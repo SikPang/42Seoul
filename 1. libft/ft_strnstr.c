@@ -6,13 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 18:43:39 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/10 19:06:25 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/10 19:51:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-static int	check_equal(char *str, char *to_find, int i, size_t to_find_len)
+static int	check_equal(const char *str, const char *to_find
+, int i, size_t to_find_len)
 {
 	size_t	find_index;
 
@@ -37,16 +38,27 @@ char	*ft_strnstr(const char	*str, const char *to_find, size_t len)
 	while (to_find[to_find_len] != '\0')
 		++to_find_len;
 	if (to_find_len == 0)
-		return (str);
+		return ((char *)str);
 	i = 0;
 	while (i < len)
 	{
 		if (str[i] == to_find[0])
 		{
 			if (check_equal(str, to_find, i, to_find_len))
-				return (str + i);
+				return ((char *)(str + i));
 		}
 		++i;
 	}
-	return (0);
+	return ((char *)0);
 }
+
+// #include <stdio.h>
+// #include <string.h>
+// int main()
+// {
+// 	char *str = "abcdefg";
+// 	char *to_find = "def";
+// 	char *temp = ft_strnstr(str, to_find, 4);
+
+// 	printf("%s", temp);
+// }

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:02:19 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/10 14:49:06 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/10 19:54:10 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strchr(const char *s, int c)
 		++i;
 	}
 	if (s[i] == c)
-			return ((char *)(s + i));
+		return ((char *)(s + i));
 	return ((char *)0);
 }
 

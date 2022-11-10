@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:34:02 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/10 13:14:02 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/10 19:55:01 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*ft_calloc(size_t nelem, size_t elsize)
 // 	int *mem2 = (int *)calloc(size, sizeof(int));
 // 	char *mem3 = (char *)ft_calloc(size, sizeof(char));
 // 	char *mem4 = (char *)calloc(size, sizeof(char));
-	
+//
 // 	for (int i=0; i<size; ++i)
 // 		printf("%d", mem1[i]);
 // 	printf("\n");
