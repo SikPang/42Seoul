@@ -6,13 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 18:43:39 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/10 14:55:59 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/10 19:06:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-int	check_equal(char *str, char *to_find, int i, size_t to_find_len)
+static int	check_equal(char *str, char *to_find, int i, size_t to_find_len)
 {
 	size_t	find_index;
 
