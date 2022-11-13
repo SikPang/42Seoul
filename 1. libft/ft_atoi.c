@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/13 16:49:39 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/13 17:49:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,25 @@ int	ft_atoi(const char *str)
 	return (num * minus);
 }
 
-#include <stdio.h>
-#include <stdlib.h>
-int main()
-{
-	char *c1 = "12345";
-	char *c2 = "    12345   ";
-	char *c3 = "+12345";
-	char *c4 = "-12345";
-	char *c5 = "  ++12345  ";
-	char *c6 = "    +2147483648  ";
-	char *c7 = "";
-	char *c8; // segmentation fault
-	printf("%d %d %d %d %d %d %d\n", ft_atoi(c1), ft_atoi(c2), ft_atoi(c3) 
-	, ft_atoi(c4), ft_atoi(c5) , ft_atoi(c6) , ft_atoi(c7));
-	printf("%d %d %d %d %d %d %d\n", atoi(c1), atoi(c2), atoi(c3) 
-	, atoi(c4), atoi(c5) , atoi(c6) , atoi(c7));
+// #include <stdio.h>
+// #include <stdlib.h>
+// int main()
+// {
+// 	char *c1 = "12345";
+// 	char *c2 = "    12345   ";
+// 	char *c3 = "+12345";
+// 	char *c4 = "-12345";
+// 	char *c5 = "  ++12345  ";
+// 	char *c6 = "    +2147483648  ";
+// 	char *c7 = "";
+// 	char *c8; // segmentation fault
+// 	printf("%d %d %d %d %d %d %d\n", ft_atoi(c1), ft_atoi(c2), ft_atoi(c3) 
+// 	, ft_atoi(c4), ft_atoi(c5) , ft_atoi(c6) , ft_atoi(c7));
+// 	printf("%d %d %d %d %d %d %d\n", atoi(c1), atoi(c2), atoi(c3) 
+// 	, atoi(c4), atoi(c5) , atoi(c6) , atoi(c7));
 
-	printf ("%d ", ft_atoi("99999999999999999999"));
-	printf ("%d\n", ft_atoi("-99999999999999999999"));
-	printf ("%d ", atoi("99999999999999999999"));
-	printf ("%d\n", atoi("-99999999999999999999"));
-}
+// 	printf ("%d ", ft_atoi("99999999999999999999"));
+// 	printf ("%d\n", ft_atoi("-99999999999999999999"));
+// 	printf ("%d ", atoi("99999999999999999999"));
+// 	printf ("%d\n", atoi("-99999999999999999999"));
+// }
