@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:07:08 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/07 23:26:36 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/17 14:04:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
-		return (2048);
+		return (1);
 	else
 		return (0);
 }

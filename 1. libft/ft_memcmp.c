@@ -22,22 +22,22 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	while (i < n)
 	{
 		if (((unsigned char *)s1)[i] != ((unsigned char *)s2)[i])
-			break ;
+			return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
 		++i;
 	}
-	return (((unsigned char *)s1)[i] - ((unsigned char *)s2)[i]);
+	return (0);
 }
 
 // #include <string.h>
 // #include <stdio.h>
 // int main()
 // {
-// 	char *c1 = "abcdefg";
-// 	char *c2 = "abcdefg";
+// 	char *c1 = "abcdefghij";
+// 	char *c2 = "abcdefgxyz";
 // 	char *c3 = "abcdef";
 
-// 	printf("%d %d %d\n", ft_memcmp(c1, c2, 8), ft_memcmp(c1, c3, 8)
+// 	printf("%d %d %d\n", ft_memcmp(c1, c2, 7), ft_memcmp(c1, c3, 8)
 // 		, ft_memcmp(c3, c1, 7));
-// 	printf("%d %d %d\n", memcmp(c1, c2, 8), memcmp(c1, c3, 8)
+// 	printf("%d %d %d\n", memcmp(c1, c2, 7), memcmp(c1, c3, 8)
 // 		, memcmp(c3, c1, 7));
 // }

@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:56 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/07 23:26:54 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/17 14:03:46 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isalpha(int c)
 {
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1024);
+		return (1);
 	else
 		return (0);
 }

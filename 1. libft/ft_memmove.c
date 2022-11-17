@@ -43,26 +43,30 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 // #include <string.h>
 // int main()
 // {
-// 	char str1[10] = "1234567890";
-// 	char str2[10] = "zzzzzzzzz";
-// 	char str3[10] = "1234567890";
-// 	char str4[10] = "zzzzzzzzz";
-// 	char *result1 = ft_memmove(str1 + 1, str1, sizeof(char) * 9);
-// 	char *result2 = memmove(str3 + 1, str3, sizeof(char) * 9);
+// 	char str1[100] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}[]zyxwvutsrqponmlkjihg";
+// 	//char str2[10] = "zzzzzzzzz";
+// 	char str3[100] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}[]zyxwvutsrqponmlkjihg";
+// 	//char str4[10] = "zzzzzzzzz";
+// 	char *result1 = ft_memmove(str1, str1+99, sizeof(char) * 1);
+// 	char *result2 = memmove(str3, str3+99, sizeof(char) * 1);
 
-// 	int arr1[10] = {};
+// 	//int arr1[10] = {};
 // 	int arr2[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
-// 	int arr3[10] = {};
+// 	//int arr3[10] = {};
 // 	int arr4[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
-// 	int *result3 = ft_memmove(arr2 + 1, arr2, sizeof(int) * 10);
-// 	int *result4 = memmove(arr4 + 1, arr4, sizeof(int) * 10);
+// 	int *result3 = ft_memmove(arr2, arr2+1, 1);
+// 	int *result4 = memmove(arr4, arr4+1, 1);
 
-// 	printf("%s ", result1);
-// 	for (int i = 0; i < 10; ++i)
-// 		printf("%d", result3[i]);
+// 	for(int i=0; i<100; ++i)
+// 		printf("%c", result1[i]);
+// 	//printf("%s ", result1);
+// 	//for (int i = 0; i < 10; ++i)
+// 	//	printf("%d", result3[i]);
 
 // 	printf("\n");
-// 	printf("%s ", result2);
-// 	for (int i = 0; i < 10; ++i)
-// 		printf("%d", result4[i]);
+// 	for(int i=0; i<100; ++i)
+// 		printf("%c", result2[i]);
+// 	//printf("%s ", result2);
+// 	//for (int i = 0; i < 10; ++i)
+// 	//	printf("%d", result4[i]);
 // }

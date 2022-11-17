@@ -6,18 +6,19 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 18:43:39 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/13 17:50:00 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/17 14:00:20 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
 static int	check_equal(const char *str, const char *to_find
-, int i, size_t len)
+, size_t i, size_t len)
 {
 	size_t	find_index;
 	size_t	to_find_len;
 
+	to_find_len = 0;
 	while (to_find[to_find_len] != '\0')
 		++to_find_len;
 	find_index = 0;

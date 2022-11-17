@@ -19,7 +19,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		if (((unsigned char *)s)[i] == c)
+		if (((unsigned char *)s)[i] == (unsigned char)c)
 			return ((void *)(s + i));
 		++i;
 	}
@@ -32,17 +32,13 @@ void	*ft_memchr(const void *s, int c, size_t n)
 // {
 // 	char str[10] = "123426729";
 // 	char str2[10] = "abfdefgfi";
-// 	int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
-// 	int *result = (int *)ft_memchr(arr, 2, 10);
-// 	int *result2 = (int *)memchr(arr, 2, 10);
+// 	int arr[10] = {-49, 49, 1, -1, 0, 'e', 'f'};
 
 // 	printf("%s ", (char *)ft_memchr(str, '2', 10));
 // 	printf("%s ", (char *)ft_memchr(str2, 'f', 10));
-// 	for (int i=0; i<5; ++i)
-// 		printf("%d", result[i]);
+// 	printf("%s", (char *)ft_memchr(arr, -1, 7));
 // 	printf("\n");
 // 	printf("%s ", (char *)memchr(str, '2', 10));
 // 	printf("%s ", (char *)memchr(str2, 'f', 10));
-// 	for (int i=0; i<5; ++i)
-// 		printf("%d", result2[i]);
+// 	printf("%s", (char *)memchr(arr, -1, 7));
 // }
