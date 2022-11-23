@@ -1,31 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 15:32:36 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/23 17:25:16 by kwsong           ###   ########.fr       */
+/*   Created: 2022/11/23 20:26:14 by kwsong            #+#    #+#             */
+/*   Updated: 2022/11/23 20:29:17 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include <unistd.h>
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	put(int nb, int fd)
 {
-	char	*new_str;
-	size_t	i;
+	nb += '0';
+	write(fd, &nb, 1);
+}
 
-	new_str = (char *)ft_calloc(len + 1, sizeof(char));
-	if (new_str == (char *)0)
-		return ((char *)0);
-	i = 0;
-	while (i < len)
+void	print_nbr(long long nb, int fd)
+{
+	if (nb < 10)
 	{
-		new_str[i] = s[i + start];
-		++i;
+		put(nb, fd);
+		return ;
 	}
-	return (new_str);
+	print_nbr(nb / 10, fd);
+	put(nb % 10, fd);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	long long	lnb;
+	char	temp;
+
+	lnb = (long long)n;
+	temp = '-';
+	if (n < 0)
+	{
+		write(fd, &temp, 1);
+		lnb *= -1;
+	}
+	print_nbr(lnb, fd);
 }

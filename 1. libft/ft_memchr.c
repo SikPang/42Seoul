@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:53:51 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/10 14:22:48 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/23 21:55:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (i < n)
 	{
 		if (((unsigned char *)s)[i] == (unsigned char)c)
-			return ((void *)(s + i));
+			return ((unsigned char *)s + i);
 		++i;
 	}
 	return ((void *)0);

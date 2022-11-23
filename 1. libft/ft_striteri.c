@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 15:32:36 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/23 17:25:16 by kwsong           ###   ########.fr       */
+/*   Created: 2022/11/23 20:07:43 by kwsong            #+#    #+#             */
+/*   Updated: 2022/11/23 20:13:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include <stddef.h>
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	char	*new_str;
 	size_t	i;
 
-	new_str = (char *)ft_calloc(len + 1, sizeof(char));
-	if (new_str == (char *)0)
-		return ((char *)0);
 	i = 0;
-	while (i < len)
+	while (s[i] != '\0')
 	{
-		new_str[i] = s[i + start];
+		f(i, s + i);
 		++i;
 	}
-	return (new_str);
 }

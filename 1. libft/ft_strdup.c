@@ -6,26 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:32:20 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/10 19:06:34 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/23 17:28:15 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include <stdlib.h>
-
-static char	*ft_strcpy(char *dest, const char *src)
-{
-	size_t	i;
-
-	i = 0;
-	while (src[i] != '\0')
-	{
-		dest[i] = src[i];
-		++i;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
+#include "libft.h"
 
 char	*ft_strdup(const char *src)
 {
@@ -35,9 +21,9 @@ char	*ft_strdup(const char *src)
 	i = 0;
 	while (src[i] != '\0')
 		++i;
-	arr = (char *)malloc(sizeof(char) * (i + 1));
+	arr = (char *)calloc(i + 1, sizeof(char));
 	if (arr == 0)
 		return (0);
-	ft_strcpy(arr, src);
+	ft_memcpy(arr, src, i);
 	return (arr);
 }

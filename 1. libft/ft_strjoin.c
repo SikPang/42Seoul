@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:48:41 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/23 16:00:08 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/23 20:57:48 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	s1_len;
 	size_t	s2_len;
 	char	*new_str;
-	size_t	total;
-	size_t	temp;
-
+	
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
-	new_str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
-	temp = 0;
-	while (temp < s1_len)
-	{
-		new_str[temp] = s1[temp];
-		++temp;
-	}
-	total = temp;
-	temp = 0;
-	while (temp < s1_len)
-	{
-		new_str[temp + total] = s1[temp];
-		++temp;
-	}
+	new_str = (char *)ft_calloc(s1_len + s2_len + 1, sizeof(char));
+	if (new_str == (char *)0)
+		return ((char *)0);
+	ft_memcpy(new_str, s1, s1_len);
+	ft_memcpy(new_str + s1_len, s2, s2_len);
 	return (new_str);
 }
