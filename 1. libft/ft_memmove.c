@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 00:11:32 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/10 18:09:27 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/23 15:31:42 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,11 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 // #include <string.h>
 // int main()
 // {
-// 	char str1[100] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}[]zyxwvutsrqponmlkjihg";
+// 	char str1[100] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQR
+//			STUVWXYZ0123456789!@#$%^&*()_+{}[]zyxwvutsrqponmlkjihg";
 // 	//char str2[10] = "zzzzzzzzz";
-// 	char str3[100] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+{}[]zyxwvutsrqponmlkjihg";
+// 	char str3[100] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQR
+//			STUVWXYZ0123456789!@#$%^&*()_+{}[]zyxwvutsrqponmlkjihg";
 // 	//char str4[10] = "zzzzzzzzz";
 // 	char *result1 = ft_memmove(str1, str1+99, sizeof(char) * 1);
 // 	char *result2 = memmove(str3, str3+99, sizeof(char) * 1);
