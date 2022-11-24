@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 20:32:20 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 21:11:28 by kwsong           ###   ########.fr       */
+/*   Created: 2022/11/24 18:47:22 by kwsong            #+#    #+#             */
+/*   Updated: 2022/11/24 21:11:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	size_t	i;
-	char	*arr;
-
-	i = 0;
-	while (src[i] != '\0')
-		++i;
-	arr = (char *)ft_calloc(i + 1, sizeof(char));
-	if (arr == 0)
-		return (0);
-	ft_memcpy(arr, src, i);
-	return (arr);
+	new->next = *lst;
+	*lst = new;
 }

@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 20:32:20 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 21:11:28 by kwsong           ###   ########.fr       */
+/*   Created: 2022/11/24 18:25:46 by kwsong            #+#    #+#             */
+/*   Updated: 2022/11/24 19:47:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
+#include <stdlib.h>
 
-char	*ft_strdup(const char *src)
+t_list	*ft_lstnew(void *content)
 {
-	size_t	i;
-	char	*arr;
+	t_list	*new;
 
-	i = 0;
-	while (src[i] != '\0')
-		++i;
-	arr = (char *)ft_calloc(i + 1, sizeof(char));
-	if (arr == 0)
-		return (0);
-	ft_memcpy(arr, src, i);
-	return (arr);
+	new = (t_list *)malloc(sizeof(t_list));
+	if (new == (t_list *)0)
+		return ((t_list *)0);
+	new->content = content;
+	new->next = (t_list *)0;
+	return (new);
 }

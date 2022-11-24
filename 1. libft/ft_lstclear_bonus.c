@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 20:32:20 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 21:11:28 by kwsong           ###   ########.fr       */
+/*   Created: 2022/11/24 19:20:10 by kwsong            #+#    #+#             */
+/*   Updated: 2022/11/24 21:02:13 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
+#include <stdlib.h>
 
-char	*ft_strdup(const char *src)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	size_t	i;
-	char	*arr;
+	t_list	*cur_node;
+	t_list	*temp;
 
-	i = 0;
-	while (src[i] != '\0')
-		++i;
-	arr = (char *)ft_calloc(i + 1, sizeof(char));
-	if (arr == 0)
-		return (0);
-	ft_memcpy(arr, src, i);
-	return (arr);
+	cur_node = *lst;
+	while (cur_node)
+	{
+		temp = cur_node->next;
+		del(cur_node->content);
+		free(cur_node);
+		cur_node = temp;
+	}
+	*lst = (t_list *)0;
 }
