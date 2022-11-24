@@ -6,25 +6,25 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:33:45 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/23 23:23:49 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/24 15:59:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static void	set_str(char* new_str, int n, int size)
+static void	set_str(char* new_str, long long ln, int size)
 {
-	if (n < 10)
+	if (ln < 10)
 	{
-		new_str[size - 1]= n + '0';
+		new_str[size - 1]= ln + '0';
 		return;
 	}
-	set_str(new_str, n / 10, size - 1);
-	new_str[size - 1]= n % 10 + '0';
+	set_str(new_str, ln / 10, size - 1);
+	new_str[size - 1]= ln % 10 + '0';
 }
 
-static int	get_size(int n)
+static int	get_size(long long n)
 {
 	int	i;
 
@@ -39,22 +39,23 @@ static int	get_size(int n)
 	return (i);
 }
 
-void	check_minus(long long *ln, int *size, int *is_minus, char *new_str)
+static int	check_minus(long long *ln, int *size, int *is_minus, char **new_str)
 {
-	if (ln < 0)
+	if (*ln < 0)
 	{
-		++(*size);
 		*is_minus = 1;
 		(*ln) *= -1;
-		new_str = (char *)ft_calloc(size + 2, sizeof(char));
+		*new_str = (char *)ft_calloc(*size + 2, sizeof(char));
 	}
 	else
 	{
 		*is_minus = 0;
-		new_str = (char *)ft_calloc(size + 1, sizeof(char));
+		*new_str = (char *)ft_calloc(*size + 1, sizeof(char));
 	}
-	if (new_str == (char *)0)
-		return ((char *)0);
+	if (*new_str == (char *)0)
+		return (0);
+	else
+		return (1);
 }
 
 char	*ft_itoa(int n)
@@ -65,21 +66,23 @@ char	*ft_itoa(int n)
 	long long	ln;
 
 	ln = (long long)n;
-	size = 0;
-	size += get_size(ln);
-	check_minus(&ln, &size, &is_minus, new_str);
+	size = get_size(ln);
+	new_str = (char *)0;
+	if (check_minus(&ln, &size, &is_minus, &new_str) == 0)
+		return ((char *)0);
 	if (is_minus == 1)
 	{
 		new_str[0] = '-';
-		set_str(new_str + 1, n, size);
+		set_str(new_str + 1, ln, size);
 	}
 	else
-		set_str(new_str, n, size);
+		set_str(new_str, ln, size);
 	return (new_str);
 }
 
-#include <stdio.h>
-int main()
-{
-	printf("%s", ft_itoa(-100));
-}
+// #include <stdio.h>
+// #include <limits.h>
+// int main()
+// {
+// 	printf("%s", ft_itoa(INT_MIN));
+// }

@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:07:40 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/23 22:08:03 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/24 16:34:54 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-static void	set_sep(char *sep, unsigned char *set)
+static void	set_sep(int *sep, unsigned char *set)
 {
 	size_t	i;
 
@@ -27,7 +27,7 @@ static void	set_sep(char *sep, unsigned char *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	sep[256];
+	int		sep[256];
 	char	*new_str;
 	size_t	s1_len;
 	size_t	start_index;
@@ -36,11 +36,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 	s1_len = ft_strlen(s1);
 	start_index = 0;
 	end_index = s1_len - 1;
+	ft_bzero((void *)sep, 256);
 	set_sep(sep, (unsigned char *)set);
 	while (sep[(int)s1[start_index]] == 1)
 		++start_index;
 	if (start_index == s1_len)
-		return ((char *)0);
+		return (ft_calloc(1, sizeof(char)));
 	while (sep[(int)s1[end_index]] == 1)
 		--end_index;
 	new_str = (char *)ft_calloc(end_index - start_index + 2, sizeof(char));
@@ -53,7 +54,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 // #include <stdio.h>
 // int main()
 // {
-// 	char *str = "   abc defg     ";
+// 	//char *str = "lorem \n ipsum \t dolor \n sit \t amet";
+// 	char *str = "lllll";
 // 	char *sep = " ";
 // 	printf("%s", ft_strtrim(str, sep));
 // }
