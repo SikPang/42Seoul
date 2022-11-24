@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:07:40 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 16:34:54 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:23:17 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	new_str = (char *)ft_calloc(end_index - start_index + 2, sizeof(char));
 	if (new_str == (char *)0)
 		return ((char *)0);
-	ft_memcpy(new_str, s1+start_index, end_index - start_index + 1);
+	ft_memcpy(new_str, s1 + start_index, end_index - start_index + 1);
 	return (new_str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:26:14 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/23 20:29:17 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:22:04 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_nbr(long long nb, int fd)
 void	ft_putnbr_fd(int n, int fd)
 {
 	long long	lnb;
-	char	temp;
+	char		temp;
 
 	lnb = (long long)n;
 	temp = '-';

@@ -6,22 +6,22 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:33:45 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 15:59:28 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:20:38 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static void	set_str(char* new_str, long long ln, int size)
+static void	set_str(char *new_str, long long ln, int size)
 {
 	if (ln < 10)
 	{
-		new_str[size - 1]= ln + '0';
-		return;
+		new_str[size - 1] = ln + '0';
+		return ;
 	}
 	set_str(new_str, ln / 10, size - 1);
-	new_str[size - 1]= ln % 10 + '0';
+	new_str[size - 1] = ln % 10 + '0';
 }
 
 static int	get_size(long long n)
