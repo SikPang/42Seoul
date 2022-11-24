@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:34:02 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/23 17:03:03 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/24 22:16:31 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@
 void	*ft_calloc(size_t nelem, size_t elsize)
 {
 	void	*new_mem;
+	size_t	total;
 	size_t	i;
 
 	if (nelem <= 0 || elsize <= 0)
 		return ((void *)0);
-	new_mem = malloc(elsize * nelem);
+	total = nelem * elsize;
+	new_mem = malloc(total);
 	if (new_mem == (void *)0)
 		return ((void *)0);
 	i = 0;
-	while (i < nelem)
+	while (i < total)
 	{
 		((unsigned char *)new_mem)[i] = 0;
 		++i;
@@ -36,11 +38,9 @@ void	*ft_calloc(size_t nelem, size_t elsize)
 // int main()
 // {
 // 	int size = 10;
-// 	int *mem1 = (int *)ft_calloc(size, sizeof(int));
-// 	int *mem2 = (int *)calloc(size, sizeof(int));
-// 	char *mem3 = (char *)ft_calloc(size, sizeof(char));
-// 	char *mem4 = (char *)calloc(size, sizeof(char));
-//
+// 	long *mem1 = (int *)ft_calloc(size, sizeof(int));
+// 	long *mem1 = (int *)ft_calloc(size, sizeof(int));
+
 // 	for (int i=0; i<size; ++i)
 // 		printf("%d", mem1[i]);
 // 	printf("\n");

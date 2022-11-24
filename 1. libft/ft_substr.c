@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:32:36 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 17:16:38 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/24 22:31:44 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	size_t	i;
 
 	s_len = ft_strlen(s);
-	if (s_len != 0 && s_len - 1 < start)
+	if (s_len <= start)
 		return ((char *)ft_calloc(1, sizeof(char)));
+	if (s_len - start < len)
+		len = s_len - start;
 	new_str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (new_str == (char *)0)
 		return ((char *)0);
