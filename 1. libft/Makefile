@@ -6,6 +6,7 @@ CFLAGS	= -Wall -Wextra -Werror
 AR		= ar
 ARFLAGS	= -srcu
 
+INC		= libft.h
 SRCS	= ft_atoi.c \
 	ft_bzero.c \
 	ft_calloc.c \
@@ -65,7 +66,7 @@ $(BONUS): $(OBJS_B)
 	@touch .bonus
 
 %.o		: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC)
 
 clean	:
 	rm -f $(OBJS)
