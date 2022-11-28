@@ -1,9 +1,10 @@
 NAME	= libft.a
+BONUS	= .bonus
 
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
 AR		= ar
-ARFLAGS	= -rcu
+ARFLAGS	= -srcu
 
 SRCS	= ft_atoi.c \
 	ft_bzero.c \
@@ -55,10 +56,13 @@ OBJS_B	= $(SRCS_B:.c=.o)
 all		: $(NAME)
 
 $(NAME)	: $(OBJS)
-	$(AR) $(ARFLAGS) $@ $^
+	$(AR) $(ARFLAGS) $@ $?
 
-bonus	: $(OBJS_B)
-	$(AR) $(ARFLAGS) $(NAME) $^
+bonus	: $(BONUS)
+
+$(BONUS): $(OBJS_B)
+	$(AR) $(ARFLAGS) $(NAME) $?
+	@touch .bonus
 
 %.o		: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -66,8 +70,10 @@ bonus	: $(OBJS_B)
 clean	:
 	rm -f $(OBJS)
 	rm -f $(OBJS_B)
+	@rm -f $(BONUS)
 
-fclean	: clean
+fclean	: 
+	make clean
 	rm -f $(NAME)
 
 re		: 
