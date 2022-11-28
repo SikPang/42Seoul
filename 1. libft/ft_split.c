@@ -6,118 +6,116 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 14:10:01 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 23:11:45 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/28 17:08:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-#include <stdio.h>
-static void	free_split(char **split, size_t row)
+
+size_t	init_var(char const *s, char c, size_t *row, size_t *col)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] == c)
+		++i;
+	*row = 0;
+	*col = 0;
+	return (i);
+}
+
+char	**free_all(char **new, size_t row)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < row)
 	{
-		free(split[i]);
+		free(new[i]);
+		new[i] = (char *)0;
 		++i;
 	}
-	free(split);
+	free(new);
+	new = (char **)0;
+	return ((char **)0);
 }
 
-static char	*malloc_cpy(char const *s, size_t size, char c, size_t i)
+void	copy_str(char **new, char c, size_t i, char const *s)
 {
-	size_t	arr_count;
-	char	*arr;
-
-	arr_count = 0;
-	arr = (char *)malloc(sizeof(char) * (size + 1));
-	if (arr == 0)
-		return (0);
-	while (s[i] != '\0' && s[i] != c)
-	{
-		arr[arr_count] = s[i];
-		++i;
-		++arr_count;
-	}
-	//printf("%zu ", arr_count);
-	arr[arr_count] = '\0';
-	return (arr);
-}
-
-static void	count_col(char const *s, char **split, char c, size_t i)
-{
-	size_t	count;
 	size_t	row;
-	size_t	check;
+	size_t	col;
 
-	count = 0;
-	row = 0;
+	i = init_var(s, c, &row, &col);
 	while (s[i] != '\0')
 	{
-		if (s[i] != c)
+		if (s[i] == c && s[i - 1] != c)
 		{
-			++count;
-			check = 0;
+			col = 0;
+			++row;
 		}
-		else if (s[i] == c && check == 0)
+		else if (s[i] != c)
 		{
-			split[row] = malloc_cpy(s, count, c, i - count);
-			if (split[row++] == (char *)0)
-				free_split(split, row);
-			check = 1;
-			count = 0;
+			new[row][col] = s[i];
+			++col;
 		}
 		++i;
-	}
-	if (check == 0)
-	{
-		split[row] = malloc_cpy(s, count, c, i - count);
-		if (split[row++] == (char *)0)
-			free_split(split, row);
 	}
 }
 
-static size_t	count_row(char const *s, char c, size_t i)
+char	**init_col(char **new, char c, size_t i, char const *s)
 {
-	size_t	count;
-	size_t	check;
+	size_t	row;
+	size_t	col;
 
-	count = 0;
-	check = 0;
+	i = init_var(s, c, &row, &col);
 	while (s[i] != '\0')
 	{
-		if (s[i] != c && check == 0)
+		if (s[i] == c && s[i - 1] != c)
 		{
-			++count;
-			check = 1;
+			new[row] = (char *)ft_calloc(col + 1, sizeof(char));
+			if (new[row] == (char *)0)
+				return (free_all(new, row));
+			col = 0;
+			++row;
 		}
-		else if (s[i] == c)
-			check = 0;
+		else if (s[i] != c)
+			++col;
 		++i;
 	}
-	return (count);
+	if (col != 0)
+	{
+		new[row] = (char *)ft_calloc(col + 1, sizeof(char));
+		if (new[row] == (char *)0)
+			return (free_all(new, row));
+	}
+	return (new);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**split;
-	size_t	count;
+	char	**new;
+	size_t	row;
+	size_t	col;
 	size_t	i;
 
-	i = 0;
-	while (s[i] != '\0' && s[i] == c)
+	i = init_var(s, c, &row, &col);
+	while (s[i] != '\0')
+	{
+		if (s[i] == c && s[i - 1] != c)
+			++row;
 		++i;
-	count = count_row(s, c, i);
-	split = (char **)malloc(sizeof(char *) * (count + 1));
-	if (split == (char **)0)
+	}
+	if (i == 0 || s[i - 1] == c)
+		new = (char **)ft_calloc(row + 1, sizeof(char *));
+	else
+		new = (char **)ft_calloc(row + 2, sizeof(char *));
+	if (new == (char **)0)
 		return ((char **)0);
-	//printf("%zu ", count);
-	split[count] = (char *)0;
-	if (count > 0)
-		count_col(s, split, c, i);
-	return (split);
+	if (init_col(new, c, i, s) == (char **)0)
+		return ((char **)0);
+	copy_str(new, c, i, s);
+	return (new);
 }
 
 // #include <stdio.h>
@@ -127,7 +125,7 @@ char	**ft_split(char const *s, char c)
 
 // 	i = 0;
 // 	j = 0;
-// 	char **sp = ft_split("hello!", ' ');
+// 	char **sp = ft_split("hello!", '');
 // 	while (sp[i])
 // 	{
 // 		while (sp[i][j])
@@ -135,6 +133,7 @@ char	**ft_split(char const *s, char c)
 // 			printf("%c", sp[i][j]);
 // 			++j;
 // 		}
+// 		printf("\n");
 // 		++i;
 // 	}
 // 	printf("\n");
@@ -149,6 +148,7 @@ char	**ft_split(char const *s, char c)
 // 			printf("%c", sp2[i][j]);
 // 			++j;
 // 		}
+// 		printf("\n");
 // 		++i;
 // 	}
 // 	printf("\n");
@@ -163,6 +163,7 @@ char	**ft_split(char const *s, char c)
 // 			printf("%c", sp3[i][j]);
 // 			++j;
 // 		}
+// 		printf("\n");
 // 		++i;
 // 	}
 // }
