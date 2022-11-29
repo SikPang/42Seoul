@@ -6,11 +6,10 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 20:32:20 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 21:11:28 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 21:00:53 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strdup(const char *src)

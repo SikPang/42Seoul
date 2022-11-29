@@ -6,11 +6,10 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 18:43:39 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 22:23:12 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 21:02:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include "libft.h"
 
 static int	check_equal(const char *str, const char *to_find

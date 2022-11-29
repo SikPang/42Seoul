@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 22:38:18 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/10 14:34:51 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 21:31:03 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_memset(void *s, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		((unsigned char *)s)[i] = c;
+		((unsigned char *)s)[i] = (unsigned char)c;
 		++i;
 	}
 	return (s);

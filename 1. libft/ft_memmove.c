@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 00:11:32 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/23 15:31:42 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 20:10:14 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	size_t	i;
 
+	if (!dest && !src)
+		return (dest);
 	i = 0;
 	if (dest > src && n > 0)
 	{

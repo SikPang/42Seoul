@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 14:10:01 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/28 17:08:25 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 21:08:13 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
+#include <stdlib.h>
 
-size_t	init_var(char const *s, char c, size_t *row, size_t *col)
+static size_t	init_var(char const *s, char c, size_t *row, size_t *col)
 {
 	size_t	i;
 
@@ -25,7 +25,7 @@ size_t	init_var(char const *s, char c, size_t *row, size_t *col)
 	return (i);
 }
 
-char	**free_all(char **new, size_t row)
+static char	**free_all(char **new, size_t row)
 {
 	size_t	i;
 
@@ -41,7 +41,7 @@ char	**free_all(char **new, size_t row)
 	return ((char **)0);
 }
 
-void	copy_str(char **new, char c, size_t i, char const *s)
+static void	copy_str(char **new, char c, size_t i, char const *s)
 {
 	size_t	row;
 	size_t	col;
@@ -63,7 +63,7 @@ void	copy_str(char **new, char c, size_t i, char const *s)
 	}
 }
 
-char	**init_col(char **new, char c, size_t i, char const *s)
+static char	**init_col(char **new, char c, size_t i, char const *s)
 {
 	size_t	row;
 	size_t	col;
@@ -99,6 +99,8 @@ char	**ft_split(char const *s, char c)
 	size_t	col;
 	size_t	i;
 
+	if (s[0] == '\0')
+		return ((char **)ft_calloc(1, sizeof(char *)));
 	i = init_var(s, c, &row, &col);
 	while (s[i] != '\0')
 	{

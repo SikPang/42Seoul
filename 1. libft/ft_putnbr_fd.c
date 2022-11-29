@@ -6,19 +6,19 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:26:14 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 17:22:04 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/28 22:40:56 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	put(int nb, int fd)
+static void	put(int nb, int fd)
 {
 	nb += '0';
 	write(fd, &nb, 1);
 }
 
-void	print_nbr(long long nb, int fd)
+static void	print_nbr(long long nb, int fd)
 {
 	if (nb < 10)
 	{

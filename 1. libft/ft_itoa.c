@@ -6,11 +6,10 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:33:45 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 17:20:38 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 20:59:20 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 static void	set_str(char *new_str, long long ln, int size)

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/23 15:31:49 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 21:32:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ static int	check_over_flow(long before_num, char ch, int minus)
 	if (minus == 1)
 	{
 		after_num = before_num * 10 + ch - '0';
-		if (before_num > 0 && after_num < 0)
+		if (after_num < 0)
 			return (1);
 	}
 	else
 	{
 		before_num *= -1;
 		after_num = before_num * 10 - (ch - '0');
-		if (before_num < 0 && after_num > 0)
+		if (after_num > 0)
 			return (-1);
 	}
 	return (0);

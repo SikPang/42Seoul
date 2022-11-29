@@ -6,11 +6,10 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:32:36 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 22:31:44 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 21:02:04 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

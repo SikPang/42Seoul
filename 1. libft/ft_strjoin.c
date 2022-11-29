@@ -6,11 +6,10 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 00:48:41 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 17:22:46 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 21:01:09 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)

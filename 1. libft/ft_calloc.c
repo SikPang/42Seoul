@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:34:02 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 22:16:31 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 19:28:29 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_calloc(size_t nelem, size_t elsize)
 	size_t	total;
 	size_t	i;
 
-	if (nelem <= 0 || elsize <= 0)
+	if (nelem < 0 || elsize < 0)
 		return ((void *)0);
 	total = nelem * elsize;
 	new_mem = malloc(total);
@@ -38,8 +38,8 @@ void	*ft_calloc(size_t nelem, size_t elsize)
 // int main()
 // {
 // 	int size = 10;
-// 	long *mem1 = (int *)ft_calloc(size, sizeof(int));
-// 	long *mem1 = (int *)ft_calloc(size, sizeof(int));
+// 	int *mem1 = (int *)ft_calloc(0, sizeof(int));
+// 	int *mem2 = (int *)calloc(0, sizeof(int));
 
 // 	for (int i=0; i<size; ++i)
 // 		printf("%d", mem1[i]);

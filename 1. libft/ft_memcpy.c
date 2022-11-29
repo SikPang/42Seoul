@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 20:33:21 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/10 14:31:55 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 20:08:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t	i;
 
+	if (!dest && !src)
+		return (dest);
 	i = 0;
 	while (i < n)
 	{

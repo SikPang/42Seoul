@@ -1,9 +1,7 @@
 NAME	= libft.a
 BONUS	= .bonus
 
-CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
-AR		= ar
 ARFLAGS	= -srcu
 
 INC		= libft.h
@@ -66,7 +64,7 @@ $(BONUS): $(OBJS_B)
 	@touch .bonus
 
 %.o		: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC)
+	$(CC) $(CFLAGS) -c $< -I$(INC)
 
 clean	:
 	rm -f $(OBJS)
