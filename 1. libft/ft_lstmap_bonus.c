@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 19:28:47 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/24 21:43:16 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 22:28:46 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,35 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	}
 	return (new_lst);
 }
+
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
+// void *		lstmap_f(void *content) {
+
+// 	(void)content;
+// 	return ("OK !");
+// }
+
+// void			lstdel_f(void *lst) {
+// 	(void)lst;
+// }
+
+// int main()
+// {
+// 	t_list *l = ft_lstnew(strdup(" 1 2 3 "));
+// 	t_list *ret;
+
+// 	l->next = ft_lstnew(strdup("ss"));
+// 	l->next->next = ft_lstnew(strdup("-_-"));
+// 	ret = ft_lstmap(l, lstmap_f, lstdel_f);
+// 	if (!strcmp(ret->content, "OK !") 
+//		&& !strcmp(ret->next->content, "OK !") 
+//		&& !strcmp(ret->next->next->content, "OK !") 
+//		&& !strcmp(l->content, " 1 2 3 ") 
+//		&& !strcmp(l->next->content, "ss") 
+//		&& !strcmp(l->next->next->content, "-_-"))
+// 		printf("suc\n");
+// 	else
+// 		printf("fail\n");
+// }

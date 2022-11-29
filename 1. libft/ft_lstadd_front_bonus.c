@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 18:47:22 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/29 21:22:45 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/29 22:09:37 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 // #include <stdlib.h>
 // int main()
 // {
+// 	t_list *l0 = ft_lstnew(strdup("nyacat"));
+// 	t_list *n0 = ft_lstnew(strdup("OK"));
+
+// 	ft_lstadd_front(&l0, n0);
+// 	if (l0 == n0 && !strcmp(l0->content, "OK"))
+// 	{
+// 		printf("suc\n");
+// 	}
+// 	else
+// 		printf("fail\n");
+
 // 	t_list *l = ft_lstnew(strdup("nyacat"));
 // 	t_list *n = ft_lstnew(strdup("OK"));
 
@@ -31,12 +42,29 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 // 	{
 // 		free(l->next);
 // 		free(l);
-// 		printf("suc");
+// 		printf("suc\n");
 // 	}
 // 	else
 // 	{
 // 		free(l->next);
 // 		free(l);
-// 		printf("fail");	
+// 		printf("fail\n");	
 // 	}
+
+// 	t_list *l2 = ((void *)0);
+// 	t_list *n2 = ft_lstnew(strdup("OK"));
+
+// 	ft_lstadd_front(&l2, n2);
+// 	if (l2 == n2 && !strcmp(l2->content, "OK"))
+// 	{
+// 		free(l2->next);
+// 		free(l2);
+// 		printf("suc\n");
+// 	}
+// 	else
+// 	{
+// 		free(l2->next);
+// 		free(l2);
+// 		printf("fail\n");
+// 	}	
 // }
