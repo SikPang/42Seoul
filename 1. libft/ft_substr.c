@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 15:32:36 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/29 21:02:04 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:03:03 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 // #include <stdio.h>
 // int main()
 // {
-// 	char *str = "abcde";
-// 	printf("%s", ft_substr(str, 0, 0));
+// 	char *str = "abcd";
+// 	printf("%s", ft_substr(str, 3, 1));
 // }
