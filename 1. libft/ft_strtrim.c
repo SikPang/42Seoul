@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:07:40 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/30 16:01:08 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/11/30 16:39:44 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 }
 
 // #include <stdio.h>
+// #include <stdlib.h>
 // int main()
 // {
-// 	// char *str = "\0asd\0";
-// 	// char *sep = "\0";
-// 	char str[10] = {'\0', 'l', 'l'};
-// 	char sep[1] = {'\0'};
+// 	char *str = "aaaaaa";
+// 	char *sep = "asdasdasd";
+// 	// char str[10] = {'\n', 'l', '\n'};
+// 	// char sep[1] = {'\n'};
 // 	printf("%s", ft_strtrim(str, sep));
 // }
