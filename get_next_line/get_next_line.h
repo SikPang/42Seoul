@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:52:07 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/01 16:53:33 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/01 22:18:29 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# define BUFFER_SIZE 6
+# define BUFFER_SIZE 1
 
 # include <stddef.h>
 

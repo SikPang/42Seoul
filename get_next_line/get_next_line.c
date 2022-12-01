@@ -6,88 +6,24 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:51:59 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/01 19:47:18 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/01 22:17:26 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
 #include <stdlib.h>
-void	ft_strncpy(char *dest, char *src, size_t start_index, size_t n)
-{
-	size_t	i;
 
-	if (src == 0)
-		return ;
-	i = 0;
-	while (src[i] != '\0')
-	{
-		if (n == 0)
-			return ;
-		dest[i + start_index] = src[i];
-		++i;
-		--n;
-	}
-	dest[i + start_index] = '\0';
-	return ;
-}
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		++i;
-	}
-	return (i);
-}
-
-char	*ft_substr(char const *s, size_t start, size_t len)
-{
-	char	*new_str;
-	size_t	s_len;
-	size_t	i;
-
-	s_len = ft_strlen(s);
-	if (s_len <= start)
-	{
-		new_str = (char *)malloc(1);
-		new_str[0] = '\0';
-		return (new_str);
-	}
-	if (s_len - start < len)
-		len = s_len - start;
-	new_str = (char *)malloc((len + 1) * sizeof(char));
-	new_str[len] = '\0';
-	if (new_str == (char *)0)
-		return ((char *)0);
-	i = 0;
-	while (i < len)
-	{
-		new_str[i] = s[i + start];
-		++i;
-	}
-	return (new_str);
-}
-
-
-
-
-
-
-
-
-char	*get_result(char **result, char **total, ssize_t check_finish)
+char	*get_result(char **result, char **total, ssize_t found_index)
 {
 	char	*temp;
 
 	temp = *total;
-	*result = ft_substr(*total, 0, check_finish + 1);
+	*result = ft_substr(*total, 0, found_index + 1);
 	if (*result == 0)
 		return (0);
-	*total = ft_substr(*total, check_finish + 1, ft_strlen(*total));
+	*total = ft_substr(*total, found_index + 1,
+			ft_strlen(*total) - found_index);
 	if (*total == 0)
 		return (0);
 	free(temp);
@@ -153,9 +89,10 @@ char	*get_next_line(int fd)
 			break ;
 		}
 		check_read = read(fd, buf, BUFFER_SIZE);
-		if (check_read == -1 || (check_read == 0 && check_finish < 0))
+		if (check_read == -1 || (check_read == 0 && check_finish == -2))
 			return (0);
-		add_to_total(&total, buf, check_read);
+		if (buf[0] != '\0')
+			add_to_total(&total, buf, check_read);
 	}
 	return (result);
 }
@@ -168,22 +105,22 @@ check_new_line 함수
 - 개행을 찾았을 경우, return index (0 이상)
 */
 
-#include <fcntl.h>
-#include <stdio.h>
-int main()
-{
-	int fd = open("t_empty.txt", O_RDONLY);
+// #include <fcntl.h>
+// #include <stdio.h>
+// int main()
+// {
+// 	int fd = open("t_hello.txt", O_RDONLY);
 
-	printf("%d\n", fd);
-	printf("return : %s\n", get_next_line(fd));
-	printf("return : %s\n", get_next_line(fd));
-	printf("return : %s\n", get_next_line(fd));
-	printf("return : %s\n", get_next_line(fd));
-	printf("return : %s\n", get_next_line(fd));
-	printf("return : %s\n", get_next_line(fd));
-	printf("return : %s\n", get_next_line(fd));
+// 	printf("%d\n", fd);
+// 	printf("return : %s\n", get_next_line(fd));	// hello
+// 	printf("return : %s\n", get_next_line(fd));	// world
+// 	printf("return : %s\n", get_next_line(fd));	// my
+// 	printf("return : %s\n", get_next_line(fd));	// name
+// 	printf("return : %s\n", get_next_line(fd));	// is
+// 	printf("return : %s\n", get_next_line(fd));	// kwsong
+// 	printf("return : %s\n", get_next_line(fd));	// ^_^
 
-	printf("return : %s\n", get_next_line(fd));
-	printf("return : %s\n", get_next_line(fd));
-	printf("return : %s\n", get_next_line(fd));
-}
+// 	printf("return : %s\n", get_next_line(fd));	// (null)
+// 	printf("return : %s\n", get_next_line(fd));	// (null)
+// 	printf("return : %s\n", get_next_line(fd));	// (null)
+// }

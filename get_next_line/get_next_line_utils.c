@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:52:04 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/01 19:08:45 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/01 22:11:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_strncpy(char *dest, char *src, size_t start_index, size_t n)
 	while (src[i] != '\0')
 	{
 		if (n == 0)
-			return ;
+			break ;
 		dest[i + start_index] = src[i];
 		++i;
 		--n;
