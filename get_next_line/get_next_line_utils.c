@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:52:04 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/01 16:59:47 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/01 19:08:45 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_strncpy(char *dest, char *src, size_t start_index, size_t n)
 		++i;
 		--n;
 	}
-	dest[i] = '\0';
+	dest[i + start_index] = '\0';
 	return ;
 }
 
