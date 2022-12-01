@@ -6,11 +6,30 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:52:04 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/30 21:44:32 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/01 16:59:47 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+
+void	ft_strncpy(char *dest, char *src, size_t start_index, size_t n)
+{
+	size_t	i;
+
+	if (src == 0)
+		return ;
+	i = 0;
+	while (src[i] != '\0')
+	{
+		if (n == 0)
+			return ;
+		dest[i + start_index] = src[i];
+		++i;
+		--n;
+	}
+	dest[i] = '\0';
+	return ;
+}
 
 size_t	ft_strlen(const char *str)
 {

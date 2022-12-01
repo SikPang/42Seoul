@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:52:07 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/30 20:42:35 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/01 16:53:33 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 
 # include <stddef.h>
 
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+void	ft_strncpy(char *dest, char *src, size_t start_index, size_t n);
+size_t	ft_strlen(const char *str);
+char	*ft_substr(char const *s, size_t start, size_t len);
 char	*get_next_line(int fd);
 
-# endif
+#endif
