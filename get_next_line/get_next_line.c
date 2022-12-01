@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:51:59 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/01 22:17:26 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/01 22:29:15 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
 #include <stdlib.h>
-
+// 빈 문자 세그폴트
 char	*get_result(char **result, char **total, ssize_t found_index)
 {
 	char	*temp;
