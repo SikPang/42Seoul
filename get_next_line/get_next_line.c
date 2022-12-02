@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:51:59 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/02 14:14:30 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/02 16:29:34 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_result(char **result, char **total, ssize_t found_index)
 	if (*result == 0)
 		return (0);
 	*total = ft_substr(*total, found_index + 1,
-			ft_strlen(*total) - found_index);
+			ft_strlen(*total) - found_index + 1);
 	if (*total == 0)
 		return (0);
 	free(temp);
