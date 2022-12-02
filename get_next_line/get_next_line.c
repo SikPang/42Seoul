@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:51:59 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/01 22:29:15 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/02 14:14:30 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <unistd.h>
 #include <stdlib.h>
-// 빈 문자 세그폴트
+
 char	*get_result(char **result, char **total, ssize_t found_index)
 {
 	char	*temp;
@@ -89,7 +89,8 @@ char	*get_next_line(int fd)
 			break ;
 		}
 		check_read = read(fd, buf, BUFFER_SIZE);
-		if (check_read == -1 || (check_read == 0 && check_finish == -2))
+		if (check_read == -1
+			|| (check_read == 0 && (check_finish == -2 || check_finish == -1)))
 			return (0);
 		if (buf[0] != '\0')
 			add_to_total(&total, buf, check_read);
