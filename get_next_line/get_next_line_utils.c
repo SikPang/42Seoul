@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:52:04 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/02 16:18:36 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/02 21:25:47 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_substr(char const *s, size_t start, size_t len)
 	s_len = ft_strlen(s);
 	if (s_len <= start)
 	{
-		new_str = (char *)malloc(1);
+		new_str = (char *)malloc(1); 
 		new_str[0] = '\0';
 		return (new_str);
 	}
