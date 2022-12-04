@@ -3,209 +3,110 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: song <song@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/30 16:51:59 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/02 22:09:31 by kwsong           ###   ########.fr       */
+/*   Created: 2022/12/04 16:34:44 by song              #+#    #+#             */
+/*   Updated: 2022/12/04 22:20:23 by song             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include "get_next_line.h"
 
+// 1.	list를 순회하며 fd를 찾음, 해당 fd의 노드가 없으면 push_back
+// 2.	해당 노드의 data에서 \n을 찾음
+// 3-1.	\n가 있으면 \n까지 substr하여 반환, 종료
+// 3-2.	\n이 없으면 read하여 buf 안에 \n이 있는지 탐색
+// 4.	list의 data와 buf를 strjoin하여 list의 data에 삽입
+// 5.	buf에 \n이 없으면 list의 data에 strjoin하고 3-2로 돌아가서 반복
 
-// void	ft_strncpy(char *dest, char *src, size_t start_index, size_t n)
-// {
-// 	size_t	i;
+t_node	*find_node(t_list *list, int fd)
+{
+	t_node	*node;
 
-// 	if (src == 0)
-// 		return ;
-// 	i = 0;
-// 	while (n > 0)
-// 	{
-// 		dest[i + start_index] = src[i];
-// 		++i;
-// 		--n;
-// 	}
-// 	dest[i + start_index] = '\0';
-// 	return ;
-// }
+	node = list->head;
+	while (node != 0)
+	{
+		if (node->fd == fd)
+			break ;
+		node = node->next_node;
+	}
+	return (node);
+}
 
-// size_t	ft_strlen(const char *str)
-// {
-// 	size_t	i;
-
-// 	i = 0;
-// 	while (str[i] != '\0')
-// 	{
-// 		++i;
-// 	}
-// 	return (i);
-// }
-
-// char	*ft_substr(char const *s, size_t start, size_t len)
-// {
-// 	char	*new_str;
-// 	size_t	s_len;
-// 	size_t	i;
-
-// 	s_len = ft_strlen(s);
-// 	if (s_len <= start)
-// 	{
-// 		new_str = (char *)malloc(1);
-// 		new_str[0] = '\0';
-// 		return (new_str);
-// 	}
-// 	if (s_len - start < len)
-// 		len = s_len - start;
-// 	new_str = (char *)malloc((len + 1) * sizeof(char));
-// 	new_str[len] = '\0';
-// 	if (new_str == (char *)0)
-// 		return ((char *)0);
-// 	i = 0;
-// 	while (i < len)
-// 	{
-// 		new_str[i] = s[i + start];
-// 		++i;
-// 	}
-// 	return (new_str);
-// }
-
-
-
-
-char	*get_result(char **total, ssize_t found_index)
+void	add_to_data(t_node *node, char *buf, ssize_t byte)
 {
 	char	*temp;
-	char	*result;
 
-	temp = *total;
-	result = ft_substr(*total, 0, found_index + 1);
+	if (byte == -1)
+		return ;
+	temp = node->data;
+	node->data = ft_strjoin(node->data, buf, byte);
+	free(temp);
+}
+
+char	*get_result(t_node *node, char *buf
+	, ssize_t new_line_index, ssize_t byte)
+{
+	char	*result;
+	size_t	data_len;
+
+	if (byte == -1)
+		return (0);
+	data_len = ft_strlen(node->data) - node->start_index;
+	result = (char *)malloc(data_len - node->start_index);
 	if (result == 0)
 		return (0);
-	*total = ft_substr(*total, found_index + 1, ft_strlen(*total) - (found_index + 1));
-	if (*total == 0)
-	{
-		free(result);
-		free(temp);
-		return (0);
-	}
-	free(temp);
+	ft_memcpy(result, node->data + node->start_index,
+		data_len - new_line_index);
+	result[data_len - new_line_index] = '\0';
+	node->start_index = new_line_index;
 	return (result);
 }
 
-int	add_to_total(char **total, char *buf, ssize_t buf_len)
-{
-	char	*temp;
-	size_t	total_len;
-	size_t	i;
-
-	i = 0;
-	total_len = 0;
-	if (*total != 0)
-		total_len = ft_strlen(*total);
-	temp = *total;
-	*total = (char *)malloc(total_len + buf_len + 1);
-	if (*total == 0)
-	{
-		free(temp);
-		return (0);
-	}
-	ft_strncpy(*total, temp, 0, total_len);
-	ft_strncpy(*total, buf, total_len, buf_len);
-	free(temp);
-	return (1);
-}
-
-ssize_t	check_new_line(char *total)
+ssize_t	find_new_line(t_node *node)
 {
 	ssize_t	i;
 
-	if (total == 0)
+	if (node->data == 0)
 		return (-1);
-	i = 0; 
-	while (total[i] != '\0')
+	i = node->start_index;
+	while (node->data[i] != '\0')
 	{
-		if (total[i] == '\n')
+		if (node->data[i] == '\n')
 			return (i);
 		++i;
 	}
-	if (i == 0)
+	if (i == node->start_index)
 		return (-2);
-	else
-		return (-3);
+	return (-1);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*total;
-	char		buf[BUFFER_SIZE];
-	ssize_t		check_finish;
-	ssize_t		check_read;
+	static t_list	list;
+	t_node			*target_node;
+	char			*buf;
+	ssize_t			byte;
+	ssize_t			new_line_index;
 
-	check_read = BUFFER_SIZE;
-	while (1)
+	target_node = find_node(&list, fd);
+	if (target_node == 0)
+		target_node = push_back(&list, fd, 0);
+	byte = BUFFER_SIZE;
+	while (byte != -1)
 	{
-		check_finish = check_new_line(total);
-		if (check_finish >= 0 || check_read < BUFFER_SIZE)
+		new_line_index = find_new_line(target_node);
+		if (new_line_index >= 0)
 			break ;
-		check_read = read(fd, buf, BUFFER_SIZE);
-		if (check_read == -1
-			|| (check_read == 0 && (check_finish == -2 || check_finish == -1)))
+		byte = read(fd, buf, BUFFER_SIZE);
+		if (new_line_index == -2 && byte == 0)
+		{
+			erase_node(&list, fd);
 			return (0);
-		if (buf[0] != '\0')
-			add_to_total(&total, buf, check_read);
+		}
+		add_to_data(target_node, buf, byte);
 	}
-	return (get_result(&total, check_finish));
+	return (get_result(target_node, buf, new_line_index, byte));
 }
-
-/*
-check_new_line 함수
-- 널 포인터일 경우, return -1
-- 빈 문자열일 경우, return -2
-- 못 찾았을 경우, return -3
-- 개행을 찾았을 경우, return index (0 이상)
-*/
-
-// #include "get_next_line.h"
-// #include <fcntl.h>
-// #include <stdio.h>
-// #include <stdlib.h>
-
-// void print_line(int fd)
-// {
-// 	char *str = get_next_line(fd);
-// 	printf("return : %s\n-------- \n", str);
-// 	free(str);
-// }
-
-// static void foo()
-// {
-// 	static void* f;
-// 	void* ff = malloc(123);
-// 	f = ff;
-// }
-
-// int main()
-// {
-// 	foo(); foo(); foo();
-// 	while (1)
-// 	{
-		
-// 	}
-// 	// int fd = open("t_hello.txt", O_RDONLY);
-// 	// printf("fd = %d\n", fd);
-
-// 	// print_line(fd);
-// 	// print_line(fd);
-// 	// print_line(fd);
-// 	// print_line(fd);
-// 	// print_line(fd);
-
-// 	// print_line(fd);
-// 	// print_line(fd);
-// 	// print_line(fd);
-// 	// print_line(fd);
-// 	// print_line(fd);
-// }
