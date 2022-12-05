@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:34:44 by song              #+#    #+#             */
-/*   Updated: 2022/12/05 17:58:10 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/05 17:59:12 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 // 1.	list를 순회하며 fd를 찾음, 해당 fd의 노드가 없으면 push_back
 // 2.	해당 노드의 data에서 \n을 찾음
