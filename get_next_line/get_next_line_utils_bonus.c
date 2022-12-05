@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:35:11 by song              #+#    #+#             */
-/*   Updated: 2022/12/05 17:59:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/05 18:21:23 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char	*ft_strjoin(char const *s1, char const *s2, ssize_t byte)
 	if (s1 == 0)
 	{
 		new_str = (char *)malloc((byte + 1) * sizeof(char));
+		if (new_str == 0)
+			return (0);
 		ft_strncpy(new_str, s2, byte);
 		return (new_str);
 	}
@@ -45,8 +47,8 @@ char	*ft_strjoin(char const *s1, char const *s2, ssize_t byte)
 	while (s1[s1_len] != '\0')
 		++s1_len;
 	new_str = (char *)malloc((s1_len + byte + 1) * sizeof(char));
-	if (new_str == (char *)0)
-		return ((char *)0);
+	if (new_str == 0)
+		return (0);
 	ft_strncpy(new_str, s1, s1_len);
 	ft_strncpy(new_str + s1_len, s2, byte);
 	return (new_str);
@@ -72,6 +74,8 @@ t_node_	*push_back(t_list *list, int fd)
 	t_node_	*cur_node;
 
 	new_node = (t_node_ *)malloc(sizeof(t_node_));
+	if (new_node == 0)
+		return (0);
 	new_node->prev_node = 0;
 	new_node->next_node = 0;
 	new_node->fd = fd;

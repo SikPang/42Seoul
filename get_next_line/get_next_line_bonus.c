@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:34:44 by song              #+#    #+#             */
-/*   Updated: 2022/12/05 17:59:12 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/05 18:20:38 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,22 @@
 // 4.	list의 data와 buf를 strjoin하여 list의 data에 삽입
 // 5.	buf에 \n이 없으면 list의 data에 strjoin하고 3-2로 돌아가서 반복
 
+char	*get_last(t_node_ *node, t_list *list, int fd)
+{
+	char	*result;
+	size_t	data_len;
+
+	data_len = 0;
+	while (node->data[data_len] != '\0')
+		++data_len;
+	result = (char *)malloc((data_len + 1) * sizeof(char));
+	if (result == 0)
+		return (0);
+	ft_strncpy(result, node->data, data_len);
+	delete_node(list, fd);
+	return (result);
+}
+
 void	add_to_data(t_node_ *node, char *buf, ssize_t byte)
 {
 	char	*temp;
@@ -32,7 +48,7 @@ void	add_to_data(t_node_ *node, char *buf, ssize_t byte)
 	free(temp);
 }
 
-char	*get_result(t_node_ *node, ssize_t new_line_index, t_list *list, int fd)
+char	*get_result(t_node_ *node, ssize_t new_line_index)
 {
 	char	*result;
 	char	*temp;
@@ -41,17 +57,18 @@ char	*get_result(t_node_ *node, ssize_t new_line_index, t_list *list, int fd)
 	data_len = 0;
 	while (node->data[data_len] != '\0')
 		++data_len;
-	if (new_line_index < 0)
-	{
-		result = (char *)malloc((data_len + 1) * sizeof(char));
-		ft_strncpy(result, node->data, data_len);
-		delete_node(list, fd);
-		return (result);
-	}
 	result = (char *)malloc((new_line_index + 2) * sizeof(char));
+	if (result == 0)
+		return (0);
 	ft_strncpy(result, node->data, new_line_index + 1);
 	temp = node->data;
 	node->data = (char *)malloc((data_len - new_line_index) * sizeof(char));
+	if (node->data == 0)
+	{
+		free(result);
+		node->data = temp;
+		return (0);
+	}
 	ft_strncpy(node->data, temp + new_line_index + 1,
 		data_len - new_line_index - 1);
 	free(temp);
@@ -99,7 +116,9 @@ char	*get_next_line(int fd)
 		}
 		add_to_data(target_node, buf, byte);
 	}
-	return (get_result(target_node, new_line_index, &list, fd));
+	if (new_line_index < 0)
+		return (get_last(target_node, &list, fd));
+	return (get_result(target_node, new_line_index));
 }
 
 /////////////////////
