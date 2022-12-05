@@ -6,12 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:35:11 by song              #+#    #+#             */
-/*   Updated: 2022/12/05 18:09:13 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/05 20:01:02 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stddef.h>
 #include "get_next_line.h"
 
 char	*ft_strncpy(char *dest, const char *src, size_t n)
@@ -38,6 +37,8 @@ char	*ft_strjoin(char const *s1, char const *s2, ssize_t byte)
 	if (s1 == 0)
 	{
 		new_str = (char *)malloc((byte + 1) * sizeof(char));
+		if (new_str == 0)
+			return (0);
 		ft_strncpy(new_str, s2, byte);
 		return (new_str);
 	}
@@ -45,14 +46,14 @@ char	*ft_strjoin(char const *s1, char const *s2, ssize_t byte)
 	while (s1[s1_len] != '\0')
 		++s1_len;
 	new_str = (char *)malloc((s1_len + byte + 1) * sizeof(char));
-	if (new_str == (char *)0)
-		return ((char *)0);
+	if (new_str == 0)
+		return (0);
 	ft_strncpy(new_str, s1, s1_len);
 	ft_strncpy(new_str + s1_len, s2, byte);
 	return (new_str);
 }
 
-t_node_	*find_node(t_list *list, int fd)
+t_node_	*find_node(t_list *list, int fd, int check)
 {
 	t_node_	*node;
 
@@ -63,7 +64,10 @@ t_node_	*find_node(t_list *list, int fd)
 			return (node);
 		node = node->next_node;
 	}
-	return (push_back(list, fd));
+	if (check == 1)
+		return (push_back(list, fd));
+	else
+		return (0);
 }
 
 t_node_	*push_back(t_list *list, int fd)
@@ -72,6 +76,8 @@ t_node_	*push_back(t_list *list, int fd)
 	t_node_	*cur_node;
 
 	new_node = (t_node_ *)malloc(sizeof(t_node_));
+	if (new_node == 0)
+		return (0);
 	new_node->prev_node = 0;
 	new_node->next_node = 0;
 	new_node->fd = fd;
@@ -97,7 +103,9 @@ void	delete_node(t_list *list, int fd)
 {
 	t_node_	*node;
 
-	node = find_node(list, fd);
+	node = find_node(list, fd, 0);
+	if (node == 0)
+		return ;
 	if (node->prev_node != 0)
 		node->prev_node->next_node = node->next_node;
 	else

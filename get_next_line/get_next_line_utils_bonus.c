@@ -6,12 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:35:11 by song              #+#    #+#             */
-/*   Updated: 2022/12/05 18:21:23 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/05 19:51:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stddef.h>
 #include "get_next_line_bonus.h"
 
 char	*ft_strncpy(char *dest, const char *src, size_t n)
@@ -54,7 +53,7 @@ char	*ft_strjoin(char const *s1, char const *s2, ssize_t byte)
 	return (new_str);
 }
 
-t_node_	*find_node(t_list *list, int fd)
+t_node_	*find_node(t_list *list, int fd, int check)
 {
 	t_node_	*node;
 
@@ -65,7 +64,10 @@ t_node_	*find_node(t_list *list, int fd)
 			return (node);
 		node = node->next_node;
 	}
-	return (push_back(list, fd));
+	if (check == 1)
+		return (push_back(list, fd));
+	else
+		return (0);
 }
 
 t_node_	*push_back(t_list *list, int fd)
@@ -101,7 +103,9 @@ void	delete_node(t_list *list, int fd)
 {
 	t_node_	*node;
 
-	node = find_node(list, fd);
+	node = find_node(list, fd, 0);
+	if (node == 0)
+		return ;
 	if (node->prev_node != 0)
 		node->prev_node->next_node = node->next_node;
 	else

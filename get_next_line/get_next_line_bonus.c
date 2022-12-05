@@ -6,20 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:34:44 by song              #+#    #+#             */
-/*   Updated: 2022/12/05 18:20:38 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/05 20:00:00 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "get_next_line_bonus.h"
-
-// 1.	list를 순회하며 fd를 찾음, 해당 fd의 노드가 없으면 push_back
-// 2.	해당 노드의 data에서 \n을 찾음
-// 3-1.	\n가 있으면 \n까지 substr하여 반환, 종료
-// 3-2.	\n이 없으면 read하여 buf 안에 \n이 있는지 탐색
-// 4.	list의 data와 buf를 strjoin하여 list의 data에 삽입
-// 5.	buf에 \n이 없으면 list의 data에 strjoin하고 3-2로 돌아가서 반복
 
 char	*get_last(t_node_ *node, t_list *list, int fd)
 {
@@ -79,7 +72,7 @@ ssize_t	find_new_line(t_node_ *node)
 {
 	ssize_t	i;
 
-	if (node->data == 0)
+	if (node == 0 || node->data == 0)
 		return (-1);
 	i = 0;
 	while (node->data[i] != '\0')
@@ -101,9 +94,10 @@ char	*get_next_line(int fd)
 	ssize_t			byte;
 	ssize_t			new_line_index;
 
-	target_node = find_node(&list, fd);
 	byte = BUFFER_SIZE;
-	while (1)
+	new_line_index = -1;
+	target_node = find_node(&list, fd, 1);
+	while (target_node != 0)
 	{
 		new_line_index = find_new_line(target_node);
 		if (new_line_index >= 0 || (new_line_index == -1 && byte == 0))
@@ -120,35 +114,3 @@ char	*get_next_line(int fd)
 		return (get_last(target_node, &list, fd));
 	return (get_result(target_node, new_line_index));
 }
-
-/////////////////////
-
-// #include "get_next_line.h"
-// #include <fcntl.h>
-// #include <stdio.h>
-// #include <stdlib.h>
-
-// void print_line(int fd)
-// {
-// 	char *str = get_next_line(fd);
-// 	printf("return : %s\n-------- \n", str);
-// 	free(str);
-// }
-
-// int main()
-// {
-// 	int fd = open("t_hello.txt", O_RDONLY);
-// 	printf("fd = %d\n", fd);
-
-// 	print_line(4);
-// 	// print_line(fd);
-// 	// print_line(fd);
-// 	// print_line(fd);
-// 	// print_line(fd);
-
-// 	// print_line(fd);
-// 	// print_line(fd);
-// 	// print_line(fd);
-// 	// print_line(fd);
-// 	// print_line(fd);
-// }
