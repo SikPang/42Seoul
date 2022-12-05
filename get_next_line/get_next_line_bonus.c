@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:34:44 by song              #+#    #+#             */
-/*   Updated: 2022/12/05 20:00:00 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/05 20:47:21 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*get_last(t_node_ *node, t_list *list, int fd)
 	char	*result;
 	size_t	data_len;
 
+	if (node == 0)
+		return (0);
 	data_len = 0;
 	while (node->data[data_len] != '\0')
 		++data_len;
@@ -30,15 +32,21 @@ char	*get_last(t_node_ *node, t_list *list, int fd)
 	return (result);
 }
 
-void	add_to_data(t_node_ *node, char *buf, ssize_t byte)
+int	add_to_data(t_node_ *node, char *buf, ssize_t byte)
 {
 	char	*temp;
 
 	if (byte == -1)
-		return ;
+		return (0);
 	temp = node->data;
 	node->data = ft_strjoin(node->data, buf, byte);
+	if (node->data == 0)
+	{
+		node->data = temp;
+		return (0);
+	}
 	free(temp);
+	return (1);
 }
 
 char	*get_result(t_node_ *node, ssize_t new_line_index)
@@ -95,20 +103,20 @@ char	*get_next_line(int fd)
 	ssize_t			new_line_index;
 
 	byte = BUFFER_SIZE;
-	new_line_index = -1;
 	target_node = find_node(&list, fd, 1);
-	while (target_node != 0)
+	while (1)
 	{
 		new_line_index = find_new_line(target_node);
 		if (new_line_index >= 0 || (new_line_index == -1 && byte == 0))
 			break ;
 		byte = read(fd, buf, BUFFER_SIZE);
-		if ((new_line_index == -2 && byte == 0) || byte == -1)
+		if ((new_line_index == -2 && byte == 0) || byte <= -1)
 		{
 			delete_node(&list, fd);
 			return (0);
 		}
-		add_to_data(target_node, buf, byte);
+		if (target_node == 0 || add_to_data(target_node, buf, byte) == 0)
+			return (0);
 	}
 	if (new_line_index < 0)
 		return (get_last(target_node, &list, fd));
