@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: song <song@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:35:11 by song              #+#    #+#             */
-/*   Updated: 2022/12/04 22:20:29 by song             ###   ########.fr       */
+/*   Updated: 2022/12/05 15:17:56 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_node	*push_back(t_list *list, int fd, char *data)
 		new_node->prev_node = cur_node;
 		list->tail = new_node;
 	}
+	return (new_node);
 }
 
 void	erase_node(t_list *list, int fd)

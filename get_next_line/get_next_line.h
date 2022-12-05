@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: song <song@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:35:09 by song              #+#    #+#             */
-/*   Updated: 2022/12/04 21:48:10 by song             ###   ########.fr       */
+/*   Updated: 2022/12/05 14:29:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ void	erase_node(t_list *list, int fd);
 size_t	ft_strlen(const char *str);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2, ssize_t byte);
+void	add_to_data(t_node *node, char *buf, ssize_t byte);
+char	*get_result(t_node *node, ssize_t new_line_index, ssize_t byte);
+ssize_t	find_new_line(t_node *node);
 char	*get_next_line(int fd);
 
 #endif
