@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:35:09 by song              #+#    #+#             */
-/*   Updated: 2022/12/06 16:27:18 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:38:04 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
-# elif BUFFER_SIZE < 1
-#  error "BUFFER_SIZE must be positive number"
 # endif
 
 typedef struct s_node

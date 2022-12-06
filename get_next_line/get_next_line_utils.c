@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:35:11 by song              #+#    #+#             */
-/*   Updated: 2022/12/06 16:13:13 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:15:58 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_node_	*find_node(t_list *list, int fd, int check)
 {
 	t_node_	*node;
 
+	if (BUFFER_SIZE <= 0)
+		return (0);
 	node = list->head;
 	while (node != 0)
 	{
@@ -69,10 +71,15 @@ t_node_	*find_node(t_list *list, int fd, int check)
 		list->buf = (char *)malloc(sizeof(char));
 		if (list->buf == 0)
 			return (0);
-		return (push_back(list, fd));
+		node = push_back(list, fd);
+		if (node == 0)
+		{
+			free(list->buf);
+			return (0);
+		}
+		return (node);
 	}
-	else
-		return (0);
+	return (0);
 }
 
 t_node_	*push_back(t_list *list, int fd)

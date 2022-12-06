@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:34:44 by song              #+#    #+#             */
-/*   Updated: 2022/12/06 16:27:13 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/06 17:38:00 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@
 // {
 // 	t_node_	*node;
 
+// 	if (BUFFER_SIZE <= 0)
+// 		return (0);
 // 	node = list->head;
 // 	while (node != 0)
 // 	{
@@ -66,7 +68,12 @@
 // 		node = node->next_node;
 // 	}
 // 	if (check == 1)
+// 	{
+// 		list->buf = (char *)malloc(sizeof(char));
+// 		if (list->buf == 0)
+// 			return (0);
 // 		return (push_back(list, fd));
+// 	}
 // 	else
 // 		return (0);
 // }
@@ -120,12 +127,17 @@
 // 	free(list->buf);
 // }
 
+
+
+
+
+
 char	*get_last(t_node_ *node, t_list *list, int fd, ssize_t nl_index)
 {
 	char	*result;
 	size_t	data_len;
 
-	if (node == 0 || nl_index == -3)
+	if (node == 0 || node->data == 0 || nl_index == -3)
 		return (0);
 	data_len = 0;
 	while (node->data[data_len] != '\0')
@@ -136,27 +148,6 @@ char	*get_last(t_node_ *node, t_list *list, int fd, ssize_t nl_index)
 	ft_strncpy(result, node->data, data_len);
 	delete_node(list, fd);
 	return (result);
-}
-
-int	add_to_data(t_list *list, t_node_ *node, ssize_t byte)
-{
-	char	*temp;
-
-	if (byte == -1)
-	{
-		free(list->buf);
-		return (0);
-	}
-	temp = node->data;
-	node->data = ft_strjoin(node->data, list->buf, byte);
-	if (node->data == 0)
-	{
-		node->data = temp;
-		free(list->buf);
-		return (0);
-	}
-	free(temp);
-	return (1);
 }
 
 char	*get_result(t_node_ *node, ssize_t nl_index)
@@ -182,21 +173,42 @@ char	*get_result(t_node_ *node, ssize_t nl_index)
 		node->data = temp;
 		return (0);
 	}
-	ft_strncpy(node->data, temp + nl_index + 1,
-		data_len - nl_index - 1);
+	ft_strncpy(node->data, temp + nl_index + 1,data_len - nl_index - 1);
 	free(temp);
 	return (result);
+}
+
+int	add_to_data(t_list *list, t_node_ *node, ssize_t byte)
+{
+	char	*temp;
+
+	if (byte == -1)
+	{
+		free(list->buf);
+		return (0);
+	}
+	temp = node->data;
+	node->data = ft_strjoin(node->data, list->buf, byte);
+	if (node->data == 0)
+	{
+		node->data = temp;
+		return (0);
+	}
+	free(temp);
+	return (1);
 }
 
 ssize_t	find_new_line(t_node_ *node, t_list *list)
 {
 	ssize_t	i;
 
+	if (node == 0)
+		return (-3);
 	free(list->buf);
 	list->buf = (char *)malloc(BUFFER_SIZE * sizeof(char));
 	if (list->buf == 0)
 		return (-3);
-	if (node == 0 || node->data == 0)
+	if (node->data == 0)
 		return (-1);
 	i = 0;
 	while (node->data[i] != '\0')
@@ -255,15 +267,15 @@ char	*get_next_line(int fd)
 // 	int fd = open("t_hello.txt", O_RDONLY);
 // 	printf("fd = %d\n", fd);
 
-// 	print_line(fd);
-// 	print_line(fd);
-// 	print_line(fd);
-// 	print_line(fd);
-// 	print_line(fd);
+// 	print_line(-1);
+// 	// print_line(fd);
+// 	// print_line(fd);
+// 	// print_line(fd);
+// 	// print_line(fd);
 
-// 	print_line(fd);
-// 	print_line(fd);
-// 	print_line(fd);
-// 	print_line(fd);
-// 	print_line(fd);
+// 	// print_line(fd);
+// 	// print_line(fd);
+// 	// print_line(fd);
+// 	// print_line(fd);
+// 	// print_line(fd);
 // }
