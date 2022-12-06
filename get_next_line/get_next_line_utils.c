@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 16:35:11 by song              #+#    #+#             */
-/*   Updated: 2022/12/05 20:01:02 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/06 16:13:13 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,12 @@ t_node_	*find_node(t_list *list, int fd, int check)
 		node = node->next_node;
 	}
 	if (check == 1)
+	{
+		list->buf = (char *)malloc(sizeof(char));
+		if (list->buf == 0)
+			return (0);
 		return (push_back(list, fd));
+	}
 	else
 		return (0);
 }
@@ -116,4 +121,5 @@ void	delete_node(t_list *list, int fd)
 		list->tail = node->prev_node;
 	free(node->data);
 	free(node);
+	free(list->buf);
 }
