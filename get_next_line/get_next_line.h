@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 16:35:09 by song              #+#    #+#             */
-/*   Updated: 2022/12/06 20:52:44 by kwsong           ###   ########.fr       */
+/*   Created: 2022/12/08 13:18:45 by kwsong            #+#    #+#             */
+/*   Updated: 2022/12/08 13:18:45 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 
 typedef struct s_node
@@ -32,18 +32,18 @@ typedef struct s_list
 {
 	t_node_	*head;
 	t_node_	*tail;
-	char	*buf;
 }	t_list;
 
-t_node_	*find_node(t_list *list, int fd, int check);
 t_node_	*push_back(t_list *list, int fd);
-void	delete_node(t_list *list, int fd);
+t_node_	*find_node(t_list *list, int fd, int check);
+void	delete_node(t_list *list, t_node_ *target);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
-char	*ft_strjoin(char const *s1, char const *s2, ssize_t byte);
-int		add_to_data(t_list *list, t_node_ *node, ssize_t byte);
-char	*get_last(t_node_ *node, t_list *list, int fd, ssize_t nl_index);
-char	*get_result(t_node_ *node, ssize_t result_len, size_t data_len);
-ssize_t	find_new_line(t_node_ *node, t_list *list);
+char	*ft_strjoin(char *s1, char *s2, ssize_t byte);
+char	*get_last(t_list *list, t_node_ *target, ssize_t byte);
+char	*get_result(t_list *list, t_node_ *target, size_t result_len,
+			size_t data_len);
+size_t	ft_strchr(char *s, char c);
+ssize_t	read_buf(t_node_ *target, int fd);
 char	*get_next_line(int fd);
 
 #endif

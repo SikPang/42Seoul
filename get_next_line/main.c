@@ -12,7 +12,7 @@ void print_line(int fd)
 
 int main()
 {
-	int fd = open("t_hello.txt", O_RDONLY);
+	int fd = open("t_edge.txt", O_RDONLY);
 	printf("fd = %d\n", fd);
 
 	print_line(fd);
@@ -25,6 +25,8 @@ int main()
 	print_line(fd);
 	print_line(fd);
 	print_line(fd);
+	print_line(fd);
+
 	print_line(fd);
 }
 
