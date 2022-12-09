@@ -6,12 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:17:53 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/08 19:39:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/09 15:45:48 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <unistd.h>
 #include "get_next_line.h"
 
 char	*ft_strncpy(char *dest, const char *src, size_t n)
