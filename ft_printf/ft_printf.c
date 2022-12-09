@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 19:58:32 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/08 23:42:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/09 22:46:23 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ int	convert(va_list ap, char c)
 	else if (c == 'p')
 		return (print_address(va_arg(ap, unsigned long long)));
 	else if (c == 'd')
-		return (print_char(va_arg(ap, int)));
+		return (print_decimal(va_arg(ap, int), 'd'));
 	else if (c == 'i')
-		return (print_char(va_arg(ap, int)));
+		return (print_decimal(va_arg(ap, int), 'i'));
 	else if (c == 'u')
-		return (print_char(va_arg(ap, int)));
+		return (print_decimal(va_arg(ap, int), 'u'));
 	else if (c == 'x')
-		return (print_char(va_arg(ap, int)));
+		return (print_hex(va_arg(ap, long long), 'x'));
 	else if (c == 'X')
-		return (print_char(va_arg(ap, int)));
+		return (print_hex(va_arg(ap, long long), 'X'));
 	else if (c == '%')
-		return (print_char(va_arg(ap, int)));
+		return (print_char('%'));
 	else if (c == '\0')
 		return (0);
 	return (print_char(c));
@@ -107,14 +107,14 @@ int main()
 	len2 += ft_printf("my :%X, %X, %X\n", max, LONG_MIN, -max);
 	printf("\n");
 
-	// edgecase
-	len1 += printf	 ("p_error :%d%,% %s%%\n", min-1, test1);
-	len2 += ft_printf("my_error:%d%,% %s%%\n", min-1, test1);
-	len1 += printf	 ("p_error :%d\n", min-1);
-	len2 += ft_printf("my_error:%d\n", min-1);
-	len1 += printf("p_error :%$%\(*%d\n");
-	len2 += printf("my_error:%$%\(*%d\n");
-	printf("\n");
+	// // edgecase
+	// len1 += printf	 ("p_error :%d%,% %s%%\n", min-1, test1);
+	// len2 += ft_printf("my_error:%d%,% %s%%\n", min-1, test1);
+	// len1 += printf	 ("p_error :%d\n", min-1);
+	// len2 += ft_printf("my_error:%d\n", min-1);
+	// len1 += printf("p_error :%$%\(*%d\n");
+	// len2 += printf("my_error:%$%\(*%d\n");
+	// printf("\n");
 
 	// return value
 	printf ("p_len :%d\n", len1);
