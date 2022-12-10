@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 19:58:32 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/10 15:40:42 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/10 19:06:30 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,22 @@
 
 int	convert(va_list ap, char c)
 {
+	int	result;
+
+	result = 0;
 	if (c == 'c')
-		return (print_char((char)va_arg(ap, int)));
+		result = print_char((char)va_arg(ap, int));
 	else if (c == 's')
-		return (print_str((va_arg(ap, char *))));
+		result = print_str((va_arg(ap, char *)));
 	else if (c == 'p')
-		return (print_address(va_arg(ap, unsigned long long)));
+		result = print_address(va_arg(ap, unsigned long long));
 	else if (c == 'd' || c == 'i' || c == 'u')
-		return (print_decimal(va_arg(ap, int), c));
+		result = print_decimal(va_arg(ap, int), c);
 	else if (c == 'x' || c == 'X')
-		return (print_hex(va_arg(ap, unsigned int), c));
+		result = print_hex(va_arg(ap, unsigned int), c);
 	else if (c == '%')
-		return (print_char('%'));
-	return (0);
+		result = print_char('%');
+	return (result);
 }
 
 int	ft_printf(const char *str, ...)
@@ -35,6 +38,7 @@ int	ft_printf(const char *str, ...)
 	va_list	ap;
 	int		i;
 	int		num;
+	int		temp;
 
 	i = 0;
 	num = 0;
@@ -42,9 +46,12 @@ int	ft_printf(const char *str, ...)
 	while (str[i] != '\0')
 	{
 		if (str[i] == '%')
-			num += convert(ap, str[++i]);
+			temp = convert(ap, str[++i]);
 		else
-			num += print_char(str[i]);
+			temp = print_char(str[i]);
+		if (temp == -1)
+			return (-1);
+		num += temp;
 		++i;
 	}
 	va_end(ap);
