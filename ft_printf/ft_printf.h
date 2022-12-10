@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 22:56:34 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/09 18:56:24 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/10 14:58:45 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdarg.h>
 
-int	print_hex(long long num, char check);
+int	print_hex(unsigned int num, char check);
 int	print_decimal(int num, char check);
 int	print_address(unsigned long long address);
 int	print_str(char *str);

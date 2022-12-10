@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 23:17:22 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/08 23:19:29 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/10 14:44:11 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	print_str(char *str)
 	i = 0;
 	while (str[i] != '\0')
 	{
-		write(1, &str[i], 1);
+		print_char(str[i]);
 		++i;
 	}
 	return (i);
