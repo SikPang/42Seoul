@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:18:45 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/08 13:18:45 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/10 16:39:39 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 42
 # endif
 
 typedef struct s_node
@@ -35,7 +35,7 @@ typedef struct s_list
 }	t_list;
 
 t_node_	*push_back(t_list *list, int fd);
-t_node_	*find_node(t_list *list, int fd, int check);
+t_node_	*find_node(t_list *list, int fd);
 void	delete_node(t_list *list, t_node_ *target);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
 char	*ft_strjoin(char *s1, char *s2, ssize_t byte);

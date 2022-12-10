@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:18:39 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/08 13:18:39 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/10 16:38:21 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_strjoin(char *s1, char *s2, ssize_t byte)
 	return (new_str);
 }
 
-t_node_	*find_node(t_list *list, int fd, int check)
+t_node_	*find_node(t_list *list, int fd)
 {
 	t_node_	*node;
 
@@ -63,20 +63,15 @@ t_node_	*find_node(t_list *list, int fd, int check)
 			return (node);
 		node = node->next_node;
 	}
-	if (check == 1)
-	{
-		node = push_back(list, fd);
-		if (node == 0)
-			return (0);
-		return (node);
-	}
-	return (0);
+	node = push_back(list, fd);
+	if (node == 0)
+		return (0);
+	return (node);
 }
 
 t_node_	*push_back(t_list *list, int fd)
 {
 	t_node_	*new_node;
-	t_node_	*cur_node;
 
 	new_node = (t_node_ *)malloc(sizeof(t_node_));
 	if (new_node == 0)
@@ -92,11 +87,8 @@ t_node_	*push_back(t_list *list, int fd)
 	}
 	else
 	{
-		cur_node = list->head;
-		while (cur_node->next_node != 0)
-			cur_node = cur_node->next_node;
-		cur_node->next_node = new_node;
-		new_node->prev_node = cur_node;
+		list->tail->next_node = new_node;
+		new_node->prev_node = list->tail;
 		list->tail = new_node;
 	}
 	return (new_node);
