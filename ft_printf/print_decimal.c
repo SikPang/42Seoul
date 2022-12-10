@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 16:01:32 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/09 22:38:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/10 15:24:46 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ft_printf.h"
 
-static void	set_str(long long ln, int *size)
+static void	recursion(long long ln, int *size)
 {
 	if (ln < 10)
 	{
@@ -21,7 +21,7 @@ static void	set_str(long long ln, int *size)
 		++(*size);
 		return ;
 	}
-	set_str(ln / 10, size);
+	recursion(ln / 10, size);
 	print_char(ln % 10 + '0');
 	++(*size);
 }
@@ -42,6 +42,6 @@ int	print_decimal(int num, char check)
 		++size;
 		ln = -1 * ln;
 	}
-	set_str(ln, &size);
+	recursion(ln, &size);
 	return (size);
 }

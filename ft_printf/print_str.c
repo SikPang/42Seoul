@@ -6,12 +6,18 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 23:17:22 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/10 14:44:11 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/10 15:49:32 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "ft_printf.h"
+
+int	print_char(char c)
+{
+	write(1, &c, 1);
+	return (1);
+}
 
 int	print_str(char *str)
 {

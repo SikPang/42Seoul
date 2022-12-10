@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2022/12/10 14:41:17 by kwsong           ###   ########.fr        #
+#    Updated: 2022/12/10 15:55:17 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,17 +17,16 @@ ARFLAGS	= -srcu
 
 INC		= ft_printf.h
 SRCS	= ft_printf.c \
-		print_char.c \
 		print_str.c \
 		print_decimal.c \
-		print_hex.c \
-		print_address.c
+		print_hex.c
 
+GCH		= $(INC).gch
 OBJS	= $(SRCS:.c=.o)
 
 all		: $(NAME)
 
-$(NAME)	: $(OBJS)
+$(NAME)	: $(OBJS) $(GCH)
 	$(AR) $(ARFLAGS) $@ $?
 
 %.o		: %.c
@@ -35,6 +34,7 @@ $(NAME)	: $(OBJS)
 
 clean	:
 	rm -f $(OBJS)
+	rm -f $(GCH)
 
 fclean	: 
 	make clean

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 22:56:34 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/10 14:58:45 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/10 15:12:43 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ int	print_address(unsigned long long address);
 int	print_str(char *str);
 int	print_char(char c);
 int	convert(va_list ap, char c);
-int ft_printf(const char *str, ...);
+int	ft_printf(const char *str, ...);
 
 #endif

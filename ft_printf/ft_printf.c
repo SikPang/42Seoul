@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 19:58:32 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/10 15:04:00 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/10 15:40:42 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,12 @@ int	convert(va_list ap, char c)
 		return (print_hex(va_arg(ap, unsigned int), c));
 	else if (c == '%')
 		return (print_char('%'));
-	else if (c == '\0')
-		return (0);
-	return (print_char(c));
+	return (0);
 }
 
-int ft_printf(const char *str, ...)
+int	ft_printf(const char *str, ...)
 {
-	va_list ap;
+	va_list	ap;
 	int		i;
 	int		num;
 
