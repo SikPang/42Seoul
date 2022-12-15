@@ -14,8 +14,9 @@
 # define LIBFT_H
 
 # include <stddef.h>
+# include "deque.h"
 
-int		ft_atoi(const char *str);
+int		ft_atoi(const char *str, t_deque *deque);
 void	*ft_calloc(size_t nelem, size_t elsize);
 char	**ft_split(char const *s, char c);
 

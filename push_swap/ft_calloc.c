@@ -19,8 +19,6 @@ void	*ft_calloc(size_t nelem, size_t elsize)
 	size_t	total;
 	size_t	i;
 
-	if (nelem < 0 || elsize < 0)
-		return ((void *)0);
 	total = nelem * elsize;
 	new_mem = malloc(total);
 	if (new_mem == (void *)0)
@@ -33,17 +31,3 @@ void	*ft_calloc(size_t nelem, size_t elsize)
 	}
 	return (new_mem);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-// 	int size = 10;
-// 	int *mem1 = (int *)ft_calloc(0, sizeof(int));
-// 	int *mem2 = (int *)calloc(0, sizeof(int));
-
-// 	for (int i=0; i<size; ++i)
-// 		printf("%d", mem1[i]);
-// 	printf("\n");
-// 	for (int i=0; i<size; ++i)
-// 		printf("%d", mem2[i]);
-// }

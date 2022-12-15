@@ -10,12 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <limits.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include "deque.h"
 
-static int	check_over_flow(long before_num, char ch, int minus)
+static void	error_exit(t_deque *deque)
 {
-	long	after_num;
+	free(deque);
+	write(2, "Error\n", 6);
+	exit(1);
+}
 
+static int	check_valid(int before_num, char ch, int minus)
+{
+	int	after_num;
+
+	if (ch < '0' || ch > '9')
+		return (0);
 	if (minus == 1)
 	{
 		after_num = before_num * 10 + ch - '0';
@@ -27,16 +38,16 @@ static int	check_over_flow(long before_num, char ch, int minus)
 		before_num *= -1;
 		after_num = before_num * 10 - (ch - '0');
 		if (after_num > 0)
-			return (-1);
+			return (1);
 	}
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, t_deque *deque)
 {
-	int		i;
-	int		minus;
-	long	num;
+	int	i;
+	int	minus;
+	int	num;
 
 	i = 0;
 	minus = 1;
@@ -49,12 +60,10 @@ int	ft_atoi(const char *str)
 			minus *= -1;
 		++i;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (1)
 	{
-		if (check_over_flow(num, str[i], minus) == 1)
-			return ((int)LONG_MAX);
-		else if (check_over_flow(num, str[i], minus) == -1)
-			return ((int)LONG_MIN);
+		if (!check_valid(num, str[i], minus))
+			error_exit(deque);
 		num = num * 10 + str[i] - '0';
 		++i;
 	}
