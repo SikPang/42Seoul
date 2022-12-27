@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 18:10:04 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/23 20:29:16 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/27 20:28:31 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "deque.h"
 #include "libft.h"
 
+#include <stdio.h>
 void	push_args(int ac, char **av, t_deque *deque)
 {
 	char	**strs;
@@ -28,6 +29,7 @@ void	push_args(int ac, char **av, t_deque *deque)
 		j = 0;
 		while (strs[j])
 		{
+			printf("%s\n", strs[j]);
 			push_back(deque, ft_atoi(strs[j], deque));
 			++j;
 		}
@@ -54,13 +56,14 @@ int	get_size(int ac, char **av)
 				++size;
 			++j;
 		}
-		if (i != 0 && av[i][j - 1] != ' ')
+		if (j != 0 && av[i][j - 1] != ' ')
 			++size;
+		
 		++i;
 	}
 	return (size);
 }
-#include <stdio.h>
+
 int main(int ac, char *av[])
 {
 	t_deque	deque_a;
@@ -68,6 +71,7 @@ int main(int ac, char *av[])
 	char	size;
 
 	size = get_size(ac, av);
+	printf("size : %d\n", size);
 	init_deque(&deque_a, size);
 	push_args(ac, av, &deque_a);
 	init_deque(&deque_b, size);
