@@ -6,20 +6,18 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2022/12/10 15:55:17 by kwsong           ###   ########.fr        #
+#    Updated: 2022/12/27 19:07:12 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= push_swap
 
-CFLAGS	= -Wall -Wextra -Werror
-ARFLAGS	= -srcu
-
-INC		= push_swap.h \
+INCS	= push_swap.h \
 		deque.h \
 		libft.h \
 		ft_printf.h
-SRCS	= push_swap.c \
+SRCS	= main.c \
+		push_swap.c \
 		deque.c \
 		command.c \
 		ft_split.c \
@@ -29,17 +27,19 @@ SRCS	= push_swap.c \
 		print_str.c \
 		print_decimal.c \
 		print_hex.c
-
-GCH		= $(INC:.h=.h.gch)
 OBJS	= $(SRCS:.c=.o)
+GCH		= $(INCS:.h=.h.gch)
+
+CC		= gcc
+CFLAGS	= -Wall -Wextra -Werror
 
 all		: $(NAME)
 
-$(NAME)	: $(OBJS) $(GCH)
-	$(AR) $(ARFLAGS) $@ $?
+$(NAME)	: $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $^
 
 %.o		: %.c
-	$(CC) $(CFLAGS) -c $< $(INC)
+	$(CC) $(CFLAGS) -c $<
 
 clean	:
 	rm -f $(OBJS)
@@ -53,4 +53,4 @@ re		:
 	make fclean
 	make all
 
-.PHONY : all clean fclean re
+.PHONY	: all clean fclean re

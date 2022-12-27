@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 18:10:04 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/15 23:50:15 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/23 20:29:16 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	get_size(int ac, char **av)
 	}
 	return (size);
 }
-
-int main(int ac, char **av)
+#include <stdio.h>
+int main(int ac, char *av[])
 {
 	t_deque	deque_a;
 	t_deque	deque_b;
@@ -72,5 +72,8 @@ int main(int ac, char **av)
 	push_args(ac, av, &deque_a);
 	init_deque(&deque_b, size);
 	// push_swap()
+
+	for (int i=0; i<deque_a.size; ++i)
+		printf("%d ", pop_back(&deque_a));
 	return (0);
 }

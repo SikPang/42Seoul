@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/29 21:32:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/23 21:16:15 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static void	error_exit(t_deque *deque)
 {
-	free(deque);
+	free(deque->arr);
 	write(2, "Error\n", 6);
 	exit(1);
 }
@@ -31,16 +31,16 @@ static int	check_valid(int before_num, char ch, int minus)
 	{
 		after_num = before_num * 10 + ch - '0';
 		if (after_num < 0)
-			return (1);
+			return (0);
 	}
 	else
 	{
 		before_num *= -1;
 		after_num = before_num * 10 - (ch - '0');
 		if (after_num > 0)
-			return (1);
+			return (0);
 	}
-	return (0);
+	return (1);
 }
 
 int	ft_atoi(const char *str, t_deque *deque)
@@ -60,7 +60,7 @@ int	ft_atoi(const char *str, t_deque *deque)
 			minus *= -1;
 		++i;
 	}
-	while (1)
+	while (str[i] != '\0')
 	{
 		if (!check_valid(num, str[i], minus))
 			error_exit(deque);
