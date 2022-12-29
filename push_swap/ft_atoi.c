@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/23 21:16:15 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/29 20:06:12 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@ static void	error_exit(t_deque *deque)
 	free(deque->arr);
 	write(2, "Error\n", 6);
 	exit(1);
+}
+
+static void	check_duplicate(t_deque *deque, int data)
+{
+	int	i;
+
+	i = 0;
+	while (i < deque->size)
+	{
+		if (deque->arr[i] == data)
+			error_exit(deque);
+		++i;
+	}
 }
 
 static int	check_valid(int before_num, char ch, int minus)
@@ -67,5 +80,6 @@ int	ft_atoi(const char *str, t_deque *deque)
 		num = num * 10 + str[i] - '0';
 		++i;
 	}
+	check_duplicate(deque, num * minus);
 	return (num * minus);
 }
