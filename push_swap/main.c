@@ -6,17 +6,16 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 18:10:04 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/29 18:01:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/30 14:11:24 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "deque.h"
-#include "libft.h"
+#include "./utility/utility.h"
 
-#include <stdio.h>
-void	push_args(int ac, char **av, t_deque *deque)
+static void	push_args(int ac, char **av, t_deque *deque)
 {
 	char	**strs;
 	int		i;
@@ -29,7 +28,6 @@ void	push_args(int ac, char **av, t_deque *deque)
 		j = 0;
 		while (strs[j])
 		{
-			printf("%s\n", strs[j]);
 			push_back(deque, ft_atoi(strs[j], deque));
 			++j;
 		}
@@ -37,7 +35,7 @@ void	push_args(int ac, char **av, t_deque *deque)
 	}
 }
 
-int	get_size(int ac, char **av)
+static int	get_size(int ac, char **av)
 {
 	int	size;
 	int	i;
@@ -71,13 +69,12 @@ int main(int ac, char *av[])
 	char	size;
 
 	size = get_size(ac, av);
-	printf("size : %d\n", size);
 	init_deque(&deque_a, size);
 	push_args(ac, av, &deque_a);
 	init_deque(&deque_b, size);
 	// push_swap()
 
-	for (int i=0; i<deque_a.size; ++i)
-		printf("%d ", pop_back(&deque_a));
+	// for (int i=0; i<deque_a.size; ++i)
+	// 	printf("%d ", pop_back(&deque_a));
 	return (0);
 }

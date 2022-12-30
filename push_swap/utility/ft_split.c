@@ -6,11 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 14:10:01 by kwsong            #+#    #+#             */
-/*   Updated: 2022/11/29 21:08:13 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/30 13:56:00 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "utility.h"
 #include <stdlib.h>
 
 static size_t	init_var(char const *s, char c, size_t *row, size_t *col)

@@ -6,12 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:46:03 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/15 17:46:24 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/30 14:07:13 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "ft_printf.h"
+#include "./ft_printf/ft_printf.h"
 
 void	swap(t_deque *deque1, t_deque *deque2, char check)
 {

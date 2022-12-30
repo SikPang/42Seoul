@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2022/12/27 20:18:27 by kwsong           ###   ########.fr        #
+#    Updated: 2022/12/30 14:08:53 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,19 +14,19 @@ NAME	= push_swap
 
 INCS	= push_swap.h \
 		deque.h \
-		libft.h \
-		ft_printf.h
+		./utility/utility.h \
+		./ft_printf/ft_printf.h
 SRCS	= main.c \
 		push_swap.c \
 		deque.c \
 		command.c \
-		ft_split.c \
-		ft_atoi.c \
-		ft_calloc.c \
-		ft_printf.c \
-		print_str.c \
-		print_decimal.c \
-		print_hex.c
+		./utility/ft_split.c \
+		./utility/ft_atoi.c \
+		./utility/ft_calloc.c \
+		./ft_printf/ft_printf.c \
+		./ft_printf/print_str.c \
+		./ft_printf/print_decimal.c \
+		./ft_printf/print_hex.c
 OBJS	= $(SRCS:.c=.o)
 GCH		= $(INCS:.h=.h.gch)
 
@@ -37,9 +37,9 @@ all		: $(NAME)
 
 $(NAME)	: $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
-
+# GCH 수정
 %.o		: %.c
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean	:
 	rm -f $(OBJS)
