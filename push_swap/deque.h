@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 13:54:57 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/23 19:44:52 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/30 17:24:15 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 typedef struct s_deque
 {
 	int	*arr;
-	int	size;
+	int	capacity;
+	int size;
 	int	head;
 	int	tail;
 }	t_deque;

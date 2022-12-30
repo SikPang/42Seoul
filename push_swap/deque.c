@@ -6,39 +6,42 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 13:54:52 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/23 21:14:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2022/12/30 18:26:29 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "deque.h"
 
-void	init_deque(t_deque *deque, int size)
+void	init_deque(t_deque *deque, int capacity)
 {
-	if (size <= 0)
+	if (capacity <= 0)
 		return ;
-	deque->arr = (int *)malloc(size * sizeof(int));
-	deque->size = size;
-	deque->head = size / 2;
-	deque->tail = size / 2;
+	deque->arr = (int *)malloc(capacity * sizeof(int));
+	deque->capacity = capacity;
+	deque->size = 0;
+	deque->head = 0;
+	deque->tail = 0;
 }
 
 void	push_front(t_deque *deque, int data)
 {
 	if (deque->head == 0)
-		deque->head = deque->size - 1;
+		deque->head = deque->capacity - 1;
 	else
 		--deque->head;
 	deque->arr[deque->head] = data;
+	++deque->size;
 }
 
 void	push_back(t_deque *deque, int data)
 {
-	if (deque->tail == deque->size - 1)
+	if (deque->tail == deque->capacity - 1)
 		deque->tail = 0;
 	else
 		++deque->tail;
 	deque->arr[deque->tail] = data;
+	++deque->size;
 }
 
 int	pop_front(t_deque *deque)
@@ -50,6 +53,7 @@ int	pop_front(t_deque *deque)
 		deque->head = 0;
 	else
 		++deque->head;
+	--deque->size;
 	return (value);
 }
 
@@ -59,8 +63,9 @@ int	pop_back(t_deque *deque)
 
 	value = deque->arr[deque->tail];
 	if (deque->tail == 0)
-		deque->tail = deque->size - 1;
+		deque->tail = deque->capacity - 1;
 	else
 		--deque->tail;
+	--deque->size;
 	return (value);
 }
