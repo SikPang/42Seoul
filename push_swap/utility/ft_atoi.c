@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include "../deque.h"
-
+#include <stdio.h>
 static void	error_exit(t_deque *deque)
 {
 	free(deque->arr);
-	write(2, "Error\n", 6);
+	//write(2, "Error\n", 6);
+	printf("arg Error");
 	exit(1);
 }
 

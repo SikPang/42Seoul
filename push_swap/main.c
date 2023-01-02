@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <unistd.h>
 #include "deque.h"
 #include "push_swap.h"
 #include "./utility/utility.h"
@@ -75,9 +74,13 @@ int main(int ac, char *av[])
 	push_args(ac, av, &deque_a);
 	init_deque(&deque_b, size);
 	//push_swap(&deque_a, &deque_b);
-	printf("%d\n", size);
-	
+
+	printf("\nA : %d\n", deque_a.size);
 	while (deque_a.size > 0)
 	 	printf("%d ", pop_back(&deque_a));
+
+	printf("\n\nB : %d\n", deque_b.size);
+	while (deque_b.size > 0)
+		printf("%d ", pop_back(&deque_b));
 	return (0);
 }

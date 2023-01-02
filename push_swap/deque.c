@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "deque.h"
 
+#include <stdio.h>
 void	init_deque(t_deque *deque, int capacity)
 {
 	if (capacity <= 0)
@@ -20,13 +21,24 @@ void	init_deque(t_deque *deque, int capacity)
 	deque->arr = (int *)malloc(capacity * sizeof(int));
 	deque->capacity = capacity;
 	deque->size = 0;
-	deque->head = 0;
-	deque->tail = 0;
+	deque->head = -1;
+	deque->tail = -1;
 }
 
 void	push_front(t_deque *deque, int data)
 {
-	if (deque->head == 0)
+	if (deque->size == deque->capacity)
+	{
+		//write(2, "Error\n", 6);
+		printf("Error : push into full deque\n");
+		exit(1);
+	}
+	if (deque->head == -1)
+	{
+		deque->head = 0;
+		deque->tail = 0;
+	}
+	else if (deque->head == 0)
 		deque->head = deque->capacity - 1;
 	else
 		--deque->head;
@@ -36,7 +48,18 @@ void	push_front(t_deque *deque, int data)
 
 void	push_back(t_deque *deque, int data)
 {
-	if (deque->tail == deque->capacity - 1)
+	if (deque->size == deque->capacity)
+	{
+		//write(2, "Error\n", 6);
+		printf("Error : push into full deque\n");
+		exit(1);
+	}
+	if (deque->head == -1)
+	{
+		deque->head = 0;
+		deque->tail = 0;
+	}
+	else if (deque->tail == deque->capacity - 1)
 		deque->tail = 0;
 	else
 		++deque->tail;
@@ -48,8 +71,19 @@ int	pop_front(t_deque *deque)
 {
 	int	value;
 
+	if (deque->size == 0)
+	{
+		//write(2, "Error\n", 6);
+		printf("Error : pop at empty deque\n");
+		exit(1);
+	}
 	value = deque->arr[deque->head];
-	if (deque->head == deque->head - 1)
+	if (deque->size == 1)
+	{
+		deque->head = -1;
+		deque->tail = -1;
+	}
+	else if (deque->head == deque->capacity - 1)
 		deque->head = 0;
 	else
 		++deque->head;
@@ -61,8 +95,19 @@ int	pop_back(t_deque *deque)
 {
 	int	value;
 
+	if (deque->size == 0)
+	{
+		//write(2, "Error\n", 6);
+		printf("Error : pop at empty deque\n");
+		exit(1);
+	}
 	value = deque->arr[deque->tail];
-	if (deque->tail == 0)
+	if (deque->size == 1)
+	{
+		deque->head = -1;
+		deque->tail = -1;
+	}
+	else if (deque->tail == 0)
 		deque->tail = deque->capacity - 1;
 	else
 		--deque->tail;
