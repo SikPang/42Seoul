@@ -63,16 +63,17 @@ int main(int ac, char *av[])
 	size = get_size(ac, av);
 	init_deque(&deque_a, size);
 	push_args(ac, av, &deque_a);
-	sorted_arr = radix_sort(&deque_a);
+	sorted_arr = radix_sort(&deque_a, 0);
 	init_deque(&deque_b, size);
 	//push_swap(&deque_a, &deque_b);
 
+	int a = deque_a.size;
 	printf("\nA : %d\n", deque_a.size);
 	while (deque_a.size > 0)
 	 	printf("%d ", pop_back(&deque_a));
 
 	printf("\n\nSorted : ");
-	for (int i=0; i<deque_a.size; ++i)
+	for (int i=0; i<a; ++i)
 	 	printf("%d ", sorted_arr[i]);
 
 	printf("\n\nB : %d\n", deque_b.size);

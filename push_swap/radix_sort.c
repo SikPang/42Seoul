@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:37:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/06 20:42:54 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/06 21:41:54 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "deque.h"
 #include "queue.h"
 
+#include <stdio.h>
 static int	*memdup(t_deque *src, int *max_cnt)
 {
 	int	*new;
@@ -23,11 +24,11 @@ static int	*memdup(t_deque *src, int *max_cnt)
 
 	new = (int *)malloc(src->size * sizeof(int));
 	i = 0;
-	cnt = 0;
 	while (i < src->size)
 	{
-		new[i] = src->arr[i];
-		temp = src->arr[i];
+		new[i] = src->arr[(i + 1) % src->size];
+		temp = src->arr[(i + 1) % src->size];
+		cnt = 0;
 		while (temp > 0)
 		{
 			temp /= 10;
@@ -61,28 +62,32 @@ static void	push_to_que(t_queue *que, int *result, int cnt, int size)
 	}
 }
 
-int *radix_sort(t_deque *src)
+int *radix_sort(t_deque *src, int max_cnt)
 {
 	t_queue	que[10];
 	int		*result;
-	int		max_cnt;
 	int		cur_idx;
 	int		i;
+	int		j;
 
 	i = 0;
 	while (i < 10)
-		init_queue(&que[i]);
-	max_cnt = 0;
+		init_queue(&que[i++]);
 	result = memdup(src, &max_cnt);
 	i = 0;
 	while (i < max_cnt)
 	{
 		push_to_que(que, result, i, src->size);
 		cur_idx = 0;
-		while (que[i].size > 0)
+		j = 0;
+		while (j < 10)
 		{
-			result[cur_idx] = pop(&que[i]);
-			++cur_idx;
+			while (que[j].size > 0)
+			{
+				result[cur_idx] = pop(&que[j]);
+				++cur_idx;
+			}
+			++j;
 		}
 		++i;
 	}
