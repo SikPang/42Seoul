@@ -1,18 +1,7 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/15 18:10:04 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/30 18:11:19 by kwsong           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdlib.h>
 #include "deque.h"
 #include "push_swap.h"
+#include "radix_sort.h"
 #include "./utility/utility.h"
 
 static void	push_args(int ac, char **av, t_deque *deque)
@@ -62,22 +51,29 @@ static int	get_size(int ac, char **av)
 	return (size);
 }
 
+// 데이터 받기 - 정렬 - 정규화 - 3진수 변환 - radix sort 시작
 #include <stdio.h>
 int main(int ac, char *av[])
 {
 	t_deque	deque_a;
 	t_deque	deque_b;
+	int		*sorted_arr;
 	int		size;
 
 	size = get_size(ac, av);
 	init_deque(&deque_a, size);
 	push_args(ac, av, &deque_a);
+	sorted_arr = radix_sort(&deque_a);
 	init_deque(&deque_b, size);
 	//push_swap(&deque_a, &deque_b);
 
 	printf("\nA : %d\n", deque_a.size);
 	while (deque_a.size > 0)
 	 	printf("%d ", pop_back(&deque_a));
+
+	printf("\n\nSorted : ");
+	for (int i=0; i<deque_a.size; ++i)
+	 	printf("%d ", sorted_arr[i]);
 
 	printf("\n\nB : %d\n", deque_b.size);
 	while (deque_b.size > 0)

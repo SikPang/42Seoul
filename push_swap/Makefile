@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2022/12/30 18:20:05 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/06 20:36:13 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,24 +14,23 @@ NAME	= push_swap
 
 INCS	= push_swap.h \
 		deque.h \
-		./utility/utility.h \
-		./ft_printf/ft_printf.h
+		queue.h \
+		radix_sort.h \
+		./utility/utility.h
 SRCS	= main.c \
 		push_swap.c \
 		deque.c \
+		queue.c \
+		radix_sort.c \
 		command.c \
 		./utility/ft_split.c \
 		./utility/ft_atoi.c \
-		./utility/ft_calloc.c \
-		./ft_printf/ft_printf.c \
-		./ft_printf/print_str.c \
-		./ft_printf/print_decimal.c \
-		./ft_printf/print_hex.c
+		./utility/ft_calloc.c
 OBJS	= $(SRCS:.c=.o)
 GCH		= $(INCS:.h=.h.gch)
 
 CC		= gcc
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror
 
 all		: $(NAME)
 
