@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:37:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/06 20:39:26 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/06 20:42:54 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	*memdup(t_deque *src, int *max_cnt)
 	return (new);
 }
 
-static void	push_to_que(t_queue *que[], int *result, int cnt, int size)
+static void	push_to_que(t_queue *que, int *result, int cnt, int size)
 {
 	int	temp;
 	int	i;
@@ -56,7 +56,7 @@ static void	push_to_que(t_queue *que[], int *result, int cnt, int size)
 			temp /= 10;
 			++i;
 		}
-		push(que[temp % 10], result[j]);
+		push(&que[temp % 10], result[j]);
 		++j;
 	}
 }
@@ -77,7 +77,7 @@ int *radix_sort(t_deque *src)
 	i = 0;
 	while (i < max_cnt)
 	{
-		push_to_que(&que, result, i, src->size);
+		push_to_que(que, result, i, src->size);
 		cur_idx = 0;
 		while (que[i].size > 0)
 		{

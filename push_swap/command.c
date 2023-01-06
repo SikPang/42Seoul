@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:46:03 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/30 14:22:38 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/06 20:43:57 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 //#include <unitsd.h>
 
 #include <stdio.h>
-void	swap(t_deque *deque1, t_deque *deque2, char check)
+void	c_swap(t_deque *deque1, t_deque *deque2, char check)
 {
 	int	first;
 	int	second;
@@ -35,7 +35,7 @@ void	swap(t_deque *deque1, t_deque *deque2, char check)
 	printf("s%c\n", check);
 }
 
-void	push(t_deque *dest, t_deque *src, char check)
+void	c_push(t_deque *dest, t_deque *src, char check)
 {
 	push_back(dest, pop_back(src));
 	//write(1, "p", 1);
@@ -43,7 +43,7 @@ void	push(t_deque *dest, t_deque *src, char check)
 	printf("p%c\n", check);
 }
 
-void	rotate(t_deque *deque1, t_deque *deque2, char check)
+void	c_rotate(t_deque *deque1, t_deque *deque2, char check)
 {
 	push_front(deque1, pop_back(deque1));
 	if (check == 'r')
@@ -53,7 +53,7 @@ void	rotate(t_deque *deque1, t_deque *deque2, char check)
 	printf("r%c\n", check);
 }
 
-void	reverse_rotate(t_deque *deque1, t_deque *deque2, char check)
+void	c_reverse_rotate(t_deque *deque1, t_deque *deque2, char check)
 {
 	push_back(deque1, pop_front(deque1));
 	if (check == 'r')
