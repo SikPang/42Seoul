@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:34:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 17:54:22 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 19:11:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "deque.h"
 #include "push_swap.h"
 #include "radix_sort.h"
+#include "./data_structure/deque.h"
 #include "./utility/utility.h"
 
 static void	push_args(int ac, char **av, t_deque *deque)

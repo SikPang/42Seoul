@@ -6,13 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/30 13:55:54 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 19:12:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 //#include <unistd.h>
-#include "../deque.h"
+#include "../data_structure/deque.h"
 #include <stdio.h>
 static void	error_exit(t_deque *deque)
 {

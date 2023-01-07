@@ -6,12 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 12:15:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 15:33:05 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 19:10:30 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "deque.h"
+#include "./data_structure/deque.h"
 
 #include <stdio.h>
 

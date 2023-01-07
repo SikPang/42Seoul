@@ -6,15 +6,16 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:45:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 17:57:39 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 19:10:46 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "queue.h"
-#include "deque.h"
-#include "array.h"
+#include "./data_structure/queue.h"
+#include "./data_structure/deque.h"
+#include "./data_structure/array.h"
 
+#include <stdio.h>
 static void	push_to_que(t_queue *que, t_array *arr, int cnt, int size)
 {
 	int	temp;
@@ -106,7 +107,7 @@ static void	partition(t_deque *deq, t_array *neg, t_array *pos)
 	memdup(neg, &neg_que);
 	memdup(pos, &pos_que);
 }
-#include <stdio.h>
+
 int *radix_sort(t_deque *deq)
 {
 	int		*result;
@@ -115,8 +116,8 @@ int *radix_sort(t_deque *deq)
 	int		i;
 
 	partition(deq, &negative, &positive);
-	start_sort(&negative, deq->size);
-	start_sort(&negative, deq->size);
+	//start_sort(&negative, deq->size);
+	start_sort(&positive, deq->size);
 	result = (int *)malloc(deq->size * sizeof(int));
 
 	

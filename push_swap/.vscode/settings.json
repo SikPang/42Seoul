@@ -3,6 +3,7 @@
 		"push_swap.h": "c",
 		"deque.h": "c",
 		"queue": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"array.h": "c"
 	}
 }
