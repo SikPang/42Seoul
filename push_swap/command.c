@@ -6,12 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:46:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/06 20:43:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 15:34:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//#include <unitsd.h>
+//#include <unistd.h>
 
 #include <stdio.h>
 void	c_swap(t_deque *deque1, t_deque *deque2, char check)

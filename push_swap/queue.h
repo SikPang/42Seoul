@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:30:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/06 19:59:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 16:15:31 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ typedef struct s_queue
 void	init_queue(t_queue *queue);
 void	push(t_queue *queue, int data);
 int		pop(t_queue *queue);
+void	clean_queue(t_queue *que);
 
 #endif

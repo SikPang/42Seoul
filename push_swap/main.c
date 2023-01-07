@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/07 15:34:10 by kwsong            #+#    #+#             */
+/*   Updated: 2023/01/07 15:41:26 by kwsong           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include "deque.h"
 #include "push_swap.h"
@@ -51,7 +63,6 @@ static int	get_size(int ac, char **av)
 	return (size);
 }
 
-// 데이터 받기 - 정렬 - 정규화 - 3진수 변환 - radix sort 시작
 #include <stdio.h>
 int main(int ac, char *av[])
 {
@@ -63,7 +74,7 @@ int main(int ac, char *av[])
 	size = get_size(ac, av);
 	init_deque(&deque_a, size);
 	push_args(ac, av, &deque_a);
-	sorted_arr = radix_sort(&deque_a, 0);
+	sorted_arr = radix_sort(&deque_a);
 	init_deque(&deque_b, size);
 	//push_swap(&deque_a, &deque_b);
 

@@ -51,3 +51,17 @@ int	pop(t_queue *queue)
 	--queue->size;
 	return (data);
 }
+
+void	clean_queue(t_queue *que)
+{
+	t_node	*temp;
+	t_node	*next;
+
+	temp = que->head;
+	while (temp != 0)
+	{
+		next = temp->next_node;
+		free(temp);
+		temp = next;
+	}
+}

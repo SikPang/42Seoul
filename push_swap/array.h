@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   array.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/15 12:15:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 15:33:05 by kwsong           ###   ########.fr       */
+/*   Created: 2023/01/07 16:39:18 by kwsong            #+#    #+#             */
+/*   Updated: 2023/01/07 17:47:29 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "deque.h"
+#ifndef ARRAY_H
+# define ARRAY_H
 
-#include <stdio.h>
+typedef struct s_array
+{
+	int	*arr;
+	int	size;
+	int	max_cnt;
+}	t_array;
 
-// void	push_swap(t_deque *deque1, t_deque *deque2)
-// {
+void	init_arr(t_array *arr, int size);
 
-// }
+#endif

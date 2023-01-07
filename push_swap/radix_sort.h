@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:34:42 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/06 21:08:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 15:41:44 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "deque.h"
 
-int *radix_sort(t_deque *src, int max_cnt);
+int *radix_sort(t_deque *src);
 
 #endif
