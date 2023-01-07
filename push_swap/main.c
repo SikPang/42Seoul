@@ -6,15 +6,36 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:34:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 19:30:53 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 19:54:33 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+//#include <unistd.h>
 #include "push_swap.h"
 #include "radix_sort.h"
 #include "./data_structure/deque.h"
 #include "./utility/utility.h"
+
+#include <stdio.h>
+static void	check_duplicate(int *arr, int size, t_deque *deq)
+{
+	int	i;
+
+	i = 0;
+	while (i < size - 1)
+	{
+		if (arr[i] == arr[i + 1])
+		{
+			//write(2, "Error\n", 6);
+			printf("Error : duplicated argument");
+			free(deq->arr);
+			free(arr);
+			exit(1);
+		}
+		++i;
+	}
+}
 
 static void	push_args(int ac, char **av, t_deque *deque)
 {
@@ -75,6 +96,7 @@ int main(int ac, char *av[])
 	init_deque(&deque_a, size);
 	push_args(ac, av, &deque_a);
 	sorted_arr = radix_sort(&deque_a);
+	check_duplicate(sorted_arr, deque_a.size, &deque_a);
 	init_deque(&deque_b, size);
 	//push_swap(&deque_a, &deque_b);
 

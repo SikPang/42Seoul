@@ -6,33 +6,21 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 19:12:59 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 19:51:45 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-//#include <unistd.h>
 #include "../data_structure/deque.h"
+//#include <unistd.h>
+
 #include <stdio.h>
-static void	error_exit(t_deque *deque)
+static void	error_exit(t_deque *deq)
 {
-	free(deque->arr);
+	free(deq->arr);
 	//write(2, "Error\n", 6);
-	printf("arg Error");
+	printf("Error : invalid argument");
 	exit(1);
-}
-
-static void	check_duplicate(t_deque *deque, int data)
-{
-	int	i;
-
-	i = 0;
-	while (i < deque->size)
-	{
-		if (deque->arr[i] == data)
-			error_exit(deque);
-		++i;
-	}
 }
 
 static int	check_valid(int before_num, char ch, int minus)
@@ -81,6 +69,5 @@ int	ft_atoi(const char *str, t_deque *deque)
 		num = num * 10 + str[i] - '0';
 		++i;
 	}
-	check_duplicate(deque, num * minus);
 	return (num * minus);
 }
