@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:45:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 19:28:42 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 21:31:22 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,40 +85,40 @@ static void	memdup(t_array *arr, t_queue *que)
 	}
 }
 
-static void	partition(t_deque *deq, t_array *neg, t_array *pos)
+static void	partition(t_queue *que, t_array *neg, t_array *pos)
 {
 	t_queue	neg_que;
 	t_queue	pos_que;
+	t_node	*temp;
 	int		data;
-	int		i;
 
-	i = 0;
 	init_queue(&neg_que);
 	init_queue(&pos_que);
-	while (i < deq->size)
+	temp = que->head;
+	while (temp != 0)
 	{
-		data = deq->arr[(i + 1) % deq->size];
+		data = temp->data;
 		if (data < 0)
 			push(&neg_que, -data);
 		else
 			push(&pos_que, data);
-		++i;
+		temp = temp->next_node;
 	}
 	memdup(neg, &neg_que);
 	memdup(pos, &pos_que);
 }
 
-int *radix_sort(t_deque *deq)
+int *radix_sort(t_queue *que)
 {
 	int		*result;
 	t_array	negative;
 	t_array	positive;
 	int		i;
 
-	partition(deq, &negative, &positive);
+	partition(que, &negative, &positive);
 	start_sort(&negative);
 	start_sort(&positive);
-	result = (int *)malloc(deq->size * sizeof(int));
+	result = (int *)malloc(que->size * sizeof(int));
 	i = -1;
 	while (i < negative.size)
 	{
