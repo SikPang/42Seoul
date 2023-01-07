@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:34:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 19:11:52 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 19:30:53 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,14 @@ int main(int ac, char *av[])
 	init_deque(&deque_b, size);
 	//push_swap(&deque_a, &deque_b);
 
+	int a = deque_a.size;
 	printf("\nA : %d\n", deque_a.size);
 	while (deque_a.size > 0)
 	 	printf("%d ", pop_back(&deque_a));
 
-	// printf("\n\nSorted : ");
-	// for (int i=0; i<a; ++i)
-	//  	printf("%d ", sorted_arr[i]);
+	printf("\n\nSorted : ");
+	for (int i=0; i<a; ++i)
+	 	printf("%d ", sorted_arr[i]);
 
 	printf("\n\nB : %d\n", deque_b.size);
 	while (deque_b.size > 0)

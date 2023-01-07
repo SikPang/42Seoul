@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:45:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 19:10:46 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 19:28:42 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include "./data_structure/array.h"
 
 #include <stdio.h>
-static void	push_to_que(t_queue *que, t_array *arr, int cnt, int size)
+static void	push_to_que(t_queue *que, t_array *arr, int cnt)
 {
 	int	temp;
 	int	i;
 	int	j;
 	
 	j = 0;
-	while (j < size)
+	while (j < arr->size)
 	{
 		temp = arr->arr[j];
 		i = 0;
@@ -37,7 +37,7 @@ static void	push_to_que(t_queue *que, t_array *arr, int cnt, int size)
 	}
 }
 
-static void	start_sort(t_array *arr, int size)
+static void	start_sort(t_array *arr)
 {
 	t_queue	que[10];
 	int		cur_idx;
@@ -50,7 +50,7 @@ static void	start_sort(t_array *arr, int size)
 	i = 0;
 	while (i < arr->max_cnt)
 	{
-		push_to_que(que, arr, i++, size);
+		push_to_que(que, arr, i++);
 		cur_idx = 0;
 		j = -1;
 		while (++j < 10)
@@ -116,27 +116,21 @@ int *radix_sort(t_deque *deq)
 	int		i;
 
 	partition(deq, &negative, &positive);
-	//start_sort(&negative, deq->size);
-	start_sort(&positive, deq->size);
+	start_sort(&negative);
+	start_sort(&positive);
 	result = (int *)malloc(deq->size * sizeof(int));
-
-	
-	// -1 -2 -3 -4  1 2 3 4
-	// - 붙이고 반대로
-	i = 0;
-	printf("negative : ");
+	i = -1;
 	while (i < negative.size)
 	{
-		printf("%d ", negative.arr[i]);
+		result[i] = -negative.arr[negative.size - 1 - i];
 		++i;
 	}
-	printf("\n");
-	printf("positive : ");
-	i = 0;
-	while (i < positive.size)
+	while (i < positive.size + negative.size)
 	{
-		printf("%d ", positive.arr[i]);
+		result[i] = positive.arr[i - negative.size];
 		++i;
 	}
+	free(negative.arr);
+	free(positive.arr);
 	return (result);
 }
