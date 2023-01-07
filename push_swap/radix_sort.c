@@ -6,13 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:45:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 21:31:22 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 22:01:13 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "./data_structure/queue.h"
-#include "./data_structure/deque.h"
 #include "./data_structure/array.h"
 
 #include <stdio.h>

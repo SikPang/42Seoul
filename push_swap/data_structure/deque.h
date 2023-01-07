@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 13:54:57 by kwsong            #+#    #+#             */
-/*   Updated: 2022/12/30 17:24:15 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 22:36:26 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 
 typedef struct s_deque
 {
-	int	*arr;
-	int	capacity;
-	int size;
-	int	head;
-	int	tail;
+	char	**arr;
+	int		capacity;
+	int		size;
+	int		head;
+	int		tail;
 }	t_deque;
 
 void	init_deque(t_deque *deque, int size);
-void	push_front(t_deque *deque, int data);
-void	push_back(t_deque *deque, int data);
-int		pop_front(t_deque *deque);
-int		pop_back(t_deque *deque);
+void	push_front(t_deque *deque, char *data);
+void	push_back(t_deque *deque, char *data);
+char	*pop_front(t_deque *deque);
+char	*pop_back(t_deque *deque);
 
 #endif

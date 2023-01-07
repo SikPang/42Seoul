@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 13:54:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 16:01:42 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 22:36:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	init_deque(t_deque *deque, int capacity)
 {
 	if (capacity <= 0)
 		return ;
-	deque->arr = (int *)malloc(capacity * sizeof(int));
+	deque->arr = (char **)malloc(capacity * sizeof(char *));
 	deque->capacity = capacity;
 	deque->size = 0;
 	deque->head = -1;
 	deque->tail = -1;
 }
 
-void	push_front(t_deque *deque, int data)
+void	push_front(t_deque *deque, char *data)
 {
 	if (deque->size == deque->capacity)
 	{
@@ -46,7 +46,7 @@ void	push_front(t_deque *deque, int data)
 	++deque->size;
 }
 
-void	push_back(t_deque *deque, int data)
+void	push_back(t_deque *deque, char *data)
 {
 	if (deque->size == deque->capacity)
 	{
@@ -67,9 +67,9 @@ void	push_back(t_deque *deque, int data)
 	++deque->size;
 }
 
-int	pop_front(t_deque *deque)
+char	*pop_front(t_deque *deque)
 {
-	int	value;
+	char	*value;
 
 	if (deque->size == 0)
 	{
@@ -91,9 +91,9 @@ int	pop_front(t_deque *deque)
 	return (value);
 }
 
-int	pop_back(t_deque *deque)
+char	*pop_back(t_deque *deque)
 {
-	int	value;
+	char	*value;
 
 	if (deque->size == 0)
 	{

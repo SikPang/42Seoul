@@ -1,7 +1,8 @@
 #include <stdlib.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include "queue.h"
 
+#include <stdio.h>
 void	init_queue(t_queue *queue)
 {
 	queue->head = 0;
@@ -30,7 +31,7 @@ void	push(t_queue *queue, int data)
 	}
 	++queue->size;
 }
-#include <stdio.h>
+
 int	pop(t_queue *queue)
 {
 	t_node	*head_node;
@@ -47,6 +48,8 @@ int	pop(t_queue *queue)
 	queue->head = queue->head->next_node;
 	if (queue->size > 1)
 		queue->head->prev_node = 0;
+	else
+		queue->tail = 0;
 	free(head_node);
 	--queue->size;
 	return (data);
