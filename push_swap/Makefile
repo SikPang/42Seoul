@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/06 20:36:13 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/07 17:56:18 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,14 @@ NAME	= push_swap
 INCS	= push_swap.h \
 		deque.h \
 		queue.h \
+		array.h \
 		radix_sort.h \
 		./utility/utility.h
 SRCS	= main.c \
 		push_swap.c \
 		deque.c \
 		queue.c \
+		array.c \
 		radix_sort.c \
 		command.c \
 		./utility/ft_split.c \

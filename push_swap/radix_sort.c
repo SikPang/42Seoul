@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   radix.c                                            :+:      :+:    :+:   */
+/*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:45:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 17:52:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/07 17:57:39 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ static void	memdup(t_array *arr, t_queue *que)
 	int	data;
 	int	cnt;
 
-	init_arr(&arr, que->size);
+	init_arr(arr, que->size);
+	i = 0;
 	while (que->size > 0)
 	{
-		data = pop(&que);
+		data = pop(que);
 		arr->arr[i++] = data;
 		cnt = 0;
 		while (data > 0)
@@ -117,19 +118,24 @@ int *radix_sort(t_deque *deq)
 	start_sort(&negative, deq->size);
 	start_sort(&negative, deq->size);
 	result = (int *)malloc(deq->size * sizeof(int));
+
+	
 	// -1 -2 -3 -4  1 2 3 4
 	// - 붙이고 반대로
 	i = 0;
+	printf("negative : ");
 	while (i < negative.size)
 	{
 		printf("%d ", negative.arr[i]);
 		++i;
 	}
 	printf("\n");
+	printf("positive : ");
 	i = 0;
 	while (i < positive.size)
 	{
 		printf("%d ", positive.arr[i]);
 		++i;
 	}
+	return (result);
 }
