@@ -6,59 +6,76 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:46:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 15:34:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:01:22 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stdlib.h>
 //#include <unistd.h>
+#include "command.h"
 
 #include <stdio.h>
-void	c_swap(t_deque *deque1, t_deque *deque2, char check)
+void	c_swap(t_deque *deq1, t_deque *deq2, char chk, t_queue *que)
 {
 	char	*first;
 	char	*second;
 
-	first = pop_back(deque1);
-	second = pop_back(deque1);
-	push_back(deque1, first);
-	push_back(deque1, second);
-	if (check == 's')
+	first = pop_back(deq1);
+	second = pop_back(deq1);
+	push_back(deq1, first);
+	push_back(deq1, second);
+	if (chk == 'a')
+		push(que, SA);
+	else if (chk == 'b')
+		push(que, SB);
+	else if (chk == 's')
 	{
-		first = pop_back(deque2);
-		second = pop_back(deque2);
-		push_back(deque2, first);
-		push_back(deque2, second);
+		first = pop_back(deq2);
+		second = pop_back(deq2);
+		push_back(deq2, first);
+		push_back(deq2, second);
+		push(que, SS);
 	}
-	//write(1, "s", 1);
-	//write(1, &check, 1);
-	printf("s%c\n", check);
 }
 
-void	c_push(t_deque *dest, t_deque *src, char check)
+void	c_push(t_deque *dest, t_deque *src, char chk, t_queue *que)
 {
 	push_back(dest, pop_back(src));
-	//write(1, "p", 1);
-	//write(1, &check, 1);
-	printf("p%c\n", check);
+	if (chk == 'a')
+		push(que, PA);
+	else if (chk == 'b')
+		push(que, PB);
 }
 
-void	c_rotate(t_deque *deque1, t_deque *deque2, char check)
+void	c_rotate(t_deque *deq1, t_deque *deq2, char chk, t_queue *que)
 {
-	push_front(deque1, pop_back(deque1));
-	if (check == 'r')
-		push_front(deque2, pop_back(deque2));
-	//write(1, "r", 1);
-	//write(1, &check, 1);
-	printf("r%c\n", check);
+	push_front(deq1, pop_back(deq1));
+	if (chk == 'a')
+		push(que, RA);
+	else if (chk == 'b')
+		push(que, RB);
+	else if (chk == 'r')
+	{
+		push_front(deq2, pop_back(deq2));
+		push(que, RR);
+	}
 }
 
-void	c_reverse_rotate(t_deque *deque1, t_deque *deque2, char check)
+void	c_reverse_rotate(t_deque *deq1, t_deque *deq2, char chk, t_queue *que)
 {
-	push_back(deque1, pop_front(deque1));
-	if (check == 'r')
-		push_back(deque2, pop_front(deque2));
-	//write(1, "rr", 1);
-	//write(1, &check, 1);
-	printf("rr%c\n", check);
+	push_back(deq1, pop_front(deq1));
+	if (chk == 'a')
+		push(que, RRA);
+	else if (chk == 'b')
+		push(que, RRB);
+	else if (chk == 'r')
+	{
+		push_back(deq2, pop_front(deq2));
+		push(que, RRR);
+	}
 }
+
+// void	print_commands(t_queue *que)
+// {
+// 	que->
+// }

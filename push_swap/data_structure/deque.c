@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 13:54:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 16:58:05 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/09 17:21:37 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	init_deque(t_deque *deque, int capacity)
 {
 	if (capacity <= 0)
 		return ;
-	deque->arr = (char **)malloc(capacity * sizeof(char *));
+	deque->arr = (char **)malloc((capacity + 1) * sizeof(char *));
+	deque->arr[capacity] = 0;
 	deque->capacity = capacity;
 	deque->size = 0;
 	deque->head = -1;

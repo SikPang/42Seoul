@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/15 12:15:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 17:27:48 by kwsong           ###   ########.fr       */
+/*   Created: 2023/01/09 17:59:31 by kwsong            #+#    #+#             */
+/*   Updated: 2023/01/09 18:00:36 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "./data_structure/deque.h"
-#include "./data_structure/queue.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-#include <stdio.h>
+# include "./data_structure/deque.h"
+# include "./data_structure/queue.h"
 
-// void	push_swap(t_deque *deq1, t_deque *deq2)
-// {
-// 	t_queue	command_que;
+void	c_swap(t_deque *deq1, t_deque *deq2, char chk, t_queue *que);
+void	c_push(t_deque *dest, t_deque *src, char chk, t_queue *que);
+void	c_rotate(t_deque *deq1, t_deque *deq2, char chk, t_queue *que);
+void	c_reverse_rotate(t_deque *deq1, t_deque *deq2, char chk, t_queue *que);
 
-// 	init_queue(&command_que);
-// }
+#endif
