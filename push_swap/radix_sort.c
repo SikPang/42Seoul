@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:45:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 22:01:13 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/09 17:17:01 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	push_to_que(t_queue *que, t_array *arr, int cnt)
 	int	temp;
 	int	i;
 	int	j;
-	
+
 	j = 0;
 	while (j < arr->size)
 	{
@@ -107,7 +107,7 @@ static void	partition(t_queue *que, t_array *neg, t_array *pos)
 	memdup(pos, &pos_que);
 }
 
-int *radix_sort(t_queue *que)
+int	*radix_sort(t_queue *que)
 {
 	int		*result;
 	t_array	negative;
