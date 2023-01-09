@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:46:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 18:01:22 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:44:30 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,3 @@ void	c_reverse_rotate(t_deque *deq1, t_deque *deq2, char chk, t_queue *que)
 		push(que, RRR);
 	}
 }
-
-// void	print_commands(t_queue *que)
-// {
-// 	que->
-// }
