@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:34:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 16:31:41 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/09 16:42:16 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	convert_push(t_queue *que, t_deque *deq)
 	int		idx;
 
 	temp = que->head;
-	idx = -1;
+	idx = 0;
 	while (que->max > 0)
 	{
 		que->max /= 3;
@@ -33,13 +33,17 @@ static void	convert_push(t_queue *que, t_deque *deq)
 	}
 	while (temp != 0)
 	{
-		deq->arr[idx] = convert(temp->data, deq->data_len);
+		push_front(deq, convert(temp->data, deq->data_len));
 		if (deq->arr[idx] == 0)
 		{
 			clean_queue(que);
 			clean_deque(deq);
 			exit(1);
 		}
+		// for (int i=0; i<deq->size; ++i)
+		// 	printf("%d : %s ", i, deq->arr[i]);
+		// printf("\n");
+		++idx;
 		temp = temp->next_node;
 	}
 }
@@ -121,7 +125,6 @@ int main(int ac, char *av[])
 	push_args(ac, av, &queue);
 	sorted_arr = radix_sort(&queue);
 	check_duplicate(sorted_arr, queue.size, &queue);
-
 	normalize(sorted_arr, queue.size, &queue);
 	init_deque(&deque_a, queue.size);
 	convert_push(&queue, &deque_a);
