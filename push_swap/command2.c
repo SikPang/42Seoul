@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 19:24:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/09 20:11:46 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,25 @@ static void	print_commands2(int data)
 void	print_commands(t_queue *que)
 {
 	t_node	*temp;
+	t_node	*cur;
 
-	temp = que->head;
-	while (temp != 0)
+	cur = que->head;
+	while (cur != 0)
 	{
-		if (temp->data == SA)
+		if (cur->data == SA)
 			write(1, "sa\n", 3);
-		else if (temp->data == SB)
+		else if (cur->data == SB)
 			write(1, "sb\n", 3);
-		else if (temp->data == SS)
+		else if (cur->data == SS)
 			write(1, "ss\n", 3);
-		else if (temp->data == PA)
+		else if (cur->data == PA)
 			write(1, "pa\n", 3);
-		else if (temp->data == PB)
+		else if (cur->data == PB)
 			write(1, "pb\n", 3);
 		else
-			print_commands2(temp->data);
-		temp = temp->next_node;
+			print_commands2(cur->data);
+		temp = cur->next_node;
+		free(cur);
+		cur = temp;
 	}
 }
