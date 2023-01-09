@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <limits.h>
 //#include <unistd.h>
 #include "queue.h"
 
@@ -8,6 +9,21 @@ void	init_queue(t_queue *queue)
 	queue->head = 0;
 	queue->tail = 0;
 	queue->size = 0;
+	queue->max = INT_MIN;
+}
+
+void	clean_queue(t_queue *queue)
+{
+	t_node	*temp;
+	t_node	*next;
+
+	temp = queue->head;
+	while (temp != 0)
+	{
+		next = temp->next_node;
+		free(temp);
+		temp = next;
+	}
 }
 
 void	push(t_queue *queue, int data)
@@ -53,18 +69,4 @@ int	pop(t_queue *queue)
 	free(head_node);
 	--queue->size;
 	return (data);
-}
-
-void	clean_queue(t_queue *que)
-{
-	t_node	*temp;
-	t_node	*next;
-
-	temp = que->head;
-	while (temp != 0)
-	{
-		next = temp->next_node;
-		free(temp);
-		temp = next;
-	}
 }

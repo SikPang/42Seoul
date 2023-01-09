@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.h                                          :+:      :+:    :+:   */
+/*   convert.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 19:04:12 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 16:31:46 by kwsong           ###   ########.fr       */
+/*   Created: 2023/01/09 16:23:50 by kwsong            #+#    #+#             */
+/*   Updated: 2023/01/09 16:31:19 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILITY_H
-# define UTILITY_H
+char	*convert(int data, int size)
+{
+	char	*converted;
 
-# include <stddef.h>
-# include "../data_structure/queue.h"
-
-int		ft_atoi(const char *str, t_queue *queue);
-void	*ft_calloc(size_t nelem, size_t elsize);
-char	**ft_split(char const *s, char c);
-char	*convert(int data, int size);
-
-#endif
+	converted = (char *)malloc(size + 1);
+	if (converted == 0)
+		return (0);
+	converted[size] = 0;
+	while (data > 0)
+	{
+		converted[size - 1] = data % 3 + '0';
+		data /= 3;
+		--size;
+	}
+	return (converted);
+}

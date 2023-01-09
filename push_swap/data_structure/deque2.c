@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.h                                          :+:      :+:    :+:   */
+/*   deque2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 19:04:12 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 16:31:46 by kwsong           ###   ########.fr       */
+/*   Created: 2023/01/09 15:40:16 by kwsong            #+#    #+#             */
+/*   Updated: 2023/01/09 16:12:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILITY_H
-# define UTILITY_H
+#include <stdlib.h>
+#include "deque.h"
 
-# include <stddef.h>
-# include "../data_structure/queue.h"
+void	clean_deque(t_deque *deque)
+{
+	int	i;
 
-int		ft_atoi(const char *str, t_queue *queue);
-void	*ft_calloc(size_t nelem, size_t elsize);
-char	**ft_split(char const *s, char c);
-char	*convert(int data, int size);
-
-#endif
+	i = 0;
+	while (i < deque->size)
+	{
+		free(deque->arr[i]);
+		++i;
+	}
+}

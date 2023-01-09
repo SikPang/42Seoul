@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/07 20:27:45 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/09 16:32:00 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,10 @@ SRCS	= main.c \
 		radix_sort.c \
 		command.c \
 		./data_structure/deque.c \
+		./data_structure/deque2.c \
 		./data_structure/queue.c \
 		./data_structure/array.c \
+		./utility/convert.c \
 		./utility/ft_split.c \
 		./utility/ft_atoi.c \
 		./utility/ft_calloc.c

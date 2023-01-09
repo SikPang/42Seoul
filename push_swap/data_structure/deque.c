@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 13:54:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 22:36:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/09 15:58:38 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_deque(t_deque *deque, int capacity)
 	deque->size = 0;
 	deque->head = -1;
 	deque->tail = -1;
+	deque->data_len = 0;
 }
 
 void	push_front(t_deque *deque, char *data)
