@@ -19,14 +19,11 @@
 #include "./utility/utility.h"
 
 #include <stdio.h>
-
 void	normalize(int *arr, int size, t_queue *que)
 {
 	t_node	*temp;
-	int		i;
 	int		j;
 
-	i = 0;
 	temp = que->head;
 	while (temp != 0)
 	{
@@ -54,7 +51,7 @@ static void	check_duplicate(int *arr, int size, t_queue *que)
 		if (arr[i] == arr[i + 1])
 		{
 			//write(2, "Error\n", 6);
-			printf("Error : duplicated argument");
+			printf("Error : duplicated argument\n");
 			clean_queue(que);
 			free(arr);
 			exit(1);
@@ -134,7 +131,7 @@ int main(int ac, char *av[])
 
 
 	t_node *temp = queue.head;
-	printf("\nnormalized : ");
+	printf("\nNormalized : ");
 	while (temp != 0)
 	{
 		printf("%d ", temp->data);
@@ -145,15 +142,16 @@ int main(int ac, char *av[])
 	printf("\n\nSorted : ");
 	for (int i=0; i<a; ++i)
 		printf("%d ", sorted_arr[i]);
-
-	printf("\n\nA : ");
-	while (deque_a.size > 0)
-		printf("%d ", pop_back(&deque_a));
-
-	printf("\n\nB : ");
-	while (deque_b.size > 0)
-		printf("%d ", pop_back(&deque_b));
 	printf("\n");
+
+	// printf("\n\nA : ");
+	// while (deque_a.size > 0)
+	// 	printf("%d ", pop_back(&deque_a));
+
+	// printf("\n\nB : ");
+	// while (deque_b.size > 0)
+	// 	printf("%d ", pop_back(&deque_b));
+	// printf("\n");
 	
 	return (0);
 }

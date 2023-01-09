@@ -16,8 +16,8 @@
 #include <stdio.h>
 void	c_swap(t_deque *deque1, t_deque *deque2, char check)
 {
-	int	first;
-	int	second;
+	char	*first;
+	char	*second;
 
 	first = pop_back(deque1);
 	second = pop_back(deque1);

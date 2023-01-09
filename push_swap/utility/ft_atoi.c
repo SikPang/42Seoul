@@ -20,7 +20,7 @@ static void	error_exit(t_queue *queue)
 {
 	clean_queue(queue);
 	//write(2, "Error\n", 6);
-	printf("Error : invalid argument");
+	printf("Error : invalid argument\n");
 	exit(1);
 }
 
