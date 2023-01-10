@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:34:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 17:12:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 16:49:32 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include "./data_structure/queue.h"
 #include "./utility/utility.h"
 
-#include <stdio.h>
 static void	convert_push(t_queue *que, t_deque *deq)
 {
 	t_node	*temp;
@@ -111,6 +110,7 @@ static void	push_args(int ac, char **av, t_queue *que)
 }
 
 #include <stdio.h>
+#include "command.h"
 int main(int ac, char *av[])
 {
 	t_queue	queue;
@@ -151,10 +151,10 @@ int main(int ac, char *av[])
 	while (deque_a.size > 0)
 		printf("%s ", pop_back(&deque_a));
 
-	// printf("\n\nB : ");
-	// while (deque_b.size > 0)
-	// 	printf("%d ", pop_back(&deque_b));
-	// printf("\n");
+	printf("\n\nB : ");
+	while (deque_b.size > 0)
+		printf("%d ", pop_back(&deque_b));
+	printf("\n");
 	
 	return (0);
 }

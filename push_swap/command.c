@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:46:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 18:44:30 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 16:42:26 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 //#include <unistd.h>
 #include "command.h"
 
+// 첫 번째 원소 == back == top
+// 마지막 원소 == front == bottom
 #include <stdio.h>
 void	c_swap(t_deque *deq1, t_deque *deq2, char chk, t_queue *que)
 {

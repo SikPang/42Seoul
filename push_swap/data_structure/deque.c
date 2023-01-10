@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 13:54:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 17:21:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 16:58:01 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	init_deque(t_deque *deque, int capacity)
 	deque->head = -1;
 	deque->tail = -1;
 	deque->data_len = 0;
+	deque->front_size = 0;
+	deque->back_size = 0;
 }
 
 void	push_front(t_deque *deque, char *data)
@@ -46,6 +48,7 @@ void	push_front(t_deque *deque, char *data)
 		--deque->head;
 	deque->arr[deque->head] = data;
 	++deque->size;
+	++deque->front_size;
 }
 
 void	push_back(t_deque *deque, char *data)
@@ -67,6 +70,7 @@ void	push_back(t_deque *deque, char *data)
 		++deque->tail;
 	deque->arr[deque->tail] = data;
 	++deque->size;
+	++deque->back_size;
 }
 
 char	*pop_front(t_deque *deque)
@@ -90,6 +94,7 @@ char	*pop_front(t_deque *deque)
 	else
 		++deque->head;
 	--deque->size;
+	--deque->front_size;
 	return (value);
 }
 
@@ -114,5 +119,6 @@ char	*pop_back(t_deque *deque)
 	else
 		--deque->tail;
 	--deque->size;
+	--deque->back_size;
 	return (value);
 }
