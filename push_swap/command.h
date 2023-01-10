@@ -6,12 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:59:31 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 18:48:15 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 18:04:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef COMMAND_H
+# define COMMAND_H
 
 # include "./data_structure/deque.h"
 # include "./data_structure/queue.h"

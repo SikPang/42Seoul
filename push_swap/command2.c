@@ -6,11 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 20:11:46 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 18:06:05 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 #include "command.h"
 
 static void	print_commands2(int data)

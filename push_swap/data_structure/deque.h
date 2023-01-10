@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 13:54:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/10 16:56:56 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 18:05:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ void	push_front(t_deque *deque, char *data);
 void	push_back(t_deque *deque, char *data);
 char	*pop_front(t_deque *deque);
 char	*pop_back(t_deque *deque);
+char	*get_front(t_deque *deque);
+char	*get_back(t_deque *deque);
 
 #endif
