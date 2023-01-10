@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 12:15:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/10 19:32:58 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 20:27:49 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 // push	: pb rb
 // pop	: rrb pa
 
-#include <stdio.h>
 static void	push_to_a(t_deque *deq_a, t_deque *deq_b, t_queue *commands)
 {
 	while (deq_b->front_size > 0)

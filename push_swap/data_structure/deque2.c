@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:40:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/10 16:31:39 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 20:26:58 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	clean_deque(t_deque *deque)
 		free(deque->arr[i]);
 		++i;
 	}
+	free(deque->arr);
 }
 
 char	*get_front(t_deque *deque)
