@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:34:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/10 18:03:59 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 18:58:39 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,33 +127,31 @@ int main(int ac, char *av[])
 	init_deque(&deque_b, queue.size);
 	push_swap(&deque_a, &deque_b);
 
-	// clean_queue(&queue);
-	// free(deque_a.arr);
-	// free(deque_b.arr);
+	clean_queue(&queue);
+	free(deque_a.arr);
+	free(deque_b.arr);
 
+	// int a = queue.size;
+	// printf("\nSorted : ");
+	// for (int i=0; i<a; ++i)
+	// 	printf("%d ", sorted_arr[i]);
 
-	
-	int a = queue.size;
-	printf("\nSorted : ");
-	for (int i=0; i<a; ++i)
-		printf("%d ", sorted_arr[i]);
+	// t_node *temp = queue.head;
+	// printf("\n\nNormalized : ");
+	// while (temp != 0)
+	// {
+	// 	printf("%d ", temp->data);
+	// 	temp = temp->next_node;
+	// }
 
-	t_node *temp = queue.head;
-	printf("\n\nNormalized : ");
-	while (temp != 0)
-	{
-		printf("%d ", temp->data);
-		temp = temp->next_node;
-	}
+	// printf("\n\nA : ");
+	// while (deque_a.size > 0)
+	// 	printf("%s ", pop_back(&deque_a));
 
-	printf("\n\nA : ");
-	while (deque_a.size > 0)
-		printf("%s ", pop_back(&deque_a));
-
-	printf("\n\nB : ");
-	while (deque_b.size > 0)
-		printf("%s ", pop_back(&deque_b));
-	printf("\n");
+	// printf("\n\nB : ");
+	// while (deque_b.size > 0)
+	// 	printf("%s ", pop_back(&deque_b));
+	// printf("\n");
 	
 	return (0);
 }
