@@ -6,13 +6,25 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/10 18:06:05 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 19:39:00 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "command.h"
+
+void	optimize_commands(t_queue *que)
+{
+	t_node	*cur;
+
+	cur = que->head;
+	while (cur->next_node != 0)
+	{
+		
+		cur = cur->next_node;
+	}
+}
 
 static void	print_commands2(int data)
 {

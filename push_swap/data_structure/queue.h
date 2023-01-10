@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:30:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/10 18:05:45 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 19:43:44 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef QUEUE_H
 # define QUEUE_H
 
-enum commands
+enum e_commands
 {
 	SA,
 	SB,
