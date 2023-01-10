@@ -6,12 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:23:50 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 17:16:14 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 19:21:45 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
+#include <stdio.h>
 char	*convert(int data, int size)
 {
 	char	*converted;

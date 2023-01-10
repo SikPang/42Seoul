@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:45:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/09 17:17:01 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/10 19:21:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	*radix_sort(t_queue *que)
 	start_sort(&negative);
 	start_sort(&positive);
 	result = (int *)malloc(que->size * sizeof(int));
-	i = -1;
+	i = 0;
 	while (i < negative.size)
 	{
 		result[i] = -negative.arr[negative.size - 1 - i];
