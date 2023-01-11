@@ -90,7 +90,7 @@ static void	check_duplicate(int *arr, int size, t_queue *que)
 	}
 }
 
-static void	push_args(int ac, char **av, t_queue *que)
+static void	get_args(int ac, char **av, t_queue *que)
 {
 	char	**strs;
 	int		i;
@@ -114,46 +114,47 @@ static void	push_args(int ac, char **av, t_queue *que)
 
 int main(int ac, char *av[])
 {
-	t_queue	queue;
-	t_deque	deque_a;
-	t_deque	deque_b;
+	t_queue	args;
+	t_deque	deq_a;
+	t_deque	deq_b;
 	int		*sorted_arr;
 
-	init_queue(&queue);
-	push_args(ac, av, &queue);
-	sorted_arr = radix_sort(&queue);
-	check_duplicate(sorted_arr, queue.size, &queue);
-	normalize(sorted_arr, queue.size, &queue);
-	init_deque(&deque_a, queue.size);
-	convert_push(&queue, &deque_a);
-	init_deque(&deque_b, queue.size);
-	push_swap(&deque_a, &deque_b);
+	init_queue(&args);
+	get_args(ac, av, &args);
+	sorted_arr = radix_sort(&args);
+	check_duplicate(sorted_arr, args.size, &args);
+	normalize(sorted_arr, args.size, &args);
+	free(sorted_arr);
+	init_deque(&deq_a, args.size);
+	convert_push(&args, &deq_a);
+	init_deque(&deq_b, args.size);
+	push_swap(&deq_a, &deq_b);
 
 
-	int a = queue.size;
-	printf("\nSorted : ");
-	for (int i=0; i<a; ++i)
-		printf("%d ", sorted_arr[i]);
+	// int a = args.size;
+	// printf("\nSorted : ");
+	// for (int i=0; i<a; ++i)
+	// 	printf("%d ", sorted_arr[i]);
 
 	printf("\n\nA : ");
-	while (deque_a.size > 0)
+	while (deq_a.size > 0)
 	{
-		char *cc = pop_back(&deque_a);
+		char *cc = pop_back(&deq_a);
 		printf("%s ", cc);
 		free(cc);
 	}
 	printf("\n\nB : ");
-	while (deque_b.size > 0)
+	while (deq_b.size > 0)
 	{
-		char *cc = pop_back(&deque_b);
+		char *cc = pop_back(&deq_b);
 		printf("%s ", cc);
 		free(cc);
 	}
 	printf("\n");
-	clean_queue(&queue);
-	clean_deque(&deque_a);
-	clean_deque(&deque_b);
-	free(sorted_arr);
+	
+	clean_queue(&args);
+	clean_deque(&deq_a);
+	clean_deque(&deq_b);
 
 	return (0);
 }
