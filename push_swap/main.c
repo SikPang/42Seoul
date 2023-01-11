@@ -28,7 +28,7 @@ static void	convert_push(t_queue *que, t_deque *deq)
 	idx = 0;
 	while (que->max > 0)
 	{
-		que->max /= 3;
+		que->max /= CONVERT_NUM;
 		++deq->data_len;
 	}
 	if (deq->data_len == 0)
@@ -136,21 +136,21 @@ int main(int ac, char *av[])
 	// for (int i=0; i<a; ++i)
 	// 	printf("%d ", sorted_arr[i]);
 
-	printf("\n\nA : ");
-	while (deq_a.size > 0)
-	{
-		char *cc = pop_back(&deq_a);
-		printf("%s ", cc);
-		free(cc);
-	}
-	printf("\n\nB : ");
-	while (deq_b.size > 0)
-	{
-		char *cc = pop_back(&deq_b);
-		printf("%s ", cc);
-		free(cc);
-	}
-	printf("\n");
+	// printf("\n\nA : ");
+	// while (deq_a.size > 0)
+	// {
+	// 	char *cc = pop_back(&deq_a);
+	// 	printf("%s ", cc);
+	// 	free(cc);
+	// }
+	// printf("\n\nB : ");
+	// while (deq_b.size > 0)
+	// {
+	// 	char *cc = pop_back(&deq_b);
+	// 	printf("%s ", cc);
+	// 	free(cc);
+	// }
+	// printf("\n");
 	
 	clean_queue(&args);
 	clean_deque(&deq_a);

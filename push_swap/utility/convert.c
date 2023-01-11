@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "utility.h"
 
-#include <stdio.h>
 char	*convert(int data, int size)
 {
 	char	*converted;
@@ -30,8 +30,8 @@ char	*convert(int data, int size)
 	converted[i] = '\0';
 	while (data > 0)
 	{
-		converted[size - 1] = data % 3 + '0';
-		data /= 3;
+		converted[size - 1] = data % CONVERT_NUM + '0';
+		data /= CONVERT_NUM;
 		--size;
 	}
 	return (converted);

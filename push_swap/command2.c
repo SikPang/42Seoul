@@ -14,16 +14,77 @@
 #include <stdlib.h>
 #include "command.h"
 
-void	optimize_commands(t_queue *que)
-{
-	t_node	*cur;
+// static t_node *	remove_ra(t_node *cur, int pa_size)
+// {
+// 	t_node	*temp;
+// 	int		i;
 
-	cur = que->head;
-	while (cur->next_node != 0)
-	{
-		cur = cur->next_node;
-	}
-}
+// 	i = 0;
+// 	while (cur->data != RRA)
+// 	{
+// 		if (i++ < pa_size)
+// 			cur->data = RRA;
+// 		else if (cur->data == RA)
+// 		{
+// 			temp = cur->next_node;
+// 			cur->prev_node->next_node = cur->next_node;
+// 			cur->next_node->prev_node = cur->prev_node;
+// 			free(cur);
+// 			cur = temp;
+// 		}
+// 		cur = cur->next_node;
+// 	}
+// 	return (cur);
+// }
+
+// static int	get_pa_size(t_node *cur)
+// {
+// 	int	pa_size;
+// 	int	ra_size;
+
+// 	pa_size = 0;
+// 	ra_size = 0;
+// 	while (cur->data == RA && cur->next_node->data == RA)
+// 	{
+// 		++ra_size;
+// 		cur = cur->next_node;
+// 	}
+// 	cur = cur->next_node;
+// 	if (cur->data != PA)
+// 		return (0);
+// 	while (cur->data == PA && cur->next_node->data == PA)
+// 	{
+// 		++pa_size;
+// 		cur = cur->next_node;
+// 	}
+// 	if (ra_size > pa_size)
+// 		return (pa_size + 1);
+// 	else
+// 		return (0);
+// }
+
+// void	optimize_commands(t_queue *que)
+// {
+// 	t_node	*cur;
+// 	int		pa_size;
+// 	int		check;
+
+// 	cur = que->head;
+// 	check = 0;
+// 	while (cur->next_node != 0)
+// 	{
+// 		if (cur->data == RRA && cur->next_node->data != RRA)
+// 			check = 1;
+// 		if (check == 1 && cur->data == RA && cur->next_node->data == RA)
+// 		{
+// 			pa_size = get_pa_size(cur);
+// 			if (pa_size > 0)
+// 				cur = remove_ra(cur, pa_size);
+// 			check = 0;
+// 		}
+// 		cur = cur->next_node;
+// 	}
+// }
 
 static void	print_commands2(int data)
 {
@@ -66,3 +127,4 @@ void	print_commands(t_queue *que)
 		cur = temp;
 	}
 }
+

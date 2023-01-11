@@ -29,6 +29,7 @@
 // push	: pb rb
 // pop	: rrb pa
 
+#include <stdio.h>
 static void	push_to_a(t_deque *deq_a, t_deque *deq_b, t_queue *commands)
 {
 	while (deq_b->front_size > 0)
@@ -71,6 +72,8 @@ void	push_swap(t_deque *deq_a, t_deque *deq_b)
 	t_queue	commands;
 	int		i;
 
+	deq_a->back_size = deq_a->front_size;
+	deq_a->front_size = 0;
 	init_queue(&commands);
 	i = 0;
 	while (i < deq_a->data_len)
@@ -79,6 +82,7 @@ void	push_swap(t_deque *deq_a, t_deque *deq_b)
 		push_to_a(deq_a, deq_b, &commands);
 		++i;
 	}
-	optimize_commands(&commands);
+	//optimize_commands(&commands);
 	print_commands(&commands);
 }
+

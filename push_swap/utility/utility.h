@@ -16,6 +16,8 @@
 # include <stddef.h>
 # include "../data_structure/queue.h"
 
+# define CONVERT_NUM 3
+
 int		ft_atoi(const char *str, t_queue *queue);
 void	*ft_calloc(size_t nelem, size_t elsize);
 char	**ft_split(char const *s, char c);
