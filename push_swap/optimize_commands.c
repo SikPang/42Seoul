@@ -1,20 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command2.c                                         :+:      :+:    :+:   */
+/*   optimize_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/12 21:01:53 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/12 21:28:02 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
 #include "command.h"
 
 #include <stdio.h>
+static t_node *remove_rra(t_node *cur, int size)
+{
+	t_node	*temp;
+
+	while (size > 0)
+	{
+		cur->data = RA;
+		cur = cur->next_node;
+		--size;
+	}
+	while (cur != 0)
+	{
+		temp = cur->prev_node;
+		cur->prev_node->next_node = cur->next_node;
+		if (cur->next_node != 0)
+			cur->next_node->prev_node = cur->prev_node;
+		free(cur);
+		cur = temp;
+		cur = cur->next_node;
+	}
+	return (cur);
+}
+
 static t_node *remove_ra(t_node *cur, int size)
 {
 	t_node	*temp;
@@ -63,73 +85,43 @@ static int	count_size(t_node *first, t_node *last)
 		return (0);
 }
 
+static void	check(t_node *first_pa, t_node *cur, int pa_size)
+{
+	int	size;
+	
+	if (first_pa != 0
+		&& first_pa->prev_node->data == RA && cur->data == RRA)
+	{
+		size = count_size(first_pa, cur);
+		if (size > 0)
+		{
+			remove_ra(first_pa, size);
+			remove_rra(cur, pa_size);
+		}
+	}
+}
+
 void	optimize_commands(t_queue *que)
 {
 	t_node	*cur;
 	t_node	*first_pa;
-	int		size;
+	int		pa_size;
 
 	cur = que->head;
 	first_pa = 0;
 	while (cur != 0)
 	{
+		pa_size = 0;
 		while (cur->data == PA)
 		{
 			if (first_pa == 0)
 				first_pa = cur;
 			cur = cur->next_node;
+			++pa_size;
 		}
-		if (first_pa != 0
-			&& first_pa->prev_node->data == RA && cur->data == RRA)
-		{
-			size = count_size(first_pa, cur);
-			if (size > 0)
-				remove_ra(first_pa, size);
-		}
+		check(first_pa, cur, pa_size);
 		first_pa = 0;
-		cur = cur->next_node;
+		if (cur != 0)
+			cur = cur->next_node;
 	}
 }
-
-static void	print_commands2(int data)
-{
-	if (data == RA)
-		write(1, "ra\n", 3);
-	else if (data == RB)
-		write(1, "rb\n", 3);
-	else if (data == RR)
-		write(1, "rr\n", 3);
-	else if (data == RRA)
-		write(1, "rra\n", 4);
-	else if (data == RRB)
-		write(1, "rrb\n", 4);
-	else if (data == RRR)
-		write(1, "rrr\n", 4);
-}
-
-void	print_commands(t_queue *que)
-{
-	t_node	*temp;
-	t_node	*cur;
-
-	cur = que->head;
-	while (cur != 0)
-	{
-		if (cur->data == SA)
-			write(1, "sa\n", 3);
-		else if (cur->data == SB)
-			write(1, "sb\n", 3);
-		else if (cur->data == SS)
-			write(1, "ss\n", 3);
-		else if (cur->data == PA)
-			write(1, "pa\n", 3);
-		else if (cur->data == PB)
-			write(1, "pb\n", 3);
-		else
-			print_commands2(cur->data);
-		temp = cur->next_node;
-		free(cur);
-		cur = temp;
-	}
-}
-

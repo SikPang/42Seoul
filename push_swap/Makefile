@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/09 19:23:50 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/12 21:25:31 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS	= main.c \
 		push_swap.c \
 		radix_sort.c \
 		command.c \
-		command2.c \
+		optimize_commands.c \
+		print_commands.c \
 		./data_structure/deque.c \
 		./data_structure/deque2.c \
 		./data_structure/queue.c \
@@ -34,8 +35,9 @@ SRCS	= main.c \
 OBJS	= $(SRCS:.c=.o)
 GCH		= $(INCS:.h=.h.gch)
 
-CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra
+CC		= cc
+CFLAGS	= -g
+#-Wall -Werror -Wextra
 
 all		: $(NAME)
 	make clean
