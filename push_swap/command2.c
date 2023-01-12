@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/12 20:38:18 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/12 21:01:53 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,17 @@ static int	count_size(t_node *first, t_node *last)
 		last = last->next_node;
 	}
 	//printf("---------- %d %d\n", rra_size, ra_size);
-	return (rra_size - ra_size);
+	if (rra_size > ra_size && ra_size - (rra_size - ra_size) > 0)
+		return (rra_size - ra_size);
+	else
+		return (0);
 }
 
 void	optimize_commands(t_queue *que)
 {
 	t_node	*cur;
 	t_node	*first_pa;
+	int		size;
 
 	cur = que->head;
 	first_pa = 0;
@@ -77,7 +81,11 @@ void	optimize_commands(t_queue *que)
 		}
 		if (first_pa != 0
 			&& first_pa->prev_node->data == RA && cur->data == RRA)
-			remove_ra(first_pa, count_size(first_pa, cur));
+		{
+			size = count_size(first_pa, cur);
+			if (size > 0)
+				remove_ra(first_pa, size);
+		}
 		first_pa = 0;
 		cur = cur->next_node;
 	}
