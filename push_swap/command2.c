@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:44:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/10 20:55:55 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/12 20:38:18 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,77 +14,74 @@
 #include <stdlib.h>
 #include "command.h"
 
-// static t_node *	remove_ra(t_node *cur, int pa_size)
-// {
-// 	t_node	*temp;
-// 	int		i;
+#include <stdio.h>
+static t_node *remove_ra(t_node *cur, int size)
+{
+	t_node	*temp;
 
-// 	i = 0;
-// 	while (cur->data != RRA)
-// 	{
-// 		if (i++ < pa_size)
-// 			cur->data = RRA;
-// 		else if (cur->data == RA)
-// 		{
-// 			temp = cur->next_node;
-// 			cur->prev_node->next_node = cur->next_node;
-// 			cur->next_node->prev_node = cur->prev_node;
-// 			free(cur);
-// 			cur = temp;
-// 		}
-// 		cur = cur->next_node;
-// 	}
-// 	return (cur);
-// }
+	cur = cur->prev_node;
+	while (size > 0)
+	{
+		cur->data = RRA;
+		cur = cur->prev_node;
+		--size;
+	}
+	while (cur->data == RA)
+	{
+		temp = cur->next_node;
+		cur->next_node->prev_node = cur->prev_node;
+		cur->prev_node->next_node = cur->next_node;
+		free(cur);
+		cur = temp;
+		cur = cur->prev_node;
+	}
+	return (cur);
+}
 
-// static int	get_pa_size(t_node *cur)
-// {
-// 	int	pa_size;
-// 	int	ra_size;
+static int	count_size(t_node *first, t_node *last)
+{
+	int	ra_size;
+	int	rra_size;
 
-// 	pa_size = 0;
-// 	ra_size = 0;
-// 	while (cur->data == RA && cur->next_node->data == RA)
-// 	{
-// 		++ra_size;
-// 		cur = cur->next_node;
-// 	}
-// 	cur = cur->next_node;
-// 	if (cur->data != PA)
-// 		return (0);
-// 	while (cur->data == PA && cur->next_node->data == PA)
-// 	{
-// 		++pa_size;
-// 		cur = cur->next_node;
-// 	}
-// 	if (ra_size > pa_size)
-// 		return (pa_size + 1);
-// 	else
-// 		return (0);
-// }
+	ra_size = 0;
+	rra_size = 0;
+	first = first->prev_node;
+	while (first->data == RA)
+	{
+		++ra_size;
+		first = first->prev_node;
+	}
+	while (last != 0 && last->data == RRA)
+	{
+		++rra_size;
+		last = last->next_node;
+	}
+	//printf("---------- %d %d\n", rra_size, ra_size);
+	return (rra_size - ra_size);
+}
 
-// void	optimize_commands(t_queue *que)
-// {
-// 	t_node	*cur;
-// 	int		pa_size;
-// 	int		check;
+void	optimize_commands(t_queue *que)
+{
+	t_node	*cur;
+	t_node	*first_pa;
 
-// 	cur = que->head;
-// 	check = 0;
-// 	while (cur->next_node != 0)
-// 	{
-// 		if (cur->data == RRA && cur->next_node->data != RRA)
-// 			check = 1;
-// 		if (check == 1 && cur->data == RA && cur->next_node->data == RA)
-// 		{
-// 			pa_size = get_pa_size(cur);
-// 			if (pa_size > 0)
-// 				cur = remove_ra(cur, pa_size);
-// 			check = 0;
-// 		}
-// 		cur = cur->next_node;
-// 	}
-// }
+	cur = que->head;
+	first_pa = 0;
+	while (cur != 0)
+	{
+		while (cur->data == PA)
+		{
+			if (first_pa == 0)
+				first_pa = cur;
+			cur = cur->next_node;
+		}
+		if (first_pa != 0
+			&& first_pa->prev_node->data == RA && cur->data == RRA)
+			remove_ra(first_pa, count_size(first_pa, cur));
+		first_pa = 0;
+		cur = cur->next_node;
+	}
+}
 
 static void	print_commands2(int data)
 {

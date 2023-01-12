@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 12:15:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/10 20:27:49 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/12 20:36:05 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	push_swap(t_deque *deq_a, t_deque *deq_b)
 		push_to_a(deq_a, deq_b, &commands);
 		++i;
 	}
-	//optimize_commands(&commands);
+	optimize_commands(&commands);
 	print_commands(&commands);
 }
 
