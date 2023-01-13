@@ -1,18 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_commands.c                                   :+:      :+:    :+:   */
+/*   commands2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 21:09:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/12 21:09:36 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 19:36:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "command.h"
+
+void	optimize_commands(t_queue *que)
+{
+	t_node	*cur;
+	t_node	*temp;
+	
+	cur = que->head;
+	while (cur != 0 && cur->next_node != 0)
+	{
+		if (cur->data == PB && cur->next_node->data == PA)
+		{
+			temp = cur->prev_node;
+			temp->next_node = cur->next_node->next_node;
+			if (cur->next_node->next_node != 0)
+				cur->next_node->next_node->prev_node = temp;
+			free(cur->next_node);
+			free(cur);
+			cur = temp;
+		}
+		else
+			cur = cur->next_node;
+	}
+}
 
 static void	print_commands2(int data)
 {

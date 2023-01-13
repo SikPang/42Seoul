@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 12:15:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 19:35:49 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 19:37:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	last_b(t_deque *deq_a, t_deque *deq_b, t_queue *cmds, int i)
 	}
 }
 
-static void	push_to_a(t_deque *deq_a, t_deque *deq_b, t_queue *cmds, int i)
+static void	push_to_a(t_deque *deq_a, t_deque *deq_b, t_queue *cmds)
 {
 	while (deq_b->front_size > 0)
 	{
@@ -119,7 +119,7 @@ void	push_swap(t_deque *deq_a, t_deque *deq_b)
 	while (i < deq_a->data_len - 1)
 	{
 		push_to_b(deq_a, deq_b, &commands, i);
-		push_to_a(deq_a, deq_b, &commands, i);
+		push_to_a(deq_a, deq_b, &commands);
 		++i;
 	}
 	last_b(deq_a, deq_b, &commands, i);
