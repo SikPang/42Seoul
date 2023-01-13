@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 12:15:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 20:40:27 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:59:41 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	last_a(t_deque *deq_a, t_deque *deq_b, t_queue *cmds)
 static void	last_b(t_deque *deq_a, t_deque *deq_b, t_queue *cmds, int i)
 {
 	int	j;
-	
+
 	j = 0;
 	while (j < deq_a->capacity)
 	{
@@ -74,7 +74,7 @@ static void	push_to_a(t_deque *deq_a, t_deque *deq_b, t_queue *cmds)
 static void	push_to_b(t_deque *deq_a, t_deque *deq_b, t_queue *cmds, int i)
 {
 	int	j;
-	
+
 	j = 0;
 	while (j < deq_a->capacity)
 	{

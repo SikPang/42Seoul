@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 20:45:14 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 20:45:39 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 21:01:43 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 
-void	error_exit()
+void	error_exit(void)
 {
 	write(2, "Error\n", 6);
 	exit(1);

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:16:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 20:48:13 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:59:53 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	clean_queue(t_queue *queue)
 void	push(t_queue *queue, int data)
 {
 	t_node	*new_node;
-	
+
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (new_node == 0)
 		error_exit();

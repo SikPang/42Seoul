@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:23:50 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 20:48:45 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:58:08 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*convert(int data, int size)
 	int		i;
 
 	i = 0;
-	converted = (char *)malloc(size + 1);
+	converted = (char *)malloc(size);
 	if (converted == 0)
 		error_exit();
 	while (i < size)
@@ -27,7 +27,6 @@ char	*convert(int data, int size)
 		converted[i] = '0';
 		++i;
 	}
-	converted[i] = '\0';
 	while (data > 0)
 	{
 		converted[size - 1] = data % CONVERT_NUM + '0';

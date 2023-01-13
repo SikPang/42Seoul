@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 21:09:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 20:39:31 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:59:22 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	optimize_commands(t_queue *que)
 {
 	t_node	*cur;
 	t_node	*temp;
-	
+
 	cur = que->head;
 	while (cur != 0 && cur->next_node != 0)
 	{

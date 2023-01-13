@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:34:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 20:54:19 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:59:34 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	get_args(int ac, char **av, t_queue *que)
 	char	**strs;
 	int		i;
 	int		j;
-	
+
 	i = 1;
 	while (i < ac)
 	{
@@ -103,7 +103,7 @@ static void	get_args(int ac, char **av, t_queue *que)
 	}
 }
 
-int main(int ac, char *av[])
+int	main(int ac, char *av[])
 {
 	t_queue	args;
 	t_deque	deq_a;
