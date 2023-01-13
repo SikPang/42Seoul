@@ -22,6 +22,7 @@ void	init_queue(t_queue *queue)
 	queue->tail = 0;
 	queue->size = 0;
 	queue->max = INT_MIN;
+	queue->min = INT_MAX;
 }
 
 void	clean_queue(t_queue *queue)
@@ -79,4 +80,29 @@ int	pop(t_queue *queue)
 	free(head_node);
 	--queue->size;
 	return (data);
+}
+
+t_node	*erase(t_queue *que, t_node *target)
+{
+	t_node	*next;
+
+	next = target->next_node;
+	if (target == que->head)
+	{
+		que->head = target->next_node;
+		target->next_node->prev_node = 0;
+	}
+	else if (target == que->tail)
+	{
+		que->tail = target->prev_node;
+		target->prev_node->next_node = 0;
+	}
+	else
+	{
+		target->next_node->prev_node = target->prev_node;
+		target->prev_node->next_node = target->next_node;
+	}
+	free(target);
+	--que->size;
+	return (next);
 }

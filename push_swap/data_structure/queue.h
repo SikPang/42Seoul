@@ -41,11 +41,13 @@ typedef struct s_queue
 	t_node	*tail;
 	int		size;
 	int		max;
+	int		min;
 }	t_queue;
 
 void	init_queue(t_queue *queue);
+void	clean_queue(t_queue *queue);
 void	push(t_queue *queue, int data);
 int		pop(t_queue *queue);
-void	clean_queue(t_queue *queue);
+t_node	*erase(t_queue *que, t_node *target);
 
 #endif

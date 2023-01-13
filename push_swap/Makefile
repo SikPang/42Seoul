@@ -12,17 +12,17 @@
 
 NAME	= push_swap
 
-INCS	= push_swap.h \
-		radix_sort.h \
+INCS	= ./sort/sort.h \
 		./data_structure/deque.h \
 		./data_structure/queue.h \
 		./data_structure/array.h \
 		./utility/utility.h
 SRCS	= main.c \
-		push_swap.c \
-		radix_sort.c \
 		command.c \
-		command2.c \
+		command_util.c \
+		./sort/small_sort.c \
+		./sort/radix_sort.c \
+		./sort/main_sort.c \
 		./data_structure/deque.c \
 		./data_structure/deque2.c \
 		./data_structure/queue.c \

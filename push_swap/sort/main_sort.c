@@ -10,10 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "command.h"
-#include "./data_structure/deque.h"
-#include "./data_structure/queue.h"
+#include "sort.h"
+#include "../command.h"
 
 static void	last_a(t_deque *deq_a, t_deque *deq_b, t_queue *cmds)
 {
@@ -91,7 +89,7 @@ static void	push_to_b(t_deque *deq_a, t_deque *deq_b, t_queue *cmds, int i)
 	}
 }
 
-void	push_swap(t_deque *deq_a, t_deque *deq_b)
+void	main_sort(t_deque *deq_a, t_deque *deq_b)
 {
 	t_queue	commands;
 	int		i;

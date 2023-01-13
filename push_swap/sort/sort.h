@@ -13,9 +13,12 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "./data_structure/deque.h"
+# include "../data_structure/deque.h"
+# include "../data_structure/queue.h"
 
-void	little_sort(t_queue *args);
-void	push_swap(t_deque *deq_a, t_deque *deq_b);
+int		*radix_sort(t_queue *que);
+void	mini_sort(t_queue *que_a);
+void	small_sort(t_queue *args);
+void	main_sort(t_deque *deq_a, t_deque *deq_b);
 
 #endif

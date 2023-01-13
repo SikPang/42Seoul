@@ -12,10 +12,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "push_swap.h"
-#include "radix_sort.h"
-#include "./data_structure/deque.h"
-#include "./data_structure/queue.h"
+#include "./sort/sort.h"
 #include "./utility/utility.h"
 
 static void	convert_push(t_queue *que, t_deque *deq)
@@ -79,7 +76,7 @@ static void	check_duplicate(int *arr, int size)
 	}
 }
 
-static int	get_args(int ac, char **av, t_queue *que)
+static int	set_args(int ac, char **av, t_queue *que)
 {
 	char	**strs;
 	int		is_ascending;
@@ -108,7 +105,7 @@ static int	get_args(int ac, char **av, t_queue *que)
 	return (is_ascending);
 }
 
-int	main(int ac, char *av[])
+int	main(int ac, char **av)
 {
 	t_queue	args;
 	t_deque	deq_a;
@@ -116,10 +113,12 @@ int	main(int ac, char *av[])
 	int		*sorted_arr;
 
 	init_queue(&args);
-	if (get_args(ac, av, &args) == 1)
+	if (set_args(ac, av, &args))
 		return (0);
-	if (args.size <= 5)
-		little_sort(&args);
+	if (args.size <= 3)
+		mini_sort(&args);
+	else if (args.size <= 5)
+		small_sort(&args);
 	else
 	{
 		sorted_arr = radix_sort(&args);
@@ -130,7 +129,7 @@ int	main(int ac, char *av[])
 		convert_push(&args, &deq_a);
 		init_deque(&deq_b, args.size);
 		clean_queue(&args);
-		push_swap(&deq_a, &deq_b);
+		main_sort(&deq_a, &deq_b);
 	}
 	return (0);
 }

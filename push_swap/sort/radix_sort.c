@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "./data_structure/queue.h"
-#include "./data_structure/array.h"
-#include "./utility/utility.h"
+#include "../data_structure/array.h"
+#include "../utility/utility.h"
+#include "sort.h"
 
 static void	push_to_que(t_queue *que, t_array *arr, int cnt)
 {
