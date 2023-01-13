@@ -6,16 +6,16 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:16:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/10 19:19:03 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:48:13 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <limits.h>
-//#include <unistd.h>
+#include <unistd.h>
 #include "queue.h"
+#include "../utility/utility.h"
 
-#include <stdio.h>
 void	init_queue(t_queue *queue)
 {
 	queue->head = 0;
@@ -43,6 +43,8 @@ void	push(t_queue *queue, int data)
 	t_node	*new_node;
 	
 	new_node = (t_node *)malloc(sizeof(t_node));
+	if (new_node == 0)
+		error_exit();
 	new_node->data = data;
 	new_node->next_node = 0;
 	if (queue->size == 0)
@@ -66,11 +68,7 @@ int	pop(t_queue *queue)
 	int		data;
 
 	if (queue->size == 0)
-	{
-		//write(2, "Error\n", 6);
-		printf("Error : pop at empty queue\n");
-		exit(1);
-	}
+		error_exit();
 	data = queue->head->data;
 	head_node = queue->head;
 	queue->head = queue->head->next_node;

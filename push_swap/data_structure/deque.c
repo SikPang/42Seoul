@@ -6,19 +6,22 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 13:54:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/10 18:33:29 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:47:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <stdlib.h>
 #include "deque.h"
+#include "../utility/utility.h"
 
-#include <stdio.h>
 void	init_deque(t_deque *deque, int capacity)
 {
 	if (capacity <= 0)
 		return ;
 	deque->arr = (char **)malloc((capacity + 1) * sizeof(char *));
+	if (deque->arr == 0)
+		error_exit();
 	deque->arr[capacity] = 0;
 	deque->capacity = capacity;
 	deque->size = 0;
@@ -32,11 +35,7 @@ void	init_deque(t_deque *deque, int capacity)
 void	push_front(t_deque *deque, char *data)
 {
 	if (deque->size == deque->capacity)
-	{
-		//write(2, "Error\n", 6);
-		printf("Error : push into full deque\n");
-		exit(1);
-	}
+		error_exit();
 	if (deque->head == -1)
 	{
 		deque->head = 0;
@@ -54,11 +53,7 @@ void	push_front(t_deque *deque, char *data)
 void	push_back(t_deque *deque, char *data)
 {
 	if (deque->size == deque->capacity)
-	{
-		//write(2, "Error\n", 6);
-		printf("Error : push into full deque\n");
-		exit(1);
-	}
+		error_exit();
 	if (deque->head == -1)
 	{
 		deque->head = 0;
@@ -78,11 +73,7 @@ char	*pop_front(t_deque *deque)
 	char	*value;
 
 	if (deque->size == 0)
-	{
-		//write(2, "Error\n", 6);
-		printf("Error : pop at empty deque\n");
-		exit(1);
-	}
+		error_exit();
 	value = deque->arr[deque->head];
 	if (deque->size == 1)
 	{
@@ -103,11 +94,7 @@ char	*pop_back(t_deque *deque)
 	char	*value;
 
 	if (deque->size == 0)
-	{
-		//write(2, "Error\n", 6);
-		printf("Error : pop at empty deque\n");
-		exit(1);
-	}
+		error_exit();
 	value = deque->arr[deque->tail];
 	if (deque->size == 1)
 	{

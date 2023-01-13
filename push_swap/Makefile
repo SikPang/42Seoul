@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/13 19:37:30 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/13 20:55:58 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS	= main.c \
 		./data_structure/queue.c \
 		./data_structure/array.c \
 		./utility/convert.c \
+		./utility/error_exit.c \
 		./utility/ft_split.c \
 		./utility/ft_atoi.c \
 		./utility/ft_calloc.c

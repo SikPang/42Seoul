@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 12:15:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 19:37:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:40:27 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,6 @@
 #include "command.h"
 #include "./data_structure/deque.h"
 #include "./data_structure/queue.h"
-
-// stack a to ->
-
-// A bottom
-// push	: ra
-// pop	: rra
-
-// B top
-// push	: pb
-// pop	: pa
-
-// B bottom
-// push	: pb rb
-// pop	: rrb pa
-
-#include <stdio.h>
 
 static void	last_a(t_deque *deq_a, t_deque *deq_b, t_queue *cmds)
 {

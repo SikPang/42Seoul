@@ -6,15 +6,15 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:45:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/10 20:26:00 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:55:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "./data_structure/queue.h"
 #include "./data_structure/array.h"
+#include "./utility/utility.h"
 
-#include <stdio.h>
 static void	push_to_que(t_queue *que, t_array *arr, int cnt)
 {
 	int	temp;
@@ -118,6 +118,8 @@ int	*radix_sort(t_queue *que)
 	start_sort(&negative);
 	start_sort(&positive);
 	result = (int *)malloc(que->size * sizeof(int));
+	if (result == 0)
+		error_exit();
 	i = 0;
 	while (i < negative.size)
 	{

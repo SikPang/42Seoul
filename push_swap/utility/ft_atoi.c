@@ -6,23 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/07 21:13:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:49:33 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../data_structure/deque.h"
-#include "../data_structure/queue.h"
-//#include <unistd.h>
-
-#include <stdio.h>
-static void	error_exit(t_queue *queue)
-{
-	clean_queue(queue);
-	//write(2, "Error\n", 6);
-	printf("Error : invalid argument\n");
-	exit(1);
-}
+#include <unistd.h>
+#include "../utility/utility.h"
 
 static int	check_valid(int before_num, char ch, int minus)
 {
@@ -46,7 +36,7 @@ static int	check_valid(int before_num, char ch, int minus)
 	return (1);
 }
 
-int	ft_atoi(const char *str, t_queue *queue)
+int	ft_atoi(const char *str)
 {
 	int	i;
 	int	minus;
@@ -66,7 +56,7 @@ int	ft_atoi(const char *str, t_queue *queue)
 	while (str[i] != '\0')
 	{
 		if (!check_valid(num, str[i], minus))
-			error_exit(queue);
+			error_exit();
 		num = num * 10 + str[i] - '0';
 		++i;
 	}

@@ -6,17 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 14:46:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/10 18:52:06 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:39:20 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-//#include <unistd.h>
+#include <unistd.h>
 #include "command.h"
 
-// 첫 번째 원소 == back == top
-// 마지막 원소 == front == bottom
-#include <stdio.h>
 void	c_swap(t_deque *deq1, t_deque *deq2, char chk, t_queue *que)
 {
 	char	*first;
@@ -38,7 +35,6 @@ void	c_swap(t_deque *deq1, t_deque *deq2, char chk, t_queue *que)
 		push_back(deq2, second);
 		push(que, SS);
 	}
-	printf("%d\n", deq1->size);
 }
 
 void	c_push(t_deque *dest, t_deque *src, char chk, t_queue *que)

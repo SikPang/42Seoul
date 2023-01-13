@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:04:12 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 16:38:29 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:51:41 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 # define UTILITY_H
 
 # include <stddef.h>
-# include "../data_structure/queue.h"
 
 # define CONVERT_NUM 3
 
-int		ft_atoi(const char *str, t_queue *queue);
+int		ft_atoi(const char *str);
 void	*ft_calloc(size_t nelem, size_t elsize);
 char	**ft_split(char const *s, char c);
 char	*convert(int data, int size);
+void	error_exit();
 
 #endif
