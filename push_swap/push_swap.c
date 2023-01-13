@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 12:15:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/12 22:54:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 19:35:49 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,50 @@
 // pop	: rrb pa
 
 #include <stdio.h>
+
+static void	last_a(t_deque *deq_a, t_deque *deq_b, t_queue *cmds)
+{
+	int	size;
+	int	i;
+
+	size = deq_b->front_size;
+	i = 0;
+	while (deq_b->back_size > 0)
+	{
+		c_push(deq_a, deq_b, 'a', cmds);
+	}
+	while (deq_b->front_size > 0)
+	{
+		c_reverse_rotate(deq_b, deq_a, 'b', cmds);
+		c_push(deq_a, deq_b, 'a', cmds);
+	}
+	while (i < size)
+	{
+		c_rotate(deq_a, deq_b, 'a', cmds);
+		++i;
+	}
+}
+
+static void	last_b(t_deque *deq_a, t_deque *deq_b, t_queue *cmds, int i)
+{
+	int	j;
+	
+	j = 0;
+	while (j < deq_a->capacity)
+	{
+		if (get_back(deq_a)[deq_a->data_len - i - 1] == '1')
+			c_rotate(deq_a, deq_b, 'a', cmds);
+		else if (get_back(deq_a)[deq_a->data_len - i - 1] == '0')
+			c_push(deq_b, deq_a, 'b', cmds);
+		else
+		{
+			c_push(deq_b, deq_a, 'b', cmds);
+			c_rotate(deq_b, deq_a, 'b', cmds);
+		}
+		++j;
+	}
+}
+
 static void	push_to_a(t_deque *deq_a, t_deque *deq_b, t_queue *cmds, int i)
 {
 	while (deq_b->front_size > 0)
@@ -41,19 +85,6 @@ static void	push_to_a(t_deque *deq_a, t_deque *deq_b, t_queue *cmds, int i)
 	{
 		c_push(deq_a, deq_b, 'a', cmds);
 	}
-	while (deq_a->front_size > 0)
-	{
-		c_reverse_rotate(deq_a, deq_b, 'a', cmds);
-		if (i == deq_a->data_len - 2
-			&& get_back(deq_a)[deq_a->data_len - i] == '1')
-			c_push(deq_b, deq_a, 'b', cmds);
-		// rra 하면서 더 큰 수 b로 넘겼음
-	}
-	if (i == deq_a->data_len - 2)
-	{
-		// b 스택 뒤집으면서 pa
-
-	}
 }
 
 static void	push_to_b(t_deque *deq_a, t_deque *deq_b, t_queue *cmds, int i)
@@ -63,9 +94,9 @@ static void	push_to_b(t_deque *deq_a, t_deque *deq_b, t_queue *cmds, int i)
 	j = 0;
 	while (j < deq_a->capacity)
 	{
-		if (get_back(deq_a)[deq_a->data_len - i - 1] == '0')
+		if (get_back(deq_a)[deq_a->data_len - i - 1] == '2')
 			c_rotate(deq_a, deq_b, 'a', cmds);
-		else if (get_back(deq_a)[deq_a->data_len - i - 1] == '1')
+		else if (get_back(deq_a)[deq_a->data_len - i - 1] == '0')
 			c_push(deq_b, deq_a, 'b', cmds);
 		else
 		{
@@ -91,7 +122,8 @@ void	push_swap(t_deque *deq_a, t_deque *deq_b)
 		push_to_a(deq_a, deq_b, &commands, i);
 		++i;
 	}
+	last_b(deq_a, deq_b, &commands, i);
+	last_a(deq_a, deq_b, &commands);
 	optimize_commands(&commands);
 	print_commands(&commands);
 }
-

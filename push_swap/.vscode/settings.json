@@ -17,6 +17,8 @@
 		"unordered_map": "c",
 		"utility": "c",
 		"vector": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"ios": "c",
+		"queue.h": "c"
 	}
 }

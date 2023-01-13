@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:34:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/12 20:15:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 16:47:05 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	normalize(int *arr, int size, t_queue *que)
 			{
 				temp->data = j;
 				if (j > que->max)
-				que->max = j;
+					que->max = j;
 				break ;
 			}
 			++j;
