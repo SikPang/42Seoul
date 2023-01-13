@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:34:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 20:59:34 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/13 22:40:51 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,15 @@ static void	check_duplicate(int *arr, int size)
 	}
 }
 
-static void	get_args(int ac, char **av, t_queue *que)
+static int	get_args(int ac, char **av, t_queue *que)
 {
 	char	**strs;
+	int		is_ascending;
 	int		i;
 	int		j;
 
 	i = 1;
+	is_ascending = 1;
 	while (i < ac)
 	{
 		strs = ft_split(av[i], ' ');
@@ -95,12 +97,15 @@ static void	get_args(int ac, char **av, t_queue *que)
 		while (strs[j])
 		{
 			push(que, ft_atoi(strs[j]));
+			if (que->size > 1 && que->tail->data < que->tail->prev_node->data)
+				is_ascending = 0;
 			free(strs[j]);
 			++j;
 		}
 		free(strs);
 		++i;
 	}
+	return (is_ascending);
 }
 
 int	main(int ac, char *av[])
@@ -111,17 +116,21 @@ int	main(int ac, char *av[])
 	int		*sorted_arr;
 
 	init_queue(&args);
-	get_args(ac, av, &args);
-	sorted_arr = radix_sort(&args);
-	check_duplicate(sorted_arr, args.size);
-	normalize(sorted_arr, args.size, &args);
-	free(sorted_arr);
-	init_deque(&deq_a, args.size);
-	convert_push(&args, &deq_a);
-	init_deque(&deq_b, args.size);
-	push_swap(&deq_a, &deq_b);
-	clean_queue(&args);
-	clean_deque(&deq_a);
-	clean_deque(&deq_b);
+	if (get_args(ac, av, &args) == 1)
+		return (0);
+	if (args.size <= 5)
+		little_sort(&args);
+	else
+	{
+		sorted_arr = radix_sort(&args);
+		check_duplicate(sorted_arr, args.size);
+		normalize(sorted_arr, args.size, &args);
+		free(sorted_arr);
+		init_deque(&deq_a, args.size);
+		convert_push(&args, &deq_a);
+		init_deque(&deq_b, args.size);
+		clean_queue(&args);
+		push_swap(&deq_a, &deq_b);
+	}
 	return (0);
 }
