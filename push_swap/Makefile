@@ -6,17 +6,12 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/13 20:55:58 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/14 17:00:21 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= push_swap
 
-INCS	= ./sort/sort.h \
-		./data_structure/deque.h \
-		./data_structure/queue.h \
-		./data_structure/array.h \
-		./utility/utility.h
 SRCS	= main.c \
 		command.c \
 		command_util.c \
@@ -33,29 +28,23 @@ SRCS	= main.c \
 		./utility/ft_atoi.c \
 		./utility/ft_calloc.c
 OBJS	= $(SRCS:.c=.o)
-GCH		= $(INCS:.h=.h.gch)
 
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra
 
 all		: $(NAME)
-	make clean
 
 $(NAME)	: $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^
-
-%.o		: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -o $(NAME) $^
 
 clean	:
 	rm -f $(OBJS)
-	rm -f $(GCH)
 
-fclean	: 
+fclean	:
 	make clean
 	rm -f $(NAME)
 
-re		: 
+re		:
 	make fclean
 	make all
 
