@@ -6,13 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 20:49:33 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/14 17:39:18 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "../utility/utility.h"
+#include "utility.h"
 
 static int	check_valid(int before_num, char ch, int minus)
 {

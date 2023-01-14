@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 15:34:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 22:40:51 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/14 17:27:00 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static int	set_args(int ac, char **av, t_queue *que)
 		while (strs[j])
 		{
 			push(que, ft_atoi(strs[j]));
-			if (que->size > 1 && que->tail->data < que->tail->prev_node->data)
+			if (que->size > 1 && que->tail->data <= que->tail->prev_node->data)
 				is_ascending = 0;
 			free(strs[j]);
 			++j;
@@ -115,14 +115,14 @@ int	main(int ac, char **av)
 	init_queue(&args);
 	if (set_args(ac, av, &args))
 		return (0);
+	sorted_arr = radix_sort(&args);
+	check_duplicate(sorted_arr, args.size);
 	if (args.size <= 3)
 		mini_sort(&args);
 	else if (args.size <= 5)
 		small_sort(&args);
 	else
 	{
-		sorted_arr = radix_sort(&args);
-		check_duplicate(sorted_arr, args.size);
 		normalize(sorted_arr, args.size, &args);
 		free(sorted_arr);
 		init_deque(&deq_a, args.size);

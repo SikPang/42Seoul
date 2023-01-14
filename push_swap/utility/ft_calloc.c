@@ -6,12 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 12:34:02 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/13 20:50:44 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/14 17:39:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include <stdlib.h>
+#include "utility.h"
 
 void	*ft_calloc(size_t nelem, size_t elsize)
 {
