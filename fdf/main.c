@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 21:44:17 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/24 22:22:30 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include "info.h"
-#include "draw.h"
+#include "draw/draw.h"
 #include "get_next_line/get_next_line.h"
 #include "utility/utility.h"
 #include "data_structure/list.h"

@@ -6,15 +6,15 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:58:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 21:27:02 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/24 22:22:19 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DRAW_H
 # define DRAW_H
 
-# include "info.h"
-# include "data_structure/list.h"
+# include "../info.h"
+# include "../data_structure/list.h"
 
 # define COLOR_RED 0xFF0000
 # define COLOR_GREEN 0xFF00

@@ -6,15 +6,15 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/24 21:29:46 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/24 22:23:02 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= fdf
 
 SRCS	= main.c \
-		bresenham.c \
-		draw.c \
+		./draw/bresenham.c \
+		./draw/draw.c \
 		./data_structure/list.c \
 		./data_structure/llist.c \
 		./get_next_line/get_next_line.c \
