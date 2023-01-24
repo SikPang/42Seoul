@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:48:17 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 16:21:14 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/24 16:33:58 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	push_list(t_llist *list)
 	if (new_node == 0)
 		error_exit();
 	new_node->data = (t_list *)malloc(sizeof(t_list));
+	init_list(new_node->data);
 	new_node->next_node = 0;
 	if (list->size == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/14 17:39:18 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/24 17:02:23 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include "utility.h"
 
+#include <stdio.h>
 static int	check_valid(int before_num, char ch, int minus)
 {
 	int	after_num;
@@ -53,7 +54,7 @@ int	ft_atoi(const char *str)
 			minus *= -1;
 		++i;
 	}
-	while (str[i] != '\0')
+	while (str[i] != '\0' && str[i] != '\n')
 	{
 		if (!check_valid(num, str[i], minus))
 			error_exit();
