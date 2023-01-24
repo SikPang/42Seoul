@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   info.h                                             :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 18:56:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 21:44:40 by kwsong           ###   ########.fr       */
+/*   Created: 2023/01/24 20:27:59 by kwsong            #+#    #+#             */
+/*   Updated: 2023/01/24 20:28:00 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INFO_H
-# define INFO_H
+#ifndef MAP_H
+# define MAP_H
 
-# define TILE_SIZE 20
-# define WIN_WIDTH 500
-# define WIN_HEIGHT 500
-
-typedef struct s_mlx
+typedef struct s_vector
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-}	t_mlx;
+	double	x;
+	double	y;
+	double	z;
+}	t_vector;
+
+typedef struct s_map
+{
+	t_vector	**map;
+	int			width;
+	int			height;
+}	t_map;
 
 #endif

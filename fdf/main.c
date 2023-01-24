@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 20:03:09 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/24 21:44:17 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	temp_parsing(char *file, t_llist *llist)
 		i = 0;
 		while (splited[i] != 0)
 		{
-			push_arg(llist->tail->data, ft_atoi(splited[i]), i, llist->size - 1);
+			push_arg(llist->tail->data, ft_atoi(splited[i])
+				, i * TILE_SIZE, (llist->size - 1) * TILE_SIZE);
 			++i;
 		}
 	}
@@ -60,8 +61,8 @@ void	temp_print(t_llist *llist)
 		node = lnode->data->head;
 		while (node != 0)
 		{
-			//printf("%.0f %.0f %.0f\t", node->y, node->x, node->z);	// coordinate
-			printf("%.0f\t", node->z);		// only data
+			//printf("%.0f %.0f %.0f\t", node->y, node->x, node->z);
+			printf("%.0f\t", node->z);
 			node = node->next_node;
 		}
 		printf("\n");
@@ -86,8 +87,8 @@ int main(int ac, char **av)
 	set_mlx(&mlx);
 	init_llist(&map);
 	temp_parsing(av[1], &map);
-	temp_print(&map);
-
+	//temp_print(&map);
+	draw_map(&map, &mlx);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
 	mlx_loop(mlx.mlx);
 	mlx_destroy_window(mlx.mlx, mlx.win);
