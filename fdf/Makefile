@@ -6,11 +6,11 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/24 16:04:14 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/24 16:12:07 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= push_swap
+NAME	= fdf
 
 SRCS	= main.c \
 		./data_structure/list.c \
@@ -24,8 +24,9 @@ SRCS	= main.c \
 OBJS	= $(SRCS:.c=.o)
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -lmlx -framework OpenGL -framework AppKit 
-
+CFLAGS	= -lmlx -framework OpenGL -framework AppKit 
+# -Wall -Werror -Wextra
+# -lmlx -framework OpenGL -framework AppKit 
 all		: $(NAME)
 
 $(NAME)	: $(OBJS)

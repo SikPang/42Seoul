@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:48:17 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 16:01:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/24 16:11:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 #include "list.h"
 #include "../utility/utility.h"
 
-void	init_list(t_llist *list)
+void	init_llist(t_llist *list)
 {
 	list->head = 0;
 	list->tail = 0;
 	list->size = 0;
 }
 
-void	clean_list(t_llist *list)
+void	clean_llist(t_llist *list)
 {
 	t_lnode	*temp;
 	t_lnode	*next;
@@ -36,7 +36,7 @@ void	clean_list(t_llist *list)
 	}
 }
 
-void	push_back(t_llist *list, t_list data)
+void	push_llist(t_llist *list, t_list data)
 {
 	t_lnode	*new_node;
 
@@ -60,7 +60,7 @@ void	push_back(t_llist *list, t_list data)
 	++list->size;
 }
 
-t_list	pop_back(t_llist *list)
+t_list	pop_llist(t_llist *list)
 {
 	t_lnode	*head_node;
 	t_list	data;
@@ -79,19 +79,19 @@ t_list	pop_back(t_llist *list)
 	return (data);
 }
 
-t_lnode	*erase(t_list *que, t_lnode *target)
+t_lnode	*erase_llist(t_llist *list, t_lnode *target)
 {
 	t_lnode	*next;
 
 	next = target->next_node;
-	if (target == que->head)
+	if (target == list->head)
 	{
-		que->head = target->next_node;
+		list->head = target->next_node;
 		target->next_node->prev_node = 0;
 	}
-	else if (target == que->tail)
+	else if (target == list->tail)
 	{
-		que->tail = target->prev_node;
+		list->tail = target->prev_node;
 		target->prev_node->next_node = 0;
 	}
 	else
@@ -100,6 +100,6 @@ t_lnode	*erase(t_list *que, t_lnode *target)
 		target->prev_node->next_node = target->next_node;
 	}
 	free(target);
-	--que->size;
+	--list->size;
 	return (next);
 }

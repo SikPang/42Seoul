@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:30:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 16:01:45 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/24 16:11:56 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,16 @@ typedef struct s_llist
 	int		size;
 }	t_llist;
 
-void	init_list(t_list *queue);
-void	clean_list(t_list *queue);
-void	push(t_list *queue, int data);
-int		pop(t_list *queue);
-t_node	*erase(t_list *que, t_node *target);
+void	init_list(t_list *list);
+void	clean_list(t_list *list);
+void	push_list(t_list *list, int data);
+int		pop_list(t_list *list);
+t_node	*erase_list(t_list *list, t_node *target);
+
+void	init_llist(t_llist *list);
+void	clean_llist(t_llist *list);
+void	push_llist(t_llist *list, t_list data);
+t_list	pop_llist(t_llist *list);
+t_lnode	*erase_llist(t_llist *list, t_lnode *target);
 
 #endif
