@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:16:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 16:14:29 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/24 17:56:39 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,16 @@ void	clean_list(t_list *list)
 	}
 }
 
-void	push_arg(t_list *list, int data)
+void	push_arg(t_list *list, double z, double x, double y)
 {
 	t_node	*new_node;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (new_node == 0)
 		error_exit();
-	new_node->data = data;
+	new_node->x = x;
+	new_node->y = y;
+	new_node->z = z;
 	new_node->next_node = 0;
 	if (list->size == 0)
 	{
@@ -67,7 +69,7 @@ int	pop_arg(t_list *list)
 
 	if (list->size == 0)
 		error_exit();
-	data = list->head->data;
+	data = list->head->z;
 	head_node = list->head;
 	list->head = list->head->next_node;
 	if (list->size > 1)

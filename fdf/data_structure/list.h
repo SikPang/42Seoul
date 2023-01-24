@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:30:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 16:19:03 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/24 17:56:44 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ typedef struct s_node
 {
 	struct s_node	*next_node;
 	struct s_node	*prev_node;
-	int				data;
+	double			x;
+	double			y;
+	double			z;
 }	t_node;
 
 typedef struct s_list
@@ -43,7 +45,7 @@ typedef struct s_llist
 
 void	init_list(t_list *list);
 void	clean_list(t_list *list);
-void	push_arg(t_list *list, int data);
+void	push_arg(t_list *list, double z, double x, double y);
 int		pop_arg(t_list *list);
 t_node	*erase_arg(t_list *list, t_node *target);
 

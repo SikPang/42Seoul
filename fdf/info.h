@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.h                                          :+:      :+:    :+:   */
+/*   info.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 19:04:12 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 18:56:05 by kwsong           ###   ########.fr       */
+/*   Created: 2023/01/24 18:56:24 by kwsong            #+#    #+#             */
+/*   Updated: 2023/01/24 20:01:54 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILITY_H
-# define UTILITY_H
+#ifndef INFO_H
+# define INFO_H
 
-# include <stddef.h>
+# define WIN_WIDTH 500
+# define WIN_HEIGHT 500
 
-int		ft_atoi(const char *str);
-void	*ft_calloc(size_t nelem, size_t elsize);
-char	**ft_split(char const *s, char c);
-void	error_exit(void);
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		size_line;
+	int		endian;
+}	t_mlx;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 17:03:36 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/24 20:03:09 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#include "./get_next_line/get_next_line.h"
-#include "./utility/utility.h"
-#include "./data_structure/list.h"
+#include "info.h"
+#include "draw.h"
+#include "get_next_line/get_next_line.h"
+#include "utility/utility.h"
+#include "data_structure/list.h"
 
 #include <stdio.h>
 void	temp_parsing(char *file, t_llist *llist)
@@ -36,10 +38,12 @@ void	temp_parsing(char *file, t_llist *llist)
 			return ;
 		push_list(llist);
 		splited = ft_split(str, ' ');
+		if (splited == 0)
+			error_exit();
 		i = 0;
 		while (splited[i] != 0)
 		{
-			push_arg(llist->tail->data, ft_atoi(splited[i]));
+			push_arg(llist->tail->data, ft_atoi(splited[i]), i, llist->size - 1);
 			++i;
 		}
 	}
@@ -56,7 +60,8 @@ void	temp_print(t_llist *llist)
 		node = lnode->data->head;
 		while (node != 0)
 		{
-			printf("%d\t", node->data);
+			//printf("%.0f %.0f %.0f\t", node->y, node->x, node->z);	// coordinate
+			printf("%.0f\t", node->z);		// only data
 			node = node->next_node;
 		}
 		printf("\n");
@@ -64,20 +69,27 @@ void	temp_print(t_llist *llist)
 	}
 }
 
-int main(int ac, char **av)
+void	set_mlx(t_mlx *mlx)
 {
-	void	*mlx;
-	void	*win;
-	t_llist	llist;
-
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 500, 500, "Hello");
-	init_llist(&llist);
-	temp_parsing(av[1], &llist);
-	//temp_print(&llist);
-	mlx_loop(mlx);
-	mlx_destroy_window(mlx, win);
-	return (0);
+	mlx->mlx = mlx_init();
+	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
+	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
+	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
+		&mlx->size_line, &mlx->endian);
 }
 
-// cc -lmlx -framework OpenGL -framework AppKit *.c
+int main(int ac, char **av)
+{
+	t_mlx	mlx;
+	t_llist	map;
+
+	set_mlx(&mlx);
+	init_llist(&map);
+	temp_parsing(av[1], &map);
+	temp_print(&map);
+
+	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
+	mlx_loop(mlx.mlx);
+	mlx_destroy_window(mlx.mlx, mlx.win);
+	return (0);
+}

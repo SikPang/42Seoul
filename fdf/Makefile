@@ -6,13 +6,14 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/24 16:12:07 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/24 19:53:49 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= fdf
 
 SRCS	= main.c \
+		draw.c \
 		./data_structure/list.c \
 		./data_structure/llist.c \
 		./get_next_line/get_next_line.c \
@@ -26,7 +27,7 @@ OBJS	= $(SRCS:.c=.o)
 CC		= cc
 CFLAGS	= -lmlx -framework OpenGL -framework AppKit 
 # -Wall -Werror -Wextra
-# -lmlx -framework OpenGL -framework AppKit 
+
 all		: $(NAME)
 
 $(NAME)	: $(OBJS)
