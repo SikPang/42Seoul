@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 16:02:12 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/24 16:21:48 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "./utility/utility.h"
 #include "./data_structure/list.h"
 
-static void	mini_parsing(char *file, t_list *list)
+static void	mini_parsing(char *file, t_llist *llist)
 {
 	char	**splited;
 	char	*str;
@@ -31,11 +31,12 @@ static void	mini_parsing(char *file, t_list *list)
 		str = get_next_line(fd);
 		if (str == 0)
 			return ;
+		push_list(&llist);
 		splited = ft_split(str, ' ');
 		i = 0;
 		while (splited[i] != 0)
 		{
-			push_back(&list, ft_atoi(splited[i]));
+			push_arg(&llist->tail->data, ft_atoi(splited[i]));
 			++i;
 		}
 	}
@@ -45,11 +46,12 @@ int main(int ac, char **av)
 {
 	void	*mlx;
 	void	*win;
-	t_list	list;
+	t_llist	llist;
 
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 500, 500, "Hello");
-	mini_parsing(av[1], &list);
+	init_llist(&llist);
+	mini_parsing(av[1], &llist);
 	mlx_loop(mlx);
 	mlx_destroy_window(mlx, win);
 	return (0);

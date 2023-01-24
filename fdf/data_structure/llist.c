@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:48:17 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 16:11:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/24 16:21:14 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,20 @@ void	clean_llist(t_llist *list)
 	while (temp != 0)
 	{
 		next = temp->next_node;
+		clean_list(temp->data);
 		free(temp);
 		temp = next;
 	}
 }
 
-void	push_llist(t_llist *list, t_list data)
+void	push_list(t_llist *list)
 {
 	t_lnode	*new_node;
 
 	new_node = (t_lnode *)malloc(sizeof(t_lnode));
 	if (new_node == 0)
 		error_exit();
-	new_node->data = data;
+	new_node->data = (t_list *)malloc(sizeof(t_list));
 	new_node->next_node = 0;
 	if (list->size == 0)
 	{
@@ -60,14 +61,13 @@ void	push_llist(t_llist *list, t_list data)
 	++list->size;
 }
 
-t_list	pop_llist(t_llist *list)
+void	pop_list(t_llist *list)
 {
 	t_lnode	*head_node;
-	t_list	data;
 
 	if (list->size == 0)
 		error_exit();
-	data = list->head->data;
+	clean_list(list->head->data);
 	head_node = list->head;
 	list->head = list->head->next_node;
 	if (list->size > 1)
@@ -76,10 +76,9 @@ t_list	pop_llist(t_llist *list)
 		list->tail = 0;
 	free(head_node);
 	--list->size;
-	return (data);
 }
 
-t_lnode	*erase_llist(t_llist *list, t_lnode *target)
+t_lnode	*erase_list(t_llist *list, t_lnode *target)
 {
 	t_lnode	*next;
 
