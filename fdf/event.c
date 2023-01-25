@@ -1,39 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   info.h                                             :+:      :+:    :+:   */
+/*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/24 18:56:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/25 17:16:09 by kwsong           ###   ########.fr       */
+/*   Created: 2023/01/25 17:09:31 by kwsong            #+#    #+#             */
+/*   Updated: 2023/01/25 17:15:58 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INFO_H
-# define INFO_H
+#include <stdlib.h>
+#include "info.h"
 
-# define TILE_SIZE 20
-
-# define X_EVENT_PRESS 2
-# define X_EVENT_EXIT 17
-# define KEY_ESC 53
-
-# define WIN_WIDTH 500
-# define WIN_HEIGHT 500
-
-typedef struct s_mlx
+int	press_key(int key_code)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		size_line;
-	int		endian;
-}	t_mlx;
+	if (key_code == KEY_ESC)
+		exit(1);
+}
 
-int	press_key(int key_code);
-int	key_exit(int key_code);
-
-#endif
+int	key_exit(int key_code)
+{
+	exit(1);
+}
