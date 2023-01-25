@@ -6,13 +6,15 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 21:08:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/25 22:16:01 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/25 22:29:23 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
 #include <stdio.h>
+
+// 브레젠헴 최적화
 void	bresenham_small(t_node *p1, t_node *p2, t_mlx *mlx)
 {
 	double	cur_x;

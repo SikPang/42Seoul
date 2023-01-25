@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/25 22:26:22 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/25 22:28:11 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	temp_parsing(char *file, t_llist *llist)
 		i = 0;
 		while (splited[i] != 0)
 		{
-			push_arg(llist->tail->data, ft_atoi(splited[i])
+			push_arg(llist->tail->data, ft_atoi(splited[i]) * TILE_SIZE
 				, i * TILE_SIZE, (llist->size - 1) * TILE_SIZE);
 			++i;
 		}
