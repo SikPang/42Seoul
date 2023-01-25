@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:56:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/25 17:16:09 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/25 22:26:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 # define INFO_H
 
 # define TILE_SIZE 20
+# define START_POS 300
 
 # define X_EVENT_PRESS 2
 # define X_EVENT_EXIT 17
 # define KEY_ESC 53
 
-# define WIN_WIDTH 500
-# define WIN_HEIGHT 500
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 
 typedef struct s_mlx
 {

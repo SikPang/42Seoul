@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/25 17:12:28 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/25 20:30:05 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCS	= main.c \
 OBJS	= $(SRCS:.c=.o)
 
 CC		= cc
-CFLAGS	= -lmlx -framework OpenGL -framework AppKit 
+CFLAGS	= -g -lmlx -framework OpenGL -framework AppKit 
 # -Wall -Werror -Wextra
 
 all		: $(NAME)

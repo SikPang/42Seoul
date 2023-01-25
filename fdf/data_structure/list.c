@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:16:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 17:56:39 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/25 20:15:13 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,27 +81,15 @@ int	pop_arg(t_list *list)
 	return (data);
 }
 
-t_node	*erase_arg(t_list *list, t_node *target)
+t_node	*copy_node(t_node *src)
 {
-	t_node	*next;
+	t_node	*dest;
 
-	next = target->next_node;
-	if (target == list->head)
-	{
-		list->head = target->next_node;
-		target->next_node->prev_node = 0;
-	}
-	else if (target == list->tail)
-	{
-		list->tail = target->prev_node;
-		target->prev_node->next_node = 0;
-	}
-	else
-	{
-		target->next_node->prev_node = target->prev_node;
-		target->prev_node->next_node = target->next_node;
-	}
-	free(target);
-	--list->size;
-	return (next);
+	dest = (t_node *)malloc(sizeof(t_node));
+	dest->x = src->x;
+	dest->y = src->y;
+	dest->z = src->z;
+	dest->next_node = src->next_node;
+	dest->prev_node = src->prev_node;
+	return (dest);
 }
