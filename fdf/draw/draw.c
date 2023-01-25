@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/25 22:31:05 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/25 22:31:51 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
 		|| temp2->x > WIN_WIDTH || temp2->y > WIN_HEIGHT)
 		return ;
 	gradient = (temp2->y - temp1->y) / (temp2->x - temp1->x);
-	//printf("%f ", gradient);
+	//printf("%f %d", gradient, (int)gradient);
 	if (gradient > 0 && gradient <= 1)
 		bresenham_small(temp1, temp2, mlx);
 	else if (gradient > -1)
