@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/26 21:26:54 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/26 21:59:11 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ t_point	*get_info_between_points(t_node *p1, t_node *p2)
 		info->gradient_sign = 1;
 	else
 		info->gradient_sign = -1;
-	printf("dx : %0.f, dy : %0.f, gra : %0.f, x_sign : %d, y_sign : %d, grad_sign : %d\n"
-	,info->dx, info->dy, info->gradient, info->dx_sign, info->dy_sign, info->gradient_sign);
+	//printf("dx : %0.f, dy : %0.f, gra : %0.f, x_sign : %d, y_sign : %d, grad_sign : %d\n"
+	//,info->dx, info->dy, info->gradient, info->dx_sign, info->dy_sign, info->gradient_sign);
 	return (info);
 }
 
@@ -84,6 +84,8 @@ void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
 		|| temp2->x > WIN_WIDTH || temp2->y > WIN_HEIGHT)
 		return ;
 	info = get_info_between_points(temp1, temp2);
+	// if (info->dx_sign == -1 && info->dy_sign == -1)
+	// 	return ;
 	if (fabs(info->gradient) <= 1)
 		bresenham_small(temp1, temp2, mlx, info);
 	else

@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:56:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/26 16:49:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/26 22:04:24 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INFO_H
 # define INFO_H
 
-# define TILE_SIZE 20
+# define TILE_SIZE 30
 # define START_POS 300
 
 # define X_EVENT_PRESS 2
