@@ -3,6 +3,7 @@
 		"get_next_line.h": "c",
 		"utility.h": "c",
 		"list.h": "c",
-		"map.h": "c"
+		"map.h": "c",
+		"functional": "c"
 	}
 }

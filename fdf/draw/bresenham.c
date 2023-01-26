@@ -6,136 +6,71 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 21:08:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/25 22:29:23 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/26 19:06:18 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "draw.h"
 
 #include <stdio.h>
-
-// 브레젠헴 최적화
-void	bresenham_small(t_node *p1, t_node *p2, t_mlx *mlx)
+void	bresenham_small(t_node *p1, t_node *p2, t_mlx *mlx, int check)
 {
-	double	cur_x;
-	double	cur_y;
+	t_node	*cur;
 	double	dx;
 	double	dy;
 	double	p;
- 
-	cur_x = p1->x;
-	cur_y = p1->y;
+	
+	cur = copy_node(p1);
 	dx = p2->x - p1->x;
 	dy = p2->y - p1->y;
 	p = 2 * dy - dx;
-	printf("small\n");
-	while (cur_x < p2->x || cur_y < p2->y)
+	printf("small : %d\n", check);
+	while (1)
 	{
-		if (p1->z > 0 && p2->z > 0)
-			put_pixel(mlx, cur_x, cur_y, COLOR_RED);
-		else
-			put_pixel(mlx, cur_x, cur_y, COLOR_WHITE);
-		cur_x += 1;
+		if ((check > 0 && cur->x >= p2->x && cur->y >= p2->y)
+			|| (check < 0 && cur->x <= p2->x && cur->y >= p2->y))
+			break ;
+		put_pixel(mlx, cur->x, cur->y, get_color(p1, p2));
+		cur->x += 1 * check;
 		if (p < 0)
 			p = p + 2 * dy;
 		else
 		{
-			cur_y += 1;
+			cur->y += 1;
 			p = p + 2 * (dy - dx);
 		}
 	}
+	free(cur);
 }
 
-void	bresenham_small_minus(t_node *p1, t_node *p2, t_mlx *mlx)
+void	bresenham_big(t_node *p1, t_node *p2, t_mlx *mlx, int check)
 {
-	double	cur_x;
-	double	cur_y;
+	t_node	*cur;
 	double	dx;
 	double	dy;
 	double	p;
- 
-	cur_x = p1->x;
-	cur_y = p1->y;
-	dx = p2->x - p1->x;
-	dy = p2->y - p1->y;
-	p = 2 * dy - dx;
-	printf("small_minus\n");
-	//printf("%0.f/%0.f, %0.f/%0.f\n", cur_x, p2->x, cur_y, p2->y);
-	while (cur_x > p2->x || cur_y < p2->y)
-	{
-		if (p1->z > 0 && p2->z > 0)
-			put_pixel(mlx, cur_x, cur_y, COLOR_RED);
-		else
-			put_pixel(mlx, cur_x, cur_y, COLOR_WHITE);
-		cur_x -= 1;
-		if (p < 0)
-			p = p + 2 * dy;
-		else
-		{
-			cur_y += 1;
-			p = p + 2 * (dy - dx);
-		}
-	}
-}
-
-void	bresenham_big(t_node *p1, t_node *p2, t_mlx *mlx)
-{
-	double	cur_x;
-	double	cur_y;
-	double	dx;
-	double	dy;
-	double	p;
-
-	cur_x = p1->x;
-	cur_y = p1->y;
+	
+	cur = copy_node(p1);
 	dx = p2->x - p1->x;
 	dy = p2->y - p1->y;
 	p = 2 * dx - dy;
-	printf("big\n");
-	while (cur_x < p2->x || cur_y < p2->y)
+	printf("big : %d\n", check);
+	//printf("%0.f/%0.f, %0.f/%0.f\n", cur->x, p2->x, cur->y, p2->y);
+	while (1)
 	{
-		if (p1->z > 0 && p2->z > 0)
-			put_pixel(mlx, cur_x, cur_y, COLOR_RED);
-		else
-			put_pixel(mlx, cur_x, cur_y, COLOR_WHITE);
-		cur_y += 1;
+		if ((check > 0 && cur->x >= p2->x && cur->y >= p2->y)
+			|| (check < 0 && cur->x >= p2->x && cur->y <= p2->y))
+			break ;
+		put_pixel(mlx, cur->x, cur->y, get_color(p1, p2));
+		cur->y += 1 * check;
 		if (p < 0)
 			p = p + 2 * dx;
 		else
 		{
-			cur_x += 1;
+			cur->x += 1;
 			p = p + 2 * (dx - dy);
 		}
 	}
-}
-
-void	bresenham_big_minus(t_node *p1, t_node *p2, t_mlx *mlx)
-{
-	double	cur_x;
-	double	cur_y;
-	double	dx;
-	double	dy;
-	double	p;
-
-	cur_x = p1->x;
-	cur_y = p1->y;
-	dx = p2->x - p1->x;
-	dy = p2->y - p1->y;
-	p = 2 * dx - dy;
-	printf("big_minus\n");
-	while (cur_x < p2->x || cur_y > p2->y)
-	{
-		if (p1->z > 0 && p2->z > 0)
-			put_pixel(mlx, cur_x, cur_y, COLOR_RED);
-		else
-			put_pixel(mlx, cur_x, cur_y, COLOR_WHITE);
-		cur_y -= 1;
-		if (p < 0)
-			p = p + 2 * dx;
-		else
-		{
-			cur_x += 1;
-			p = p + 2 * (dx - dy);
-		}
-	}
+	free(cur);
 }

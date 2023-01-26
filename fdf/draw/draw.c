@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/25 22:31:51 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/26 19:09:34 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ void	put_pixel(t_mlx *mlx, int x, int y, int color)
 
     pixel = mlx->addr + (y * mlx->size_line + x * (mlx->bits_per_pixel / 8));
 	*(int *)pixel = color;
+}
+
+int	get_color(t_node *p1, t_node *p2)
+{
+	if (p1->z > 0 && p2->z > 0)
+		return (COLOR_RED);
+	else if (p1->z < 0 && p2->z < 0)
+		return (COLOR_GREEN);
+	else
+		return (COLOR_WHITE);
 }
 
 // y axis 45 degree	(x, y)
@@ -37,8 +47,9 @@ void	isometric_projection(t_node *p)
 	//printf("before: %f %f\n", p->x, p->y);
 	p->x = p->x * cos(45.0 * PI / 180.0) - p->y * sin(45.0 * PI / 180.0) + START_POS;
 	p->y = prev_x * sin(45.0 * PI / 180.0) + p->y * cos(45.0 * PI / 180.0) + START_POS;
-	//printf("after: %f %f\n\n", p->x, p->y);
-	//p->y = p->y * sin(35.3 * PI / 180.0) - p->z * cos(35.3 * PI / 180.0);	
+	//printf("after: %f %f\n", p->x, p->y);
+	//p->y = p->y * cos(35.3 * PI / 180.0) - p->z * sin(35.3 * PI / 180.0);	
+	//printf("last: %f\n\n", p->y);
 }
 
 void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
@@ -46,6 +57,7 @@ void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
 	t_node	*temp1;
 	t_node	*temp2;
 	double	gradient;
+	int		check;
 
 	temp1 = copy_node(p1);
 	temp2 = copy_node(p2);
@@ -56,15 +68,15 @@ void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
 		|| temp2->x > WIN_WIDTH || temp2->y > WIN_HEIGHT)
 		return ;
 	gradient = (temp2->y - temp1->y) / (temp2->x - temp1->x);
-	//printf("%f %d", gradient, (int)gradient);
-	if (gradient > 0 && gradient <= 1)
-		bresenham_small(temp1, temp2, mlx);
-	else if (gradient > -1)
-		bresenham_big_minus(temp1, temp2, mlx);
-	else if (gradient > 1)
-		bresenham_big(temp1, temp2, mlx);
+	if (gradient < 0)
+		check = -1;
 	else
-		bresenham_small_minus(temp1, temp2, mlx);
+		check = 1;
+	//printf("%f %d", gradient, (int)gradient);
+	if (gradient <= 1)
+		bresenham_small(temp1, temp2, mlx, check);
+	else
+		bresenham_big(temp1, temp2, mlx, check);
 	free(temp1);
 	free(temp2);
 }
