@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:58:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/26 21:14:43 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/26 22:24:10 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define COLOR_WHITE 0xFFFFFF
 
 #define PI 3.141592
+#define EPSILON 0.99
 
 typedef struct s_point
 {
