@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/25 20:30:05 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/26 22:37:11 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME	= fdf
 
 SRCS	= main.c \
 		event.c \
+		./draw/color.c \
 		./draw/bresenham.c \
 		./draw/draw.c \
 		./data_structure/list.c \
@@ -27,7 +28,7 @@ SRCS	= main.c \
 OBJS	= $(SRCS:.c=.o)
 
 CC		= cc
-CFLAGS	= -g -lmlx -framework OpenGL -framework AppKit 
+CFLAGS	= -Lmlx_mms -lmlx -framework OpenGL -framework AppKit 
 # -Wall -Werror -Wextra
 
 all		: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:58:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/26 22:24:10 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/26 22:36:53 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ typedef struct s_point
 	int		gradient_sign;
 }	t_point;
 
-t_point	*get_info_between_points(t_node *p1, t_node *p2);
 void	bresenham_small(t_node *p1, t_node *p2, t_mlx *mlx, t_point *info);
 void	bresenham_big(t_node *p1, t_node *p2, t_mlx *mlx, t_point *info);
-void	put_pixel(t_mlx *mlx, int x, int y, int color);
 int		get_color(t_node *p1, t_node *p2);
 void	draw_map(t_llist *map, t_mlx *mlx);
 

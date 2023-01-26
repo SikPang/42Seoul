@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/26 21:59:11 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/26 22:35:37 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "draw.h"
 
 #include <stdio.h>
-t_point	*get_info_between_points(t_node *p1, t_node *p2)
+static t_point	*get_info_between_points(t_node *p1, t_node *p2)
 {
 	t_point	*info;
 
@@ -35,19 +35,7 @@ t_point	*get_info_between_points(t_node *p1, t_node *p2)
 		info->gradient_sign = 1;
 	else
 		info->gradient_sign = -1;
-	//printf("dx : %0.f, dy : %0.f, gra : %0.f, x_sign : %d, y_sign : %d, grad_sign : %d\n"
-	//,info->dx, info->dy, info->gradient, info->dx_sign, info->dy_sign, info->gradient_sign);
 	return (info);
-}
-
-int	get_color(t_node *p1, t_node *p2)
-{
-	if (p1->z > 0 && p2->z > 0)
-		return (COLOR_RED);
-	else if (p1->z < 0 && p2->z < 0)
-		return (COLOR_GREEN);
-	else
-		return (COLOR_WHITE);
 }
 
 // y axis 45 degree	(x, y)
@@ -56,7 +44,7 @@ int	get_color(t_node *p1, t_node *p2)
 // x' = x * cos(th) - y * sin(th)
 // y' = x * sin(th) + y * cos(th)
 
-void	isometric_projection(t_node *p)
+static void	isometric_projection(t_node *p)
 {
 	double	prev_x;
 
@@ -66,10 +54,9 @@ void	isometric_projection(t_node *p)
 	p->y = p->y * cos(35.3 * PI / 180.0) - p->z * sin(35.3 * PI / 180.0);
 	p->x += START_POS;
 	p->y += START_POS;	
-	//printf("last: %f\n\n", p->y);
 }
 
-void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
+static void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
 {
 	t_node	*temp1;
 	t_node	*temp2;
@@ -84,8 +71,6 @@ void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
 		|| temp2->x > WIN_WIDTH || temp2->y > WIN_HEIGHT)
 		return ;
 	info = get_info_between_points(temp1, temp2);
-	// if (info->dx_sign == -1 && info->dy_sign == -1)
-	// 	return ;
 	if (fabs(info->gradient) <= 1)
 		bresenham_small(temp1, temp2, mlx, info);
 	else

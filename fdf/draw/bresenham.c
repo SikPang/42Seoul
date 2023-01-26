@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 21:08:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/26 22:27:28 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/26 22:34:54 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "draw.h"
 
 #include <stdio.h>
-int	is_equal(double a, double b)
+static int	is_equal(double a, double b)
 {
 	if (fabs(a - b) < EPSILON)
 		return (1);
@@ -23,7 +23,7 @@ int	is_equal(double a, double b)
 		return (0);
 }
 
-void	put_pixel(t_mlx *mlx, int x, int y, int color)
+static void	put_pixel(t_mlx *mlx, int x, int y, int color)
 {
 	char    *pixel;
 
@@ -33,7 +33,7 @@ void	put_pixel(t_mlx *mlx, int x, int y, int color)
 
 void	bresenham_small(t_node *p1, t_node *p2, t_mlx *mlx, t_point *info)
 {
-	printf("small\n");
+	//printf("small\n");
 	info->p = 2 * fabs(info->dy) - fabs(info->dx);
 	while (1)
 	{
@@ -53,7 +53,7 @@ void	bresenham_small(t_node *p1, t_node *p2, t_mlx *mlx, t_point *info)
 
 void	bresenham_big(t_node *p1, t_node *p2, t_mlx *mlx, t_point *info)
 {
-	printf("big\n");
+	//printf("big\n");
 	info->p = 2 * fabs(info->dx) - fabs(info->dy);
 	while (1)
 	{
