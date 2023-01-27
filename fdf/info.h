@@ -35,6 +35,6 @@ typedef struct s_mlx
 }	t_mlx;
 
 int	press_key(int key_code);
-int	key_exit(int key_code);
+int	button_exit(int key_code);
 
 #endif

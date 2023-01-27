@@ -21,14 +21,28 @@
 #include "data_structure/list.h"
 
 #include <stdio.h>
-void	temp_parsing(char *file, t_llist *llist)
+static void	check_valid(t_llist *llist)
+{
+	t_lnode	*lnode;
+	int		size;
+
+	lnode = llist->head;
+	size = lnode->data->size;
+	while (lnode != 0)
+	{
+		if (size != lnode->data->size)
+			error_exit();
+		lnode = lnode->next_node;
+	}
+}
+
+static void	get_args(int fd, t_llist *llist)
 {
 	char	**splited;
 	char	*str;
-	int 	fd;
+	int		color;
 	int		i;
 	
-	fd = open(file, O_RDONLY);
 	str = malloc(1);
 	while (str != 0)
 	{
@@ -43,14 +57,16 @@ void	temp_parsing(char *file, t_llist *llist)
 		i = 0;
 		while (splited[i] != 0)
 		{
-			push_arg(llist->tail->data, ft_atoi(splited[i]) * (TILE_SIZE * 1.5 / 10)
-				, i * TILE_SIZE, (llist->size - 1) * TILE_SIZE);
+			push_arg(llist->tail->data, ft_atoi(splited[i], &color)
+				 * (TILE_SIZE * 0.15) , i * TILE_SIZE
+				 , (llist->size - 1) * TILE_SIZE);
+			llist->tail->data->tail->color = color;
 			++i;
 		}
 	}
 }
 
-void	temp_print(t_llist *llist)
+static void	temp_print(t_llist *llist)
 {
 	t_lnode	*lnode;
 	t_node	*node;
@@ -70,7 +86,7 @@ void	temp_print(t_llist *llist)
 	}
 }
 
-void	set_mlx(t_mlx *mlx)
+static void	set_mlx(t_mlx *mlx)
 {
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
@@ -86,12 +102,13 @@ int main(int ac, char **av)
 
 	set_mlx(&mlx);
 	init_llist(&map);
-	temp_parsing(av[1], &map);
+	get_args(open(av[1], O_RDONLY), &map);
+	check_valid(&map);
 	//temp_print(&map);
 	draw_map(&map, &mlx);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
 	mlx_hook(mlx.win, X_EVENT_PRESS, 0, press_key, 0);
-	mlx_hook(mlx.win, X_EVENT_EXIT, 0, key_exit, 0);
+	mlx_hook(mlx.win, X_EVENT_EXIT, 0, button_exit, 0);
 	mlx_loop(mlx.mlx);
 	mlx_destroy_window(mlx.mlx, mlx.win);
 	return (0);

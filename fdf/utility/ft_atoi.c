@@ -15,6 +15,21 @@
 #include "utility.h"
 
 #include <stdio.h>
+static int	get_color(char *str)
+{
+	int	i;
+	int	num;
+
+	i = 0;
+	num = 0;
+	while (str[i] != '\0' && str[i] != '\n')
+	{
+		num = num * 10 + str[i] - '0';
+		++i;
+	}
+	return (num);
+}
+
 static int	check_valid(int before_num, char ch, int minus)
 {
 	int	after_num;
@@ -37,7 +52,7 @@ static int	check_valid(int before_num, char ch, int minus)
 	return (1);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, int *color)
 {
 	int	i;
 	int	minus;
@@ -54,12 +69,14 @@ int	ft_atoi(const char *str)
 			minus *= -1;
 		++i;
 	}
-	while (str[i] != '\0' && str[i] != '\n')
+	while (str[i] != '\0' && str[i] != '\n' && str[i] != ',')
 	{
 		if (!check_valid(num, str[i], minus))
 			error_exit();
 		num = num * 10 + str[i] - '0';
 		++i;
 	}
+	if (str[i] == ',')
+		*color = get_color(str + i + 1);
 	return (num * minus);
 }

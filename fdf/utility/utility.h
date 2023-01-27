@@ -14,8 +14,9 @@
 # define UTILITY_H
 
 # include <stddef.h>
+# include "data_structure/list.h"
 
-int		ft_atoi(const char *str);
+int		ft_atoi(const char *str, int *color);
 void	*ft_calloc(size_t nelem, size_t elsize);
 char	**ft_split(char const *s, char c);
 void	error_exit(void);

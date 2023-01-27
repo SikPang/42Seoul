@@ -19,7 +19,7 @@ int	press_key(int key_code)
 		exit(1);
 }
 
-int	key_exit(int key_code)
+int	button_exit(int key_code)
 {
 	exit(1);
 }
