@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:30:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/26 20:52:33 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 19:15:41 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_node
 	double			x;
 	double			y;
 	double			z;
-	int				color;
+	unsigned int	color;
 }	t_node;
 
 typedef struct s_list

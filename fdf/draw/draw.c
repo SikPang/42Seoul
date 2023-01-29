@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/26 22:35:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 18:13:45 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static t_point	*get_info_between_points(t_node *p1, t_node *p2)
 	info->dx = p2->x - p1->x;
 	info->dy = p2->y - p1->y;
 	info->gradient = info->dy / info->dx;
+	info->distance = sqrt(pow(p2->x - p1->x, 2) + pow(p2->y - p1->y, 2));
 	if (info->dx >= 0)
 		info->dx_sign = 1;
 	else
