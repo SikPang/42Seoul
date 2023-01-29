@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/29 20:33:55 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 22:24:08 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "utility.h"
 #include "../draw/draw.h"
 
+#include <stdio.h>
 static int	set_color(char *str)
 {
 	int		i;

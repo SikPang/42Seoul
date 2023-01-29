@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:58:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/29 21:26:29 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 22:06:51 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 # include "../info.h"
 # include "../data_structure/list.h"
 
-# define COLOR_RED 0x00FF0000
-# define COLOR_GREEN 0x0000FF00
-# define COLOR_WHITE 0x00FFFFFF
+# define COLOR_RED 0xFF0000
+# define COLOR_GREEN 0xFF00
+# define COLOR_BLUE 0xFF
+# define COLOR_WHITE 0xFFFFFF
 
 #define PI 3.141592
 #define EPSILON 0.99

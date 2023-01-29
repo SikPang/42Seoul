@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:35:43 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/29 22:01:30 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 22:40:19 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ static unsigned int	get_value(unsigned int color, char target)
 	unsigned int	result;
 	
 	if (target == 'R')
-		result = color & (255 << 16);
+		result = color & ((unsigned int)255 << 16);
 	else if (target == 'G')
-		result = color & (255 << 8);
+		result = color & ((unsigned int)255 << 8);
 	else if (target == 'B')
-		result = color & (255);
+		result = color & ((unsigned int)255);
 	else
-		result = color & (255 << 24);
+		result = color & ((unsigned int)255 << 24);
 	return (result);
 }
 
-static int	color_lerp(t_node *p1, t_node *p2, double percent)
+static unsigned int	color_lerp(t_node *p1, t_node *p2, double percent)
 {
 	unsigned int	result;
 	unsigned int	red;

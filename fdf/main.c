@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/29 17:20:41 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 22:29:42 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ static void	temp_print(t_llist *llist)
 		{
 			//printf("%.0f %.0f %.0f\t", node->y, node->x, node->z);
 			//printf("%.0f\t", node->z);
-			printf("%d\t", node->color);
+			printf("%u\t", node->color);
 			node = node->next_node;
 		}
 		printf("\n");
 		lnode = lnode->next_node;
 	}
+	printf("%u\n", COLOR_RED);
 }
 
 static void	check_valid(t_llist *llist)
@@ -106,7 +107,7 @@ int	main(int ac, char **av)
 	init_llist(&map);
 	get_args(open(av[1], O_RDONLY), &map);
 	check_valid(&map);
-	//temp_print(&map);
+	temp_print(&map);
 	draw_map(&map, &mlx);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
 	mlx_hook(mlx.win, X_EVENT_PRESS, 0, press_key, 0);
