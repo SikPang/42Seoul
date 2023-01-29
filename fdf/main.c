@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/26 22:31:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 15:57:00 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	get_args(int fd, t_llist *llist)
 	char	*str;
 	int		color;
 	int		i;
-	
+
 	str = malloc(1);
 	while (str != 0)
 	{
@@ -58,8 +58,7 @@ static void	get_args(int fd, t_llist *llist)
 		while (splited[i] != 0)
 		{
 			push_arg(llist->tail->data, ft_atoi(splited[i], &color)
-				 * (TILE_SIZE * 0.15) , i * TILE_SIZE
-				 , (llist->size - 1) * TILE_SIZE);
+				* (TILE * 0.15), i * TILE, (llist->size - 1) * TILE);
 			llist->tail->data->tail->color = color;
 			++i;
 		}
@@ -78,7 +77,8 @@ static void	temp_print(t_llist *llist)
 		while (node != 0)
 		{
 			//printf("%.0f %.0f %.0f\t", node->y, node->x, node->z);
-			printf("%.0f\t", node->z);
+			//printf("%.0f\t", node->z);
+			printf("%.0f\t", node->color);
 			node = node->next_node;
 		}
 		printf("\n");
@@ -92,14 +92,16 @@ static void	set_mlx(t_mlx *mlx)
 	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
 	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
-		&mlx->size_line, &mlx->endian);
+					&mlx->size_line, &mlx->endian);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_mlx	mlx;
 	t_llist	map;
 
+	if (ac != 2)
+		return (0);
 	set_mlx(&mlx);
 	init_llist(&map);
 	get_args(open(av[1], O_RDONLY), &map);

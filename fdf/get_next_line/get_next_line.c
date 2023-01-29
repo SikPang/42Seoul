@@ -6,12 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:17:53 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 17:01:19 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 15:47:34 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "get_next_line.h"
+#include "../utility/utility.h"
 
 char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
@@ -129,7 +130,9 @@ char	*get_next_line(int fd)
 		if (result_len > 0)
 			return (get_result(&list, target, result_len, 0));
 		byte = read_buf(target, fd);
-		if (byte <= 0)
+		if (byte == 0)
 			return (get_last(&list, target, byte));
+		else if (byte == -1)
+			error_exit();
 	}
 }

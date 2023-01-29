@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:04:12 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 18:56:05 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 15:42:13 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define UTILITY_H
 
 # include <stddef.h>
-# include "data_structure/list.h"
+# include "../data_structure/list.h"
 
 int		ft_atoi(const char *str, int *color);
 void	*ft_calloc(size_t nelem, size_t elsize);
