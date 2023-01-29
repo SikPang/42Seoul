@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 22:35:43 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/29 22:40:19 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 22:43:55 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	get_color(t_node *p1, t_node *p2, t_point *info)
 	distance = sqrt(pow(p2->x - p1->x, 2) + pow(p2->y - p1->y, 2));
 	percent = 1 - distance / info->distance;
 	color = color_lerp(p1, p2, percent);
-	printf("%u, %u, %u, %0.2f/%0.2f (%0.2f%%)\n", p1->color, p2->color, color, distance, info->distance, percent);
+	//printf("%u, %u, %u, %0.2f/%0.2f (%0.2f%%)\n", p1->color, p2->color, color, distance, info->distance, percent);
 	return (color);
 }
 
