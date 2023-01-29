@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:16:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/25 20:15:13 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 17:13:58 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ t_node	*copy_node(t_node *src)
 	dest->x = src->x;
 	dest->y = src->y;
 	dest->z = src->z;
+	dest->color = src->color;
 	dest->next_node = src->next_node;
 	dest->prev_node = src->prev_node;
 	return (dest);

@@ -6,27 +6,30 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 17:20:00 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 17:25:14 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include "utility.h"
+#include "../draw/draw.h"
 
 #include <stdio.h>
-static int	get_color(char *str)
+// 0x 소문자 or 대문자
+static int	set_color(char *str)
 {
-	int	i;
-	int	num;
+	int		i;
+	int		j;
+	int		num;
 
 	i = 0;
-	num = 0;
-	while (str[i] != '\0' && str[i] != '\n')
-	{
-		num = num * 10 + str[i] - '0';
-		++i;
-	}
+	if (str[i] == ',' && str[i + 1] == '0' && str[i + 2] == 'x')
+		num = ft_atoh(str + 3);
+	else if (str[i] == '\0' || str[i] == '\n')
+		num = COLOR_WHITE;
+	else
+		error_exit();
 	return (num);
 }
 
@@ -76,7 +79,6 @@ int	ft_atoi(const char *str, int *color)
 		num = num * 10 + str[i] - '0';
 		++i;
 	}
-	if (str[i] == ',')
-		*color = get_color(str + i + 1);
+	*color = set_color((char *)str + i);
 	return (num * minus);
 }

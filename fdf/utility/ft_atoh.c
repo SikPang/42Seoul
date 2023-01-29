@@ -1,19 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   ft_atoh.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 22:35:43 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/29 17:13:42 by kwsong           ###   ########.fr       */
+/*   Created: 2023/01/29 16:27:20 by kwsong            #+#    #+#             */
+/*   Updated: 2023/01/29 17:22:40 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw.h"
+#include "utility.h"
 
-#include <stdio.h>
-int	get_color(t_node *p1, t_node *p2)
+int	ft_atoh(char *str)
 {
-	return (p2->color);
+	int		i;
+	int		j;
+	int		num;
+	int		check;
+	char	*hex;
+
+	hex = "0123456789ABCDEF0123456789abcdef";
+	i = 0;
+	num = 0;
+	while (str[i] != '\0' && str[i] != '\n')
+	{
+		j = 0;
+		check = 0;
+		while (hex[j] != '\0')
+		{
+			if (str[i] == hex[j])
+			{
+				num = (num * 16) + (j % 16);
+				check = 1;
+			}
+			++j;
+		}
+		if (check == 0)
+			error_exit();
+		++i;
+	}
+	return (num);
 }

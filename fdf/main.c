@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/29 15:57:00 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/29 17:20:41 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,27 @@
 #include "data_structure/list.h"
 
 #include <stdio.h>
+static void	temp_print(t_llist *llist)
+{
+	t_lnode	*lnode;
+	t_node	*node;
+
+	lnode = llist->head;
+	while (lnode != 0)
+	{
+		node = lnode->data->head;
+		while (node != 0)
+		{
+			//printf("%.0f %.0f %.0f\t", node->y, node->x, node->z);
+			//printf("%.0f\t", node->z);
+			printf("%d\t", node->color);
+			node = node->next_node;
+		}
+		printf("\n");
+		lnode = lnode->next_node;
+	}
+}
+
 static void	check_valid(t_llist *llist)
 {
 	t_lnode	*lnode;
@@ -62,27 +83,6 @@ static void	get_args(int fd, t_llist *llist)
 			llist->tail->data->tail->color = color;
 			++i;
 		}
-	}
-}
-
-static void	temp_print(t_llist *llist)
-{
-	t_lnode	*lnode;
-	t_node	*node;
-
-	lnode = llist->head;
-	while (lnode != 0)
-	{
-		node = lnode->data->head;
-		while (node != 0)
-		{
-			//printf("%.0f %.0f %.0f\t", node->y, node->x, node->z);
-			//printf("%.0f\t", node->z);
-			printf("%.0f\t", node->color);
-			node = node->next_node;
-		}
-		printf("\n");
-		lnode = lnode->next_node;
 	}
 }
 
