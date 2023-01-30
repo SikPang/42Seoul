@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:27:20 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/29 22:39:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 16:25:24 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_atoh(char *str)
 {
 	int		i;
 	int		j;
-	unsigned int		num;
+	int		num;
 	int		check;
 	char	*hex;
 

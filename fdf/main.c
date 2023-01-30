@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/29 22:44:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 17:46:51 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	temp_print(t_llist *llist)
 		while (node != 0)
 		{
 			//printf("%.0f %.0f %.0f\t", node->y, node->x, node->z);
-			//printf("%.0f\t", node->z);
-			printf("%u\t", node->color);
+			printf("%.0f\t", node->z);
+			//printf("%d\t", node->color);
 			node = node->next_node;
 		}
 		lnode = lnode->next_node;
@@ -77,6 +77,12 @@ static void	get_args(int fd, t_llist *llist)
 		i = 0;
 		while (splited[i] != 0)
 		{
+			int k = 0;
+			printf("%d : ", i);
+			while (splited[i][k] != '\0')
+				printf("%d ", splited[i][k++]);
+			printf("\n");
+			
 			push_arg(llist->tail->data, ft_atoi(splited[i], &color)
 				* (TILE * 0.15), i * TILE, (llist->size - 1) * TILE);
 			llist->tail->data->tail->color = color;

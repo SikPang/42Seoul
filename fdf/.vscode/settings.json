@@ -5,6 +5,7 @@
 		"list.h": "c",
 		"map.h": "c",
 		"functional": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"ratio": "c"
 	}
 }

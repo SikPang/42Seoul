@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/29 22:24:08 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 17:47:05 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,39 @@
 #include "../draw/draw.h"
 
 #include <stdio.h>
-static int	set_color(char *str)
+
+static int	get_default_color(int z)
+{
+	if (z >= 15)
+		return (COLOR_RED);
+	else if (z >= 10)
+		return (COLOR_ORANGE);
+	else if (z >= 5)
+		return (COLOR_YELLOW);
+	else if (z >= 0)
+		return (COLOR_GREEN);
+	else if (z >= -5)
+		return (COLOR_BLUE);
+	else if (z >= -10)
+		return (COLOR_NAVY);
+	else
+		return (COLOR_PURPLE);
+}
+
+static int	set_color(char *str, int z)
 {
 	int		i;
 	int		j;
-	int		num;
+	int		color;
 
 	i = 0;
 	if (str[i] == ',' && str[i + 1] == '0' && str[i + 2] == 'x')
-		num = ft_atoh(str + 3);
+		color = ft_atoh(str + 3);
 	else if (str[i] == '\0' || str[i] == '\n')
-		num = COLOR_WHITE;
+		color = get_default_color(z);
 	else
 		error_exit();
-	return (num);
+	return (color);
 }
 
 static int	check_valid(int before_num, char ch, int minus)
@@ -78,6 +97,6 @@ int	ft_atoi(const char *str, int *color)
 		num = num * 10 + str[i] - '0';
 		++i;
 	}
-	*color = set_color((char *)str + i);
+	*color = set_color((char *)str + i, num);
 	return (num * minus);
 }
