@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:48:17 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 16:33:58 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 21:09:05 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init_llist(t_llist *list)
 	list->head = 0;
 	list->tail = 0;
 	list->size = 0;
+	list->max = 0;
 }
 
 void	clean_llist(t_llist *list)
@@ -46,6 +47,8 @@ void	push_list(t_llist *list)
 		error_exit();
 	new_node->data = (t_list *)malloc(sizeof(t_list));
 	init_list(new_node->data);
+	if (list->size != 0 && list->tail->data->max > list->max)
+		list->max = list->tail->data->max;
 	new_node->next_node = 0;
 	if (list->size == 0)
 	{

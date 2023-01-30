@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:30:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 16:24:22 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 21:08:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_list
 	t_node	*head;
 	t_node	*tail;
 	int		size;
+	double	max;
 }	t_list;
 
 typedef struct s_lnode
@@ -42,6 +43,7 @@ typedef struct s_llist
 	t_lnode	*head;
 	t_lnode	*tail;
 	int		size;
+	double	max;
 }	t_llist;
 
 void	init_list(t_list *list);

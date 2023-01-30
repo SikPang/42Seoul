@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 19:49:52 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 20:50:37 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	isometric_projection(t_node *p, t_mlx *mlx)
 	p->y = prev_x * sin(45.0 * PI / 180.0) + p->y * cos(45.0 * PI / 180.0);
 	p->y = p->y * cos(35.3 * PI / 180.0) - p->z * sin(35.3 * PI / 180.0);
 	p->x += mlx->start_pos;
-	p->y += mlx->start_pos;	
+	p->y += mlx->start_pos / 2;	
 }
 
 static void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)

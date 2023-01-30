@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:56:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 19:51:20 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 20:46:01 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # define X_EVENT_EXIT 17
 # define KEY_ESC 53
 
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 1000
 
 typedef struct s_mlx
 {

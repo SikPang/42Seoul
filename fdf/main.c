@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 20:36:23 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 21:17:44 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,6 @@
 #include "data_structure/list.h"
 
 #include <stdio.h>
-static void	temp_print(t_llist *llist)
-{
-	t_lnode	*lnode;
-	t_node	*node;
-
-	lnode = llist->head;
-	while (lnode != 0)
-	{
-		node = lnode->data->head;
-		while (node != 0)
-		{
-			//printf("%.0f %.0f %.0f\t", node->y, node->x, node->z);
-			printf("%.0f\t", node->z);
-			//printf("%d\t", node->color);
-			node = node->next_node;
-		}
-		lnode = lnode->next_node;
-	}
-}
-
 static void	check_valid(t_llist *llist, t_mlx *mlx)
 {
 	t_lnode	*lnode;
@@ -58,7 +38,7 @@ static void	check_valid(t_llist *llist, t_mlx *mlx)
 		{
 			node->x *= mlx->tile_size;
 			node->y *= mlx->tile_size;
-			node->z *= mlx->tile_size;
+			node->z *= mlx->tile_size * 0.15;
 			node = node->next_node;
 		}
 		lnode = lnode->next_node;
@@ -72,7 +52,7 @@ static void	get_args(int fd, t_llist *llist)
 	int		color;
 	int		i;
 
-	str = 0;
+	str = malloc(1);
 	while (str != 0)
 	{
 		free(str);
@@ -103,19 +83,20 @@ static void	set_mlx(t_mlx *mlx)
 			&mlx->size_line, &mlx->endian);
 }
 
-static void	set_value(t_llist *map, t_mlx *mlx)
+static void	adjust_scale_and_pos(t_llist *map, t_mlx *mlx)
 {
 	int	col;
 	int	row;
 
-	printf("%p\n", map->head);
 	col = map->head->data->size;
 	row = map->size;
-	if (col > row)
-		mlx->tile_size = 500 / col;
+	if (col >= row && col * 2.5 >= map->max)
+		mlx->tile_size = 600 / col;
+	else if (row >= col && row * 2.5 >= map->max)
+		mlx->tile_size = 600 / row;
 	else
-		mlx->tile_size = 500 / row;
-	mlx->start_pos = 300;
+		mlx->tile_size = 600 / map->max * 2.5;
+	mlx->start_pos = 500;
 }
 
 int	main(int ac, char **av)
@@ -128,16 +109,13 @@ int	main(int ac, char **av)
 	set_mlx(&mlx);
 	init_llist(&map);
 	get_args(open(av[1], O_RDONLY), &map);
-	temp_print(&map);
-	//set_value(&map, &mlx);
-	// mlx.tile_size = 30;
-	// mlx.start_pos = 300;
-	// check_valid(&map, &mlx);
-	// draw_map(&map, &mlx);
-	// mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
-	// mlx_hook(mlx.win, X_EVENT_PRESS, 0, press_key, 0);
-	// mlx_hook(mlx.win, X_EVENT_EXIT, 0, button_exit, 0);
-	// mlx_loop(mlx.mlx);
-	// mlx_destroy_window(mlx.mlx, mlx.win);
+	adjust_scale_and_pos(&map, &mlx);
+	check_valid(&map, &mlx);
+	draw_map(&map, &mlx);
+	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
+	mlx_hook(mlx.win, X_EVENT_PRESS, 0, press_key, 0);
+	mlx_hook(mlx.win, X_EVENT_EXIT, 0, button_exit, 0);
+	mlx_loop(mlx.mlx);
+	mlx_destroy_window(mlx.mlx, mlx.win);
 	return (0);
 }

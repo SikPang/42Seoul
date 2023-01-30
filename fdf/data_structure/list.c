@@ -6,12 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:16:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/29 17:13:58 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 21:07:33 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <math.h>
 #include "list.h"
 #include "../utility/utility.h"
 
@@ -20,6 +21,7 @@ void	init_list(t_list *list)
 	list->head = 0;
 	list->tail = 0;
 	list->size = 0;
+	list->max = 0;
 }
 
 void	clean_list(t_list *list)
@@ -46,6 +48,8 @@ void	push_arg(t_list *list, double z, double x, double y)
 	new_node->x = x;
 	new_node->y = y;
 	new_node->z = z;
+	if (fabs(z) > list->max)
+		list->max = fabs(z);
 	new_node->next_node = 0;
 	if (list->size == 0)
 	{

@@ -6,6 +6,7 @@
 		"map.h": "c",
 		"functional": "c",
 		"unistd.h": "c",
-		"ratio": "c"
+		"ratio": "c",
+		"stdio.h": "c"
 	}
 }
