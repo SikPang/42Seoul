@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 18:59:00 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 21:33:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static int	check_valid(int before_num, char ch, int minus)
 	return (1);
 }
 
-int	ft_atoi(const char *str, int *color)
+int	ft_atoi(char *str, int *color)
 {
 	int	i;
 	int	minus;
@@ -98,5 +98,6 @@ int	ft_atoi(const char *str, int *color)
 		++i;
 	}
 	*color = set_color((char *)str + i, num);
+	free(str);
 	return (num * minus);
 }

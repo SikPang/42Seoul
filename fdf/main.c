@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 21:23:23 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 21:32:51 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,14 @@ static void	get_args(int fd, t_llist *llist)
 		splited = ft_split(str, ' ');
 		if (splited == 0)
 			error_exit();
-		i = 0;
-		while (splited[i] != 0)
+		i = -1;
+		while (splited[++i] != 0)
 		{
 			push_arg(llist->tail->data, ft_atoi(splited[i], &color),
 				i, (llist->size - 1));
 			llist->tail->data->tail->color = color;
-			++i;
 		}
+		free(splited);
 	}
 }
 
