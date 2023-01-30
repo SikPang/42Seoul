@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 18:51:48 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 20:36:23 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ static void	temp_print(t_llist *llist)
 	}
 }
 
-static void	check_valid(t_llist *llist)
+static void	check_valid(t_llist *llist, t_mlx *mlx)
 {
 	t_lnode	*lnode;
+	t_node	*node;
 	int		size;
 
 	lnode = llist->head;
@@ -52,6 +53,14 @@ static void	check_valid(t_llist *llist)
 	{
 		if (size != lnode->data->size)
 			error_exit();
+		node = lnode->data->head;
+		while (node != 0)
+		{
+			node->x *= mlx->tile_size;
+			node->y *= mlx->tile_size;
+			node->z *= mlx->tile_size;
+			node = node->next_node;
+		}
 		lnode = lnode->next_node;
 	}
 }
@@ -63,7 +72,7 @@ static void	get_args(int fd, t_llist *llist)
 	int		color;
 	int		i;
 
-	str = malloc(1);
+	str = 0;
 	while (str != 0)
 	{
 		free(str);
@@ -77,8 +86,8 @@ static void	get_args(int fd, t_llist *llist)
 		i = 0;
 		while (splited[i] != 0)
 		{
-			push_arg(llist->tail->data, ft_atoi(splited[i], &color)
-				* (TILE * 0.15), i * TILE, (llist->size - 1) * TILE);
+			push_arg(llist->tail->data, ft_atoi(splited[i], &color),
+				i, (llist->size - 1));
 			llist->tail->data->tail->color = color;
 			++i;
 		}
@@ -91,7 +100,22 @@ static void	set_mlx(t_mlx *mlx)
 	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
 	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
-					&mlx->size_line, &mlx->endian);
+			&mlx->size_line, &mlx->endian);
+}
+
+static void	set_value(t_llist *map, t_mlx *mlx)
+{
+	int	col;
+	int	row;
+
+	printf("%p\n", map->head);
+	col = map->head->data->size;
+	row = map->size;
+	if (col > row)
+		mlx->tile_size = 500 / col;
+	else
+		mlx->tile_size = 500 / row;
+	mlx->start_pos = 300;
 }
 
 int	main(int ac, char **av)
@@ -104,13 +128,16 @@ int	main(int ac, char **av)
 	set_mlx(&mlx);
 	init_llist(&map);
 	get_args(open(av[1], O_RDONLY), &map);
-	check_valid(&map);
-	//temp_print(&map);
-	draw_map(&map, &mlx);
-	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
-	mlx_hook(mlx.win, X_EVENT_PRESS, 0, press_key, 0);
-	mlx_hook(mlx.win, X_EVENT_EXIT, 0, button_exit, 0);
-	mlx_loop(mlx.mlx);
-	mlx_destroy_window(mlx.mlx, mlx.win);
+	temp_print(&map);
+	//set_value(&map, &mlx);
+	// mlx.tile_size = 30;
+	// mlx.start_pos = 300;
+	// check_valid(&map, &mlx);
+	// draw_map(&map, &mlx);
+	// mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
+	// mlx_hook(mlx.win, X_EVENT_PRESS, 0, press_key, 0);
+	// mlx_hook(mlx.win, X_EVENT_EXIT, 0, button_exit, 0);
+	// mlx_loop(mlx.mlx);
+	// mlx_destroy_window(mlx.mlx, mlx.win);
 	return (0);
 }

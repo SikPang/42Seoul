@@ -6,22 +6,19 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:56:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 16:46:17 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 19:51:20 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INFO_H
 # define INFO_H
 
-# define TILE 30
-# define START_POS 300
-
 # define X_EVENT_PRESS 2
 # define X_EVENT_EXIT 17
 # define KEY_ESC 53
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
 
 typedef struct s_mlx
 {
@@ -32,6 +29,8 @@ typedef struct s_mlx
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
+	int		tile_size;
+	int		start_pos;
 }	t_mlx;
 
 int	press_key(int key_code);

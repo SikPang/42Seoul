@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 16:25:46 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 19:49:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static t_point	*get_info_between_points(t_node *p1, t_node *p2)
 // x' = x * cos(th) - y * sin(th)
 // y' = x * sin(th) + y * cos(th)
 
-static void	isometric_projection(t_node *p)
+static void	isometric_projection(t_node *p, t_mlx *mlx)
 {
 	double	prev_x;
 
@@ -53,8 +53,8 @@ static void	isometric_projection(t_node *p)
 	p->x = p->x * cos(45.0 * PI / 180.0) - p->y * sin(45.0 * PI / 180.0);
 	p->y = prev_x * sin(45.0 * PI / 180.0) + p->y * cos(45.0 * PI / 180.0);
 	p->y = p->y * cos(35.3 * PI / 180.0) - p->z * sin(35.3 * PI / 180.0);
-	p->x += START_POS;
-	p->y += START_POS;	
+	p->x += mlx->start_pos;
+	p->y += mlx->start_pos;	
 }
 
 static void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
@@ -65,10 +65,10 @@ static void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
 
 	temp1 = copy_node(p1);
 	temp2 = copy_node(p2);
-	isometric_projection(temp1);
-	isometric_projection(temp2);
+	isometric_projection(temp1, mlx);
+	isometric_projection(temp2, mlx);
 	if (temp1->x < 0 || temp1->y < 0 || temp2->x < 0 || temp2->y < 0
-		|| temp1->x > WIN_WIDTH || temp1->y > WIN_HEIGHT 
+		|| temp1->x > WIN_WIDTH || temp1->y > WIN_HEIGHT
 		|| temp2->x > WIN_WIDTH || temp2->y > WIN_HEIGHT)
 		return ;
 	info = get_info_between_points(temp1, temp2);
