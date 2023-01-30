@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 21:08:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/29 22:19:26 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 18:59:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <math.h>
 #include "draw.h"
 
-#include <stdio.h>
 static int	is_equal(double a, double b)
 {
 	if (fabs(a - b) < EPSILON)
@@ -33,7 +32,6 @@ static void	put_pixel(t_mlx *mlx, int x, int y, int color)
 
 void	bresenham_small(t_node *p1, t_node *p2, t_mlx *mlx, t_point *info)
 {
-	//printf("small\n");
 	info->p = 2 * fabs(info->dy) - fabs(info->dx);
 	while (1)
 	{
@@ -53,7 +51,6 @@ void	bresenham_small(t_node *p1, t_node *p2, t_mlx *mlx, t_point *info)
 
 void	bresenham_big(t_node *p1, t_node *p2, t_mlx *mlx, t_point *info)
 {
-	//printf("big\n");
 	info->p = 2 * fabs(info->dx) - fabs(info->dy);
 	while (1)
 	{

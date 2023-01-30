@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 14:10:01 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 17:43:48 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 18:46:10 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	copy_str(char **new, char c, size_t i, char const *s)
 	size_t	col;
 
 	i = init_var(s, c, &row, &col);
-	while (s[i] != '\0')
+	while (s[i] != '\0' && s[i] != '\n')
 	{
 		if (s[i] == c && s[i - 1] != c)
 		{
@@ -69,7 +69,7 @@ static char	**init_col(char **new, char c, size_t i, char const *s)
 	size_t	col;
 
 	i = init_var(s, c, &row, &col);
-	while (s[i] != '\0')
+	while (s[i] != '\0' && s[i] != '\n')
 	{
 		if (s[i] == c && s[i - 1] != c)
 		{
