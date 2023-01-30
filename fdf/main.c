@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 21:17:44 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 21:23:23 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include "utility/utility.h"
 #include "data_structure/list.h"
 
-#include <stdio.h>
 static void	check_valid(t_llist *llist, t_mlx *mlx)
 {
 	t_lnode	*lnode;

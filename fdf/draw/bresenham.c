@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 21:08:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 18:59:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 21:24:01 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static int	is_equal(double a, double b)
 
 static void	put_pixel(t_mlx *mlx, int x, int y, int color)
 {
-	char    *pixel;
+	char	*pixel;
 
-    pixel = mlx->addr + (y * mlx->size_line + x * (mlx->bits_per_pixel / 8));
+	pixel = mlx->addr + (y * mlx->size_line + x * (mlx->bits_per_pixel / 8));
 	*(int *)pixel = color;
 }
 

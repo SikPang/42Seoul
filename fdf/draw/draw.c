@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 20:50:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/30 21:24:54 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdlib.h>
 #include "draw.h"
 
-#include <stdio.h>
 static t_point	*get_info_between_points(t_node *p1, t_node *p2)
 {
 	t_point	*info;
