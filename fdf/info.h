@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:56:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 19:56:31 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 20:18:13 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define KEY_1 18
 # define KEY_2 19
 # define KEY_3 20
-# define KEY_0 29
 
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 1000
@@ -58,7 +57,6 @@ void	set_default(t_mlx *mlx);
 void	update_window(t_mlx *mlx);
 void	to_orthogonal_z(t_mlx *mlx);
 void	to_orthogonal_y(t_mlx *mlx);
-void	invert_map(t_mlx *mlx);
 int		press_key(int key, t_mlx *mlx);
 int		button_exit(int key);
 

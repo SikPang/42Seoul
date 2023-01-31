@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:09:31 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 19:57:03 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 20:18:04 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,12 @@ int	press_key(int key, t_mlx *mlx)
 		rotate_map(key, mlx);
 	else if (key == KEY_PLUS || key == KEY_MINUS)
 		zoom_map(key, mlx);
-	else if (key == KEY_0)
-		set_default(mlx);
 	else if (key == KEY_1)
-		to_orthogonal_z(mlx);
+		set_default(mlx);
 	else if (key == KEY_2)
-		to_orthogonal_y(mlx);
+		to_orthogonal_z(mlx);
 	else if (key == KEY_3)
-		invert_map(mlx);
+		to_orthogonal_y(mlx);
 	return (0);
 }
 

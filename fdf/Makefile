@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/31 19:50:05 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/31 20:26:23 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS	= main.c \
 		./draw/color.c \
 		./draw/bresenham.c \
 		./draw/draw.c \
+		./draw/draw_str.c \
 		./data_structure/list.c \
 		./data_structure/llist.c \
 		./get_next_line/get_next_line.c \

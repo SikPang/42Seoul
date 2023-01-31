@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 19:42:52 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 20:31:41 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int	main(int ac, char **av)
 	check_valid(&mlx);
 	draw_map(&mlx);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
+	draw_str(&mlx);
 	mlx_hook(mlx.win, X_EVENT_PRESS, 0, press_key, &mlx);
 	mlx_hook(mlx.win, X_EVENT_EXIT, 0, button_exit, 0);
 	mlx_loop(mlx.mlx);

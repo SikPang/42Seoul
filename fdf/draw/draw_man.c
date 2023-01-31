@@ -1,37 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_man.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 20:27:42 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 20:21:14 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "draw.h"
 #include <math.h>
 #include <stdlib.h>
-#include <mlx.h>
-#include "draw.h"
-
-void	clear_window(t_mlx *mlx)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < WIN_HEIGHT)
-	{
-		j = 0;
-		while (j < WIN_WIDTH)
-		{
-			put_pixel(mlx, j, i, COLOR_BLACK);
-			++j;
-		}
-		++i;
-	}
-}
 
 static t_point	*get_info_between_points(t_node *p1, t_node *p2)
 {
