@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 19:32:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 20:31:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 22:08:14 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "info.h"
 #include "draw/draw.h"
-#include <stdio.h>
+
 void	update_window(t_mlx *mlx)
 {
 	clear_window(mlx);

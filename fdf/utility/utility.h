@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:04:12 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 21:33:36 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 22:14:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include "../data_structure/list.h"
 
+char	*ft_itoa(int n);
 int		ft_atoh(char *str);
 int		ft_atoi(char *str, int *color);
 void	*ft_calloc(size_t nelem, size_t elsize);

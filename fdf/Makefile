@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/31 20:26:23 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/31 22:15:34 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS	= main.c \
 		./utility/ft_split.c \
 		./utility/ft_atoh.c \
 		./utility/ft_atoi.c \
+		./utility/ft_itoa.c \
 		./utility/ft_calloc.c
 OBJS	= $(SRCS:.c=.o)
 

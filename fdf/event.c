@@ -6,15 +6,19 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:09:31 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 20:18:04 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 22:26:20 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <limits.h>
 #include "info.h"
 
 static void	zoom_map(int key, t_mlx *mlx)
 {
+	if ((key == KEY_PLUS && mlx->tile_size == INT_MAX)
+		|| (key == KEY_MINUS && mlx->tile_size == 0))
+		return ;
 	if (key == KEY_PLUS)
 		mlx->tile_size += 1;
 	else
@@ -24,6 +28,11 @@ static void	zoom_map(int key, t_mlx *mlx)
 
 static void	rotate_map(int key, t_mlx *mlx)
 {
+	if ((key == KEY_W && mlx->euler_x == INT_MAX)
+		|| (key == KEY_S && mlx->euler_x == INT_MIN)
+		|| (key == KEY_A && mlx->euler_z == INT_MAX)
+		|| (key == KEY_D && mlx->euler_z == INT_MIN))
+		return ;
 	if (key == KEY_W)
 		mlx->euler_x += 1;
 	else if (key == KEY_S)
@@ -37,6 +46,11 @@ static void	rotate_map(int key, t_mlx *mlx)
 
 static void	translate_map(int key, t_mlx *mlx)
 {
+	if ((key == KEY_UP && mlx->start_y == -1000)
+		|| (key == KEY_DOWN && mlx->start_y == 2000)
+		|| (key == KEY_LEFT && mlx->start_x == -1000)
+		|| (key == KEY_RIGHT && mlx->start_x == 2000))
+		return ;
 	if (key == KEY_UP)
 		mlx->start_y -= 5;
 	else if (key == KEY_DOWN)
