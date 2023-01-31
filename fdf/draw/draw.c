@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 18:27:58 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 19:04:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ static void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
 	t_node	*temp2;
 	t_point	*info;
 
-	temp1 = copy_node(p1);
-	temp2 = copy_node(p2);
+	temp1 = copy_node(p1, mlx->tile_size);
+	temp2 = copy_node(p2, mlx->tile_size);
 	isometric_projection(temp1, mlx);
 	isometric_projection(temp2, mlx);
 	if (temp1->x < 0 || temp1->y < 0 || temp2->x < 0 || temp2->y < 0

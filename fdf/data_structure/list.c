@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:16:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 21:07:33 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 19:02:08 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ int	pop_arg(t_list *list)
 	return (data);
 }
 
-t_node	*copy_node(t_node *src)
+t_node	*copy_node(t_node *src, int tile_size)
 {
 	t_node	*dest;
 
 	dest = (t_node *)malloc(sizeof(t_node));
-	dest->x = src->x;
-	dest->y = src->y;
-	dest->z = src->z;
+	dest->x = src->x * tile_size;
+	dest->y = src->y * tile_size;
+	dest->z = src->z * tile_size * 0.15;
 	dest->color = src->color;
 	dest->next_node = src->next_node;
 	dest->prev_node = src->prev_node;

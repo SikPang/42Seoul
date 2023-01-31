@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:30:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 18:02:32 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 19:01:57 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_list(t_list *list);
 void	clean_list(t_list *list);
 void	push_arg(t_list *list, double z, double x, double y);
 int		pop_arg(t_list *list);
-t_node	*copy_node(t_node *src);
+t_node	*copy_node(t_node *src, int tile_size);
 
 void	init_llist(t_llist **list);
 void	clean_llist(t_llist *list);

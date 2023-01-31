@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:09:31 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 18:38:18 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 18:50:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static void	translate_map(int key, t_mlx *mlx)
 	else
 		mlx->start_x += 1;
 	mlx_clear_window(mlx->mlx, mlx->win);
+	//mlx_destroy_image(mlx->mlx, mlx->img);
+	//mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
 	draw_map(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 }

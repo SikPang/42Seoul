@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 18:28:48 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 18:55:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	check_valid(t_mlx *mlx)
 		node = lnode->data->head;
 		while (node != 0)
 		{
-			node->x *= mlx->tile_size;
-			node->y *= mlx->tile_size;
-			node->z *= mlx->tile_size * 0.15;
+			//node->x *= mlx->tile_size;
+			//node->y *= mlx->tile_size;
+			//node->z *= mlx->tile_size * 0.15;
 			node = node->next_node;
 		}
 		lnode = lnode->next_node;
