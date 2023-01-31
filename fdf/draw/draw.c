@@ -6,12 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 17:41:01 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 18:27:58 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include <stdlib.h>
+#include <mlx.h>
 #include "draw.h"
 
 static t_point	*get_info_between_points(t_node *p1, t_node *p2)
@@ -49,11 +50,14 @@ static void	isometric_projection(t_node *p, t_mlx *mlx)
 	double	prev_x;
 
 	prev_x = p->x;
-	p->x = p->x * cos(45.0 * PI / 180.0) - p->y * sin(45.0 * PI / 180.0);
-	p->y = prev_x * sin(45.0 * PI / 180.0) + p->y * cos(45.0 * PI / 180.0);
-	p->y = p->y * cos(35.3 * PI / 180.0) - p->z * sin(35.3 * PI / 180.0);
-	p->x += mlx->start_pos;
-	p->y += mlx->start_pos / 2;	
+	p->x = p->x * cos(mlx->euler_z * PI / 180.0)
+		- p->y * sin(mlx->euler_z * PI / 180.0);
+	p->y = prev_x * sin(mlx->euler_z * PI / 180.0)
+		+ p->y * cos(mlx->euler_z * PI / 180.0);
+	p->y = p->y * cos(mlx->euler_x * PI / 180.0)
+		- p->z * sin(mlx->euler_x * PI / 180.0);
+	p->x += mlx->start_x;
+	p->y += mlx->start_y;
 }
 
 static void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
@@ -80,12 +84,13 @@ static void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
 	free(info);
 }
 
+#include <stdio.h>
 void	draw_map(t_mlx *mlx)
 {
 	t_lnode	*lnode;
 	t_node	*node;
 	t_node	*next_low_node;
-
+	
 	lnode = mlx->map->head;
 	while (lnode->next_node != 0)
 	{

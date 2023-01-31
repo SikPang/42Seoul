@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:09:31 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 17:56:29 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 18:38:18 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,46 @@
 #include "info.h"
 #include "draw/draw.h"
 
+#include <stdio.h>
 static void	zoom_map(int key, t_mlx *mlx)
 {
-	
+	if (key == KEY_PLUS)
+		mlx->tile_size += 1;
+	else
+		mlx->tile_size -= 1;
 	mlx_clear_window(mlx->mlx, mlx->win);
 	draw_map(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 }
 
 static void	rotate_map(int key, t_mlx *mlx)
 {
-	
+	if (key == KEY_W)
+		mlx->euler_x += 1;
+	else if (key == KEY_S)
+		mlx->euler_x -= 1;
+	else if (key == KEY_A)
+		mlx->euler_z += 1;
+	else
+		mlx->euler_z -= 1;
 	mlx_clear_window(mlx->mlx, mlx->win);
 	draw_map(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 }
 
 static void	translate_map(int key, t_mlx *mlx)
 {
-	
+	if (key == KEY_UP)
+		mlx->start_y -= 1;
+	else if (key == KEY_DOWN)
+		mlx->start_y += 1;
+	else if (key == KEY_LEFT)
+		mlx->start_x -= 1;
+	else
+		mlx->start_x += 1;
 	mlx_clear_window(mlx->mlx, mlx->win);
 	draw_map(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 }
 
 int	press_key(int key, t_mlx *mlx)

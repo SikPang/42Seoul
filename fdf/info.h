@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:56:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 17:18:13 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 18:09:15 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ typedef struct s_mlx
 	int		size_line;
 	int		endian;
 	int		tile_size;
-	int		start_pos;
+	int		start_x;
+	int		start_y;
+	double	euler_z;
+	double	euler_x;
 }	t_mlx;
 
 int	press_key(int key, t_mlx *mlx);

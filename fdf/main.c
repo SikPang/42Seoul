@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 18:02:36 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 18:28:48 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 #include "utility/utility.h"
 #include "data_structure/list.h"
 
-#include <stdio.h>
 static void	check_valid(t_mlx *mlx)
 {
 	t_lnode	*lnode;
@@ -87,7 +86,10 @@ static void	adjust_scale_and_pos(t_mlx *mlx)
 		mlx->tile_size = 600 / row;
 	else
 		mlx->tile_size = 600 / mlx->map->max * 2.5;
-	mlx->start_pos = 500;
+	mlx->start_x = 500;
+	mlx->start_y = 250;
+	mlx->euler_z = 45.0;
+	mlx->euler_x = 35.3;
 }
 
 static void	set_mlx(t_mlx *mlx, char **av)
