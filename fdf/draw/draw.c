@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 21:24:54 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 17:41:01 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ static void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
 	free(info);
 }
 
-void	draw_map(t_llist *map, t_mlx *mlx)
+void	draw_map(t_mlx *mlx)
 {
 	t_lnode	*lnode;
 	t_node	*node;
 	t_node	*next_low_node;
 
-	lnode = map->head;
+	lnode = mlx->map->head;
 	while (lnode->next_node != 0)
 	{
 		node = lnode->data->head;

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:58:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 19:03:36 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 17:40:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ typedef struct s_point
 int		get_color(t_node *p1, t_node *p2, t_point *info);
 void	bresenham_small(t_node *p1, t_node *p2, t_mlx *mlx, t_point *info);
 void	bresenham_big(t_node *p1, t_node *p2, t_mlx *mlx, t_point *info);
-void	draw_map(t_llist *map, t_mlx *mlx);
+void	draw_map(t_mlx *mlx);
 
 #endif

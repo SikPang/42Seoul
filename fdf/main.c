@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 21:32:51 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 18:02:36 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,14 @@
 #include "utility/utility.h"
 #include "data_structure/list.h"
 
-static void	check_valid(t_llist *llist, t_mlx *mlx)
+#include <stdio.h>
+static void	check_valid(t_mlx *mlx)
 {
 	t_lnode	*lnode;
 	t_node	*node;
 	int		size;
 
-	lnode = llist->head;
+	lnode = mlx->map->head;
 	size = lnode->data->size;
 	while (lnode != 0)
 	{
@@ -73,46 +74,45 @@ static void	get_args(int fd, t_llist *llist)
 	}
 }
 
-static void	set_mlx(t_mlx *mlx)
+static void	adjust_scale_and_pos(t_mlx *mlx)
+{
+	int	col;
+	int	row;
+
+	col = mlx->map->head->data->size;
+	row = mlx->map->size;
+	if (col >= row && col * 2.5 >= mlx->map->max)
+		mlx->tile_size = 600 / col;
+	else if (row >= col && row * 2.5 >= mlx->map->max)
+		mlx->tile_size = 600 / row;
+	else
+		mlx->tile_size = 600 / mlx->map->max * 2.5;
+	mlx->start_pos = 500;
+}
+
+static void	set_mlx(t_mlx *mlx, char **av)
 {
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
 	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
 			&mlx->size_line, &mlx->endian);
-}
-
-static void	adjust_scale_and_pos(t_llist *map, t_mlx *mlx)
-{
-	int	col;
-	int	row;
-
-	col = map->head->data->size;
-	row = map->size;
-	if (col >= row && col * 2.5 >= map->max)
-		mlx->tile_size = 600 / col;
-	else if (row >= col && row * 2.5 >= map->max)
-		mlx->tile_size = 600 / row;
-	else
-		mlx->tile_size = 600 / map->max * 2.5;
-	mlx->start_pos = 500;
+	init_llist(&mlx->map);
 }
 
 int	main(int ac, char **av)
 {
 	t_mlx	mlx;
-	t_llist	map;
 
 	if (ac != 2)
 		return (0);
-	set_mlx(&mlx);
-	init_llist(&map);
-	get_args(open(av[1], O_RDONLY), &map);
-	adjust_scale_and_pos(&map, &mlx);
-	check_valid(&map, &mlx);
-	draw_map(&map, &mlx);
+	set_mlx(&mlx, av);
+	get_args(open(av[1], O_RDONLY), mlx.map);
+	adjust_scale_and_pos(&mlx);
+	check_valid(&mlx);
+	draw_map(&mlx);
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
-	mlx_hook(mlx.win, X_EVENT_PRESS, 0, press_key, 0);
+	mlx_hook(mlx.win, X_EVENT_PRESS, 0, press_key, &mlx);
 	mlx_hook(mlx.win, X_EVENT_EXIT, 0, button_exit, 0);
 	mlx_loop(mlx.mlx);
 	mlx_destroy_window(mlx.mlx, mlx.win);

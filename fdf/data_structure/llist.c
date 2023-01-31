@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 15:48:17 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 21:09:05 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 18:02:34 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 #include "list.h"
 #include "../utility/utility.h"
 
-void	init_llist(t_llist *list)
+void	init_llist(t_llist **list)
 {
-	list->head = 0;
-	list->tail = 0;
-	list->size = 0;
-	list->max = 0;
+	*list = (t_llist *)malloc(sizeof(t_llist));
+	(*list)->head = 0;
+	(*list)->tail = 0;
+	(*list)->size = 0;
+	(*list)->max = 0;
 }
 
 void	clean_llist(t_llist *list)

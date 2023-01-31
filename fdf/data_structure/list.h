@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 17:30:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 21:08:59 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 18:02:32 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	push_arg(t_list *list, double z, double x, double y);
 int		pop_arg(t_list *list);
 t_node	*copy_node(t_node *src);
 
-void	init_llist(t_llist *list);
+void	init_llist(t_llist **list);
 void	clean_llist(t_llist *list);
 void	push_list(t_llist *list);
 void	pop_list(t_llist *list);
