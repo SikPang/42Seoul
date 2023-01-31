@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/01/29 16:31:59 by kwsong           ###   ########.fr        #
+#    Updated: 2023/01/31 19:50:05 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME	= fdf
 
 SRCS	= main.c \
 		event.c \
+		event2.c \
 		./draw/color.c \
 		./draw/bresenham.c \
 		./draw/draw.c \

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 21:08:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/30 21:24:01 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 19:16:08 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_equal(double a, double b)
 		return (0);
 }
 
-static void	put_pixel(t_mlx *mlx, int x, int y, int color)
+void	put_pixel(t_mlx *mlx, int x, int y, int color)
 {
 	char	*pixel;
 

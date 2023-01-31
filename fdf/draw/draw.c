@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 19:04:28 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 19:18:10 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,24 @@
 #include <stdlib.h>
 #include <mlx.h>
 #include "draw.h"
+
+void	clear_window(t_mlx *mlx)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < WIN_HEIGHT)
+	{
+		j = 0;
+		while (j < WIN_WIDTH)
+		{
+			put_pixel(mlx, j, i, COLOR_BLACK);
+			++j;
+		}
+		++i;
+	}
+}
 
 static t_point	*get_info_between_points(t_node *p1, t_node *p2)
 {
@@ -84,7 +102,6 @@ static void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
 	free(info);
 }
 
-#include <stdio.h>
 void	draw_map(t_mlx *mlx)
 {
 	t_lnode	*lnode;

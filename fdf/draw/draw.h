@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:58:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 17:40:52 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 19:17:27 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define COLOR_NAVY 0x000080
 # define COLOR_PURPLE 0x8B00FF
 # define COLOR_WHITE 0xFFFFFF
+# define COLOR_BLACK 0x0
 
 # define PI 3.141592
 # define EPSILON 0.9
@@ -40,6 +41,8 @@ typedef struct s_point
 	int		gradient_sign;
 }	t_point;
 
+void	put_pixel(t_mlx *mlx, int x, int y, int color);
+void	clear_window(t_mlx *mlx);
 int		get_color(t_node *p1, t_node *p2, t_point *info);
 void	bresenham_small(t_node *p1, t_node *p2, t_mlx *mlx, t_point *info);
 void	bresenham_big(t_node *p1, t_node *p2, t_mlx *mlx, t_point *info);

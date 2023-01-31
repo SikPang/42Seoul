@@ -6,25 +6,20 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:09:31 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 18:50:59 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/01/31 19:57:03 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include <stdlib.h>
 #include "info.h"
-#include "draw/draw.h"
 
-#include <stdio.h>
 static void	zoom_map(int key, t_mlx *mlx)
 {
 	if (key == KEY_PLUS)
 		mlx->tile_size += 1;
 	else
 		mlx->tile_size -= 1;
-	mlx_clear_window(mlx->mlx, mlx->win);
-	draw_map(mlx);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
+	update_window(mlx);
 }
 
 static void	rotate_map(int key, t_mlx *mlx)
@@ -37,26 +32,20 @@ static void	rotate_map(int key, t_mlx *mlx)
 		mlx->euler_z += 1;
 	else
 		mlx->euler_z -= 1;
-	mlx_clear_window(mlx->mlx, mlx->win);
-	draw_map(mlx);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
+	update_window(mlx);
 }
 
 static void	translate_map(int key, t_mlx *mlx)
 {
 	if (key == KEY_UP)
-		mlx->start_y -= 1;
+		mlx->start_y -= 5;
 	else if (key == KEY_DOWN)
-		mlx->start_y += 1;
+		mlx->start_y += 5;
 	else if (key == KEY_LEFT)
-		mlx->start_x -= 1;
+		mlx->start_x -= 5;
 	else
-		mlx->start_x += 1;
-	mlx_clear_window(mlx->mlx, mlx->win);
-	//mlx_destroy_image(mlx->mlx, mlx->img);
-	//mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
-	draw_map(mlx);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
+		mlx->start_x += 5;
+	update_window(mlx);
 }
 
 int	press_key(int key, t_mlx *mlx)
@@ -64,19 +53,21 @@ int	press_key(int key, t_mlx *mlx)
 	if (key == KEY_ESC)
 		exit(1);
 	else if (key == KEY_LEFT || key == KEY_RIGHT
-		|| key == KEY_UP || key == KEY_DOWN)	// Translate
+		|| key == KEY_UP || key == KEY_DOWN)
 		translate_map(key, mlx);
 	else if (key == KEY_W || key == KEY_A
-		|| key == KEY_S || key == KEY_D)	// Rotate
+		|| key == KEY_S || key == KEY_D)
 		rotate_map(key, mlx);
-	else if (key == KEY_PLUS || key == KEY_MINUS)	// Zoom
+	else if (key == KEY_PLUS || key == KEY_MINUS)
 		zoom_map(key, mlx);
-	else if (key == KEY_1)	// Isometric
-		exit(1);
-	else if (key == KEY_2)	// Another
-		exit(1);
-	else if (key == KEY_3)	// Invert
-		exit(1);
+	else if (key == KEY_0)
+		set_default(mlx);
+	else if (key == KEY_1)
+		to_orthogonal_z(mlx);
+	else if (key == KEY_2)
+		to_orthogonal_y(mlx);
+	else if (key == KEY_3)
+		invert_map(mlx);
 	return (0);
 }
 
