@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 17:27:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/01 16:16:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/01 17:14:38 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,18 @@ void	adjust_scale_and_pos(t_mlx *mlx)
 static void	set_mlx(t_mlx *mlx)
 {
 	mlx->mlx = mlx_init();
+	if (mlx->mlx == 0)
+		error_exit();
 	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "fdf");
+	if (mlx->win == 0)
+		error_exit();
 	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (mlx->img == 0)
+		error_exit();
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bits_per_pixel,
 			&mlx->size_line, &mlx->endian);
+	if (mlx->addr == 0)
+		error_exit();
 	init_llist(&mlx->map);
 }
 
