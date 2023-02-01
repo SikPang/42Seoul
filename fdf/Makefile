@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/01 16:03:07 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/01 16:28:06 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ OBJS	= $(SRCS:.c=.o)
 B_OBJS	= $(B_SRCS:.c=.o)
 
 CFLAGS	= -Wall -Werror -Wextra
-GFLAGS	= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -lm
+GFLAGS	= $(MLX) -framework OpenGL -framework AppKit -lm
 
 all		: $(MANDATORY)
 	@touch $(MANDATORY)
