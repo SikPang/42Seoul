@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:06:44 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/01 14:14:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/01 14:34:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <unistd.h>
 #include "utility_bonus.h"
 #include "../draw/draw_bonus.h"
-
-#include <stdio.h>
 
 static int	get_default_color(int z)
 {

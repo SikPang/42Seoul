@@ -6,11 +6,12 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/01 14:17:04 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/01 15:14:44 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= fdf
+
 MANDATORY	= .man
 BONUS		= .bonus
 
@@ -34,6 +35,7 @@ SRCS_FILE	= main.c \
 			./utility/ft_calloc.c
 B_SRCS_FILE	= main_bonus.c \
 			event_bonus.c \
+			event2_bonus.c \
 			./draw/color_bonus.c \
 			./draw/bresenham_bonus.c \
 			./draw/draw_bonus.c \
@@ -46,7 +48,6 @@ B_SRCS_FILE	= main_bonus.c \
 			./utility/ft_atoh_bonus.c \
 			./utility/ft_atoi_bonus.c \
 			./utility/ft_calloc_bonus.c \
-			event2_bonus.c \
 			./draw/draw_str_bonus.c \
 			./utility/ft_itoa_bonus.c
 
@@ -57,13 +58,14 @@ OBJS	= $(SRCS:.c=.o)
 B_OBJS	= $(B_SRCS:.c=.o)
 
 CFLAGS	= -Wall -Werror -Wextra
-GFLAGS	= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+GFLAGS	= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit -lm
 
 all		: $(MANDATORY)
 	@touch $(MANDATORY)
 	@rm -f $(BONUS)
 
 $(MANDATORY)	: $(OBJS)
+	make -C $(MLX_DIR)
 	$(CC) $(CFLAGS) $(GFLAGS) -o $(NAME) $^
 
 bonus	: $(BONUS)
@@ -71,6 +73,7 @@ bonus	: $(BONUS)
 	@rm -f $(MANDATORY)
 
 $(BONUS)		: $(B_OBJS)
+	make -C $(MLX_DIR)
 	$(CC) $(GFLAGS) -o $(NAME) $^
 
 clean	:
@@ -79,6 +82,7 @@ clean	:
 
 fclean	:
 	make clean
+	make clean -C $(MLX_DIR)
 	rm -f $(NAME)
 	@rm -f $(BONUS)
 	@rm -f $(MANDATORY)
