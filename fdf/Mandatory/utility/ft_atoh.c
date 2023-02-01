@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 16:27:20 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/01 13:52:59 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:12:41 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	get_index(char c, char *hex)
 {
 	int		i;
-	
+
 	i = 0;
 	while (hex[i] != '\0')
 	{

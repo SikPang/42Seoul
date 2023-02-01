@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:56:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/01 14:13:33 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:08:58 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ void	update_window(t_mlx *mlx);
 void	to_orthogonal_z(t_mlx *mlx);
 void	to_orthogonal_y(t_mlx *mlx);
 int		press_key(int key, t_mlx *mlx);
-int		button_exit();
+int		button_exit(void);
 
 #endif

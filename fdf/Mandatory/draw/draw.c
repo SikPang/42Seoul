@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_man.c                                         :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 20:21:14 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:12:20 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,6 @@ static t_point	*get_info_between_points(t_node *p1, t_node *p2)
 		info->gradient_sign = -1;
 	return (info);
 }
-
-// y axis 45 degree	(x, y)
-// x axis 35.265 degree (y, z)
-// degree to radian = degree * ( pi / 180 )
-// x' = x * cos(th) - y * sin(th)
-// y' = x * sin(th) + y * cos(th)
 
 static void	isometric_projection(t_node *p, t_mlx *mlx)
 {
@@ -88,7 +82,7 @@ void	draw_map(t_mlx *mlx)
 	t_lnode	*lnode;
 	t_node	*node;
 	t_node	*next_low_node;
-	
+
 	lnode = mlx->map->head;
 	while (lnode->next_node != 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 17:09:31 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/01 13:51:51 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:11:46 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	press_key(int key)
 	return (0);
 }
 
-int	button_exit()
+int	button_exit(void)
 {
 	exit(1);
 	return (0);

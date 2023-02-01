@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_str.c                                         :+:      :+:    :+:   */
+/*   draw_str_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:21:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 22:44:30 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:13:53 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include <mlx.h>
 #include "draw_bonus.h"
 #include "../utility/utility_bonus.h"
-
-#include <stdio.h>
 
 static void	put_str(char *str, char *num, t_mlx *mlx, int pos)
 {

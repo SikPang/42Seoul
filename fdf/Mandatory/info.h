@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 18:56:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/01 13:52:01 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:11:49 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ typedef struct s_mlx
 }	t_mlx;
 
 int		press_key(int key);
-int		button_exit();
+int		button_exit(void);
 
 #endif
