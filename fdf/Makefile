@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/01 16:28:06 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/01 17:07:23 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ all		: $(MANDATORY)
 
 $(MANDATORY)	: $(OBJS)
 	make -C $(MLX_DIR)
+	rm -f $(NAME)
 	$(CC) $(CFLAGS) $(GFLAGS) -o $(NAME) $^
 
 bonus	: $(BONUS)
@@ -75,6 +76,7 @@ bonus	: $(BONUS)
 
 $(BONUS)		: $(B_OBJS)
 	make -C $(MLX_DIR)
+	rm -f $(NAME)
 	$(CC) $(CFLAGS) $(GFLAGS) -o $(NAME) $^
 
 clean	:
