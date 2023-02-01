@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 20:21:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/01 16:13:53 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/01 17:09:30 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 static void	put_str(char *str, char *num, t_mlx *mlx, int pos)
 {
+	if (num == 0)
+		error_exit();
 	mlx_string_put(mlx->mlx, mlx->win, 20, 20 + pos, COLOR_WHITE, str);
 	mlx_string_put(mlx->mlx, mlx->win, 120, 20 + pos, COLOR_WHITE, num);
 	free(num);
