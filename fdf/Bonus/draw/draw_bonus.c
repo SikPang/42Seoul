@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:50:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/01 16:12:29 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/01 16:42:27 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,11 @@ static void	draw_line(t_node *p1, t_node *p2, t_mlx *mlx)
 	if (temp1->x < 0 || temp1->y < 0 || temp2->x < 0 || temp2->y < 0
 		|| temp1->x > WIN_WIDTH || temp1->y > WIN_HEIGHT
 		|| temp2->x > WIN_WIDTH || temp2->y > WIN_HEIGHT)
+	{
+		free(temp1);
+		free(temp2);
 		return ;
+	}
 	info = get_info_between_points(temp1, temp2);
 	if (fabs(info->gradient) <= 1)
 		bresenham_small(temp1, temp2, mlx, info);
