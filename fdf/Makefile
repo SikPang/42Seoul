@@ -6,18 +6,19 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/01 15:14:44 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/01 16:03:07 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= fdf
+MLX			= libmlx.a
 
 MANDATORY	= .man
 BONUS		= .bonus
 
 SRCS_DIR	= ./Mandatory/
 B_SRCS_DIR	= ./Bonus/
-MLX_DIR		= ./mlx_mms
+MLX_DIR		= ./mlx_mac/
 
 SRCS_FILE	= main.c \
 			event.c \
@@ -74,7 +75,7 @@ bonus	: $(BONUS)
 
 $(BONUS)		: $(B_OBJS)
 	make -C $(MLX_DIR)
-	$(CC) $(GFLAGS) -o $(NAME) $^
+	$(CC) $(CFLAGS) $(GFLAGS) -o $(NAME) $^
 
 clean	:
 	rm -f $(OBJS)
@@ -84,6 +85,7 @@ fclean	:
 	make clean
 	make clean -C $(MLX_DIR)
 	rm -f $(NAME)
+	rm -f $(MLX)
 	@rm -f $(BONUS)
 	@rm -f $(MANDATORY)
 
