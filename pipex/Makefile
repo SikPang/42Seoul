@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/03 15:51:46 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/03 20:25:33 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,9 @@ SRCS_FILE	= main.c \
 			./get_next_line/get_next_line_utils.c \
 			./utility/error_exit.c \
 			./utility/ft_strncmp.c \
+			./utility/ft_strncpy.c \
+			./utility/ft_strlen.c \
+			./utility/ft_strjoin.c \
 			./utility/ft_calloc.c \
 			./utility/ft_split.c
 B_SRCS_FILE	= main.c

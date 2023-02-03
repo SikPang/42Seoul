@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 10:05:26 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/03 20:14:14 by kwsong           ###   ########.fr       */
+/*   Created: 2022/10/16 00:48:41 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/03 21:28:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "utility.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i;
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*new_str;
 
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (s1[i] != '\0')
-	{
-		if (s1[i] != s2[i])
-			break ;
-		if (n == 1)
-			return (0);
-		++i;
-		--n;
-	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	new_str = (char *)malloc(s1_len + s2_len + 2);
+	if (new_str == (char *)0)
+		return ((char *)0);
+	new_str[s1_len + s2_len + 1] = '\0';
+	ft_strncpy(new_str, s1, s1_len);
+	new_str[s1_len] = '/';
+	ft_strncpy(new_str + s1_len + 1, s2, s2_len);
+	return (new_str);
 }

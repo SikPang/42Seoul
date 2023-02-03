@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:18:45 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 15:59:58 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/03 20:28:08 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_glist
 t_gnode	*push_back(t_glist *list, int fd);
 t_gnode	*find_node(t_glist *list, int fd);
 void	delete_node(t_glist *list, t_gnode *target);
-char	*ft_strncpy(char *dest, const char *src, size_t n);
-char	*ft_strjoin(char *s1, char *s2, ssize_t byte);
+char	*ft_gstrncpy(char *dest, const char *src, size_t n);
+char	*ft_gstrjoin(char *s1, char *s2, ssize_t byte);
 char	*get_last(t_glist *list, t_gnode *target, ssize_t byte);
 char	*get_result(t_glist *list, t_gnode *target, size_t result_len,
 			size_t data_len);

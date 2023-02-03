@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 10:05:26 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/03 20:14:14 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/03 20:13:37 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/03 20:27:41 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utility.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
 	size_t	i;
 
+	if (!dest && !src)
+		return (dest);
 	i = 0;
-	if (n == 0)
-		return (0);
-	while (s1[i] != '\0')
+	while (i < n)
 	{
-		if (s1[i] != s2[i])
-			break ;
-		if (n == 1)
-			return (0);
+		dest[i] = src[i];
 		++i;
-		--n;
 	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	dest[i] = '\0';
+	return (dest);
 }

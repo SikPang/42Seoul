@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:17:53 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/31 17:54:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/03 20:28:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "get_next_line.h"
 #include "../utility/utility.h"
 
-char	*ft_strncpy(char *dest, const char *src, size_t n)
+char	*ft_gstrncpy(char *dest, const char *src, size_t n)
 {
 	size_t	i;
 
@@ -49,7 +49,7 @@ char	*get_last(t_glist *list, t_gnode *target, ssize_t byte)
 		delete_node(list, target);
 		return (0);
 	}
-	ft_strncpy(result, target->data, data_len);
+	ft_gstrncpy(result, target->data, data_len);
 	delete_node(list, target);
 	return (result);
 }
@@ -68,7 +68,7 @@ char	*get_result(t_glist *list, t_gnode *target, size_t result_len,
 		delete_node(list, target);
 		return (0);
 	}
-	ft_strncpy(result, target->data, result_len);
+	ft_gstrncpy(result, target->data, result_len);
 	temp = target->data;
 	target->data = (char *)malloc(data_len - result_len + 1);
 	if (target->data == 0)
@@ -78,7 +78,7 @@ char	*get_result(t_glist *list, t_gnode *target, size_t result_len,
 		delete_node(list, target);
 		return (0);
 	}
-	ft_strncpy(target->data, temp + result_len, data_len - result_len);
+	ft_gstrncpy(target->data, temp + result_len, data_len - result_len);
 	free(temp);
 	return (result);
 }
@@ -98,7 +98,7 @@ ssize_t	read_buf(t_gnode *target, int fd)
 		if (byte <= 0)
 			break ;
 		temp = target->data;
-		target->data = ft_strjoin(target->data, buf, byte);
+		target->data = ft_gstrjoin(target->data, buf, byte);
 		if (target->data == 0)
 		{
 			target->data = temp;

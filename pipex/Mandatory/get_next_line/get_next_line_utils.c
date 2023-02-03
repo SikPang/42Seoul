@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:18:39 by kwsong            #+#    #+#             */
-/*   Updated: 2023/01/24 16:00:33 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/03 20:28:35 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ size_t	ft_strchr(char *s, char c)
 	return (0);
 }
 
-char	*ft_strjoin(char *s1, char *s2, ssize_t byte)
+char	*ft_gstrjoin(char *s1, char *s2, ssize_t byte)
 {
 	size_t	s1_len;
 	char	*new_str;
@@ -45,8 +45,8 @@ char	*ft_strjoin(char *s1, char *s2, ssize_t byte)
 		free(s2);
 		return (0);
 	}
-	ft_strncpy(new_str, s1, s1_len);
-	ft_strncpy(new_str + s1_len, s2, byte);
+	ft_gstrncpy(new_str, s1, s1_len);
+	ft_gstrncpy(new_str + s1_len, s2, byte);
 	return (new_str);
 }
 
