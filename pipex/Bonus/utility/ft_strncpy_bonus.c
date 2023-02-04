@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   info.h                                             :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 16:00:42 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/04 21:32:02 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/03 20:13:37 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/03 20:27:41 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INFO_H
-# define INFO_H
+#include "utility_bonus.h"
 
-# define READ 0
-# define WRITE 1
-
-# define STD_IN 0
-# define STD_OUT 1
-
-typedef struct s_args
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
-	int		ac;
-	char	**av;
-	char	**ev;
-	char	**paths;
-}	t_args;
+	size_t	i;
 
-typedef struct s_fds
-{
-	int		pipe[2];
-	int		input[2];
-}	t_fds;
-
-#endif
+	if (!dest && !src)
+		return (dest);
+	i = 0;
+	while (i < n)
+	{
+		dest[i] = src[i];
+		++i;
+	}
+	dest[i] = '\0';
+	return (dest);
+}

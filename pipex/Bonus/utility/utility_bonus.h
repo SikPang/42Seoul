@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   info.h                                             :+:      :+:    :+:   */
+/*   utility_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 16:00:42 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/04 21:32:02 by kwsong           ###   ########.fr       */
+/*   Created: 2022/11/10 19:04:12 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/04 16:18:55 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INFO_H
-# define INFO_H
+#ifndef UTILITY_BONUS_H
+# define UTILITY_BONUS_H
 
-# define READ 0
-# define WRITE 1
+# include <stddef.h>
 
-# define STD_IN 0
-# define STD_OUT 1
-
-typedef struct s_args
-{
-	int		ac;
-	char	**av;
-	char	**ev;
-	char	**paths;
-}	t_args;
-
-typedef struct s_fds
-{
-	int		pipe[2];
-	int		input[2];
-}	t_fds;
+size_t	ft_strlen(const char *str);
+char	*ft_strncpy(char *dest, const char *src, size_t n);
+char	*ft_strjoin(char const *s1, char const *s2);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	*ft_calloc(size_t nelem, size_t elsize);
+char	**ft_split(char const *s, char c);
+void	error_exit(void);
 
 #endif

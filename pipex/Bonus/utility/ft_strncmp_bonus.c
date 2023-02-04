@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   info.h                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/04 16:00:42 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/04 21:32:02 by kwsong           ###   ########.fr       */
+/*   Created: 2022/10/10 10:05:26 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/03 20:14:14 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INFO_H
-# define INFO_H
+#include "utility_bonus.h"
 
-# define READ 0
-# define WRITE 1
-
-# define STD_IN 0
-# define STD_OUT 1
-
-typedef struct s_args
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int		ac;
-	char	**av;
-	char	**ev;
-	char	**paths;
-}	t_args;
+	size_t	i;
 
-typedef struct s_fds
-{
-	int		pipe[2];
-	int		input[2];
-}	t_fds;
-
-#endif
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] != '\0')
+	{
+		if (s1[i] != s2[i])
+			break ;
+		if (n == 1)
+			return (0);
+		++i;
+		--n;
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
