@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/04 19:34:03 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/04 20:19:42 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 #include <stdlib.h>
 #include "utility/utility.h"
 #include "info.h"
+
+void	put_str(char *str)
+{
+	int	i;
+
+	i = 0;
+	write(2, "  ", 2);
+	while(str[i] != 0)
+	{
+		write(2, &str[i], 1);
+		++i;
+	}
+	write(2, " ", 1);
+}
 
 static void	child_process(t_args *arg, t_fds *fd, int count)
 {
@@ -29,10 +43,13 @@ static void	child_process(t_args *arg, t_fds *fd, int count)
 	while (arg->paths[i] != 0)
 	{
 		find_str = ft_strjoin(arg->paths[i], arg->av[count]);
+		put_str(find_str);
 		execve(find_str, cmd_args, arg->ev);
+		write(2, "_ failed\n", 9);
 		free(find_str);
 		++i;
 	}
+	write(2, "execve failed\n", 14);
 	i = 0;
 	while (cmd_args[i] != 0)
 	{
@@ -47,34 +64,45 @@ static void	pipex(t_args *arg, t_fds *fd)
 	int		count;
 	pid_t 	pid;
 
-	count = 1;
-	dup2(fd->pipe[WRITE], STD_OUT);
-	dup2(fd->pipe[READ], STD_IN);
-	while (count < arg->ac - 2)
+	count = 2;
+	dup2(fd->input[READ], STD_IN);	// stdin -> input_file
+	dup2(fd->pipe[WRITE], STD_OUT);	// stdout -> pipe
+	while (count < arg->ac - 1)
 	{
-		if (count == arg->ac - 3)
-			dup2(fd->pipe[WRITE], fd->input[WRITE]);
+		write(2, "while...\n", 9);
+		if (count > 2)
+		{
+			dup2(fd->pipe[READ], fd->input[READ]);		// stdin -> input_file -> pipe
+			dup2(fd->input[WRITE], fd->pipe[WRITE]);	// stdout -> pipe -> output_file
+		}
 		pid = fork();
 		if (pid == 0)
 			child_process(arg, fd, count);
 		else
+		{
+			write(2, " waiting...\n", 12);
 			wait(0);
+			write(2, "\n done! wait\n", 13);
+		}
 		++count;
 	}
+	write(2, "done! while\n", 12);
 }
 
 static char	**get_paths(char **ev)
 {
 	char	**paths;
+	int		i;
 
-	while (*ev != 0)
+	i = 0;
+	while (ev[i] != 0)
 	{
-		if (ft_strncmp(*ev, "PATH=", 5) == 0)
+		if (ft_strncmp(ev[i], "PATH=", 5) == 0)
 		{
-			paths = ft_split((*ev) + 5, ':');
+			paths = ft_split(ev[i] + 5, ':');
 			return (paths);
 		}
-		++ev;
+		++i;
 	}
 	return (0);
 }
