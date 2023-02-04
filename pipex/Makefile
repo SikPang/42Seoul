@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/04 16:16:25 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/04 21:44:16 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,16 @@ SRCS_FILE	= main.c \
 			./utility/ft_strjoin.c \
 			./utility/ft_calloc.c \
 			./utility/ft_split.c
-B_SRCS_FILE	= main.c
+B_SRCS_FILE	= main_bonus.c \
+			./get_next_line/get_next_line_bonus.c \
+			./get_next_line/get_next_line_utils_bonus.c \
+			./utility/error_bonus.c \
+			./utility/ft_strncmp_bonus.c \
+			./utility/ft_strncpy_bonus.c \
+			./utility/ft_strlen_bonus.c \
+			./utility/ft_strjoin_bonus.c \
+			./utility/ft_calloc_bonus.c \
+			./utility/ft_split_bonus.c
 
 SRCS	= $(addprefix $(SRCS_DIR), $(SRCS_FILE))
 B_SRCS	= $(addprefix $(B_SRCS_DIR), $(B_SRCS_FILE))
