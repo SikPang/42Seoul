@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/04 21:44:16 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/04 21:50:08 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,6 @@ CFLAGS	= #-Wall -Werror -Wextra
 all		: $(MANDATORY)
 	@touch $(MANDATORY)
 	@rm -f $(BONUS)
-	make clean
 
 $(MANDATORY)	: $(OBJS)
 	rm -f $(NAME)
@@ -59,6 +58,7 @@ $(MANDATORY)	: $(OBJS)
 bonus	: $(BONUS)
 	@touch $(BONUS)
 	@rm -f $(MANDATORY)
+	make clean
 
 $(BONUS)		: $(B_OBJS)
 	rm -f $(NAME)
