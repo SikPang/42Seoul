@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/04 20:19:42 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/04 21:21:18 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ static void	child_process(t_args *arg, t_fds *fd, int count)
 	int		i;
 
 	i = 0;
+	if (count == 2)
+		close(fd->pipe[READ]);
+	else
+		close(fd->pipe[WRITE]);
 	cmd_args = ft_split(arg->av[count], ' ');
 	while (arg->paths[i] != 0)
 	{
@@ -67,13 +71,14 @@ static void	pipex(t_args *arg, t_fds *fd)
 	count = 2;
 	dup2(fd->input[READ], STD_IN);	// stdin -> input_file
 	dup2(fd->pipe[WRITE], STD_OUT);	// stdout -> pipe
+	close(fd->pipe[WRITE]);
 	while (count < arg->ac - 1)
 	{
 		write(2, "while...\n", 9);
 		if (count > 2)
 		{
-			dup2(fd->pipe[READ], fd->input[READ]);		// stdin -> input_file -> pipe
-			dup2(fd->input[WRITE], fd->pipe[WRITE]);	// stdout -> pipe -> output_file
+			dup2(fd->pipe[READ], STD_IN);		// stdin -> pipe
+			dup2(fd->input[WRITE], STD_OUT);	// stdout -> output_file
 		}
 		pid = fork();
 		if (pid == 0)
