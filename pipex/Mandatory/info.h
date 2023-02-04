@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:00:42 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/04 16:52:58 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/04 17:07:34 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define BUFFER_SIZE 100
 
-# define IN 0
-# define OUT 1
+# define READ 0
+# define WRITE 1
 
 # define STD_IN 0
 # define STD_OUT 1
