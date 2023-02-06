@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_split_util.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 12:34:02 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/03 15:06:52 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/06 20:42:33 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/06 23:20:02 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "utility.h"
 
-void	*ft_calloc(size_t nelem, size_t elsize)
+void	check_quote(char c, int *is_quote)
 {
-	void	*new_mem;
-	size_t	total;
-	size_t	i;
-
-	total = nelem * elsize;
-	new_mem = malloc(total);
-	if (new_mem == (void *)0)
-		return ((void *)0);
-	i = 0;
-	while (i < total)
+	if (c == '\'')
 	{
-		((unsigned char *)new_mem)[i] = 0;
-		++i;
+		if (*is_quote == 0)
+			*is_quote = 1;
+		else if (*is_quote == 1)
+			*is_quote = 0;
+		else if (*is_quote == 2)
+			*is_quote = 3;
+		else if (*is_quote == 3)
+			*is_quote = 2;
 	}
-	return (new_mem);
+	else if (c == '\"')
+	{
+		if (*is_quote == 0)
+			*is_quote = 2;
+		else if (*is_quote == 2)
+			*is_quote = 0;
+		else if (*is_quote == 1)
+			*is_quote = 3;
+		else if (*is_quote == 3)
+			*is_quote = 1;
+	}
 }

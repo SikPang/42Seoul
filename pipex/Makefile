@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/06 16:13:41 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/06 23:18:39 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ SRCS_FILE	= main.c \
 			./utility/ft_strncpy.c \
 			./utility/ft_strlen.c \
 			./utility/ft_strjoin.c \
-			./utility/ft_calloc.c \
-			./utility/ft_split.c
+			./utility/ft_split.c \
+			./utility/ft_split_util.c
 B_SRCS_FILE	= main_bonus.c \
 			./get_next_line/get_next_line_bonus.c \
 			./get_next_line/get_next_line_utils_bonus.c \
@@ -54,10 +54,10 @@ $(MANDATORY)	: $(OBJS)
 	rm -f $(NAME)
 	$(CC) $(CFLAGS) -o $(NAME) $^
 
-bonus	: $(BONUS)
-	@touch $(BONUS)
-	@rm -f $(MANDATORY)
-	make clean
+#bonus	: $(BONUS)
+#	@touch $(BONUS)
+#	@rm -f $(MANDATORY)
+#	make clean
 
 $(BONUS)		: $(B_OBJS)
 	rm -f $(NAME)

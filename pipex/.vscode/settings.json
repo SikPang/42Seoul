@@ -5,6 +5,7 @@
 		"limits": "c",
 		"ratio": "c",
 		"stdbool.h": "c",
-		"utility.h": "c"
+		"utility.h": "c",
+		"stdio.h": "c"
 	}
 }

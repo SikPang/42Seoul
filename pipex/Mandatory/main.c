@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/06 19:26:20 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/06 23:22:43 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,41 @@
 #include "utility/utility.h"
 #include "info.h"
 
-// void	put_str(char *str)
-// {
-// 	int	i;
+void	put_str(char *str)
+{
+	int	i;
 
-// 	i = 0;
-// 	write(2, " ", 1);
-// 	while(str[i] != 0)
-// 	{
-// 		write(2, &str[i], 1);
-// 		++i;
-// 	}
-// 	write(2, "\n", 1);
-// }
+	i = 0;
+	write(2, " ", 1);
+	while(str[i] != 0)
+	{
+		write(2, &str[i], 1);
+		++i;
+	}
+	write(2, "\n", 1);
+}
 
-// void	put_2d_str(char **str)
-// {
-// 	int	i;
-// 	int	j;
+void	put_2d_str(char **str)
+{
+	int	i;
+	int	j;
 
-// 	i = 0;
-// 	write(2, "=== 2d str ===\n", 15);
-// 	while(str[i] != 0)
-// 	{
-// 		j = 0;
-// 		write(2, "  ", 2);
-// 		while(str[i][j] != 0)
-// 		{
-// 			write(2, &str[i][j], 1);
-// 			++j;
-// 		}
-// 		write(2, "\n", 1);
-// 		++i;
-// 	}
-// 	write(2, "==============\n", 15);
-// }
+	i = 0;
+	write(2, "=== 2d str ===\n", 15);
+	while(str[i] != 0)
+	{
+		j = 0;
+		write(2, "  ", 2);
+		while(str[i][j] != 0)
+		{
+			write(2, &str[i][j], 1);
+			++j;
+		}
+		write(2, "\n", 1);
+		++i;
+	}
+	write(2, "==============\n", 15);
+}
 
 static void	child_process(t_args *arg, t_fds *fd, int count)
 {
@@ -66,7 +66,9 @@ static void	child_process(t_args *arg, t_fds *fd, int count)
 		close(fd->pipe[READ]);
 	else
 		close(fd->pipe[WRITE]);
+	//put_str(arg->av[count]);
 	cmd_args = ft_split(arg->av[count], ' ');
+	put_2d_str(cmd_args);
 	if (cmd_args == NULL)
 		error_exit();
 	while (arg->paths[i] != 0)
@@ -78,14 +80,13 @@ static void	child_process(t_args *arg, t_fds *fd, int count)
 		free(find_str);
 		++i;
 	}
-	error_exit();
+	perror_exit();
 }
 
 static void	pipex(t_args *arg, t_fds *fd)
 {
 	int		count;
 	pid_t	pid;
-	int		wait_val;
 
 	count = 2;
 	if (dup2(fd->input[READ], STD_IN) == -1
@@ -106,7 +107,7 @@ static void	pipex(t_args *arg, t_fds *fd)
 			child_process(arg, fd, count);
 		++count;
 	}
-	if (wait(&wait_val) == -1)
+	if (wait(0) == -1)
 		perror_exit();
 }
 
@@ -138,10 +139,8 @@ int	main(int ac, char **av, char **ev)
 	arg.ac = ac;
 	arg.av = av;
 	arg.ev = ev;
-	if (access(av[1], R_OK) == -1)
-		perror_exit();
 	fd.input[READ] = open(av[1], O_RDONLY);
-	fd.input[WRITE] = open(av[ac - 1], O_WRONLY | O_CREAT, 0666);
+	fd.input[WRITE] = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (fd.input[READ] == -1 || fd.input[WRITE] == -1)
 		perror_exit();
 	arg.paths = get_paths(ev);

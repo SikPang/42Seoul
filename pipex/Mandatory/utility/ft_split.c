@@ -5,117 +5,143 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/16 14:10:01 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/06 16:54:23 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/06 21:01:54 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/06 23:19:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utility.h"
 #include <stdlib.h>
+#include "utility.h"
 
-static size_t	init_var(char const *s, char c, size_t *row, size_t *col)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] == c)
-		++i;
-	*row = 0;
-	*col = 0;
-	return (i);
-}
-
-static char	**free_all(char **new, size_t row)
+char	**free_all(char **strs, size_t row)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < row)
 	{
-		free(new[i]);
-		new[i] = (char *)0;
+		free(strs[i]);
+		strs[i] = (char *)0;
 		++i;
 	}
-	free(new);
-	new = (char **)0;
-	return ((char **)0);
+	free(strs);
+	strs = 0;
+	return (0);
 }
 
-static void	copy_str(char **new, char c, size_t i, char const *s)
+void	copy_str(char **result, char *s, char c)
 {
-	size_t	row;
-	size_t	col;
+	int	row;
+	int	col;
+	int	i;
+	int	is_quote;
 
-	i = init_var(s, c, &row, &col);
+	row = 0;
+	col = 0;
+	i = 0;
+	is_quote = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == c && s[i - 1] != c)
+		check_quote(s[i], &is_quote);
+		if (i != 0 && s[i] == c && s[i - 1] != c && !is_quote)
 		{
 			col = 0;
 			++row;
 		}
-		else if (s[i] != c)
+		else if (s[i] != c || (s[i] == c && is_quote))
 		{
-			new[row][col] = s[i];
+			result[row][col] = s[i];
 			++col;
 		}
 		++i;
 	}
 }
 
-static char	**init_col(char **new, char c, size_t i, char const *s)
+int	init_col(char **result, char *s, char c)
 {
-	size_t	row;
-	size_t	col;
+	int		cnt;
+	int		row;
+	int		i;
+	int		is_quote;
 
-	i = init_var(s, c, &row, &col);
+	cnt = 0;
+	row = 0;
+	i = 0;
+	is_quote = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == c && s[i - 1] != c)
+		check_quote(s[i], &is_quote);
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0') && !is_quote)
 		{
-			new[row] = (char *)ft_calloc(col + 1, sizeof(char));
-			if (new[row] == (char *)0)
-				return (free_all(new, row));
-			col = 0;
+			++cnt;
+			result[row] = (char *)malloc(cnt + 1);
+			if (result[row] == NULL)
+				return ((int)free_all(result, row));
+			result[row][cnt] = '\0';
 			++row;
+			cnt = 0;
 		}
-		else if (s[i] != c)
-			++col;
+		else if (s[i] != c || (s[i] == c && is_quote))
+			++cnt;
 		++i;
 	}
-	if (col != 0)
-	{
-		new[row] = (char *)ft_calloc(col + 1, sizeof(char));
-		if (new[row] == (char *)0)
-			return (free_all(new, row));
-	}
-	return (new);
+	return (1);
 }
 
-char	**ft_split(char const *s, char c)
+char	**init_row(char *s, char c)
 {
-	char	**new;
-	size_t	row;
-	size_t	col;
-	size_t	i;
+	char	**result;
+	int		cnt;
+	int		i;
+	int		is_quote;
 
+	cnt = 0;
+	i = 0;
+	is_quote = 0;
+	while (s[i] != '\0')
+	{
+		check_quote(s[i], &is_quote);
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0') && !is_quote)
+			++cnt;
+		++i;
+	}
+	result = (char **)malloc((cnt + 1) * sizeof(char *));
+	if (is_quote || result == NULL)
+		return (NULL);
+	result[cnt] = NULL;
+	return (result);
+}
+
+char	**ft_split(char *s, char c)
+{
+	char	**result;
+
+	if (s == NULL)
+		return (NULL);
 	if (s[0] == '\0')
-		return ((char **)ft_calloc(1, sizeof(char *)));
-	i = init_var(s, c, &row, &col);
-	while (s[i] != '\0')
 	{
-		if (s[i] == c && s[i - 1] != c)
-			++row;
-		++i;
+		result = malloc(sizeof(char *));
+		if (result == 0)
+			return (result);
+		result[0] = NULL;
+		return (result);
 	}
-	if (i == 0 || s[i - 1] == c)
-		new = (char **)ft_calloc(row + 1, sizeof(char *));
-	else
-		new = (char **)ft_calloc(row + 2, sizeof(char *));
-	if (new == (char **)0)
-		return ((char **)0);
-	if (init_col(new, c, i, s) == (char **)0)
-		return ((char **)0);
-	copy_str(new, c, i, s);
-	return (new);
+	while (*s == c)
+		++s;
+	result = init_row(s, c);
+	if (result == NULL)
+		return (NULL);
+	if (init_col(result, s, c) == 0)
+		return (NULL);
+	copy_str(result, s, c);
+	return (result);
 }
+
+// #include <stdio.h>
+// int main()
+// {
+// 	char **str = ft_split("awk s/asd/ ds/g'", ' ');
+// 	int i = 0;
+// 	while (str != 0 && str[i] != 0)
+// 		printf("%s\n", str[i++]);
+// }
