@@ -6,12 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 14:10:01 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/03 15:06:52 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/06 16:54:23 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "utility.h"
+#include <stdlib.h>
 
 static size_t	init_var(char const *s, char c, size_t *row, size_t *col)
 {
@@ -47,7 +47,7 @@ static void	copy_str(char **new, char c, size_t i, char const *s)
 	size_t	col;
 
 	i = init_var(s, c, &row, &col);
-	while (s[i] != '\0' && s[i] != '\n')
+	while (s[i] != '\0')
 	{
 		if (s[i] == c && s[i - 1] != c)
 		{
@@ -69,7 +69,7 @@ static char	**init_col(char **new, char c, size_t i, char const *s)
 	size_t	col;
 
 	i = init_var(s, c, &row, &col);
-	while (s[i] != '\0' && s[i] != '\n')
+	while (s[i] != '\0')
 	{
 		if (s[i] == c && s[i - 1] != c)
 		{
@@ -99,8 +99,6 @@ char	**ft_split(char const *s, char c)
 	size_t	col;
 	size_t	i;
 
-	if (s == 0)
-		return (0);
 	if (s[0] == '\0')
 		return ((char **)ft_calloc(1, sizeof(char *)));
 	i = init_var(s, c, &row, &col);
@@ -110,10 +108,11 @@ char	**ft_split(char const *s, char c)
 			++row;
 		++i;
 	}
-	if (i != 0 && s[i - 1] != c)
-		++row;
-	new = (char **)ft_calloc(row + 1, sizeof(char *));
-	if (new == 0)
+	if (i == 0 || s[i - 1] == c)
+		new = (char **)ft_calloc(row + 1, sizeof(char *));
+	else
+		new = (char **)ft_calloc(row + 2, sizeof(char *));
+	if (new == (char **)0)
 		return ((char **)0);
 	if (init_col(new, c, i, s) == (char **)0)
 		return ((char **)0);
