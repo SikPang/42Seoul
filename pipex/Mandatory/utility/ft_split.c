@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include "utility.h"
 
-char	**free_all(char **strs, size_t row)
+static int	free_all(char **strs, size_t row)
 {
 	size_t	i;
 
@@ -29,7 +29,7 @@ char	**free_all(char **strs, size_t row)
 	return (0);
 }
 
-void	copy_str(char **result, char *s, char c)
+static void	copy_str(char **result, char *s, char c)
 {
 	int	row;
 	int	col;
@@ -48,7 +48,8 @@ void	copy_str(char **result, char *s, char c)
 			col = 0;
 			++row;
 		}
-		else if (s[i] != c || (s[i] == c && is_quote))
+		else if (s[i] != '\'' && s[i] != '\"' 
+			&& s[i] != c || (s[i] == c && is_quote))
 		{
 			result[row][col] = s[i];
 			++col;
@@ -57,7 +58,7 @@ void	copy_str(char **result, char *s, char c)
 	}
 }
 
-int	init_col(char **result, char *s, char c)
+static int	init_col(char **result, char *s, char c)
 {
 	int		cnt;
 	int		row;
@@ -81,14 +82,15 @@ int	init_col(char **result, char *s, char c)
 			++row;
 			cnt = 0;
 		}
-		else if (s[i] != c || (s[i] == c && is_quote))
+		else if (s[i] != '\'' && s[i] != '\"' 
+			&& s[i] != c || (s[i] == c && is_quote))
 			++cnt;
 		++i;
 	}
 	return (1);
 }
 
-char	**init_row(char *s, char c)
+static char	**init_row(char *s, char c)
 {
 	char	**result;
 	int		cnt;

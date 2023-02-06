@@ -66,9 +66,7 @@ static void	child_process(t_args *arg, t_fds *fd, int count)
 		close(fd->pipe[READ]);
 	else
 		close(fd->pipe[WRITE]);
-	//put_str(arg->av[count]);
 	cmd_args = ft_split(arg->av[count], ' ');
-	put_2d_str(cmd_args);
 	if (cmd_args == NULL)
 		error_exit();
 	while (arg->paths[i] != 0)
