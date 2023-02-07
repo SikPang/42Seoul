@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:00:42 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/07 17:41:10 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/07 20:34:42 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ typedef struct s_fds
 }	t_fds;
 
 void	dup_fds(t_fds *fd, t_args *arg, int count);
-void	close_fd(t_fds *fd, t_args *arg, int count);
+void	close_fds(t_fds *fd, t_args *arg, int count);
 
 #endif

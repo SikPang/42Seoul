@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/07 19:40:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/07 22:11:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	child_process(t_args *arg, t_fds *fd, int count)
 	int		i;
 
 	i = 0;
-	close_fd(fd, arg, count);
+	close_fds(fd, arg, count);
 	cmd_args = ft_split(arg->av[count], ' ');
 	if (cmd_args == NULL)
 		error_exit();
