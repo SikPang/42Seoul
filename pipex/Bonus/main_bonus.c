@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/07 14:38:36 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/07 15:11:45 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	put_str(char *str)
 	int	i;
 
 	i = 0;
-	write(2, " ", 1);
+	write(2, "== ", 3);
 	while(str[i] != 0)
 	{
 		write(2, &str[i], 1);
@@ -39,7 +39,7 @@ void	put_2d_str(char **str)
 	int	j;
 
 	i = 0;
-	write(2, "=== 2d str ===\n", 15);
+	write(2, "==============\n", 15);
 	while(str[i] != 0)
 	{
 		j = 0;
@@ -81,6 +81,8 @@ static void	child_process(t_args *arg, t_fds *fd, int count)
 	perror_exit();
 }
 
+// read : file -> pipe -> pipe -> ... pipe
+// write : pipe -> pipe -> pipe -> ... file
 static void	pipex(t_args *arg, t_fds *fd)
 {
 	int		count;

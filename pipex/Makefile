@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/06 23:18:39 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/07 15:40:05 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,32 +18,25 @@ BONUS		= .bonus
 SRCS_DIR	= ./Mandatory/
 B_SRCS_DIR	= ./Bonus/
 
-SRCS_FILE	= main.c \
-			./utility/error.c \
-			./utility/ft_strncmp.c \
-			./utility/ft_strncpy.c \
-			./utility/ft_strlen.c \
-			./utility/ft_strjoin.c \
-			./utility/ft_split.c \
-			./utility/ft_split_util.c
-B_SRCS_FILE	= main_bonus.c \
-			./get_next_line/get_next_line_bonus.c \
-			./get_next_line/get_next_line_utils_bonus.c \
-			./utility/error_bonus.c \
-			./utility/ft_strncmp_bonus.c \
-			./utility/ft_strncpy_bonus.c \
-			./utility/ft_strlen_bonus.c \
-			./utility/ft_strjoin_bonus.c \
-			./utility/ft_calloc_bonus.c \
-			./utility/ft_split_bonus.c
+SRCS_FILE	= main \
+			./utility/error \
+			./utility/ft_strncmp \
+			./utility/ft_strncpy \
+			./utility/ft_strlen \
+			./utility/ft_strjoin \
+			./utility/ft_split \
+			./utility/ft_split_util
+B_SRCS_FILE	= ./get_next_line/get_next_line \
+			./get_next_line/get_next_line_utils
 
-SRCS	= $(addprefix $(SRCS_DIR), $(SRCS_FILE))
-B_SRCS	= $(addprefix $(B_SRCS_DIR), $(B_SRCS_FILE))
+SRCS	= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILE)))
+B_SRCS	= $(addprefix $(B_SRCS_DIR), $(addsuffix _bonus.c, $(SRCS_FILE))) \
+			$(addprefix $(B_SRCS_DIR), $(addsuffix _bonus.c, $(B_SRCS_FILE)))
 
 OBJS	= $(SRCS:.c=.o)
 B_OBJS	= $(B_SRCS:.c=.o)
 
-CFLAGS	= #-Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra
 
 all		: $(MANDATORY)
 	@touch $(MANDATORY)
@@ -54,10 +47,10 @@ $(MANDATORY)	: $(OBJS)
 	rm -f $(NAME)
 	$(CC) $(CFLAGS) -o $(NAME) $^
 
-#bonus	: $(BONUS)
-#	@touch $(BONUS)
-#	@rm -f $(MANDATORY)
-#	make clean
+bonus	: $(BONUS)
+	@touch $(BONUS)
+	@rm -f $(MANDATORY)
+	make clean
 
 $(BONUS)		: $(B_OBJS)
 	rm -f $(NAME)
@@ -77,4 +70,4 @@ re		:
 	make fclean
 	make all
 
-.PHONY	: all clean fclean re
+.PHONY	: all bonus clean fclean re

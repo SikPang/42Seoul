@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 21:01:54 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/07 14:46:59 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/07 15:33:15 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static void	copy_str(char **result, char *s, char c)
 			col = 0;
 			++row;
 		}
-		else if (s[i] != '\'' && s[i] != '\"'
-			&& s[i] != c || (s[i] == c && is_quote))
+		else if ((s[i] != '\'' && s[i] != '\"' && s[i] != c)
+			|| (s[i] == c && is_quote))
 		{
 			result[row][col] = s[i];
 			++col;
@@ -80,8 +80,8 @@ static int	init_col(char **result, char *s, char c)
 			result[row++][cnt] = '\0';
 			cnt = 0;
 		}
-		else if (s[i] != '\'' && s[i] != '\"'
-			&& s[i] != c || (s[i] == c && is_quote))
+		else if ((s[i] != '\'' && s[i] != '\"' && s[i] != c)
+			|| (s[i] == c && is_quote))
 			++cnt;
 	}
 	return (1);

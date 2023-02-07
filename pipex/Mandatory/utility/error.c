@@ -6,13 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 20:45:14 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/06 19:35:02 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/07 15:28:10 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include <errno.h>
 #include <stdio.h>
 #include "utility.h"
 
