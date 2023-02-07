@@ -6,6 +6,9 @@
 		"ratio": "c",
 		"stdbool.h": "c",
 		"utility.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"wait.h": "c",
+		"info_bonus.h": "c",
+		"utility_bonus.h": "c"
 	}
 }

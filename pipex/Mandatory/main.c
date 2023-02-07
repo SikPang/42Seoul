@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/07 14:50:03 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/07 15:58:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,13 @@ static char	**get_paths(char **ev)
 		if (ft_strncmp(ev[i], "PATH=", 5) == 0)
 		{
 			paths = ft_split(ev[i] + 5, ':');
+			if (paths == NULL)
+				error_exit();
 			return (paths);
 		}
 		++i;
 	}
-	return (0);
+	return (NULL);
 }
 
 int	main(int ac, char **av, char **ev)

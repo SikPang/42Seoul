@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/07 15:11:45 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/07 17:41:18 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ static void	child_process(t_args *arg, t_fds *fd, int count)
 	int		i;
 
 	i = 0;
-	if (count < arg->ac - 2)
-		close(fd->pipe[READ]);
-	else
-		close(fd->pipe[WRITE]);
+	close_fd(fd, arg, count);
 	cmd_args = ft_split(arg->av[count], ' ');
 	if (cmd_args == NULL)
 		error_exit();
@@ -81,25 +78,15 @@ static void	child_process(t_args *arg, t_fds *fd, int count)
 	perror_exit();
 }
 
-// read : file -> pipe -> pipe -> ... pipe
-// write : pipe -> pipe -> pipe -> ... file
 static void	pipex(t_args *arg, t_fds *fd)
 {
 	int		count;
 	pid_t	pid;
 
 	count = 2;
-	if (dup2(fd->input[READ], STD_IN) == -1
-		|| dup2(fd->pipe[WRITE], STD_OUT) == -1)
-		perror_exit();
 	while (count < arg->ac - 1)
 	{
-		if (count == arg->ac - 2)
-		{
-			if (dup2(fd->pipe[READ], STD_IN) == -1
-				|| dup2(fd->input[WRITE], STD_OUT) == -1)
-				perror_exit();
-		}
+		dup_fds(fd, arg, count);
 		pid = fork();
 		if (pid == -1)
 			perror_exit();
@@ -109,6 +96,25 @@ static void	pipex(t_args *arg, t_fds *fd)
 	}
 	if (wait(0) == -1)
 		perror_exit();
+}
+
+static void	init_pipe(t_fds *fd)
+{
+	int	i;
+
+	fd->pipe = (int **)malloc((fd->pipe_size) * sizeof(int *));
+	if (fd->pipe == NULL)
+		error_exit();
+	i = 0;
+	while (i < fd->pipe_size)
+	{
+		fd->pipe[i] = (int *)malloc(2 * sizeof(int));
+		if (fd->pipe[i] == NULL)
+			error_exit();
+		if (pipe(fd->pipe[i]) == -1)
+			perror_exit();
+		++i;
+	}
 }
 
 static char	**get_paths(char **ev)
@@ -122,11 +128,13 @@ static char	**get_paths(char **ev)
 		if (ft_strncmp(ev[i], "PATH=", 5) == 0)
 		{
 			paths = ft_split(ev[i] + 5, ':');
+			if (paths == NULL)
+				error_exit();
 			return (paths);
 		}
 		++i;
 	}
-	return (0);
+	return (NULL);
 }
 
 int	main(int ac, char **av, char **ev)
@@ -139,6 +147,7 @@ int	main(int ac, char **av, char **ev)
 	arg.ac = ac;
 	arg.av = av;
 	arg.ev = ev;
+	fd.pipe_size = ac - 3;
 	fd.input[READ] = open(av[1], O_RDONLY);
 	fd.input[WRITE] = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (fd.input[READ] == -1 || fd.input[WRITE] == -1)
@@ -146,8 +155,7 @@ int	main(int ac, char **av, char **ev)
 	arg.paths = get_paths(ev);
 	if (arg.paths == NULL)
 		error_exit();
-	if (pipe(fd.pipe) == -1)
-		perror_exit();
+	init_pipe(&fd);
 	pipex(&arg, &fd);
 	return (0);
 }
