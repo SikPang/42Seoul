@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "utility.h"
+#include "utility_bonus.h"
 
 static int	free_all(char **strs, size_t row)
 {
