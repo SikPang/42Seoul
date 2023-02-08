@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:00:42 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/07 20:34:42 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 14:24:10 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ typedef struct s_fds
 	int		input[2];
 }	t_fds;
 
+typedef struct s_here_doc
+{
+	int		pipe[2];
+	int		outfile;
+}	t_here_doc;
+
+void	here_doc(t_args	*arg);
 void	dup_fds(t_fds *fd, t_args *arg, int count);
 void	close_fds(t_fds *fd, t_args *arg, int count);
 

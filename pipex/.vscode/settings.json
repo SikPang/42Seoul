@@ -9,6 +9,7 @@
 		"stdio.h": "c",
 		"wait.h": "c",
 		"info_bonus.h": "c",
-		"utility_bonus.h": "c"
+		"utility_bonus.h": "c",
+		"stdlib.h": "c"
 	}
 }

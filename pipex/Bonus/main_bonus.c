@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 13:59:47 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 14:26:31 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	put_str(char *str)
 
 	i = 0;
 	write(2, "== ", 3);
-	while(str[i] != 0)
+	while (str[i] != 0)
 	{
 		write(2, &str[i], 1);
 		++i;
@@ -40,11 +40,11 @@ void	put_2d_str(char **str)
 
 	i = 0;
 	write(2, "==============\n", 15);
-	while(str[i] != 0)
+	while (str[i] != 0)
 	{
 		j = 0;
 		write(2, "  ", 2);
-		while(str[i][j] != 0)
+		while (str[i][j] != 0)
 		{
 			write(2, &str[i][j], 1);
 			++j;
@@ -147,14 +147,16 @@ int	main(int ac, char **av, char **ev)
 	arg.ac = ac;
 	arg.av = av;
 	arg.ev = ev;
+	arg.paths = get_paths(ev);
+	if (arg.paths == NULL)
+		error_exit();
+	if (ft_strcmp(av[1], "here_doc") == 0)
+		here_doc(&arg);
 	fd.pipe_size = ac - 4;
 	fd.input[READ] = open(av[1], O_RDONLY);
 	fd.input[WRITE] = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (fd.input[READ] == -1 || fd.input[WRITE] == -1)
 		perror_exit();
-	arg.paths = get_paths(ev);
-	if (arg.paths == NULL)
-		error_exit();
 	init_pipe(&fd);
 	pipex(&arg, &fd);
 	return (0);
