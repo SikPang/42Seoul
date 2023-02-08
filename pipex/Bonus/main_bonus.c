@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 19:38:05 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 22:18:55 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ static void	pipex(t_args *arg, t_fds *fd)
 {
 	int		count;
 	pid_t	pid;
+	int		i;
 
+	i = 0;
 	count = 2;
 	while (count < arg->ac - 1)
 	{
@@ -58,8 +60,11 @@ static void	pipex(t_args *arg, t_fds *fd)
 			child_process(arg, fd, count);
 		++count;
 	}
-	if (wait(0) == -1)
-		perror_exit();
+	while (i++ < fd->pipe_size + 1)
+	{
+		if (wait(0) == -1)
+			perror_exit();
+	}
 }
 
 static void	init_pipe(t_fds *fd)

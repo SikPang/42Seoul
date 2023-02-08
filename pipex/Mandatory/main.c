@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 21:17:04 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 22:17:14 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static void	child_process(t_args *arg, t_fds *fd, int count)
 
 static void	pipex(t_args *arg, t_fds *fd)
 {
-	int		count;
 	pid_t	pid;
+	int		count;
 
 	count = 2;
 	if (dup2(fd->input[READ], STD_IN) == -1
@@ -71,8 +71,6 @@ static void	pipex(t_args *arg, t_fds *fd)
 			child_process(arg, fd, count);
 		++count;
 	}
-	if (wait(0) == -1)
-		perror_exit();
 }
 
 static char	**get_paths(char **ev)
@@ -99,9 +97,11 @@ int	main(int ac, char **av, char **ev)
 {
 	t_args	arg;
 	t_fds	fd;
+	int		i;
 
 	if (ac != 5)
 		error_exit();
+	i = 0;
 	arg.ac = ac;
 	arg.av = av;
 	arg.ev = ev;
@@ -115,5 +115,10 @@ int	main(int ac, char **av, char **ev)
 	if (pipe(fd.pipe) == -1)
 		perror_exit();
 	pipex(&arg, &fd);
+	while (i++ < 2)
+	{
+		if (wait(0) == -1)
+			perror_exit();
+	}
 	return (0);
 }
