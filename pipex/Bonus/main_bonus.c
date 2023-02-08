@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/07 22:11:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 13:59:47 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ int	main(int ac, char **av, char **ev)
 	t_args	arg;
 	t_fds	fd;
 
+	if (ac < 5)
+		error_exit();
 	arg.ac = ac;
 	arg.av = av;
 	arg.ev = ev;
