@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 20:45:14 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 17:27:26 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 17:45:31 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	error_exit(void)
 
 void	perror_exit(void)
 {
-	//perror("Error");
-	write(2, "pError\n", 7);
+	perror("Error");
 	exit(1);
 }

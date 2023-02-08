@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 16:51:15 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 17:36:06 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,10 @@ int	main(int ac, char **av, char **ev)
 	if (arg.paths == NULL)
 		error_exit();
 	if (ft_strcmp(av[1], "here_doc") == 0)
+	{
 		here_doc(&arg);
+		return (0);
+	}
 	fd.pipe_size = ac - 4;
 	fd.input[READ] = open(av[1], O_RDONLY);
 	fd.input[WRITE] = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);

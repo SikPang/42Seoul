@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:12:19 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 17:34:56 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 17:47:31 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,19 +123,23 @@ static void	get_line(t_args	*arg, t_here_doc *hd)
 		temp = line;
 		while (*temp != '\0')
 		{
-			write(hd->input[TEMP], temp, 1);
+			if (write(hd->input[TEMP], temp, 1) == -1)
+				perror_exit();
 			++temp;
 		}
 	}
+	close(hd->input[TEMP]);
 }
 
+// 파일에 이어서 쓰기
+// gnl에 EOF 받아도 종료 안되게 처리
 void	here_doc(t_args	*arg)
 {
 	t_here_doc	hd;
 
 	if (arg->ac != 6)
 		error_exit();
-	hd.input[TEMP] = open(".temp", O_RDWR | O_CREAT | O_TRUNC, 0666);
+	hd.input[TEMP] = open(".temp", O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	hd.input[WRITE] = open(arg->av[arg->ac - 1], O_WRONLY | O_CREAT , 0666);
 	if (hd.input[TEMP] == -1 || hd.input[WRITE] == -1)
 		perror_exit();
@@ -145,6 +149,6 @@ void	here_doc(t_args	*arg)
 	if (arg->av[2] == NULL)
 		error_exit();
 	get_line(arg, &hd);
+	hd.input[TEMP] = open(".temp", O_RDONLY, 0666);
 	pipex(arg, &hd);
-	exit(1);
 }
