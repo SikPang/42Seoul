@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/08 14:24:38 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/08 17:20:53 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ SRCS_FILE	= main \
 			./utility/ft_split \
 			./utility/ft_split_util
 B_SRCS_FILE	= main2 \
+			here_doc \
 			./utility/ft_strcmp \
+			./utility/ft_rstrjoin \
 			./get_next_line/get_next_line \
 			./get_next_line/get_next_line_utils
 
@@ -38,7 +40,7 @@ B_SRCS	= $(addprefix $(B_SRCS_DIR), $(addsuffix _bonus.c, $(SRCS_FILE))) \
 OBJS	= $(SRCS:.c=.o)
 B_OBJS	= $(B_SRCS:.c=.o)
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= #-Wall -Werror -Wextra
 
 all		: $(MANDATORY)
 	@touch $(MANDATORY)

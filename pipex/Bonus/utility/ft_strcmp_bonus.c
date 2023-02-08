@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:07:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 14:08:01 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 14:52:23 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;
 
+	if (s1 == 0 || s2 == 0)
+		return (-1);
 	i = 0;
 	while (s1[i] != '\0')
 	{

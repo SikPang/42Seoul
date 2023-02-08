@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:17:53 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/03 20:28:28 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 15:05:58 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "get_next_line_bonus.h"
-#include "../utility/utility_bonus.h"
 
 char	*ft_gstrncpy(char *dest, const char *src, size_t n)
 {
@@ -133,6 +132,6 @@ char	*get_next_line(int fd)
 		if (byte == 0)
 			return (get_last(&list, target, byte));
 		else if (byte == -1)
-			error_exit();
+			return (0);
 	}
 }

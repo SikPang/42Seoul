@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 14:26:31 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 16:51:15 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,42 +18,6 @@
 #include <stdio.h>
 #include "utility/utility_bonus.h"
 #include "info_bonus.h"
-
-void	put_str(char *str)
-{
-	int	i;
-
-	i = 0;
-	write(2, "== ", 3);
-	while (str[i] != 0)
-	{
-		write(2, &str[i], 1);
-		++i;
-	}
-	write(2, "\n", 1);
-}
-
-void	put_2d_str(char **str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	write(2, "==============\n", 15);
-	while (str[i] != 0)
-	{
-		j = 0;
-		write(2, "  ", 2);
-		while (str[i][j] != 0)
-		{
-			write(2, &str[i][j], 1);
-			++j;
-		}
-		write(2, "\n", 1);
-		++i;
-	}
-	write(2, "==============\n", 15);
-}
 
 static void	child_process(t_args *arg, t_fds *fd, int count)
 {

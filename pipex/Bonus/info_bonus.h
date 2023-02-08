@@ -6,13 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:00:42 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 14:24:10 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 16:43:40 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INFO_BONUS_H
 # define INFO_BONUS_H
 
+# define TEMP 0
 # define READ 0
 # define WRITE 1
 
@@ -37,7 +38,7 @@ typedef struct s_fds
 typedef struct s_here_doc
 {
 	int		pipe[2];
-	int		outfile;
+	int		input[2];
 }	t_here_doc;
 
 void	here_doc(t_args	*arg);

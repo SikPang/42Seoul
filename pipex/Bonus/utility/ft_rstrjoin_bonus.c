@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_bonus.c                                      :+:      :+:    :+:   */
+/*   ft_rstrjoin_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 20:45:14 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 17:27:26 by kwsong           ###   ########.fr       */
+/*   Created: 2022/10/16 00:48:41 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/08 17:05:39 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include "utility_bonus.h"
 
-void	error_exit(void)
+char	*ft_rstrjoin(char const *s1, char const *s2)
 {
-	write(2, "Error\n", 6);
-	exit(1);
-}
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*new_str;
 
-void	perror_exit(void)
-{
-	//perror("Error");
-	write(2, "pError\n", 7);
-	exit(1);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	new_str = (char *)malloc(s1_len + s2_len + 1);
+	if (new_str == (char *)0)
+		return ((char *)0);
+	ft_strncpy(new_str, s1, s1_len);
+	ft_strncpy(new_str + s1_len, s2, s2_len);
+	return (new_str);
 }

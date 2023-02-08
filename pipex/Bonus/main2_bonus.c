@@ -6,13 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 17:36:21 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 14:41:53 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 15:12:55 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
 #include "utility/utility_bonus.h"
 #include "info_bonus.h"
 
@@ -55,14 +53,4 @@ void	close_fds(t_fds *fd, t_args *arg, int count)
 			close(fd->pipe[i][WRITE]);
 		++i;
 	}
-}
-
-void	here_doc(t_args	*arg)
-{
-	t_here_doc	hd;
-
-	if (pipe(hd.pipe) == -1)
-		perror_exit();
-	hd.outfile = open(arg->av[arg->ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	
 }
