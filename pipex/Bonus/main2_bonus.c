@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 17:36:21 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 15:12:55 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 21:03:21 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	dup_fds(t_fds *fd, t_args *arg, int count)
 		if (dup2(fd->input[READ], STD_IN) == -1
 			|| dup2(fd->pipe[count - 2][WRITE], STD_OUT) == -1)
 			perror_exit();
+		close(fd->input[READ]);
 	}
 	else if (count < arg->ac - 2)
 	{
@@ -33,6 +34,7 @@ void	dup_fds(t_fds *fd, t_args *arg, int count)
 		if (dup2(fd->pipe[fd->pipe_size - 1][READ], STD_IN) == -1
 			|| dup2(fd->input[WRITE], STD_OUT) == -1)
 			perror_exit();
+		close(fd->input[WRITE]);
 	}
 }
 

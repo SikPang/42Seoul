@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:12:19 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 20:46:19 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 21:46:09 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,6 @@
 #include "get_next_line/get_next_line_bonus.h"
 #include "utility/utility_bonus.h"
 #include "info_bonus.h"
-
-void	put_str(char *str)
-{
-	int	i;
-
-	i = 0;
-	write(2, "== ", 3);
-	while (str[i] != 0)
-	{
-		write(2, &str[i], 1);
-		++i;
-	}
-	write(2, " ", 1);
-}
-
-void	put_2d_str(char **str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	write(2, "==============\n", 15);
-	while (str[i] != 0)
-	{
-		j = 0;
-		write(2, "  ", 2);
-		while (str[i][j] != 0)
-		{
-			write(2, &str[i][j], 1);
-			++j;
-		}
-		write(2, "\n", 1);
-		++i;
-	}
-	write(2, "==============\n", 15);
-}
 
 static void	child_process(t_args *arg, t_here_doc *fd, int count)
 {
@@ -86,7 +50,7 @@ static void	pipex(t_args *arg, t_here_doc *fd)
 	if (dup2(fd->input[TEMP], STD_IN) == -1
 		|| dup2(fd->pipe[WRITE], STD_OUT) == -1)
 		perror_exit();
-	close(fd->input[TEMP]);
+	//close(fd->input[TEMP]);
 	while (count < arg->ac - 1)
 	{
 		if (count == arg->ac - 2)
@@ -154,6 +118,5 @@ void	here_doc(t_args	*arg)
 	if (hd.input[TEMP] == -1 || hd.input[WRITE] == -1)
 		perror_exit();
 	pipex(arg, &hd);
-	close(hd.input[TEMP]);
 	unlink(".temp");
 }

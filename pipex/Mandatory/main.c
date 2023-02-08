@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 19:28:44 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 21:17:04 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	pipex(t_args *arg, t_fds *fd)
 	if (dup2(fd->input[READ], STD_IN) == -1
 		|| dup2(fd->pipe[WRITE], STD_OUT) == -1)
 		perror_exit();
+	close(fd->input[READ]);
 	while (count < arg->ac - 1)
 	{
 		if (count == arg->ac - 2)
@@ -61,6 +62,7 @@ static void	pipex(t_args *arg, t_fds *fd)
 			if (dup2(fd->pipe[READ], STD_IN) == -1
 				|| dup2(fd->input[WRITE], STD_OUT) == -1)
 				perror_exit();
+			close(fd->input[WRITE]);
 		}
 		pid = fork();
 		if (pid == -1)
