@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:12:19 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 20:30:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 20:46:19 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ static void	pipex(t_args *arg, t_here_doc *fd)
 			child_process(arg, fd, count);
 		++count;
 	}
-	close(fd->pipe[READ]);
-	close(fd->pipe[WRITE]);
 	if (wait(0) == -1)
 		perror_exit();
 }
@@ -156,5 +154,6 @@ void	here_doc(t_args	*arg)
 	if (hd.input[TEMP] == -1 || hd.input[WRITE] == -1)
 		perror_exit();
 	pipex(arg, &hd);
-	//unlink(".temp");
+	close(hd.input[TEMP]);
+	unlink(".temp");
 }
