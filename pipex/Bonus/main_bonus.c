@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 18:08:39 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 18:14:04 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ int	main(int ac, char **av, char **ev)
 	if (ft_strcmp(av[1], "here_doc") == 0)
 	{
 		here_doc(&arg);
-		while (1);
 		return (0);
 	}
 	fd.pipe_size = ac - 4;

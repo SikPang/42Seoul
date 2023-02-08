@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:12:19 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 18:10:36 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 18:15:32 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ static void	get_line(t_args	*arg, t_here_doc *hd)
 			error_exit();
 		if (ft_strcmp(line, arg->av[2]) == 0)
 			break ;
+		printf("%d\n", ft_strcmp(line, arg->av[2]));
 		temp = line;
 		while (*temp != '\0')
 		{
@@ -140,7 +141,8 @@ void	here_doc(t_args	*arg)
 	if (arg->ac != 6)
 		error_exit();
 	hd.input[TEMP] = open(".temp", O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	hd.input[WRITE] = open(arg->av[arg->ac - 1], O_WRONLY | O_CREAT , 0666);
+	hd.input[WRITE] = open(arg->av[arg->ac - 1]
+		, O_WRONLY | O_CREAT | O_APPEND , 0666);
 	if (hd.input[TEMP] == -1 || hd.input[WRITE] == -1)
 		perror_exit();
 	if (pipe(hd.pipe) == -1)
