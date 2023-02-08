@@ -6,13 +6,34 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 17:36:21 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 21:03:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 22:48:30 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include "utility/utility_bonus.h"
 #include "info_bonus.h"
+
+void	wait_all(t_fds *fd, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < fd->pipe_size)
+	{
+		close(fd->pipe[i][READ]);
+		close(fd->pipe[i][WRITE]);
+		++i;
+	}
+	i = 0;
+	while (i < size)
+	{
+		if (wait(0) == -1)
+			perror_exit();
+		++i;
+	}
+}
 
 void	dup_fds(t_fds *fd, t_args *arg, int count)
 {

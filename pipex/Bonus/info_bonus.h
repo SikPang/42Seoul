@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 16:00:42 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 16:43:40 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 22:37:57 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_here_doc
 	int		input[2];
 }	t_here_doc;
 
+void	wait_all(t_fds *fd, int size);
 void	here_doc(t_args	*arg);
 void	dup_fds(t_fds *fd, t_args *arg, int count);
 void	close_fds(t_fds *fd, t_args *arg, int count);

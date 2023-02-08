@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:12:19 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 22:22:04 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 22:46:02 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@
 #include "utility/utility_bonus.h"
 #include "info_bonus.h"
 
-static void	wait_all()
+static void	wait_here(t_here_doc *fd, int size)
 {
 	int	i;
 
+	close(fd->pipe[READ]);
+	close(fd->pipe[WRITE]);
 	i = 0;
-	while (i++ < 2)
+	while (i++ < size)
 	{
 		if (wait(0) == -1)
 			perror_exit();
@@ -128,6 +130,6 @@ void	here_doc(t_args	*arg)
 	if (hd.input[TEMP] == -1 || hd.input[WRITE] == -1)
 		perror_exit();
 	pipex(arg, &hd);
-	wait_all();
+	wait_here(&hd, 2);
 	unlink(".temp");
 }

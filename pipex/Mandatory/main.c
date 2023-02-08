@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 22:17:14 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 22:44:30 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@
 #include <stdio.h>
 #include "utility/utility.h"
 #include "info.h"
+
+void	wait_all(t_fds *fd, int size)
+{
+	int	i;
+
+	close(fd->pipe[READ]);
+	close(fd->pipe[WRITE]);
+	i = 0;
+	while (i++ < size)
+	{
+		if (wait(0) == -1)
+			perror_exit();
+	}
+}
 
 static void	child_process(t_args *arg, t_fds *fd, int count)
 {
@@ -115,10 +129,6 @@ int	main(int ac, char **av, char **ev)
 	if (pipe(fd.pipe) == -1)
 		perror_exit();
 	pipex(&arg, &fd);
-	while (i++ < 2)
-	{
-		if (wait(0) == -1)
-			perror_exit();
-	}
+	wait_all(&fd, 2);
 	return (0);
 }
