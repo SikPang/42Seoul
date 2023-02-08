@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:17:53 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 18:05:49 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 18:49:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*ft_gstrncpy(char *dest, const char *src, size_t n)
 	return (dest);
 }
 
-#include <unistd.h>
 char	*get_last(t_glist *list, t_gnode *target, ssize_t byte)
 {
 	char	*result;

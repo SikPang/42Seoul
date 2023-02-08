@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 15:03:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 18:14:04 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 19:38:05 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	main(int ac, char **av, char **ev)
 	}
 	fd.pipe_size = ac - 4;
 	fd.input[READ] = open(av[1], O_RDONLY);
-	fd.input[WRITE] = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	fd.input[WRITE] = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0666);
 	if (fd.input[READ] == -1 || fd.input[WRITE] == -1)
 		perror_exit();
 	init_pipe(&fd);

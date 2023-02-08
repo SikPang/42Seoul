@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:12:19 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 18:15:32 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 20:30:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "utility/utility_bonus.h"
 #include "info_bonus.h"
 
-#include <stdio.h>
 void	put_str(char *str)
 {
 	int	i;
@@ -87,6 +86,7 @@ static void	pipex(t_args *arg, t_here_doc *fd)
 	if (dup2(fd->input[TEMP], STD_IN) == -1
 		|| dup2(fd->pipe[WRITE], STD_OUT) == -1)
 		perror_exit();
+	close(fd->input[TEMP]);
 	while (count < arg->ac - 1)
 	{
 		if (count == arg->ac - 2)
@@ -94,6 +94,7 @@ static void	pipex(t_args *arg, t_here_doc *fd)
 			if (dup2(fd->pipe[TEMP], STD_IN) == -1
 				|| dup2(fd->input[WRITE], STD_OUT) == -1)
 				perror_exit();
+			close(fd->input[WRITE]);
 		}
 		pid = fork();
 		if (pid == -1)
@@ -102,6 +103,8 @@ static void	pipex(t_args *arg, t_here_doc *fd)
 			child_process(arg, fd, count);
 		++count;
 	}
+	close(fd->pipe[READ]);
+	close(fd->pipe[WRITE]);
 	if (wait(0) == -1)
 		perror_exit();
 }
@@ -120,7 +123,6 @@ static void	get_line(t_args	*arg, t_here_doc *hd)
 			error_exit();
 		if (ft_strcmp(line, arg->av[2]) == 0)
 			break ;
-		printf("%d\n", ft_strcmp(line, arg->av[2]));
 		temp = line;
 		while (*temp != '\0')
 		{
@@ -130,10 +132,8 @@ static void	get_line(t_args	*arg, t_here_doc *hd)
 		}
 	}
 	free(line);
-	close(hd->input[TEMP]);
 }
 
-// 파일에 이어서 쓰기
 void	here_doc(t_args	*arg)
 {
 	t_here_doc	hd;
@@ -141,9 +141,7 @@ void	here_doc(t_args	*arg)
 	if (arg->ac != 6)
 		error_exit();
 	hd.input[TEMP] = open(".temp", O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	hd.input[WRITE] = open(arg->av[arg->ac - 1]
-		, O_WRONLY | O_CREAT | O_APPEND , 0666);
-	if (hd.input[TEMP] == -1 || hd.input[WRITE] == -1)
+	if (hd.input[TEMP] == -1)
 		perror_exit();
 	if (pipe(hd.pipe) == -1)
 		perror_exit();
@@ -151,6 +149,12 @@ void	here_doc(t_args	*arg)
 	if (arg->av[2] == NULL)
 		error_exit();
 	get_line(arg, &hd);
+	close(hd.input[TEMP]);
 	hd.input[TEMP] = open(".temp", O_RDONLY, 0666);
+	hd.input[WRITE] = open(arg->av[arg->ac - 1],
+			O_WRONLY | O_CREAT | O_APPEND, 0666);
+	if (hd.input[TEMP] == -1 || hd.input[WRITE] == -1)
+		perror_exit();
 	pipex(arg, &hd);
+	//unlink(".temp");
 }
