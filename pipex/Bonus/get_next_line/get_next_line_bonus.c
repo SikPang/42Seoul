@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:17:53 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 15:05:58 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 18:05:49 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*ft_gstrncpy(char *dest, const char *src, size_t n)
 	return (dest);
 }
 
+#include <unistd.h>
 char	*get_last(t_glist *list, t_gnode *target, ssize_t byte)
 {
 	char	*result;
@@ -129,9 +130,7 @@ char	*get_next_line(int fd)
 		if (result_len > 0)
 			return (get_result(&list, target, result_len, 0));
 		byte = read_buf(target, fd);
-		if (byte == 0)
-			return (get_last(&list, target, byte));
-		else if (byte == -1)
+		if (byte == -1)
 			return (0);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:12:19 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/08 17:47:31 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/08 18:10:36 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,11 @@ static void	get_line(t_args	*arg, t_here_doc *hd)
 			++temp;
 		}
 	}
+	free(line);
 	close(hd->input[TEMP]);
 }
 
 // 파일에 이어서 쓰기
-// gnl에 EOF 받아도 종료 안되게 처리
 void	here_doc(t_args	*arg)
 {
 	t_here_doc	hd;
