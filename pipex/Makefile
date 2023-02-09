@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/08 17:20:53 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/09 14:50:24 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,7 @@ SRCS_FILE	= main \
 			./utility/ft_strjoin \
 			./utility/ft_split \
 			./utility/ft_split_util
-B_SRCS_FILE	= main2 \
-			here_doc \
-			./utility/ft_strcmp \
-			./utility/ft_rstrjoin \
+B_SRCS_FILE	= ./utility/ft_strcmp \
 			./get_next_line/get_next_line \
 			./get_next_line/get_next_line_utils
 
