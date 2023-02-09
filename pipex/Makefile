@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/09 14:55:00 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/09 19:01:40 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS_DIR	= ./Mandatory/
 B_SRCS_DIR	= ./Bonus/
 
 SRCS_FILE	= main \
+			utils \
 			./split/ft_split \
 			./split/ft_split_util \
 			./utility/error \
