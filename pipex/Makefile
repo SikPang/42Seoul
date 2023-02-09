@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/09 14:50:24 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/09 14:55:00 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,13 @@ SRCS_DIR	= ./Mandatory/
 B_SRCS_DIR	= ./Bonus/
 
 SRCS_FILE	= main \
+			./split/ft_split \
+			./split/ft_split_util \
 			./utility/error \
 			./utility/ft_strncmp \
 			./utility/ft_strncpy \
 			./utility/ft_strlen \
-			./utility/ft_strjoin \
-			./utility/ft_split \
-			./utility/ft_split_util
+			./utility/ft_strjoin
 B_SRCS_FILE	= ./utility/ft_strcmp \
 			./get_next_line/get_next_line \
 			./get_next_line/get_next_line_utils

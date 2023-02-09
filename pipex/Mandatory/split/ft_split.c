@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_bonus.c                                   :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 21:01:54 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/07 15:32:58 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/09 14:53:34 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "utility_bonus.h"
+#include "ft_split.h"
 
 static int	free_all(char **strs, size_t row)
 {
@@ -135,12 +135,3 @@ char	**ft_split(char *s, char c)
 	copy_str(result, s, c);
 	return (result);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-// 	char **str = ft_split("awk s/asd/ ds/g'", ' ');
-// 	int i = 0;
-// 	while (str != 0 && str[i] != 0)
-// 		printf("%s\n", str[i++]);
-// }
