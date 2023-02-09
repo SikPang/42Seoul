@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 18:57:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/09 19:51:43 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/09 20:51:47 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,11 @@ void	close_fds(t_fd *fd, int i, int cmd_size)
 	{
 		close(fd->prev_pipe[READ]);
 		close(fd->cur_pipe[WRITE]);
-		close(fd->prev_pipe[WRITE]);
 	}
 	else
 	{
 		close(fd->prev_pipe[READ]);
 		close(fd->file[WRITE]);
-		close(fd->prev_pipe[WRITE]);
 	}
 }
 
@@ -80,12 +78,16 @@ void	dup_fds(t_fd *fd, int i, int cmd_size)
 	}
 	else if (i < cmd_size - 1)
 	{
+		close(STD_IN);
+		close(STD_OUT);
 		if (dup2(fd->prev_pipe[READ], STD_IN) == -1
 			|| dup2(fd->cur_pipe[WRITE], STD_OUT) == -1)
 			perror_exit();
 	}
 	else
 	{
+		close(STD_IN);
+		close(STD_OUT);
 		if (dup2(fd->prev_pipe[READ], STD_IN) == -1
 			|| dup2(fd->file[WRITE], STD_OUT) == -1)
 			perror_exit();

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 18:57:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/09 20:23:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/09 20:51:57 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	close_fds(t_fd *fd, int i, int cmd_size)
 	{
 		close(fd->prev_pipe[READ]);
 		close(fd->file[WRITE]);
-		close(fd->prev_pipe[WRITE]);
 	}
 }
 
