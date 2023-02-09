@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/09 19:53:20 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/09 21:09:44 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,12 +39,11 @@ B_SRCS	= $(addprefix $(B_SRCS_DIR), $(addsuffix _bonus.c, $(SRCS_FILE))) \
 OBJS	= $(SRCS:.c=.o)
 B_OBJS	= $(B_SRCS:.c=.o)
 
-CFLAGS	= #-Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra
 
 all		: $(MANDATORY)
 	@touch $(MANDATORY)
 	@rm -f $(BONUS)
-	make clean
 
 $(MANDATORY)	: $(OBJS)
 	rm -f $(NAME)
@@ -53,7 +52,6 @@ $(MANDATORY)	: $(OBJS)
 bonus	: $(BONUS)
 	@touch $(BONUS)
 	@rm -f $(MANDATORY)
-	make clean
 
 $(BONUS)		: $(B_OBJS)
 	rm -f $(NAME)
