@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:34:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/09 19:01:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/09 20:03:37 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,8 @@ void	wait_all(int size);
 char	**get_paths(char **ev);
 void	close_fds(t_fd *fd, int i, int last);
 void	dup_fds(t_fd *fd, int i, int last);
+void	child_process(t_arg *arg, t_fd *fd, int count, int cmd_size);
+void	pipex(t_arg *arg, t_fd *fd, int i, int cmd_size);
+void	here_doc(t_arg *arg, t_fd *fd);
 
 #endif

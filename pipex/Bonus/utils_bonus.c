@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 18:57:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/09 18:59:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/09 19:51:43 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ char	**get_paths(char **ev)
 	return (_NULL);
 }
 
-void	close_fds(t_fd *fd, int i, int last)
+void	close_fds(t_fd *fd, int i, int cmd_size)
 {
 	if (i == 0)
 	{
 		close(fd->file[READ]);
 		close(fd->cur_pipe[WRITE]);
 	}
-	else if (i < last)
+	else if (i < cmd_size - 1)
 	{
 		close(fd->prev_pipe[READ]);
 		close(fd->cur_pipe[WRITE]);
@@ -70,7 +70,7 @@ void	close_fds(t_fd *fd, int i, int last)
 	}
 }
 
-void	dup_fds(t_fd *fd, int i, int last)
+void	dup_fds(t_fd *fd, int i, int cmd_size)
 {
 	if (i == 0)
 	{
@@ -78,7 +78,7 @@ void	dup_fds(t_fd *fd, int i, int last)
 			|| dup2(fd->cur_pipe[WRITE], STD_OUT) == -1)
 			perror_exit();
 	}
-	else if (i < last)
+	else if (i < cmd_size - 1)
 	{
 		if (dup2(fd->prev_pipe[READ], STD_IN) == -1
 			|| dup2(fd->cur_pipe[WRITE], STD_OUT) == -1)

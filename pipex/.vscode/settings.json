@@ -2,6 +2,11 @@
 	"files.associations": {
 		"ft_split_bonus.h": "c",
 		"ft_split.h": "c",
-		"utility_bonus.h": "c"
+		"utility_bonus.h": "c",
+		"chrono": "c",
+		"__bit_reference": "c",
+		"algorithm": "c",
+		"bitset": "c",
+		"unordered_map": "c"
 	}
 }
