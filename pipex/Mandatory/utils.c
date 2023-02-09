@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 18:57:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/09 20:51:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/09 21:13:45 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**get_paths(char **ev)
 	return (_NULL);
 }
 
-void	close_fds(t_fd *fd, int i, int cmd_size)
+void	close_fds(t_fd *fd, int i)
 {
 	if (i == 0)
 	{
@@ -63,7 +63,7 @@ void	close_fds(t_fd *fd, int i, int cmd_size)
 	}
 }
 
-void	dup_fds(t_fd *fd, int i, int cmd_size)
+void	dup_fds(t_fd *fd, int i)
 {
 	if (i == 0)
 	{

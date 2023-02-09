@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:21:39 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/09 21:02:30 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/09 21:14:03 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	pipex(t_arg *arg, t_fd *fd, int index, int cmd_size)
 			if (pipe(fd->cur_pipe) == -1)
 				perror_exit();
 		}
-		dup_fds(fd, i, cmd_size);
-		close_fds(fd, i, cmd_size);
+		dup_fds(fd, i);
+		close_fds(fd, i);
 		pid = fork();
 		if (pid == -1)
 			perror_exit();

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:34:27 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/09 19:42:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/09 21:12:44 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_fd
 
 void	wait_all(int size);
 char	**get_paths(char **ev);
-void	close_fds(t_fd *fd, int i, int last);
-void	dup_fds(t_fd *fd, int i, int last);
+void	close_fds(t_fd *fd, int i);
+void	dup_fds(t_fd *fd, int i);
 
 #endif
