@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:21:39 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/09 20:18:16 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/09 21:03:21 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	child_process(t_arg *arg, t_fd *fd, int index, int cmd_size)
 	if (index != cmd_size - 1)
 	{
 		close(fd->file[WRITE]);
-	 	close(fd->cur_pipe[READ]);
+		close(fd->cur_pipe[READ]);
 	}
 	cmd_args = ft_split(arg->av[index], ' ');
 	if (cmd_args == _NULL)
