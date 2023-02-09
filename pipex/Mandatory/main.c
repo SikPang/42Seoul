@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:21:39 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/09 19:43:30 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/09 20:23:49 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@
 #include "utility/utility.h"
 #include "main.h"
 
-static void	child_process(t_arg *arg, t_fd *fd, int count, int last)
+void	child_process(t_arg *arg, t_fd *fd, int index, int cmd_size)
 {
 	char	*cmd_with_path;
 	char	**cmd_args;
 	int		i;
 
-	if (count != last)
+	if (index != cmd_size - 1)
 	{
 		close(fd->file[WRITE]);
 	 	close(fd->cur_pipe[READ]);
 	}
-	cmd_args = ft_split(arg->av[count + 2], ' ');
+	cmd_args = ft_split(arg->av[index], ' ');
 	if (cmd_args == _NULL)
 		error_exit();
 	i = 0;
@@ -44,31 +44,33 @@ static void	child_process(t_arg *arg, t_fd *fd, int count, int last)
 	perror_exit();
 }
 
-static void	pipex(t_arg *arg, t_fd *fd, int i)
+void	pipex(t_arg *arg, t_fd *fd, int index, int cmd_size)
 {
 	pid_t	pid;
+	int		i;
 
-	while (i < arg->ac - 1)
+	i = 0;
+	while (i < cmd_size)
 	{
-		if (i < arg->ac - 2)
+		if (i < cmd_size - 1)
 		{
 			if (pipe(fd->cur_pipe) == -1)
 				perror_exit();
 		}
-		dup_fds(fd, i - 2, arg->ac - 4);
-		close_fds(fd, i - 2, arg->ac - 4);
+		dup_fds(fd, i, cmd_size);
+		close_fds(fd, i, cmd_size);
 		pid = fork();
 		if (pid == -1)
 			perror_exit();
 		else if (pid == 0)
-			child_process(arg, fd, i - 2, arg->ac - 4);
+			child_process(arg, fd, i + index, i + cmd_size);
 		fd->prev_pipe[0] = fd->cur_pipe[0];
 		fd->prev_pipe[1] = fd->cur_pipe[1];
 		++i;
 	}
 	close(STD_IN);
 	close(STD_OUT);
-	wait_all(arg->ac - 3);
+	wait_all(cmd_size);
 }
 
 int	main(int ac, char **av, char **ev)
@@ -88,6 +90,6 @@ int	main(int ac, char **av, char **ev)
 	fd.file[WRITE] = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd.file[READ] == -1 || fd.file[WRITE] == -1)
 		perror_exit();
-	pipex(&arg, &fd, 2);
+	pipex(&arg, &fd, 2, 2);
 	return (0);
 }
