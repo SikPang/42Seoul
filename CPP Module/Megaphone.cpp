@@ -1,16 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/10 18:48:04 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/10 18:50:35 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/10 18:43:50 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/10 18:52:02 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(int ac, char **av)
+#include "Megaphone.hpp"
+
+Megaphone::Megaphone()
 {
-	
+	str = "";
 }
+
+Megaphone::~Megaphone()
+{
+	//delete str;
+}
+
+Megaphone::Megaphone(const Megaphone &instance)
+{
+	str = "";
+}
+
+// Megaphone& Megaphone::operator= (const Megaphone &instance);
+// {
+
+// }

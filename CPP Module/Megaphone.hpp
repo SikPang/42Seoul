@@ -17,15 +17,26 @@
 #include <string>
 #include <iostream>
 
+/*	
+class A
+{
+  A();
+  ~A();
+  A(const A &a);
+  A &operator= (const A &a);
+};
+*/
+
 class Megaphone
 {
 private:
-	string str;
+	std::string str;
 
 public:
-	Megaphone(void);
-	~Megaphone(void);
-	void print_str();
+	Megaphone();
+	~Megaphone();
+	Megaphone(const Megaphone &instance);
+	Megaphone &operator= (const Megaphone &instance);
 };
 
 #endif
