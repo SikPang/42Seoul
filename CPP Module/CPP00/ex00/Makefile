@@ -1,0 +1,37 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/02/10 18:36:16 by kwsong            #+#    #+#              #
+#    Updated: 2023/02/13 20:12:35 by kwsong           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME	= megaphone
+
+SRCS	= megaphone.cpp
+OBJS	= $(SRCS:.c=.o)
+
+CC		= c++
+CFLAGS	= -Wall -Werror -Wextra -std=c++98
+
+all		: $(NAME)
+
+$(NAME)	: $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $^
+
+clean	:
+	rm -f $(OBJS)
+
+fclean	:
+	make clean
+	rm -f $(NAME)
+
+re		:
+	make fclean
+	make all
+
+.PHONY	: all clean fclean re
