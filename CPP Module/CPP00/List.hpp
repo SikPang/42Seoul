@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 22:28:08 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 16:12:06 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/14 17:00:36 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ class List
 public:
 	class Node
 	{
-	private:
-		Node&	prev;
-		Node&	next;
+	public:
+		Node*	prev;
+		Node*	next;
 		T		data;
 
 	public:
@@ -29,16 +29,11 @@ public:
 		Node(Node& instance);
 		~Node();
 		Node& operator=(Node& instance);
-
-	public:
-		Node&	Prev();
-		Node&	Next();
-		T		Data();
 	};
 
-private:
-	Node&	head;
-	Node&	tail;
+public:
+	Node*	head;
+	Node*	tail;
 	int		size;
 
 public:
@@ -57,6 +52,9 @@ public:
 	void	PopFront();
 	void	CheckLimit();
 	void	Erase(Node& target);
+
+public:
+	void	Print(List& list);
 };
 
 
@@ -86,17 +84,32 @@ List<T>& List<T>::operator=(List<T>& instance)
 }
 
 template <typename T>
-List<T>::~List() {}
+List<T>::~List()
+{
+	Node* cur = head;
+	Node* temp;
+	
+	while (cur != NULL)
+	{
+		temp = cur;
+		cur = cur->next;
+		delete temp;
+	}
+}
 
 template <typename T>
 T List<T>::Back()
 {
+	if (size == 0)
+		return 0;
 	return tail->data;
 }
 
 template <typename T>
 T List<T>::Front()
 {
+	if (size == 0)
+		return 0;
 	return head->data;
 }
 
@@ -113,14 +126,14 @@ void List<T>::PushBack(T data)
 
 	if (size == 0)
 	{
-		head = *newNode;
-		tail = *newNode;
+		head = newNode;
+		tail = newNode;
 	}
 	else
 	{
-		tail.next = *newNode;
+		tail->next = newNode;
 		newNode->prev = tail;
-		tail = *newNode;
+		tail = newNode;
 	}
 	++size;
 }
@@ -132,14 +145,14 @@ void List<T>::PushFront(T data)
 
 	if (size == 0)
 	{
-		head = *newNode;
-		tail = *newNode;
+		head = newNode;
+		tail = newNode;
 	}
 	else
 	{
-		head.prev = *newNode;
+		head->prev = newNode;
 		newNode->next = head;
-		head = *newNode;
+		head = newNode;
 	}
 	++size;
 }
@@ -147,7 +160,7 @@ void List<T>::PushFront(T data)
 template <typename T>
 void List<T>::PopBack()
 {
-	Node* temp = &tail;
+	Node* temp = tail;
 	
 	if (size == 0)
 		return;
@@ -168,7 +181,7 @@ void List<T>::PopBack()
 template <typename T>
 void List<T>::PopFront()
 {
-	Node* temp = &head;
+	Node* temp = head;
 
 	if (size == 0)
 		return;
@@ -182,7 +195,7 @@ void List<T>::PopFront()
 		head->next->prev = NULL;
 		head = head->next;
 	}
-	delete head;
+	delete temp;
 	--size;
 }
 
@@ -210,8 +223,8 @@ void List<T>::Erase(Node& target)
 		return;
 	else
 	{
-		temp->prev.next = temp->next;
-		temp->next.prev = temp->prev;
+		temp->prev->next = temp->next;
+		temp->next->prev = temp->prev;
 		delete temp;
 		--size;
 	}
@@ -244,7 +257,7 @@ List<T>::Node::Node(Node& instance)
 }
 
 template <typename T>
-List<T>::Node& List<T>::Node::operator=(Node& instance)
+typename List<T>::Node& List<T>::Node::operator=(Node& instance)
 {
 	prev = instance.prev;
 	next = instance.next;
@@ -252,22 +265,7 @@ List<T>::Node& List<T>::Node::operator=(Node& instance)
 }
 
 template <typename T>
-List<T>::Node::~Node() {}
-
-template <typename T>
-List<T>::Node& List<T>::Node::Next()
+List<T>::Node::~Node()
 {
-	return next;
-}
-
-template <typename T>
-List<T>::Node& List<T>::Node::Prev()
-{
-	return prev;
-}
-
-template <typename T>
-T List<T>::Node::Data()
-{
-	return data;
+	//delete this;
 }
