@@ -6,11 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 22:28:08 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 18:15:52 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/14 21:40:37 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+#ifndef __LIST_HPP__
+#define __LIST_HPP__
 
 template <typename T>
 class List
@@ -271,3 +273,5 @@ List<T>::Node::~Node()
 {
 	//delete this;
 }
+
+#endif

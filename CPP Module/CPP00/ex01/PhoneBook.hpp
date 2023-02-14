@@ -6,11 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:18 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 19:08:51 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/14 21:41:00 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
+#ifndef __PHONEBOOK_HPP__
+#define __PHONEBOOK_HPP__
 
 #include <string>
 
@@ -56,3 +58,5 @@ public:
 	void RemovePerson();
 	void PrintPhoneBook();
 };
+
+#endif
