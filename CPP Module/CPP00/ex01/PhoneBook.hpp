@@ -6,13 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:18 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/13 22:38:03 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/14 14:47:27 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <string>
+#include "List.hpp"
 
 #define PNUM_SIZE 20
 #define PB_SIZE 8
@@ -37,10 +38,10 @@ private:
 	};
 
 private:
-	Person list[PB_SIZE];
-	int		head;
-	int		tail;
-	int		size;
+	List<Person>	list;
+	int				head;
+	int				tail;
+	int				size;
 	
 public:
 	PhoneBook();
