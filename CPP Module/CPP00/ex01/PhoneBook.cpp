@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:20 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 19:13:18 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/14 21:20:13 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,23 +83,37 @@ void PhoneBook::RemovePerson()
 
 void PhoneBook::PrintPhoneBook()
 {
+	if (size == 0)
+	{
+		std::cout << "There is no one in PhoneBook\n\n";
+		return;
+	}
+	
 	int		index;
 	char*	phoneNumber;
 	
+	std::cout << "index\tFirstName\tLastName\tNickName\n";
 	for (int i=0; i<size; ++i)
 	{
 		std::cout << i << "\t" 
 			<< list[(head + i) % PB_SIZE].GetFirstName() << "\t"
 			<< list[(head + i) % PB_SIZE].GetLastName() << "\t"
 			<< list[(head + i) % PB_SIZE].GetNickName() << "\t";
+		std::cout << '\n';
 	}
-	std::cout << "Put index to see the phone number\n";
+	std::cout << "\n== Put index to see the phone number\n";
 	std::cin >> index;
 
+	if (index < -1 || index >= size)
+	{
+		std::cout << "wrong index\n\n";
+		return;
+	}
+	std::cout << list[index].GetNickName() << "'s Phone Number is ";
 	phoneNumber = list[(head + index) % PB_SIZE].GetPhoneNumber();
 	for (int i=0; i<PNUM_SIZE; ++i)
 		std::cout << phoneNumber[i];
-	std::cout << '\n';
+	std::cout << "\n\n";
 }
 
 PhoneBook::~PhoneBook() {}
