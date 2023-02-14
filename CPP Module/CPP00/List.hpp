@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 22:28:08 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 17:00:36 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/14 17:38:32 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,18 +205,18 @@ void List<T>::Erase(Node& target)
 	if (size == 0)
 		return;
 
-	if (&target == &head)
+	if (&target == head)
 		PopFront();
-	else if (&target == &tail)
+	else if (&target == tail)
 		PopBack();
 
-	Node* temp = &head;
+	Node* temp = head;
 	
 	while (temp != NULL)
 	{
 		if (temp == &target)
 			break;
-		temp = &(temp->next);
+		temp = temp->next;
 	}
 
 	if (temp == NULL)

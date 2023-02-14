@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 16:16:02 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 17:03:15 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/14 17:38:38 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <iostream>
 #include "List.hpp"
 
-using namespace std;
+using std::string;
+using std::cout;
 
 void f()
 {
@@ -39,8 +40,11 @@ void Print(List<int>& list)
 void Print(List<string>& list)
 {
 	cout << "- size : " << list.Size();
-	cout << ", front : " << list.Front();
-	cout << ", back : " << list.Back() << '\n';
+	if (list.Size() != 0)
+	{
+		cout << ", front : " << list.Front();
+		cout << ", back : " << list.Back() << '\n';
+	}
 
 	List<string>::Node* temp = list.head;
 	while (temp != NULL)
@@ -62,6 +66,7 @@ int main()
 		list.PushBack(i + 1);
 		Print(list);
 	}
+
 	for (int i=0; i<5; ++i)
 	{
 		list.PopBack();
@@ -78,6 +83,28 @@ int main()
 		list.PopFront();
 		Print(list);
 	}
+
+	for (int i=0; i<5; ++i)
+	{
+		list.PushBack(i + 1);
+		Print(list);
+	}
+
+	List<int>::Node* tempNode;
+	for (int i=0; i<3; ++i)
+	{
+		tempNode = list.head->next;
+		list.Erase(*tempNode);
+		Print(list);
+	}
+	tempNode = list.tail;
+	list.Erase(*tempNode);
+	Print(list);
+	tempNode = list.head;
+	list.Erase(*tempNode);
+	Print(list);
+
+	cout << "---------------------------------\n";
 
 	List<string> strList;
 	
@@ -108,23 +135,3 @@ int main()
 		Print(strList);
 	}
 }
-
-// void Print(list<int>& list)
-// {
-// 	cout << list.size() << '\n';
-// 	cout << list.front() << '\n';
-// 	cout << list.back() << '\n' << '\n';
-// }
-
-// int main()
-// {
-// 	list<int> list;
-
-// 	Print(list);
-
-// 	for (int i=0; i<5; ++i)
-// 	{
-// 		list.push_back(i + 1);
-// 		Print(list);
-// 	}
-// }
