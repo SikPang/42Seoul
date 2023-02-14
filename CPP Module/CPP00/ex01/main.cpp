@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:55:09 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 21:20:46 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/14 21:24:42 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ void GetInfo(PhoneBook& pb)
 	std::string phoneNumber;
 	char		phoneNumberArr[PNUM_SIZE];
 
-	std::cout << "put first name\n";
+	std::cout << "\n== put first name (1/5)\n";
 	std::cin >> firstName;
 
-	std::cout << "put last name\n";
+	std::cout << "\n== put last name (2/5)\n";
 	std::cin >> lastName;
 
-	std::cout << "put nick name\n";
+	std::cout << "\n== put nick name (3/5)\n";
 	std::cin >> nickName;
 
-	std::cout << "put darkest secret\n";
+	std::cout << "\n== put darkest secret (4/5)\n";
 	std::cin >> darkestSecret;
 
-	std::cout << "put phoneNumber without '-'\n";
+	std::cout << "\n== put phoneNumber without '-' (maximum 20 characters) (5/5)\n\n";
 	std::cin >> phoneNumber;
 
 	for (int i=0; i<phoneNumber.size(); ++i)

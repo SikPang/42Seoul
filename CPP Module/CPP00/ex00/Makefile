@@ -6,14 +6,14 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 18:36:16 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/13 20:12:35 by kwsong           ###   ########.fr        #
+#    Updated: 2023/02/14 21:21:56 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= megaphone
 
 SRCS	= megaphone.cpp
-OBJS	= $(SRCS:.c=.o)
+OBJS	= $(SRCS:.cpp=.o)
 
 CC		= c++
 CFLAGS	= -Wall -Werror -Wextra -std=c++98
