@@ -6,14 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:18 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 14:47:27 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/14 19:08:51 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <string>
-#include "List.hpp"
 
 #define PNUM_SIZE 20
 #define PB_SIZE 8
@@ -34,15 +33,19 @@ private:
 		Person(const Person& instance);
 		Person(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber);
 		~Person();
-		Person& operator=(const Person& instance);
+		Person&		operator=(const Person& instance);
+		std::string	GetFirstName();
+		std::string	GetLastName();
+		std::string	GetNickName();
+		char*		GetPhoneNumber();
 	};
 
 private:
-	List<Person>	list;
-	int				head;
-	int				tail;
-	int				size;
-	
+	Person	list[PB_SIZE];
+	int		head;
+	int		tail;
+	int		size;
+
 public:
 	PhoneBook();
 	PhoneBook(const PhoneBook& instance);
