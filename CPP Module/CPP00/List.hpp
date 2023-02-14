@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 22:28:08 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 17:38:32 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/14 18:15:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ T List<T>::Back()
 	return tail->data;
 }
 
+// type이 string이면서 size가 0일 때 segfault
 template <typename T>
 T List<T>::Front()
 {
@@ -113,6 +114,7 @@ T List<T>::Front()
 	return head->data;
 }
 
+// type이 string이면서 size가 0일 때 segfault
 template <typename T>
 int List<T>::Size()
 {
