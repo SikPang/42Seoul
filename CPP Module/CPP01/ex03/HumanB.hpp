@@ -1,25 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   HumanB.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 22:38:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 22:39:23 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/15 18:12:41 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/15 18:32:10 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#pragma once
+#ifndef __HUMANB_HPP__
+#define __HUMANB_HPP__
 
-int main()
+#include <string>
+#include "Weapon.hpp"
+
+class HumanB
 {
-	Zombie*	heapZombie = new Zombie("heap");
-	Zombie	stackZombie("stack");
+private:
+	std::string	name;
+	Weapon*		weapon;
 
-	Zombie* newZom = newZombie("newZombie");
-	randomChump("randomChump");
+public:
+	HumanB();
+	HumanB(std::string name);
+	HumanB(HumanB& instance);
+	~HumanB();
+	HumanB&	operator=(HumanB& instance);
 
-	delete newZom;
-	delete heapZombie;
-}
+	void	attack();
+	void	setWeapon(Weapon& weapon);
+};
+
+#endif

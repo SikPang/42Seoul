@@ -5,21 +5,38 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 22:38:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 22:39:23 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/15 17:47:14 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/15 19:15:29 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Weapon.hpp"
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
 int main()
 {
-	Zombie*	heapZombie = new Zombie("heap");
-	Zombie	stackZombie("stack");
+	{
+		Weapon club = Weapon("crude spiked club");
+		HumanA bob("Bob", club);
+		bob.attack();
+		club.setType("some other type of club");
+		bob.attack();
+	}
+	{
+		Weapon club = Weapon("crude spiked club");
+		HumanB jim("Jim");
+		jim.setWeapon(club);
+		jim.attack();
+		club.setType("some other type of club");
+		jim.attack();
+	}
 
-	Zombie* newZom = newZombie("newZombie");
-	randomChump("randomChump");
-
-	delete newZom;
-	delete heapZombie;
+	HumanA a;
+	a.attack();
+	
+	HumanB b("b");
+	b.attack();
+	
+	return 0;
 }

@@ -1,53 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 16:12:50 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/15 16:12:50 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/15 18:12:42 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/15 18:39:57 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Zombie.hpp"
+#include "HumanB.hpp"
 
-Zombie::Zombie()
+HumanB::HumanB()
 {
 	name = "";
-	announce();
+	weapon = NULL;
 }
 
-Zombie::Zombie(std::string name)
+HumanB::HumanB(std::string name)
 {
 	this->name = name;
-	announce();
+	this->weapon = NULL;
 }
 
-Zombie::Zombie(Zombie& instance)
+HumanB::HumanB(HumanB& instance)
 {
 	name = instance.name;
-	announce();
+	weapon = instance.weapon;
 }
 
-Zombie& Zombie::operator=(Zombie& instance)
+HumanB& HumanB::operator=(HumanB& instance)
 {
 	name = instance.name;
+	weapon = instance.weapon;
 	return *this;
 }
 
-Zombie::~Zombie()
+HumanB::~HumanB() {}
+
+void HumanB::attack()
 {
-	die();
+	std::cout << name << " attacks with their ";
+	
+	if (weapon == NULL)
+		std::cout << "fist\n";
+	else
+		std::cout << weapon->getType() << "\n";
 }
 
-void Zombie::announce()
+void HumanB::setWeapon(Weapon& weapon)
 {
-	std::cout << name << ": BraiiiiiiinnnzzzZ...\n";
-}
-
-void Zombie::die()
-{
-	std::cout << name << " died\n";
+	this->weapon = &weapon;
 }

@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 22:39:37 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 22:43:29 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/15 21:05:48 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/15 21:43:00 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __ZOMBIE_HPP__
-#define __ZOMBIE_HPP__
+#ifndef __CLAPTRAP_HPP__
+#define __CLAPTRAP_HPP__
 
 #include <string>
 
-class Zombie
+class ClapTrap
 {
 private:
 	std::string	name;
+	int			hitPoint;
+	int			energyPoint;
+	int			attackDamage;
 
 public:
-	Zombie();
-	Zombie(std::string name);
-	Zombie(Zombie& instance);
-	~Zombie();
-	Zombie&	operator=(Zombie& instance);
+	ClapTrap();
+	ClapTrap(std::string name);
+	ClapTrap(ClapTrap& instance);
+	~ClapTrap();
+	ClapTrap&	operator=(ClapTrap& instance);
 
-	void	announce();
-	void	die();
+	void		attack(const std::string& target);
+	void		takeDamage(unsigned int amount);
+	void		beRepaired(unsigned int amount);
+	int			getAttackDamage();
 };
-
-Zombie*	newZombie(std::string name);
-void	randomChump(std::string name);
 
 #endif

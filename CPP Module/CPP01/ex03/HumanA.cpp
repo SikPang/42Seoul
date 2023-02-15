@@ -1,53 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 16:12:50 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/15 16:12:50 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/15 18:12:42 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/15 18:38:44 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Zombie.hpp"
+#include "HumanA.hpp"
 
-Zombie::Zombie()
+HumanA::HumanA()
 {
 	name = "";
-	announce();
+	weapon = NULL;
 }
 
-Zombie::Zombie(std::string name)
+HumanA::HumanA(std::string name, Weapon& weapon)
 {
 	this->name = name;
-	announce();
+	this->weapon = &weapon;
 }
 
-Zombie::Zombie(Zombie& instance)
+HumanA::HumanA(HumanA& instance)
 {
 	name = instance.name;
-	announce();
+	weapon = instance.weapon;
 }
 
-Zombie& Zombie::operator=(Zombie& instance)
+HumanA& HumanA::operator=(HumanA& instance)
 {
 	name = instance.name;
+	weapon = instance.weapon;
 	return *this;
 }
 
-Zombie::~Zombie()
-{
-	die();
-}
+HumanA::~HumanA() {}
 
-void Zombie::announce()
+void HumanA::attack()
 {
-	std::cout << name << ": BraiiiiiiinnnzzzZ...\n";
-}
-
-void Zombie::die()
-{
-	std::cout << name << " died\n";
+	if (weapon == NULL)
+		std::cout << "Error : HumanA has no weapon\n";
+	else
+		std::cout << name << " attacks with their " << weapon->getType() << "\n";
 }

@@ -5,21 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 22:38:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 22:39:23 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/15 17:32:10 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/15 17:46:29 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include <iostream>
+#include <string>
 
 int main()
 {
-	Zombie*	heapZombie = new Zombie("heap");
-	Zombie	stackZombie("stack");
+	std::string		str = "HI THIS IS BRAIN";
+	std::string*	pStr = &str;
+	std::string&	rStr = str;
 
-	Zombie* newZom = newZombie("newZombie");
-	randomChump("randomChump");
+	std::cout << "address of str  : " << &str << '\n';
+	std::cout << "address of pStr : " << pStr << '\n';
+	std::cout << "address of rStr : " << &rStr << "\n\n";
 
-	delete newZom;
-	delete heapZombie;
+	std::cout << "value of str  : " << str << '\n';
+	std::cout << "value of pStr : " << *pStr << '\n';
+	std::cout << "value of rStr : " << rStr << '\n';
 }

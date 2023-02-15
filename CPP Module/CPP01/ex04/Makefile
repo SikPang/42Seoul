@@ -10,10 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= phonebook
+NAME	= sed
 
-SRCS	= main.cpp \
-		PhoneBook.cpp
+SRCS	= main.cpp 
 OBJS	= $(SRCS:.cpp=.o)
 
 CC		= c++

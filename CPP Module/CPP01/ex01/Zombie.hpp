@@ -30,9 +30,19 @@ public:
 
 	void	announce();
 	void	die();
+	void	setName(std::string name);
 };
 
-Zombie*	newZombie(std::string name);
-void	randomChump(std::string name);
+Zombie*	zombieHorde(int N, std::string name);
+
+namespace HordeNum
+{
+	enum Horde
+	{
+		FIRST = 3,
+		SECOND = 5,
+		THIRD = 7
+	};
+}
 
 #endif

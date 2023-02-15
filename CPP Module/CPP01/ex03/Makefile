@@ -10,10 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= phonebook
+NAME	= weapon
 
 SRCS	= main.cpp \
-		PhoneBook.cpp
+		Weapon.cpp \
+		HumanA.cpp \
+		HumanB.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 CC		= c++

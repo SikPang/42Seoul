@@ -10,10 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= phonebook
+NAME	= zombie
 
 SRCS	= main.cpp \
-		PhoneBook.cpp
+		Zombie.cpp \
+		randomChump.cpp \
+		newZombie.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 CC		= c++

@@ -10,11 +10,9 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= zombie
+NAME	= clapTrap
 
-SRCS	= main.cpp \
-		Zombie.cpp \
-		zombieHorde.cpp
+SRCS	= main.cpp 
 OBJS	= $(SRCS:.cpp=.o)
 
 CC		= c++

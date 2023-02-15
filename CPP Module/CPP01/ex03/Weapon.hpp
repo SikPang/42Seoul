@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 22:38:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 22:39:23 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/15 18:00:22 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/15 18:10:27 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#pragma once
+#ifndef __WEAPON_HPP__
+#define __WEAPON_HPP__
 
-int main()
+#include <string>
+
+class Weapon
 {
-	Zombie*	heapZombie = new Zombie("heap");
-	Zombie	stackZombie("stack");
+private:
+	std::string	type;
 
-	Zombie* newZom = newZombie("newZombie");
-	randomChump("randomChump");
+public:
+	Weapon();
+	Weapon(std::string type);
+	Weapon(Weapon& instance);
+	~Weapon();
+	Weapon&	operator=(Weapon& instance);
 
-	delete newZom;
-	delete heapZombie;
-}
+	const std::string&	getType();
+	void				setType(std::string type);
+};
+
+#endif

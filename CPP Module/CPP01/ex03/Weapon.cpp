@@ -1,25 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 22:38:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 22:39:23 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/15 18:05:50 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/15 18:38:40 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Weapon.hpp"
 
-int main()
+Weapon::Weapon()
 {
-	Zombie*	heapZombie = new Zombie("heap");
-	Zombie	stackZombie("stack");
+	type = "";
+}
 
-	Zombie* newZom = newZombie("newZombie");
-	randomChump("randomChump");
+Weapon::Weapon(std::string type)
+{
+	this->type = type;
+}
 
-	delete newZom;
-	delete heapZombie;
+Weapon::Weapon(Weapon& instance)
+{
+	type = instance.type;
+}
+
+Weapon& Weapon::operator=(Weapon& instance)
+{
+	type = instance.type;
+	return *this;
+}
+
+Weapon::~Weapon() {}
+
+const std::string& Weapon::getType()
+{
+	return (type);
+}
+
+void Weapon::setType(std::string type)
+{
+	this->type = type;
 }

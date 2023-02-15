@@ -16,19 +16,16 @@
 Zombie::Zombie()
 {
 	name = "";
-	announce();
 }
 
 Zombie::Zombie(std::string name)
 {
 	this->name = name;
-	announce();
 }
 
 Zombie::Zombie(Zombie& instance)
 {
 	name = instance.name;
-	announce();
 }
 
 Zombie& Zombie::operator=(Zombie& instance)
@@ -50,4 +47,9 @@ void Zombie::announce()
 void Zombie::die()
 {
 	std::cout << name << " died\n";
+}
+
+void Zombie::setName(std::string name)
+{
+	this->name = name;
 }
