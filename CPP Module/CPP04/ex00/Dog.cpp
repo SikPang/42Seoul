@@ -1,31 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 16:56:54 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 17:55:50 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/16 18:06:36 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/16 18:35:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#ifndef __FRAGTRAP_HPP__
-#define __FRAGTRAP_HPP__
+#include <iostream>
+#include "Dog.hpp"
 
-#include "ClapTrap.hpp"
-
-class FragTrap : public ClapTrap
+Dog::Dog()
 {
-public:
-	FragTrap();
-	FragTrap(std::string name);
-	FragTrap(FragTrap& instance);
-	~FragTrap();
-	FragTrap&	operator=(FragTrap& instance);
+	type = "Dog";
 
-	void		highFivesGuys();
-};
+	std::cout << "Dog Created.\n";
+}
 
-#endif
+Dog::Dog(Dog& instance)
+{
+	instance.type = type;
+
+	std::cout << "Dog Created.\n";
+}
+
+Dog& Dog::operator=(Dog& instance)
+{
+	instance.type = type;
+	
+	return *this;
+}
+
+Dog::~Dog() 
+{
+	std::cout << "Dog Destroyed.\n";
+}
+
+void Dog::makeSound() const
+{
+	std::cout << "* Woof! *\n";
+}

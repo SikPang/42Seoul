@@ -1,31 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 16:56:54 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 17:55:50 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/16 18:06:33 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/16 18:35:58 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#ifndef __FRAGTRAP_HPP__
-#define __FRAGTRAP_HPP__
+#include <iostream>
+#include "Cat.hpp"
 
-#include "ClapTrap.hpp"
-
-class FragTrap : public ClapTrap
+Cat::Cat()
 {
-public:
-	FragTrap();
-	FragTrap(std::string name);
-	FragTrap(FragTrap& instance);
-	~FragTrap();
-	FragTrap&	operator=(FragTrap& instance);
+	type = "Cat";
 
-	void		highFivesGuys();
-};
+	std::cout << "Cat Created.\n";
+}
 
-#endif
+Cat::Cat(Cat& instance)
+{
+	instance.type = type;
+
+	std::cout << "Cat Created.\n";
+}
+
+Cat& Cat::operator=(Cat& instance)
+{
+	instance.type = type;
+	
+	return *this;
+}
+
+Cat::~Cat() 
+{
+	std::cout << "Cat Destroyed.\n";
+}
+
+void Cat::makeSound() const
+{
+	std::cout << "* Meow~ *\n";
+}

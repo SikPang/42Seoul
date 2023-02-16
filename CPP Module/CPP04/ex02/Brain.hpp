@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 16:56:54 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 17:55:50 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/16 18:47:55 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/16 19:29:53 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __FRAGTRAP_HPP__
-#define __FRAGTRAP_HPP__
+#ifndef __BRAIN_HPP__
+#define __BRAIN_HPP__
 
-#include "ClapTrap.hpp"
+#include <string>
 
-class FragTrap : public ClapTrap
+#define IDEA_CAPACITY 100
+
+class Brain
 {
-public:
-	FragTrap();
-	FragTrap(std::string name);
-	FragTrap(FragTrap& instance);
-	~FragTrap();
-	FragTrap&	operator=(FragTrap& instance);
+protected:
+	std::string	ideas[IDEA_CAPACITY];
 
-	void		highFivesGuys();
+public:
+	Brain();
+	Brain(Brain& instance);
+	virtual ~Brain();
+	Brain&			operator=(Brain& instance);
 };
 
 #endif
