@@ -10,9 +10,12 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= clapTrap
+NAME	= fragTrap
 
-SRCS	= main.cpp 
+SRCS	= main.cpp \
+		ClapTrap.cpp \
+		ScavTrap.cpp \
+		FragTrap.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 CC		= c++

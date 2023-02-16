@@ -6,24 +6,55 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 21:01:22 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/15 21:01:40 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/16 17:21:38 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-충분한 ClapTraps를 가질 수 없기 때문에 이제 파생 로봇을 만들 것입니다.
-그것은 ScavTrap으로 명명될 것이고 ClapTrap에서 생성자와 소멸자를 상속받을 것이다. 그러나 생성자, 소멸자 및 공격자()는 다른 메시지를 인쇄합니다.
-결국, 클랩트랩은 그들의 개성을 인식한다.
-테스트에는 적절한 구조/파괴 체인이 표시되어야 합니다.
-ScavTrap이 생성되면 프로그램은 ClapTrap을 빌드하는 것으로 시작합니다. 파괴는 역순입니다. 왜죠?
-ScavTrap은 ClapTrap의 특성을 사용하며(결과적으로 ClapTrap 업데이트) 다음과 같이 초기화해야 합니다:
-• 생성자에게 매개 변수로 전달되는 이름
-• 적중점(100), ClapTrap의 상태를 나타냅니다
-• 에너지 포인트(50)
-• 공격 데미지(20)
+#include <iostream>
+#include "ScavTrap.hpp"
 
-ScavTrap에는 다음과 같은 특수 용량도 있습니다:
-보이드 가드 게이트();
-이 멤버 기능은 ScavTrap이 게이트 키퍼 모드에 있음을 알리는 메시지를 표시합니다.
-프로그램에 테스트를 추가하는 것을 잊지 마십시오.
-*/
+void CheckBIsAlive(ScavTrap& stB)
+{
+	std::cout << "is ScavTrap B Alive? : " << stB.IsAlive() << "\n\n";
+}
+
+void PrevFunc()
+{
+	ClapTrap	ctA("A");
+	ClapTrap	ctB("B");
+
+	for (int i = 0; i < 10; ++i)
+	{
+		ctA.attack("B");
+		ctB.takeDamage(ctA.getAttackDamage());
+	}
+
+	ctA.attack("B");
+	ctA.beRepaired(1);
+	
+	ctB.beRepaired(1);
+	ctB.beRepaired(1);
+}
+
+int main()
+{
+	PrevFunc();
+	std::cout << "-----------------------------------\n";
+
+	ScavTrap	stA("A");
+	ScavTrap	stB("B");
+
+	for (int i = 0; i < 6; ++i)
+	{
+		stA.attack("B");
+		stB.takeDamage(stA.getAttackDamage());
+		CheckBIsAlive(stB);
+	}
+
+	stB.beRepaired(20);
+	CheckBIsAlive(stB);
+
+	stB.beRepaired(20);
+	CheckBIsAlive(stB);
+	stB.guardGate();
+}

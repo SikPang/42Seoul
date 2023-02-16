@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 21:01:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 17:12:06 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/16 14:10:08 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/16 16:46:26 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+#ifndef __SCAVTRAP_HPP__
+#define __SCAVTRAP_HPP__
+
+#include <string>
 #include "ClapTrap.hpp"
-#include <iostream>
 
-int main()
+class ScavTrap : public ClapTrap
 {
-	ClapTrap	ctA("A");
-	ClapTrap	ctB("B");
+private:
+	bool	isAlive;
+	bool	isGateKeeperMode;
 
-	for (int i = 0; i < 10; ++i)
-	{
-		ctA.attack("B");
-		ctB.takeDamage(ctA.getAttackDamage());
-	}
+public:
+	ScavTrap();
+	ScavTrap(std::string name);
+	ScavTrap(ScavTrap& instance);
+	~ScavTrap();
+	ScavTrap&	operator=(ScavTrap& instance);
 
-	ctA.attack("B");
-	ctA.beRepaired(1);
-	
-	ctB.beRepaired(1);
-	ctB.beRepaired(1);
-}
+	void		takeDamage(unsigned int amount);
+	void		beRepaired(unsigned int amount);
+	void		guardGate();
+	bool		IsAlive();
+};
+
+#endif

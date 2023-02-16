@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 21:01:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 17:12:06 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/16 16:56:54 by kwsong            #+#    #+#             */
+/*   Updated: 2023/02/16 17:06:17 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
-#include <iostream>
 
-int main()
+class FragTrap : public ClapTrap
 {
-	ClapTrap	ctA("A");
-	ClapTrap	ctB("B");
+public:
+	FragTrap();
+	FragTrap(std::string name);
+	FragTrap(FragTrap& instance);
+	~FragTrap();
+	FragTrap&	operator=(FragTrap& instance);
 
-	for (int i = 0; i < 10; ++i)
-	{
-		ctA.attack("B");
-		ctB.takeDamage(ctA.getAttackDamage());
-	}
-
-	ctA.attack("B");
-	ctA.beRepaired(1);
-	
-	ctB.beRepaired(1);
-	ctB.beRepaired(1);
-}
+	void		highFivesGuys();
+};
