@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:18:28 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/17 15:23:39 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/17 15:44:21 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ Bureaucrat::~Bureaucrat()
 	std::cout << "Bureaucrat Destroyed.\n";
 }
 
-const std::string Bureaucrat::getName()
+std::string Bureaucrat::getName()
 {
 	return name;
 }

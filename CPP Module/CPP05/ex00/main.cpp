@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 19:59:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 21:32:00 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/02/17 15:23:09 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,72 @@ catch(메모::메모 & e)
 */
 
 #include <iostream>
+#include "Bureaucrat.hpp"
 
 int main()
 {
+	Bureaucrat b1;
+	b1 << b1;
+
+	Bureaucrat b2("kim", 1);
+	b2 << b2;
 	
+	Bureaucrat b3("lee", 150);
+	b3 << b3;
+	
+	try
+	{
+		Bureaucrat b4("park", 0);
+		b4 << b4;
+	}
+	catch (Bureaucrat::GradeTooHighException &e)
+	{
+		e.report();
+	}
+	catch (Bureaucrat::GradeTooLowException &e)
+	{
+		e.report();
+	}
+	
+	try
+	{
+		Bureaucrat b5("song", 151);
+		b5 << b5;
+	}
+	catch (Bureaucrat::GradeTooHighException &e)
+	{
+		e.report();
+	}
+	catch (Bureaucrat::GradeTooLowException &e)
+	{
+		e.report();
+	}
+
+	try
+	{
+		b2.upGrade();
+	}
+	catch (Bureaucrat::GradeTooHighException &e)
+	{
+		e.report();
+	}
+	catch (Bureaucrat::GradeTooLowException &e)
+	{
+		e.report();
+	}
+
+	try
+	{
+		b3.downGrade();
+	}
+	catch (Bureaucrat::GradeTooHighException &e)
+	{
+		e.report();
+	}
+	catch (Bureaucrat::GradeTooLowException &e)
+	{
+		e.report();
+	}
+
 	return 0;
 }
