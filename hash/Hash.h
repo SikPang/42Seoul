@@ -1,38 +1,39 @@
 #ifndef HASH_H
 #define HASH_H
 
-#define MAX_LOAD_FACTOR 0.5
-
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+#include "Pair.h"
+
+#define MAX_LOAD_FACTOR 0.5
 
 typedef enum state
 {
 	EMPTY,
-	DELETED,
-	USED
+	USED,
+	DELETED
 } state;
 
-typedef struct data
+typedef struct node
 {
-	char*			key;
-	int				value;
-	state			state;
-	unsigned long	hash_result;
-} data;
+	pair* data;
+	state state;
+	unsigned int hash_value;
+} node;
 
 typedef struct hash
 {
-	data*			bucket;
-	unsigned long   size;
-	unsigned long   capacity;
+	node* bucket;
+	int size;
+	int capacity;
 } hash;
 
-hash* init_hash(void);
-void resize_hash(hash* hash);
-int find_hash(hash* hash, char* key, int* return_ref);
-void erase_hash(hash* hash, char* key);
-void insert_hash(hash* hash, char* key, int value);
-void clear_hash(hash* hash);
+void initialize(hash *hash);
+void reserve(hash *hash, int size);
+void insert(hash* hash, pair* data);
+void erase(hash* hash, char* key);
+pair* find(hash* hash, char* key);
+void clear(hash* hash);
 
 #endif
