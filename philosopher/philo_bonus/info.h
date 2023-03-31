@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 16:51:24 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/03/31 20:23:56 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 # include <semaphore.h>
 # include <stdlib.h>
+# include <sys/time.h>
 # include "utility/utility.h"
 
-# define FILE_NAME_FORK "fork_semaphore"
-# define FILE_NAME_PRINT "print_semaphore"
+# define FILE_NAME_FORK "/fork_semaphore"
+# define FILE_NAME_SET "/set_semaphore"
+# define FILE_NAME_PRINT "/print_semaphore"
 
 typedef enum e_state
 {
@@ -29,21 +31,24 @@ typedef enum e_state
 
 typedef struct s_philo
 {
-	int my_number;
-	int count_eat;
-	t_state state;
+	struct timeval	starving_time;
+	int 			my_number;
+	int 			count_eat;
+	t_state 		state;
 } t_philo;
 
 typedef struct s_info
 {
-	t_philo philo;
-	sem_t *fork;
-	sem_t *print;
-	int max_philo;
-	int time_to_die;
-	int time_to_eat;
-	int time_to_sleep;
-	int must_eat;
+	struct timeval	start_time;
+	t_philo 		philo;
+	sem_t 			*fork;
+	sem_t 			*fork_set;
+	sem_t 			*print;
+	int 			max_philo;
+	int 			time_to_die;
+	int 			time_to_eat;
+	int				time_to_sleep;
+	int 			must_eat;
 } t_info;
 
 t_info	*init_info(char **av);

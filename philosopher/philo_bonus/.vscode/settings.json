@@ -2,6 +2,10 @@
 	"files.associations": {
 		"wait.h": "c",
 		"utility.h": "c",
-		"philosopher.h": "c"
+		"philosopher.h": "c",
+		"time.h": "c",
+		"__locale": "c",
+		"info.h": "c",
+		"ks_time.h": "c"
 	}
 }

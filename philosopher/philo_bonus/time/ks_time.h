@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.h                                          :+:      :+:    :+:   */
+/*   ks_time.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 19:04:12 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 20:24:19 by kwsong           ###   ########.fr       */
+/*   Created: 2023/03/31 19:44:12 by kwsong            #+#    #+#             */
+/*   Updated: 2023/03/31 20:29:14 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILITY_H
-# define UTILITY_H
+#ifndef KS_TIME_H
+# define KS_TIME_H
 
-typedef enum e_error
-{
-	ARG,
-	MALLOC,
-	FORK,
-	SEM
-} t_error;
+# include <unistd.h>
+# include <sys/time.h>
 
-int		ft_atoi(const char *str);
-void	error_exit(t_error code);
+int	get_time_from_start(struct timeval *start_time);
 
 #endif

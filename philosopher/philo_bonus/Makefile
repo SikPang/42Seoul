@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/03/31 15:57:13 by kwsong           ###   ########.fr        #
+#    Updated: 2023/03/31 20:38:11 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME		= philo_bonus
 SRCS_FILE	= main \
 			info \
 			philosopher \
+			time/ks_time \
 			utility/ft_atoi \
-			utility/ft_itoa \
 			utility/error_exit
 
 SRCS	= $(addsuffix .c, $(SRCS_FILE))

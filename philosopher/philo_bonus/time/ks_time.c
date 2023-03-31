@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utility.h                                          :+:      :+:    :+:   */
+/*   ks_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 19:04:12 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 20:24:19 by kwsong           ###   ########.fr       */
+/*   Created: 2023/03/31 19:44:14 by kwsong            #+#    #+#             */
+/*   Updated: 2023/03/31 20:46:24 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILITY_H
-# define UTILITY_H
+#include "ks_time.h"
 
-typedef enum e_error
+int	get_time_from_start(struct timeval *start_time)
 {
-	ARG,
-	MALLOC,
-	FORK,
-	SEM
-} t_error;
-
-int		ft_atoi(const char *str);
-void	error_exit(t_error code);
-
-#endif
+	struct timeval	cur_time;
+	int				sec;
+	int				usec;
+	
+	gettimeofday(&cur_time, NULL);
+	sec = (cur_time.tv_sec - start_time->tv_sec) * 1000;
+	usec = (cur_time.tv_usec - start_time->tv_usec) / 1000;
+	return (sec + usec);
+}
