@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utility.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 15:39:51 by kwsong           ###   ########.fr       */
+/*   Created: 2022/11/10 19:04:12 by kwsong            #+#    #+#             */
+/*   Updated: 2023/03/31 15:17:34 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utility/utility.h"
-#include "philosopher.h"
+#ifndef UTILITY_H
+# define UTILITY_H
 
-int	main(int ac, char **av)
+typedef enum e_error
 {
-	t_info	*info;
+	ARG,
+	MALLOC,
+	FORK,
+	SEM
+} t_error;
 
-	if (ac != 5 && ac != 6)
-		error_exit(ARG);
-	info = init_info(av);
-	free_info(info);
-}
+int		ft_atoi(const char *str);
+char	*ft_itoa(int n);
+void	error_exit(t_error code);
+
+#endif

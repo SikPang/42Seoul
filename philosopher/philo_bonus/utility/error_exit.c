@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 15:39:51 by kwsong           ###   ########.fr       */
+/*   Created: 2023/01/13 20:45:14 by kwsong            #+#    #+#             */
+/*   Updated: 2023/03/31 15:05:49 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utility/utility.h"
-#include "philosopher.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include "utility.h"
 
-int	main(int ac, char **av)
+void	error_exit(t_error code)
 {
-	t_info	*info;
-
-	if (ac != 5 && ac != 6)
-		error_exit(ARG);
-	info = init_info(av);
-	free_info(info);
+	if (code == ARG)
+		write(2, "Arguments ", 11);
+	else if (code == MALLOC)
+		write(2, "Malloc ", 8);
+	else if (code == FORK)
+		write(2, "Fork ", 6);
+	else if (code == SEM)
+		write(2, "Semaphore ", 11);
+	write(2, "Error\n", 6);
+	exit(1);
 }
