@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 20:23:56 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/03/31 22:21:01 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,26 @@ typedef enum e_state
 {
 	EAT,
 	SLEEP,
-	THINK
+	THINK,
+	DIED
 } t_state;
 
 typedef struct s_philo
 {
-	struct timeval	starving_time;
-	int 			my_number;
-	int 			count_eat;
-	t_state 		state;
+	double	starving_time;
+	int 	my_number;
+	int 	count_eat;
+	t_state state;
 } t_philo;
 
 typedef struct s_info
 {
-	struct timeval	start_time;
 	t_philo 		philo;
 	sem_t 			*fork;
 	sem_t 			*fork_set;
 	sem_t 			*print;
+	pid_t			*pids;
+	struct timeval	start_time;
 	int 			max_philo;
 	int 			time_to_die;
 	int 			time_to_eat;
@@ -52,6 +54,7 @@ typedef struct s_info
 } t_info;
 
 t_info	*init_info(char **av);
-void free_info(t_info *info);
+void	unlink_all(t_info *info);
+void 	free_all(t_info *info);
 
 #endif

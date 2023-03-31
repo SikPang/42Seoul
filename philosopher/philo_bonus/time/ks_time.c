@@ -6,13 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 19:44:14 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 20:46:24 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/03/31 21:40:57 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ks_time.h"
 
-int	get_time_from_start(struct timeval *start_time)
+int	get_time_from(struct timeval *start_time)
 {
 	struct timeval	cur_time;
 	int				sec;

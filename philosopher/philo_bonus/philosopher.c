@@ -6,21 +6,18 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 20:57:39 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/03/31 21:56:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "philosopher.h"
-#include "info.h"
-#include "time/ks_time.h"
 
-static void philo_print(t_info *info, t_state state)
+void	philo_print(t_info *info, t_state state)
 {
 	int	time;
 
 	sem_wait(info->print);
-	time = get_time_from_start(&(info->start_time));
+	time = get_time_from(&(info->start_time));
 	if (state == THINK)
 		printf("%d %d is thinking\n", time, info->philo.my_number);
 	else if (state == SLEEP)
@@ -31,13 +28,17 @@ static void philo_print(t_info *info, t_state state)
 		printf("%d %d has taken a fork\n", time, info->philo.my_number);
 		printf("%d %d is eating\n", time, info->philo.my_number);
 	}
+	else if (state == DIED)
+		printf("%d %d is died\n", time, info->philo.my_number);
 	sem_post(info->print);
 }
 
 static void	philo_eat(t_info *info)
 {
 	philo_print(info, EAT);
+	info->philo.starving_time = 0;
 	usleep(info->time_to_eat * 1000);
+	++(info->philo.count_eat);
 	sem_post(info->fork);
 	sem_post(info->fork);
 	sem_post(info->fork_set);
@@ -62,6 +63,9 @@ static void	philo_think(t_info *info)
 
 void	philo_update(t_info *info)
 {
+	pthread_t	th;
+	
+	pthread_create(&th, NULL, observing, (void *)info);
 	while (1)
 	{
 		if (info->philo.state == THINK)

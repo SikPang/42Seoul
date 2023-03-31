@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ks_time.h                                          :+:      :+:    :+:   */
+/*   philosopher_observe.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/31 19:44:12 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 21:40:58 by kwsong           ###   ########.fr       */
+/*   Created: 2023/03/31 21:32:02 by kwsong            #+#    #+#             */
+/*   Updated: 2023/03/31 22:22:58 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KS_TIME_H
-# define KS_TIME_H
+#include "philosopher.h"
 
-# include <unistd.h>
-# include <sys/time.h>
+void	*observing(void *data)
+{
+	t_info	*info;
 
-int	get_time_from(struct timeval *start_time);
-
-#endif
+	info = (t_info *)data;
+	while (1)
+	{
+		if (info->philo.starving_time >= info->time_to_die)
+		{
+			philo_print(info, DIED);
+			exit(44);
+		}
+		info->philo.starving_time += 10;
+		usleep(1000 * 10);
+	}
+	return (data);
+}

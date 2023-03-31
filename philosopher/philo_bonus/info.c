@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 20:52:25 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/03/31 22:21:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void set_semaphore(t_info *info)
 {
-	info->fork = sem_open(FILE_NAME_FORK, O_CREAT, 0666,
+	info->fork = sem_open(FILE_NAME_FORK, O_CREAT | O_EXCL, 0666,
 		info->max_philo);
-	info->fork_set = sem_open(FILE_NAME_SET, O_CREAT, 0666,
+	info->fork_set = sem_open(FILE_NAME_SET, O_CREAT | O_EXCL, 0666,
 		info->max_philo / 2);
-	info->print = sem_open(FILE_NAME_PRINT, O_CREAT, 0666, 1);
+	info->print = sem_open(FILE_NAME_PRINT, O_CREAT | O_EXCL, 0666, 1);
     if (info->fork == SEM_FAILED || info->fork_set == SEM_FAILED
 		|| info->print == SEM_FAILED)
 		error_exit(SEM);
@@ -41,15 +41,17 @@ t_info	*init_info(char **av)
 	info->must_eat = 0;
 	if (av[5] != NULL)
 		info->must_eat = ft_atoi(av[5]);
+	unlink_all(info);
 	set_semaphore(info);
 	gettimeofday(&(info->start_time), NULL);
 	info->philo.my_number = 0;
 	info->philo.count_eat = 0;
 	info->philo.state = THINK;
+	info->philo.starving_time = 0.0;
 	return (info);
 }
 
-void free_info(t_info *info)
+void unlink_all(t_info *info)
 {
 	sem_close(info->fork);
 	sem_unlink(FILE_NAME_FORK);
@@ -57,5 +59,11 @@ void free_info(t_info *info)
 	sem_unlink(FILE_NAME_SET);
 	sem_close(info->print);
 	sem_unlink(FILE_NAME_PRINT);
+}
+
+void free_all(t_info *info)
+{
+	unlink_all(info);
+	free(info->pids);
 	free(info);
 }
