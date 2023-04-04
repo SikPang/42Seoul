@@ -6,12 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:04:12 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 20:24:19 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/04 21:53:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILITY_H
 # define UTILITY_H
+
+#include <stddef.h>
 
 typedef enum e_error
 {
@@ -23,5 +25,9 @@ typedef enum e_error
 
 int		ft_atoi(const char *str);
 void	error_exit(t_error code);
+char	*ft_itoa(int n);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(const char *str);
 
 #endif

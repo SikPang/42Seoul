@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.h                                      :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/04 21:58:50 by kwsong           ###   ########.fr       */
+/*   Created: 2022/10/03 07:33:15 by kwsong            #+#    #+#             */
+/*   Updated: 2023/04/04 21:52:34 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILOSOPHER_H
-# define PHILOSOPHER_H
+#include "utility.h"
 
-# include <pthread.h>
-# include <stdio.h>
-# include "info.h"
-# include "time/ks_time.h"
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
 
-void	philo_print(t_info *info, t_state state);
-void	philo_update(t_info *info);
-void	*observing(void *data);
-
-#endif
+	i = 0;
+	while (str[i] != '\0')
+	{
+		++i;
+	}
+	return (i);
+}

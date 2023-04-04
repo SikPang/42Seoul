@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 22:09:46 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/04 21:41:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	wait_all(t_info *info)
 			++i;
 		}
 	}
+	printf("Done!\n");
 }
 
 void make_processes(t_info *info)
@@ -55,10 +56,10 @@ void make_processes(t_info *info)
 		error_exit(MALLOC);
 	while (i < info->max_philo)
 	{
+		++(info->philo.my_number);
 		info->pids[i] = fork();
 		if (info->pids[i] == 0)
 			philo_update(info);
-		++(info->philo.my_number);
 		++i;
 	}
 }

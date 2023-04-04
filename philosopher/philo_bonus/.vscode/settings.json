@@ -6,6 +6,7 @@
 		"time.h": "c",
 		"__locale": "c",
 		"info.h": "c",
-		"ks_time.h": "c"
+		"ks_time.h": "c",
+		"stdlib.h": "c"
 	}
 }
