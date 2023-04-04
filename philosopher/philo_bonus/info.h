@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 22:21:01 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/04 21:01:21 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define FILE_NAME_FORK "/fork_semaphore"
 # define FILE_NAME_SET "/set_semaphore"
 # define FILE_NAME_PRINT "/print_semaphore"
+# define FILE_NAME_STARVE "/starve_semaphore"
 
 typedef enum e_state
 {
@@ -32,7 +33,7 @@ typedef enum e_state
 
 typedef struct s_philo
 {
-	double	starving_time;
+	int		time_last_eat;
 	int 	my_number;
 	int 	count_eat;
 	t_state state;
@@ -44,6 +45,7 @@ typedef struct s_info
 	sem_t 			*fork;
 	sem_t 			*fork_set;
 	sem_t 			*print;
+	sem_t 			*starve;
 	pid_t			*pids;
 	struct timeval	start_time;
 	int 			max_philo;

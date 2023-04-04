@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/04 17:01:01 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/04 21:00:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	philo_print(t_info *info, t_state state)
 static void	philo_eat(t_info *info)
 {
 	philo_print(info, EAT);
-	info->philo.starving_time = 0;
+	sem_wait(info->starve);
+	info->philo.time_last_eat = get_time_from(&(info->start_time));
+	sem_post(info->starve);
 	usleep(info->time_to_eat * 1000);
 	++(info->philo.count_eat);
 	sem_post(info->fork);
