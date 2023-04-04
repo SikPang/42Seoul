@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 21:56:28 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/04 17:01:01 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	philo_eat(t_info *info)
 	sem_post(info->fork);
 	sem_post(info->fork);
 	sem_post(info->fork_set);
+	if (info->philo.count_eat == info->must_eat)
+		exit(0);
 	info->philo.state = SLEEP;
 }
 
