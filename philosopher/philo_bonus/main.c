@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/04 21:41:25 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 13:45:01 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	wait_all(t_info *info)
 	while (i < info->max_philo)
 	{
 		waitpid(-1, &signal, 0);
-		if (WEXITSTATUS(signal) == 44)
+		if (WEXITSTATUS(signal) == DEATH_SIGNAL)
 		{
 			is_died = 1;
 			break ;
@@ -43,7 +43,6 @@ void	wait_all(t_info *info)
 			++i;
 		}
 	}
-	printf("Done!\n");
 }
 
 void make_processes(t_info *info)
@@ -54,6 +53,7 @@ void make_processes(t_info *info)
 	info->pids = (pid_t *)malloc(info->max_philo * sizeof(pid_t));
 	if (info->pids == NULL)
 		error_exit(MALLOC);
+	gettimeofday(&(info->start_time), NULL);
 	while (i < info->max_philo)
 	{
 		++(info->philo.my_number);
@@ -75,4 +75,5 @@ int	main(int ac, char **av)
 	wait_all(info);
 	unlink_all(info);
 	free_all(info);
+	return (SUCCESS);
 }

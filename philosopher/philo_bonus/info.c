@@ -6,11 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/04 22:17:30 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 13:22:55 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "info.h"
+#include <stdio.h>
 
 static void set_starve(t_info *info)
 {
@@ -24,7 +25,7 @@ static void set_starve(t_info *info)
 	i = 0;
 	while (i < info->max_philo)
 	{
-		itoa_result = ft_itoa(info->philo.my_number);
+		itoa_result = ft_itoa(i);
 		file_name = ft_strjoin("/semapore_", itoa_result);
 		info->starve[i] = sem_open(file_name, O_CREAT | O_EXCL, 0666, 1);
 		free(itoa_result);
@@ -62,13 +63,11 @@ t_info	*init_info(char **av)
 	if (info->max_philo < 1 || info->max_philo > 1000 || info->time_to_die < 1
 		|| info->time_to_eat < 1 || info->time_to_sleep < 1)
 		error_exit(ARG);
-	info->must_eat = 0;
+	info->must_eat = -1;
 	if (av[5] != NULL)
 		info->must_eat = ft_atoi(av[5]);
-	info->starve = NULL;
 	unlink_all(info);
 	set_semaphore(info);
-	gettimeofday(&(info->start_time), NULL);
 	info->philo.my_number = 0;
 	info->philo.count_eat = 0;
 	info->philo.state = THINK;
@@ -82,19 +81,15 @@ void unlink_all(t_info *info)
 	char	*file_name;
 	int		i;
 
-	if (info->starve != NULL)
+	i = 0;
+	while (i < info->max_philo)
 	{
-		i = 0;
-		while (i < info->max_philo)
-		{
-			itoa_result = ft_itoa(info->philo.my_number);
-			file_name = ft_strjoin("/semapore_", itoa_result);
-			sem_close(info->starve[i]);
-			sem_unlink(file_name);
-			free(itoa_result);
-			free(file_name);
-			++i;
-		}
+		itoa_result = ft_itoa(i);
+		file_name = ft_strjoin("/semapore_", itoa_result);
+		sem_unlink(file_name);
+		free(itoa_result);
+		free(file_name);
+		++i;
 	}
 	sem_close(info->fork);
 	sem_unlink(FILE_NAME_FORK);

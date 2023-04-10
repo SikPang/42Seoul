@@ -6,14 +6,16 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:04:12 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/04 21:53:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 13:32:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILITY_H
 # define UTILITY_H
 
-#include <stddef.h>
+# include <stddef.h>
+
+# define ERROR 1
 
 typedef enum e_error
 {

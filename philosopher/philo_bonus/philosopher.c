@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/04 22:18:09 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 13:35:56 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,28 @@
 
 void	philo_print(t_info *info, t_state state)
 {
-	int	time;
+	long	time;
 
 	sem_wait(info->print);
 	time = get_time_from(&(info->start_time));
 	if (state == THINK)
-		printf("%d %d is thinking\n", time, info->philo.my_number);
+		printf("%ld %d is thinking\n", time, info->philo.my_number);
 	else if (state == SLEEP)
-		printf("%d %d is sleeping\n", time, info->philo.my_number);
+		printf("%ld %d is sleeping\n", time, info->philo.my_number);
 	else if (state == EAT)
 	{
-		printf("%d %d has taken a fork\n", time, info->philo.my_number);
-		printf("%d %d has taken a fork\n", time, info->philo.my_number);
-		printf("%d %d is eating\n", time, info->philo.my_number);
+		printf("%ld %d has taken a fork\n", time, info->philo.my_number);
+		printf("%ld %d has taken a fork\n", time, info->philo.my_number);
+		printf("%ld %d is eating\n", time, info->philo.my_number);
 	}
 	else if (state == DIED)
-		printf("%d %d is died\n", time, info->philo.my_number);
+		printf("%ld %d is died\n", time, info->philo.my_number);
 	sem_post(info->print);
 	if (state == EAT)
 	{
-		sem_wait(info->starve[info->philo.my_number]);
+		sem_wait(info->starve[info->philo.my_number - 1]);
 		info->philo.time_last_eat = time;
-		sem_post(info->starve[info->philo.my_number]);
+		sem_post(info->starve[info->philo.my_number - 1]);
 	}
 }
 
@@ -47,10 +47,8 @@ static void	philo_eat(t_info *info)
 	sem_post(info->fork);
 	sem_post(info->fork);
 	sem_post(info->fork_set);
-	if (info->philo.count_eat >= info->must_eat)
-	{
-		exit(0);
-	}
+	if (info->philo.count_eat == info->must_eat)
+		exit(SUCCESS);
 	info->philo.state = SLEEP;
 }
 

@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ks_time.h                                          :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/31 19:44:12 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 21:40:58 by kwsong           ###   ########.fr       */
+/*   Created: 2023/03/31 19:44:14 by kwsong            #+#    #+#             */
+/*   Updated: 2023/04/10 13:47:43 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KS_TIME_H
-# define KS_TIME_H
+#include "time.h"
 
-# include <unistd.h>
-# include <sys/time.h>
-
-int	get_time_from(struct timeval *start_time);
-
-#endif
+long	get_time_from(struct timeval *start_time)
+{
+	struct timeval	cur_time;
+	long			sec;
+	long			usec;
+	
+	gettimeofday(&cur_time, NULL);
+	sec = (cur_time.tv_sec - start_time->tv_sec) * 1000;
+	usec = (cur_time.tv_usec - start_time->tv_usec) / 1000;
+	return (sec + usec);
+}

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 20:45:14 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/31 15:05:49 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 13:32:11 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	error_exit(t_error code)
 	else if (code == SEM)
 		write(2, "Semaphore ", 11);
 	write(2, "Error\n", 6);
-	exit(1);
+	exit(ERROR);
 }

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:33:45 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/04 22:19:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 13:04:35 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,44 +39,19 @@ static int	get_size(long long n)
 	return (i);
 }
 
-static int	check_minus(long long *ln, int size, int *is_minus, char **new_str)
-{
-	if (*ln < 0)
-	{
-		*is_minus = 1;
-		(*ln) *= -1;
-		*new_str = (char *)malloc((size + 2) * sizeof(char));
-		*new_str[size + 1] = '\0';
-	}
-	else
-	{
-		*is_minus = 0;
-		*new_str = (char *)malloc((size + 1) * sizeof(char));
-		*new_str[size] = '\0';
-	}
-	if (*new_str == (char *)0)
-		error_exit(MALLOC);
-	return (1);
-}
-
 char	*ft_itoa(int n)
 {
 	char		*new_str;
 	int			size;
-	int			is_minus;
 	long long	ln;
 
 	ln = (long long)n;
 	size = get_size(ln);
-	new_str = (char *)0;
-	check_minus(&ln, size, &is_minus, &new_str);
-	if (is_minus == 1)
-	{
-		new_str[0] = '-';
-		set_str(new_str + 1, ln, size);
-	}
-	else
-		set_str(new_str, ln, size);
+	new_str = (char *)malloc((size + 1) * sizeof(char));
+	if (new_str == (char *)0)
+		error_exit(MALLOC);
+	new_str[size] = '\0';
+	set_str(new_str, ln, size);
 	return (new_str);
 }
 
@@ -84,5 +59,11 @@ char	*ft_itoa(int n)
 // #include <limits.h>
 // int main()
 // {
-// 	printf("%s", ft_itoa(INT_MIN));
+// 	printf("%s\n", ft_itoa(0));
+// 	printf("%s\n", ft_itoa(9));
+// 	printf("%s\n", ft_itoa(178));
+// 	printf("%s\n", ft_itoa(152353));
+// 	printf("%s\n", ft_itoa(1));
+// 	printf("%s\n", ft_itoa(90890832));
+// 	printf("%s\n", ft_itoa(INT_MAX));
 // }
