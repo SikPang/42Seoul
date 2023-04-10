@@ -6,12 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 13:45:01 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 14:40:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <signal.h>
+#include <semaphore.h>
 #include "utility/utility.h"
 #include "philosopher.h"
 #include "info.h"
@@ -45,21 +46,30 @@ void	wait_all(t_info *info)
 	}
 }
 
-void make_processes(t_info *info)
+void	make_processes(t_info *info)
 {
 	int		i;
 
-	i = 0;
 	info->pids = (pid_t *)malloc(info->max_philo * sizeof(pid_t));
 	if (info->pids == NULL)
 		error_exit(MALLOC);
-	gettimeofday(&(info->start_time), NULL);
+	while (info->philo.my_number < info->max_philo)
+	{
+		sem_wait(info->starve[info->philo.my_number]);
+		++(info->philo.my_number);
+		info->pids[info->philo.my_number - 1] = fork();
+		if (info->pids[info->philo.my_number - 1] == 0)
+		{
+			sem_wait(info->starve[info->philo.my_number - 1]);
+			sem_post(info->starve[info->philo.my_number - 1]);
+			gettimeofday(&(info->start_time), NULL);
+			philo_update(info);
+		}
+	}
+	i = 0;
 	while (i < info->max_philo)
 	{
-		++(info->philo.my_number);
-		info->pids[i] = fork();
-		if (info->pids[i] == 0)
-			philo_update(info);
+		sem_post(info->starve[i]);
 		++i;
 	}
 }

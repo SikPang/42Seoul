@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 13:35:56 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 14:38:54 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	philo_think(t_info *info)
 void	philo_update(t_info *info)
 {
 	pthread_t	th;
-	
+
 	pthread_create(&th, NULL, observing, (void *)info);
 	while (1)
 	{

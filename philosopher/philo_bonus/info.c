@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 13:22:55 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 14:38:35 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "info.h"
 #include <stdio.h>
 
-static void set_starve(t_info *info)
+static void	set_starve(t_info *info)
 {
 	char	*itoa_result;
 	char	*file_name;
@@ -28,23 +28,23 @@ static void set_starve(t_info *info)
 		itoa_result = ft_itoa(i);
 		file_name = ft_strjoin("/semapore_", itoa_result);
 		info->starve[i] = sem_open(file_name, O_CREAT | O_EXCL, 0666, 1);
-		free(itoa_result);
-		free(file_name);
 		if (info->starve[i] == SEM_FAILED)
 			error_exit(SEM);
+		free(itoa_result);
+		free(file_name);
 		++i;
 	}
 }
 
-static void set_semaphore(t_info *info)
+static void	set_semaphore(t_info *info)
 {
 	set_starve(info);
 	info->fork = sem_open(FILE_NAME_FORK, O_CREAT | O_EXCL, 0666,
-		info->max_philo);
+			info->max_philo);
 	info->fork_set = sem_open(FILE_NAME_SET, O_CREAT | O_EXCL, 0666,
-		info->max_philo / 2);
+			info->max_philo / 2);
 	info->print = sem_open(FILE_NAME_PRINT, O_CREAT | O_EXCL, 0666, 1);
-    if (info->fork == SEM_FAILED || info->fork_set == SEM_FAILED
+	if (info->fork == SEM_FAILED || info->fork_set == SEM_FAILED
 		|| info->print == SEM_FAILED)
 		error_exit(SEM);
 }
@@ -75,7 +75,7 @@ t_info	*init_info(char **av)
 	return (info);
 }
 
-void unlink_all(t_info *info)
+void	unlink_all(t_info *info)
 {
 	char	*itoa_result;
 	char	*file_name;
@@ -99,7 +99,7 @@ void unlink_all(t_info *info)
 	sem_unlink(FILE_NAME_PRINT);
 }
 
-void free_all(t_info *info)
+void	free_all(t_info *info)
 {
 	unlink_all(info);
 	free(info->pids);

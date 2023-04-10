@@ -1,0 +1,14 @@
+DESCRIPTION
+     The nanosleep() function causes the calling thread to sleep for the amount of time specified
+     in rqtp (the actual time slept may be longer, due to system latencies and possible limita-
+     tions in the timer resolution of the hardware).  An unmasked signal will cause nanosleep()
+     to terminate the sleep early, regardless of the SA_RESTART value on the interrupting signal.
+
+RETURN VALUES
+     If nanosleep() returns because the requested time has elapsed, the value returned will be
+     zero.
+
+     If nanosleep() returns due to the delivery of a signal, the value returned will be the -1,
+     and the global variable errno will be set to indicate the interruption.  If rmtp is
+     non-NULL, the timespec structure it references is updated to contain the unslept amount (the
+     request time minus the time actually slept).
