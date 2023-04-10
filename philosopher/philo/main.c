@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 21:14:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 21:16:01 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ static void	observing(t_philo *philo)
 
 static void	make_thread(t_philo *philo)
 {
-	pthread_t	obs_thread;
-	int			i;
+	int	i;
 
 	gettimeofday(&(philo->info->start_time), NULL);
 	i = 0;
