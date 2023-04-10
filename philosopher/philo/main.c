@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 18:23:39 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 18:25:15 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ static void	make_thread(t_philo *philo)
 	pthread_t	th;
 	int	i;
 
-	gettimeofday(&(info->start_time), NULL);
+	gettimeofday(&(philo->info->start_time), NULL);
 	i = 0;
-	while (i < info->max_philo)
+	while (i < philo->info->max_philo)
 	{
-		pthread_create(&(info->philo[i].thread), NULL, philo_update,
-			(void *)(info->philo));
+		pthread_create(&(philo[i].thread), NULL, philo_update,
+			(void *)(philo));
 		++i;
 	}
 	pthread_create(&th, NULL, observing, (void *)info);

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 17:52:32 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 18:25:37 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ static void	philo_think(t_philo *philo)
 
 void	*philo_update(void *data)
 {
-	t_philo	*philo = data;
+	t_philo	*philo;
+
+	philo = (t_philo *)data;
 	while (1)
 	{
 		if (philo->state == THINK)
