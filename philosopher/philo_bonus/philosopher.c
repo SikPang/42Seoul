@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 15:20:38 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 15:37:08 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ long	philo_print(t_info *info, t_state state)
 
 static void	philo_eat(t_info *info)
 {
-	long	start_time;
+	long	cur_time;
 
-	start_time = philo_print(info, EAT);
+	cur_time = philo_print(info, EAT);
 	sem_wait(info->starve[info->philo.my_number - 1]);
-	info->philo.time_last_eat = start_time;
+	info->philo.time_last_eat = cur_time;
 	sem_post(info->starve[info->philo.my_number - 1]);
-	while (get_time_from(&(info->start_time)) - start_time < info->time_to_eat)
+	while (get_time_from(&(info->start_time)) - cur_time < info->time_to_eat)
 		usleep(CHECK_CYCLE);
 	++(info->philo.count_eat);
 	sem_post(info->fork);
@@ -58,10 +58,10 @@ static void	philo_eat(t_info *info)
 
 static void	philo_sleep(t_info *info)
 {	
-	long	start_time;
+	long	cur_time;
 
-	start_time = philo_print(info, SLEEP);
-	while (get_time_from(&(info->start_time)) - start_time < info->time_to_sleep)
+	cur_time = philo_print(info, SLEEP);
+	while (get_time_from(&(info->start_time)) - cur_time < info->time_to_sleep)
 		usleep(CHECK_CYCLE);
 	info->philo.state = THINK;
 }

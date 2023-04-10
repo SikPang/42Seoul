@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 15:31:59 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 15:35:35 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	set_semaphore(t_info *info)
 	info->print = sem_open(FILE_NAME_PRINT, O_CREAT | O_EXCL, 0666, 1);
 	if (info->fork == SEM_FAILED || info->fork_set == SEM_FAILED
 		|| info->print == SEM_FAILED)
-	if (info->print == SEM_FAILED)
 		error_exit(SEM);
 }
 
