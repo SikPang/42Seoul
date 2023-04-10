@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 15:35:35 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 16:33:33 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	set_starve(t_info *info)
 	while (i < info->max_philo)
 	{
 		itoa_result = ft_itoa(i);
-		file_name = ft_strjoin(FILE_NAME_PREFIX, itoa_result);
+		file_name = ft_strjoin(FILE_NAME_STARVE, itoa_result);
 		info->starve[i] = sem_open(file_name, O_CREAT | O_EXCL, 0666, 1);
 		if (info->starve[i] == SEM_FAILED)
 			error_exit(SEM);
@@ -85,7 +85,7 @@ void	unlink_all(t_info *info)
 	while (i < info->max_philo)
 	{
 		itoa_result = ft_itoa(i);
-		file_name = ft_strjoin(FILE_NAME_PREFIX, itoa_result);
+		file_name = ft_strjoin(FILE_NAME_STARVE, itoa_result);
 		sem_unlink(file_name);
 		free(itoa_result);
 		free(file_name);

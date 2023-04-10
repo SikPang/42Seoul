@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 15:31:05 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 16:33:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@
 # include <sys/time.h>
 # include "utility/utility.h"
 
-# define FILE_NAME_PREFIX "semapore_"
+# define FILE_NAME_STARVE "/starve_semapore_"
 # define FILE_NAME_FORK "/fork_semaphore"
 # define FILE_NAME_SET "/set_semaphore"
 # define FILE_NAME_PRINT "/print_semaphore"
-# define FILE_NAME_STARVE "/starve_semaphore"
 
 typedef enum e_state
 {
