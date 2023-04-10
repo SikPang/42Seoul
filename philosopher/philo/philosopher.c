@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 18:25:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 20:30:20 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,27 @@ long	philo_print(t_philo *philo, t_state state)
 {
 	long	time;
 
-	sem_wait(info->print);
-	time = get_time_from(&(info->start_time));
-	if (state == THINK)
-		printf("%ld %d is thinking\n", time, info->philo.my_number);
-	else if (state == SLEEP)
-		printf("%ld %d is sleeping\n", time, info->philo.my_number);
-	else if (state == EAT)
+	pthread_mutex_lock(&(philo->info->print));
+	if (philo[0].info->is_over == TRUE)
 	{
-		printf("%ld %d has taken a fork\n", time, info->philo.my_number);
-		printf("%ld %d has taken a fork\n", time, info->philo.my_number);
-		printf("%ld %d is eating\n", time, info->philo.my_number);
-	}
-	else if (state == DIED)
-	{
-		printf("%ld %d is died\n", time, info->philo.my_number);
+		pthread_mutex_unlock(&(philo->info->print));
 		return (time);
 	}
-	sem_post(info->print);
+	time = get_time_from(&(philo->info->start_time));
+	if (state == THINK)
+		printf("%ld %d is thinking\n", time, philo->my_number);
+	else if (state == SLEEP)
+		printf("%ld %d is sleeping\n", time, philo->my_number);
+	else if (state == FORK)
+		printf("%ld %d has taken a fork\n", time, philo->my_number);
+	else if (state == EAT)
+		printf("%ld %d is eating\n", time, philo->my_number);
+	else if (state == DIED)
+	{
+		printf("%ld %d is died\n", time, philo->my_number);
+		return (time);
+	}
+	pthread_mutex_unlock(&(philo->info->print));
 	return (time);
 }
 
@@ -41,38 +44,72 @@ static void	philo_eat(t_philo *philo)
 {
 	long	cur_time;
 
-	cur_time = philo_print(info, EAT);
-	sem_wait(info->starve[info->philo.my_number - 1]);
-	info->philo.time_last_eat = cur_time;
-	sem_post(info->starve[info->philo.my_number - 1]);
-	while (get_time_from(&(info->start_time)) - cur_time < info->time_to_eat)
+	cur_time = philo_print(philo, EAT);
+	pthread_mutex_lock(&(philo->starve));
+	philo->time_last_eat = cur_time;
+	pthread_mutex_unlock(&(philo->starve));
+	while (get_time_from(&(philo->info->start_time)) - cur_time
+		< philo->info->time_to_eat)
+	{
+		if (philo[0].info->is_over == TRUE)
+		{
+			pthread_mutex_unlock(&(philo->info->fork[philo->left_idx].mutex));
+			pthread_mutex_unlock(&(philo->info->fork[philo->right_idx].mutex));
+			return ;
+		}
 		usleep(CHECK_CYCLE);
-	++(info->philo.count_eat);
-	sem_post(info->fork);
-	sem_post(info->fork);
-	sem_post(info->fork_set);
-	if (info->philo.count_eat == info->must_eat)
-		exit(SUCCESS);
-	info->philo.state = SLEEP;
+	}
+	++(philo->count_eat);
+	pthread_mutex_unlock(&(philo->info->fork[philo->left_idx].mutex));
+	philo->info->fork[philo->left_idx].state = AVAILAVLE;
+	pthread_mutex_unlock(&(philo->info->fork[philo->right_idx].mutex));
+	philo->info->fork[philo->left_idx].state = AVAILAVLE;
+	if (philo->count_eat == philo->info->must_eat)
+		philo[0].info->is_over = TRUE;
+	philo->state = SLEEP;
 }
 
 static void	philo_sleep(t_philo *philo)
 {	
 	long	cur_time;
 
-	cur_time = philo_print(info, SLEEP);
-	while (get_time_from(&(info->start_time)) - cur_time < info->time_to_sleep)
+	cur_time = philo_print(philo, SLEEP);
+	while (get_time_from(&(philo->info->start_time)) - cur_time
+		< philo->info->time_to_sleep)
+	{
+		if (philo[0].info->is_over == TRUE)
+			return ;
 		usleep(CHECK_CYCLE);
-	info->philo.state = THINK;
+	}
+	philo->state = THINK;
 }
 
 static void	philo_think(t_philo *philo)
 {
-	philo_print(info, THINK);
-	sem_wait(info->fork_set);
-	sem_wait(info->fork);
-	sem_wait(info->fork);
-	info->philo.state = EAT;
+	philo_print(philo, THINK);
+	while (philo->info->fork[philo->left_idx].state == UNAVAILAVLE)
+		if (philo[0].info->is_over == TRUE)
+			return ;
+	philo->info->fork[philo->left_idx].state = UNAVAILAVLE;
+	pthread_mutex_lock(&(philo->info->fork[philo->left_idx].mutex));
+	philo_print(philo, FORK);
+	while (philo->info->fork[philo->right_idx].state == UNAVAILAVLE)
+	{
+		if (philo[0].info->is_over == TRUE)
+		{
+			pthread_mutex_unlock(&(philo->info->fork[philo->left_idx].mutex));
+			return ;
+		}
+	}
+	philo->info->fork[philo->right_idx].state = UNAVAILAVLE;
+	pthread_mutex_lock(&(philo->info->fork[philo->right_idx].mutex));
+	philo_print(philo, FORK);
+	if (philo[0].info->is_over == TRUE)
+	{
+		pthread_mutex_unlock(&(philo->info->fork[philo->left_idx].mutex));
+		pthread_mutex_unlock(&(philo->info->fork[philo->right_idx].mutex));
+	}
+	philo->state = EAT;
 }
 
 void	*philo_update(void *data)
@@ -80,8 +117,12 @@ void	*philo_update(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
+	if (philo->my_number % 2 == 0)
+		usleep(200);
 	while (1)
 	{
+		if (philo[0].info->is_over == TRUE)
+			return (NULL);
 		if (philo->state == THINK)
 			philo_think(philo);
 		else if (philo->state == EAT)

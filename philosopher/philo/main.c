@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 18:25:15 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 20:30:03 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,50 +22,57 @@ void	join_all(t_philo *philo)
 	int	i;
 
 	i = 0;
-	while (i < info->max_philo)
+	while (i < philo->info->max_philo)
 	{
-		pthread_join(info->philo[i].thread, NULL);
+		pthread_join(philo[i].thread, NULL);
 		++i;
 	}
 }
 
-static void	*observing(void *data)
+static void	observing(t_philo *philo)
 {
-	t_philo	*philo;
+	t_info	*info;
 	long	cur_time;
 	int		last_eat;
+	int		i;
 
-	info = (t_info *)data;
-	cur_time = get_time_from(&(info->start_time));
+	info = philo[0].info;
 	while (1)
 	{
-		sem_wait(info->starve[info->philo.my_number - 1]);
-		last_eat = info->philo.time_last_eat;
-		sem_post(info->starve[info->philo.my_number - 1]);
-		if (cur_time - last_eat >= info->time_to_die)
+		cur_time = get_time_from(&(info->start_time));
+		i = 0;
+		while (i < info->max_philo)
 		{
-			philo_print(info, DIED);
-			exit(DEATH_SIGNAL);
+			if (info->is_over == TRUE)
+				return ;
+			pthread_mutex_lock(&(philo->starve));
+			last_eat = philo->time_last_eat;
+			pthread_mutex_unlock(&(philo->starve));
+			if (cur_time - last_eat >= info->time_to_die)
+			{
+				philo_print(philo, DIED);
+				info->is_over = TRUE;
+				return ;
+			}
+			++i;
 		}
 		usleep(OBSERVE_CYCLE);
 	}
-	return (data);
 }
 
 static void	make_thread(t_philo *philo)
 {
-	pthread_t	th;
-	int	i;
+	pthread_t	obs_thread;
+	int			i;
 
 	gettimeofday(&(philo->info->start_time), NULL);
 	i = 0;
 	while (i < philo->info->max_philo)
 	{
 		pthread_create(&(philo[i].thread), NULL, philo_update,
-			(void *)(philo));
+			(void *)(philo + i));
 		++i;
 	}
-	pthread_create(&th, NULL, observing, (void *)info);
 }
 
 int	main(int ac, char **av)
@@ -76,6 +83,7 @@ int	main(int ac, char **av)
 		error_exit(ARG);
 	philo = init_philo(av);
 	make_thread(philo);
+	observing(philo);
 	join_all(philo);
 	free_all(philo);
 	return (SUCCESS);

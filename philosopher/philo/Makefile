@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/04/10 15:51:45 by kwsong           ###   ########.fr        #
+#    Updated: 2023/04/10 20:31:23 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,20 +15,15 @@ NAME		= philo
 SRCS_FILE	= main \
 			info \
 			philosopher \
-			philosopher_observe \
 			time/time \
 			utility/ft_atoi \
-			utility/ft_itoa \
-			utility/ft_memcpy \
-			utility/ft_strlen \
-			utility/ft_strjoin \
 			utility/error_exit
 
 SRCS	= $(addsuffix .c, $(SRCS_FILE))
 
 OBJS	= $(SRCS:.c=.o)
 
-CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= #-Wall -Werror -Wextra
 
 all		: $(NAME)
 	make clean

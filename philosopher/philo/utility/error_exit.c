@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 20:45:14 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 13:32:11 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 19:26:40 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	error_exit(t_error code)
 		write(2, "Arguments ", 11);
 	else if (code == MALLOC)
 		write(2, "Malloc ", 8);
-	else if (code == FORK)
-		write(2, "Fork ", 6);
-	else if (code == SEM)
-		write(2, "Semaphore ", 11);
+	else if (code == MUTEX)
+		write(2, "Mutex ", 6);
+	else if (code == THREAD)
+		write(2, "Thread ", 11);
 	write(2, "Error\n", 6);
 	exit(ERROR);
 }

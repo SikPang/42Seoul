@@ -6,10 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 18:23:03 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 20:27:55 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "info.h"
 
 static void	set_fork(t_info *info)
@@ -41,12 +42,22 @@ t_philo	*set_philo(t_info *info)
 	{
 		pthread_mutex_init(&(philo[i].starve), NULL);
 		philo[i].time_last_eat = 0;
-		philo[i].my_number = 0;
+		philo[i].my_number = i + 1;
 		philo[i].count_eat = 0;
 		philo[i].state = THINK;
 		philo[i].info = info;
+		if (i == 0)
+			philo[i].left_idx = info->max_philo - 1;
+		else
+			philo[i].left_idx = philo[i].my_number - 2;
+		philo[i].right_idx = philo[i].my_number - 1;
+		//if (i != info->max_philo - 1)
+		//	printf("%d : %d, %d\n", i, philo[i].left_idx, philo[i].right_idx);
 		++i;
 	}
+	philo[info->max_philo - 1].left_idx = 0;
+	philo[info->max_philo - 1].right_idx = philo[info->max_philo - 1].my_number - 2;
+	//printf("%d : %d, %d\n", info->max_philo - 1, philo[info->max_philo - 1].left_idx, philo[info->max_philo - 1].right_idx);
 	return (philo);
 }
 
@@ -72,6 +83,7 @@ t_philo	*init_philo(char **av)
 		if (info->must_eat < 1)
 			error_exit(ARG);
 	}
+	info->is_over = FALSE;
 	set_fork(info);
 	pthread_mutex_init(&(info->print), NULL);
 	philo = set_philo(info);

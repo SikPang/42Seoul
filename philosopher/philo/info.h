@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 18:22:54 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 20:27:51 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@
 # include <sys/time.h>
 # include "utility/utility.h"
 
+# define TRUE 0
+# define FALSE 1
+
 typedef enum e_state
 {
+	FORK,
 	EAT,
 	SLEEP,
 	THINK,
@@ -27,7 +31,6 @@ typedef enum e_state
 	AVAILAVLE,
 	UNAVAILAVLE
 }	t_state;
-
 
 typedef struct s_fork
 {
@@ -45,6 +48,7 @@ typedef struct s_info
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat;
+	_Bool			is_over;
 }	t_info;
 
 typedef struct s_philo
@@ -54,8 +58,10 @@ typedef struct s_philo
 	int				time_last_eat;
 	int				my_number;
 	int				count_eat;
+	int				left_idx;
+	int				right_idx;
 	t_state			state;
-	t_info			*info
+	t_info			*info;
 }	t_philo;
 
 t_philo	*init_philo(char **av);
