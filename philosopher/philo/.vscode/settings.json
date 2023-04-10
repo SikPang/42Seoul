@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"semaphore.h": "c",
+		"utility.h": "c",
+		"locale": "c",
+		"string": "c"
+	}
+}
