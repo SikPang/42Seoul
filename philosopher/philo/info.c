@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 17:10:52 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 18:23:03 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,28 +28,32 @@ static void	set_fork(t_info *info)
 	}
 }
 
-static void	set_philo(t_info *info)
+t_philo	*set_philo(t_info *info)
 {
-	int	i;
+	t_philo	*philo;
+	int		i;
 
-	info->philo = (t_philo *)malloc(info->max_philo * sizeof(t_philo));
-	if (info->philo == NULL)
+	philo = (t_philo *)malloc(info->max_philo * sizeof(t_philo));
+	if (philo == NULL)
 		error_exit(MALLOC);
 	i = 0;
 	while (i < info->max_philo)
 	{
-		pthread_mutex_init(&(info->philo[i].starve), NULL);
-		info->philo[i].time_last_eat = 0;
-		info->philo[i].my_number = 0;
-		info->philo[i].count_eat = 0;
-		info->philo[i].state = THINK;
+		pthread_mutex_init(&(philo[i].starve), NULL);
+		philo[i].time_last_eat = 0;
+		philo[i].my_number = 0;
+		philo[i].count_eat = 0;
+		philo[i].state = THINK;
+		philo[i].info = info;
 		++i;
 	}
+	return (philo);
 }
 
-t_info	*init_info(char **av)
+t_philo	*init_philo(char **av)
 {
 	t_info	*info;
+	t_philo	*philo;
 
 	info = (t_info *)malloc(sizeof(t_info));
 	if (info == NULL)
@@ -68,25 +72,25 @@ t_info	*init_info(char **av)
 		if (info->must_eat < 1)
 			error_exit(ARG);
 	}
-	set_philo(info);
 	set_fork(info);
 	pthread_mutex_init(&(info->print), NULL);
-	return (info);
+	philo = set_philo(info);
+	return (philo);
 }
 
-void	free_all(t_info *info)
+void	free_all(t_philo *philo)
 {
 	int	i;
 
 	i = 0;
-	while (i < info->max_philo)
+	while (i < philo->info->max_philo)
 	{
-		pthread_mutex_destroy(&(info->fork[i].mutex));
-		pthread_mutex_destroy(&(info->philo[i].starve));
+		pthread_mutex_destroy(&(philo->info->fork[i].mutex));
+		pthread_mutex_destroy(&(philo[i].starve));
 		++i;
 	}
-	pthread_mutex_destroy(&(info->print));
-	free(info->philo);
-	free(info->fork);
-	free(info);
+	pthread_mutex_destroy(&(philo->info->print));
+	free(philo->info->fork);
+	free(philo->info);
+	free(philo);
 }
