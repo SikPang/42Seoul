@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 21:02:17 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 21:14:54 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,6 @@ t_philo	*set_philo(t_info *info)
 		++i;
 	}
 	philo[0].left_idx = info->max_philo - 1;
-	// i = 0;
-	// while (i < info->max_philo)
-	// {
-	// 	printf("%d : %d, %d\n", i, philo[i].left_idx, philo[i].right_idx);
-	// 	++i;
-	// }
 	return (philo);
 }
 

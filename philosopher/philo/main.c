@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 20:30:03 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 21:14:21 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,25 @@ void	join_all(t_philo *philo)
 
 static void	observing(t_philo *philo)
 {
-	t_info	*info;
 	long	cur_time;
 	int		last_eat;
 	int		i;
 
-	info = philo[0].info;
 	while (1)
 	{
-		cur_time = get_time_from(&(info->start_time));
+		cur_time = get_time_from(&(philo[0].info->start_time));
 		i = 0;
-		while (i < info->max_philo)
+		while (i < philo[0].info->max_philo)
 		{
-			if (info->is_over == TRUE)
+			if (philo[0].info->is_over == TRUE)
 				return ;
 			pthread_mutex_lock(&(philo->starve));
 			last_eat = philo->time_last_eat;
 			pthread_mutex_unlock(&(philo->starve));
-			if (cur_time - last_eat >= info->time_to_die)
+			if (cur_time - last_eat >= philo[0].info->time_to_die)
 			{
 				philo_print(philo, DIED);
-				info->is_over = TRUE;
+				philo[0].info->is_over = TRUE;
 				return ;
 			}
 			++i;

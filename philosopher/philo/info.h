@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 20:27:51 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 21:14:33 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum e_state
 
 typedef struct s_fork
 {
-	pthread_mutex_t mutex;
+	pthread_mutex_t	mutex;
 	t_state			state;
 }	t_fork;
 
