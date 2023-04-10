@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 20:30:20 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 21:01:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	philo_eat(t_philo *philo)
 	pthread_mutex_unlock(&(philo->info->fork[philo->left_idx].mutex));
 	philo->info->fork[philo->left_idx].state = AVAILAVLE;
 	pthread_mutex_unlock(&(philo->info->fork[philo->right_idx].mutex));
-	philo->info->fork[philo->left_idx].state = AVAILAVLE;
+	philo->info->fork[philo->right_idx].state = AVAILAVLE;
 	if (philo->count_eat == philo->info->must_eat)
 		philo[0].info->is_over = TRUE;
 	philo->state = SLEEP;
@@ -117,8 +117,6 @@ void	*philo_update(void *data)
 	t_philo	*philo;
 
 	philo = (t_philo *)data;
-	if (philo->my_number % 2 == 0)
-		usleep(200);
 	while (1)
 	{
 		if (philo[0].info->is_over == TRUE)
