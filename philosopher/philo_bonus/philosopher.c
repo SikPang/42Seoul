@@ -6,13 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 14:38:54 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 15:20:38 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	philo_print(t_info *info, t_state state)
+long	philo_print(t_info *info, t_state state)
 {
 	long	time;
 
@@ -29,20 +29,24 @@ void	philo_print(t_info *info, t_state state)
 		printf("%ld %d is eating\n", time, info->philo.my_number);
 	}
 	else if (state == DIED)
-		printf("%ld %d is died\n", time, info->philo.my_number);
-	sem_post(info->print);
-	if (state == EAT)
 	{
-		sem_wait(info->starve[info->philo.my_number - 1]);
-		info->philo.time_last_eat = time;
-		sem_post(info->starve[info->philo.my_number - 1]);
+		printf("%ld %d is died\n", time, info->philo.my_number);
+		return (time);
 	}
+	sem_post(info->print);
+	return (time);
 }
 
 static void	philo_eat(t_info *info)
 {
-	philo_print(info, EAT);
-	usleep(info->time_to_eat * 1000);
+	long	start_time;
+
+	start_time = philo_print(info, EAT);
+	sem_wait(info->starve[info->philo.my_number - 1]);
+	info->philo.time_last_eat = start_time;
+	sem_post(info->starve[info->philo.my_number - 1]);
+	while (get_time_from(&(info->start_time)) - start_time < info->time_to_eat)
+		usleep(CHECK_CYCLE);
 	++(info->philo.count_eat);
 	sem_post(info->fork);
 	sem_post(info->fork);
@@ -53,9 +57,12 @@ static void	philo_eat(t_info *info)
 }
 
 static void	philo_sleep(t_info *info)
-{
-	philo_print(info, SLEEP);
-	usleep(info->time_to_sleep * 1000);
+{	
+	long	start_time;
+
+	start_time = philo_print(info, SLEEP);
+	while (get_time_from(&(info->start_time)) - start_time < info->time_to_sleep)
+		usleep(CHECK_CYCLE);
 	info->philo.state = THINK;
 }
 

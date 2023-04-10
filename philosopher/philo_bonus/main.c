@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 14:40:28 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/10 15:29:30 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	wait_all(t_info *info)
 			kill(info->pids[i], 1);
 			++i;
 		}
+		sem_close(info->print);
 	}
 }
 
@@ -53,23 +54,14 @@ void	make_processes(t_info *info)
 	info->pids = (pid_t *)malloc(info->max_philo * sizeof(pid_t));
 	if (info->pids == NULL)
 		error_exit(MALLOC);
-	while (info->philo.my_number < info->max_philo)
-	{
-		sem_wait(info->starve[info->philo.my_number]);
-		++(info->philo.my_number);
-		info->pids[info->philo.my_number - 1] = fork();
-		if (info->pids[info->philo.my_number - 1] == 0)
-		{
-			sem_wait(info->starve[info->philo.my_number - 1]);
-			sem_post(info->starve[info->philo.my_number - 1]);
-			gettimeofday(&(info->start_time), NULL);
-			philo_update(info);
-		}
-	}
+	gettimeofday(&(info->start_time), NULL);
 	i = 0;
 	while (i < info->max_philo)
 	{
-		sem_post(info->starve[i]);
+		++(info->philo.my_number);
+		info->pids[i] = fork();
+		if (info->pids[i] == 0)
+			philo_update(info);
 		++i;
 	}
 }

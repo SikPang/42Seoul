@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/04/10 14:16:57 by kwsong           ###   ########.fr        #
+#    Updated: 2023/04/10 15:10:55 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRCS	= $(addsuffix .c, $(SRCS_FILE))
 
 OBJS	= $(SRCS:.c=.o)
 
-CFLAGS	= -fsanitize=address #-Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra
 
 all		: $(NAME)
 	make clean
