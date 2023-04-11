@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 16:42:15 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 17:00:38 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	join_all(t_philo *philo)
 	i = 0;
 	while (i < philo->info->max_philo)
 	{
-		printf("--- %d\n", i + 1);
 		pthread_join(philo[i].thread, NULL);
+		printf("--- %d\n", i + 1);
 		++i;
 	}
 }

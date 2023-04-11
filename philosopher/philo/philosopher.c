@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 16:45:24 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 17:27:54 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,14 @@ static void	philo_eat(t_philo *philo)
 		< philo->info->time_to_eat)
 	{
 		if (check_dead(philo) == TRUE)
-		{
-			put_down_fork(philo->info->fork + philo->left_idx);
-			put_down_fork(philo->info->fork + philo->right_idx);
-			return ;
-		}
+			break ;
 		usleep(CHECK_CYCLE);
 	}
 	++(philo->count_eat);
 	put_down_fork(philo->info->fork + philo->left_idx);
+	printf("-- put down %d fork : %d\n", philo->left_idx, philo->my_number);
 	put_down_fork(philo->info->fork + philo->right_idx);
+	printf("-- put down %d fork : %d\n", philo->right_idx, philo->my_number);
 	philo->state = SLEEP;
 }
 
@@ -87,19 +85,24 @@ static void	philo_think(t_philo *philo)
 		if (check_dead(philo) == TRUE)
 			return ;
 	philo_print(philo, FORK);
+	printf("-- get %d fork : %dn", philo->left_idx, philo->my_number);
 	while (check_fork(philo->info->fork + philo->right_idx) == FALSE)
 	{
 		if (check_dead(philo) == TRUE)
 		{
 			put_down_fork(philo->info->fork + philo->left_idx);
+			printf("-- put down %d fork : %d\n", philo->left_idx, philo->my_number);
 			return ;
 		}
 	}
 	philo_print(philo, FORK);
+	printf("-- get %d fork : %dn", philo->right_idx, philo->my_number);
 	if (check_dead(philo) == TRUE)
 	{
 		put_down_fork(philo->info->fork + philo->left_idx);
+		printf("-- put down %d fork : %d\n", philo->left_idx, philo->my_number);
 		put_down_fork(philo->info->fork + philo->right_idx);
+		printf("-- put down %d fork : %d\n", philo->right_idx, philo->my_number);
 	}
 	philo->state = EAT;
 }
@@ -111,18 +114,21 @@ void	*philo_update(void *data)
 	philo = (t_philo *)data;
 	while (1)
 	{
-		if (check_dead(philo) == TRUE)
-			return (NULL);
-		if (philo->count_eat == philo->info->must_eat)
-		{
-			increase_done_cnt(philo);
-			return (NULL);
-		}
 		if (philo->state == THINK)
 			philo_think(philo);
 		else if (philo->state == EAT)
 			philo_eat(philo);
 		else if (philo->state == SLEEP)
 			philo_sleep(philo);
+		if (check_dead(philo) == TRUE)
+		{
+			printf("+ %d\n", philo->my_number);
+			return (NULL);
+		}
+		if (philo->count_eat == philo->info->must_eat)
+		{
+			increase_done_cnt(philo);
+			return (NULL);
+		}
 	}
 }
