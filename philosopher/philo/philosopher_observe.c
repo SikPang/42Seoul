@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:49:11 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 18:48:56 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 19:24:16 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,8 @@ void	observing(t_philo *philo)
 		if (check_done(philo) == TRUE)
 			return ;
 		usleep(OBSERVE_CYCLE);
+		if (philo->info->max_philo % 2 == 1)
+			philo->info->time_to_think = philo->info->time_to_eat * 2
+				- philo->info->time_to_sleep;
 	}
 }

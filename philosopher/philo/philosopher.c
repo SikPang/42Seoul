@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 19:10:25 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 19:28:12 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void	*philo_update(void *data)
 	philo = (t_philo *)data;
 	while (1)
 	{
+		if (philo->my_number % 2 == 0)
+			usleep(1000);
 		if (philo->state == THINK)
 			philo_think(philo);
 		else if (philo->state == EAT)
