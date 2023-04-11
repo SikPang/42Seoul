@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 20:30:11 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:04:16 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,10 @@
 
 long	philo_print(t_philo *philo, t_state state);
 void	*philo_update(void *philo);
+void	observing(t_philo *philo);
+_Bool	check_done(t_philo *philo);
+void	set_done(t_philo *philo);
+void	put_down_fork(t_fork *fork);
+_Bool	check_fork(t_fork *fork);
 
 #endif

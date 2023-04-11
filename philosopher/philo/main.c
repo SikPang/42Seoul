@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 21:16:01 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:18:51 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,35 +26,6 @@ void	join_all(t_philo *philo)
 	{
 		pthread_join(philo[i].thread, NULL);
 		++i;
-	}
-}
-
-static void	observing(t_philo *philo)
-{
-	long	cur_time;
-	int		last_eat;
-	int		i;
-
-	while (1)
-	{
-		cur_time = get_time_from(&(philo[0].info->start_time));
-		i = 0;
-		while (i < philo[0].info->max_philo)
-		{
-			if (philo[0].info->is_over == TRUE)
-				return ;
-			pthread_mutex_lock(&(philo->starve));
-			last_eat = philo->time_last_eat;
-			pthread_mutex_unlock(&(philo->starve));
-			if (cur_time - last_eat >= philo[0].info->time_to_die)
-			{
-				philo_print(philo, DIED);
-				philo[0].info->is_over = TRUE;
-				return ;
-			}
-			++i;
-		}
-		usleep(OBSERVE_CYCLE);
 	}
 }
 

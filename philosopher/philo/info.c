@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 21:14:54 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:18:22 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	set_fork(t_info *info)
 	while (i < info->max_philo)
 	{
 		pthread_mutex_init(&(info->fork[i].mutex), NULL);
-		info->fork[i].state = AVAILAVLE;
+		info->fork[i].is_available = TRUE;
 		++i;
 	}
 }
@@ -76,9 +76,10 @@ t_philo	*init_philo(char **av)
 		if (info->must_eat < 1)
 			error_exit(ARG);
 	}
-	info->is_over = FALSE;
+	info->is_done = FALSE;
 	set_fork(info);
 	pthread_mutex_init(&(info->print), NULL);
+	pthread_mutex_init(&(info->done), NULL);
 	philo = set_philo(info);
 	return (philo);
 }
@@ -95,6 +96,7 @@ void	free_all(t_philo *philo)
 		++i;
 	}
 	pthread_mutex_destroy(&(philo->info->print));
+	pthread_mutex_destroy(&(philo->info->done));
 	free(philo->info->fork);
 	free(philo->info);
 	free(philo);

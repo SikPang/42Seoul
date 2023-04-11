@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 21:14:33 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:17:54 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <sys/time.h>
 # include "utility/utility.h"
 
-# define TRUE 0
-# define FALSE 1
+# define TRUE 1
+# define FALSE 0
 
 typedef enum e_state
 {
@@ -28,27 +28,26 @@ typedef enum e_state
 	SLEEP,
 	THINK,
 	DIED,
-	AVAILAVLE,
-	UNAVAILAVLE
 }	t_state;
 
 typedef struct s_fork
 {
 	pthread_mutex_t	mutex;
-	t_state			state;
+	_Bool			is_available;
 }	t_fork;
 
 typedef struct s_info
 {
 	t_fork			*fork;
 	pthread_mutex_t	print;
+	pthread_mutex_t	done;
 	struct timeval	start_time;
 	int				max_philo;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat;
-	_Bool			is_over;
+	_Bool			is_done;
 }	t_info;
 
 typedef struct s_philo

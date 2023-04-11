@@ -3,6 +3,7 @@
 		"semaphore.h": "c",
 		"utility.h": "c",
 		"locale": "c",
-		"string": "c"
+		"string": "c",
+		"philosopher.h": "c"
 	}
 }
