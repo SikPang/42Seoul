@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 16:33:33 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 19:58:05 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	set_starve(t_info *info)
 
 static void	set_semaphore(t_info *info)
 {
+	unlink_all(info);
 	set_starve(info);
 	info->fork = sem_open(FILE_NAME_FORK, O_CREAT | O_EXCL, 0666,
 			info->max_philo);
@@ -65,8 +66,11 @@ t_info	*init_info(char **av)
 		error_exit(ARG);
 	info->must_eat = -1;
 	if (av[5] != NULL)
+	{
 		info->must_eat = ft_atoi(av[5]);
-	unlink_all(info);
+		if (info->must_eat < 1)
+			error_exit(ARG);
+	}
 	set_semaphore(info);
 	info->philo.my_number = 0;
 	info->philo.count_eat = 0;
