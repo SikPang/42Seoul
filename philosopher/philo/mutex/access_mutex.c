@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 15:28:26 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 16:37:44 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 19:36:26 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 _Bool	check_fork(t_fork *fork)
 {
+	usleep(CHECK_CYCLE);
 	pthread_mutex_lock(&(fork->mutex));
 	if (fork->is_available)
 	{
