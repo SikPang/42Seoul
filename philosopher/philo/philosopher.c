@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 18:32:36 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 18:59:55 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ long	philo_print(t_philo *philo, t_state state)
 	long	time;
 
 	pthread_mutex_lock(&(philo->info->print));
+	time = get_time_from(&(philo->info->start_time));
 	if (check_dead(philo) == TRUE)
 	{
 		pthread_mutex_unlock(&(philo->info->print));
 		return (0);
 	}
-	time = get_time_from(&(philo->info->start_time));
 	if (state == THINK)
 		printf("%ld %d is thinking\n", time, philo->my_number);
 	else if (state == SLEEP)
@@ -48,13 +48,8 @@ static void	philo_eat(t_philo *philo)
 
 	cur_time = philo_print(philo, EAT);
 	update_eat_time(philo, cur_time);
-	while (get_time_from(&(philo->info->start_time)) - cur_time
-		< philo->info->time_to_eat)
-	{
-		if (check_dead(philo) == TRUE)
-			break ;
-		usleep(CHECK_CYCLE);
-	}
+	if (philo_usleep(philo, cur_time, philo->info->time_to_eat) == FALSE)
+		return ;
 	++(philo->count_eat);
 	put_down_fork(philo->info->fork + philo->left_idx);
 	put_down_fork(philo->info->fork + philo->right_idx);
@@ -66,20 +61,18 @@ static void	philo_sleep(t_philo *philo)
 	long	cur_time;
 
 	cur_time = philo_print(philo, SLEEP);
-	while (get_time_from(&(philo->info->start_time)) - cur_time
-		< philo->info->time_to_sleep)
-	{
-		if (check_dead(philo) == TRUE)
-			return ;
-		usleep(CHECK_CYCLE);
-	}
+	if (philo_usleep(philo, cur_time, philo->info->time_to_sleep) == FALSE)
+		return ;
 	philo->state = THINK;
 }
 
 static void	philo_think(t_philo *philo)
 {
-	philo_print(philo, THINK);
-	//usleep(1000);
+	long	cur_time;
+
+	cur_time = philo_print(philo, THINK);
+	if (philo_usleep(philo, cur_time, philo->info->time_to_think) == FALSE)
+		return;
 	while (check_fork(philo->info->fork + philo->left_idx) == FALSE)
 		if (check_dead(philo) == TRUE)
 			return ;
