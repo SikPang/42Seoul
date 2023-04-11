@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 15:56:53 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 16:38:34 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ static void	set_fork(t_info *info)
 {
 	int	i;
 
+	pthread_mutex_init(&(info->print), NULL);
+	pthread_mutex_init(&(info->died), NULL);
+	pthread_mutex_init(&(info->done), NULL);
 	info->fork = (t_fork *)malloc(info->max_philo * sizeof(t_fork));
 	if (info->fork == NULL)
 		error_exit(MALLOC);
@@ -79,8 +82,6 @@ t_philo	*init_philo(char **av)
 	info->is_died = FALSE;
 	info->cnt_done_eat = 0;
 	set_fork(info);
-	pthread_mutex_init(&(info->print), NULL);
-	pthread_mutex_init(&(info->died), NULL);
 	philo = set_philo(info);
 	return (philo);
 }
@@ -98,6 +99,7 @@ void	free_all(t_philo *philo)
 	}
 	pthread_mutex_destroy(&(philo->info->print));
 	pthread_mutex_destroy(&(philo->info->died));
+	pthread_mutex_destroy(&(philo->info->done));
 	free(philo->info->fork);
 	free(philo->info);
 	free(philo);

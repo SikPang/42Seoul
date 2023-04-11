@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 16:23:32 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 16:45:24 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static void	philo_eat(t_philo *philo)
 	{
 		if (check_dead(philo) == TRUE)
 		{
-			pthread_mutex_unlock(&(philo->info->fork[philo->left_idx].mutex));
-			pthread_mutex_unlock(&(philo->info->fork[philo->right_idx].mutex));
+			put_down_fork(philo->info->fork + philo->left_idx);
+			put_down_fork(philo->info->fork + philo->right_idx);
 			return ;
 		}
 		usleep(CHECK_CYCLE);
@@ -82,6 +82,7 @@ static void	philo_sleep(t_philo *philo)
 static void	philo_think(t_philo *philo)
 {
 	philo_print(philo, THINK);
+	//usleep(1000);
 	while (check_fork(philo->info->fork + philo->left_idx) == FALSE)
 		if (check_dead(philo) == TRUE)
 			return ;
@@ -90,15 +91,15 @@ static void	philo_think(t_philo *philo)
 	{
 		if (check_dead(philo) == TRUE)
 		{
-			pthread_mutex_unlock(&(philo->info->fork[philo->left_idx].mutex));
+			put_down_fork(philo->info->fork + philo->left_idx);
 			return ;
 		}
 	}
 	philo_print(philo, FORK);
 	if (check_dead(philo) == TRUE)
 	{
-		pthread_mutex_unlock(&(philo->info->fork[philo->left_idx].mutex));
-		pthread_mutex_unlock(&(philo->info->fork[philo->right_idx].mutex));
+		put_down_fork(philo->info->fork + philo->left_idx);
+		put_down_fork(philo->info->fork + philo->right_idx);
 	}
 	philo->state = EAT;
 }

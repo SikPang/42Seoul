@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 15:56:38 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 16:37:53 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_info
 	t_fork			*fork;
 	pthread_mutex_t	print;
 	pthread_mutex_t	died;
+	pthread_mutex_t	done;
 	struct timeval	start_time;
 	int				max_philo;
 	int				time_to_die;
