@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 20:44:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 22:09:26 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,19 @@
 #include "philosopher.h"
 #include "info.h"
 
-void	wait_all(t_info *info)
+static void	kill_all(t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < info->max_philo)
+	{
+		kill(info->pids[i], 1);
+		++i;
+	}
+}
+
+static void	wait_all(t_info *info)
 {
 	int		signal;
 	int		i;
@@ -36,17 +48,12 @@ void	wait_all(t_info *info)
 		++i;
 	}
 	if (is_died)
-	{
-		i = 0;
-		while (i < info->max_philo)
-		{
-			kill(info->pids[i], 1);
-			++i;
-		}
-	}
+		kill_all(info);
+	else
+		printf("%ld done !\n", get_time_from(&(info->start_time)));
 }
 
-void	make_processes(t_info *info)
+static void	make_processes(t_info *info)
 {
 	int	i;
 

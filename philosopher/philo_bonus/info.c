@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 20:44:08 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 22:04:18 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	unlink_all(t_info *info)
 void	free_all(t_info *info)
 {
 	unlink_all(info);
+	free(info->starve);
 	free(info->pids);
 	free(info);
 }
