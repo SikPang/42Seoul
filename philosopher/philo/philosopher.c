@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 19:28:12 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 19:49:46 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,14 @@ static void	philo_sleep(t_philo *philo)
 	philo->state = THINK;
 }
 
-static void	philo_think(t_philo *philo)
+static void	philo_think(t_philo *philo, _Bool is_first)
 {
 	long	cur_time;
 
 	cur_time = philo_print(philo, THINK);
-	if (philo_usleep(philo, cur_time, philo->info->time_to_think) == FALSE)
-		return;
+	if (!is_first
+		&& philo_usleep(philo, cur_time, philo->info->time_to_think) == FALSE)
+		return ;
 	while (check_fork(philo->info->fork + philo->left_idx) == FALSE)
 		if (check_dead(philo) == TRUE)
 			return ;
@@ -97,14 +98,16 @@ static void	philo_think(t_philo *philo)
 void	*philo_update(void *data)
 {
 	t_philo	*philo;
+	_Bool	is_first;
 
 	philo = (t_philo *)data;
+	is_first = TRUE;
 	while (1)
 	{
 		if (philo->my_number % 2 == 0)
 			usleep(1000);
 		if (philo->state == THINK)
-			philo_think(philo);
+			philo_think(philo, is_first);
 		else if (philo->state == EAT)
 			philo_eat(philo);
 		else if (philo->state == SLEEP)
@@ -116,5 +119,6 @@ void	*philo_update(void *data)
 			increase_done_cnt(philo);
 			return (NULL);
 		}
+		is_first = FALSE;
 	}
 }
