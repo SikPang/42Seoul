@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 19:58:05 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 20:44:08 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static void	set_starve(t_info *info)
 
 static void	set_semaphore(t_info *info)
 {
+	info->starve = NULL;
 	unlink_all(info);
 	set_starve(info);
 	info->fork = sem_open(FILE_NAME_FORK, O_CREAT | O_EXCL, 0666,
@@ -90,6 +91,8 @@ void	unlink_all(t_info *info)
 	{
 		itoa_result = ft_itoa(i);
 		file_name = ft_strjoin(FILE_NAME_STARVE, itoa_result);
+		if (info->starve != NULL)
+			sem_close(info->starve[i]);
 		sem_unlink(file_name);
 		free(itoa_result);
 		free(file_name);

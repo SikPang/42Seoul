@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 20:08:08 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 20:44:37 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	wait_all(t_info *info)
 		i = 0;
 		while (i < info->max_philo)
 		{
-			printf("%d\n", kill(info->pids[i], 1));
+			kill(info->pids[i], 1);
 			++i;
 		}
 	}
