@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 21:34:48 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 21:40:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	join_all(t_philo *philo)
 		++i;
 	}
 	if (check_done(philo) == TRUE)
-		printf("%ld done !", get_time_from(&(philo->info->start_time)));
+		printf("%ld done !\n", get_time_from(&(philo->info->start_time)));
 }
 
 static void	make_thread(t_philo *philo)
