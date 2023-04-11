@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 16:28:44 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 20:08:08 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	wait_all(t_info *info)
 		i = 0;
 		while (i < info->max_philo)
 		{
-			kill(info->pids[i], DEATH_SIGNAL);
+			printf("%d\n", kill(info->pids[i], 1));
 			++i;
 		}
 	}
@@ -48,7 +48,7 @@ void	wait_all(t_info *info)
 
 void	make_processes(t_info *info)
 {
-	int		i;
+	int	i;
 
 	info->pids = (pid_t *)malloc(info->max_philo * sizeof(pid_t));
 	if (info->pids == NULL)
