@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/04/11 15:18:58 by kwsong           ###   ########.fr        #
+#    Updated: 2023/04/11 16:23:54 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ SRCS_FILE	= main \
 			info \
 			philosopher \
 			philosopher_observe \
+			mutex/access_mutex \
+			mutex/access_mutex2 \
 			time/time \
 			utility/ft_atoi \
 			utility/error_exit

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 15:18:22 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:56:53 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ t_philo	*init_philo(char **av)
 		if (info->must_eat < 1)
 			error_exit(ARG);
 	}
-	info->is_done = FALSE;
+	info->is_died = FALSE;
+	info->cnt_done_eat = 0;
 	set_fork(info);
 	pthread_mutex_init(&(info->print), NULL);
-	pthread_mutex_init(&(info->done), NULL);
+	pthread_mutex_init(&(info->died), NULL);
 	philo = set_philo(info);
 	return (philo);
 }
@@ -96,7 +97,7 @@ void	free_all(t_philo *philo)
 		++i;
 	}
 	pthread_mutex_destroy(&(philo->info->print));
-	pthread_mutex_destroy(&(philo->info->done));
+	pthread_mutex_destroy(&(philo->info->died));
 	free(philo->info->fork);
 	free(philo->info);
 	free(philo);

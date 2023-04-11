@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 15:17:54 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 15:56:38 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,15 @@ typedef struct s_info
 {
 	t_fork			*fork;
 	pthread_mutex_t	print;
-	pthread_mutex_t	done;
+	pthread_mutex_t	died;
 	struct timeval	start_time;
 	int				max_philo;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				must_eat;
-	_Bool			is_done;
+	int				cnt_done_eat;
+	_Bool			is_died;
 }	t_info;
 
 typedef struct s_philo

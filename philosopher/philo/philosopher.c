@@ -6,10 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 15:18:39 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 16:23:32 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./mutex/access_mutex.h"
 #include "philosopher.h"
 
 long	philo_print(t_philo *philo, t_state state)
@@ -17,7 +18,7 @@ long	philo_print(t_philo *philo, t_state state)
 	long	time;
 
 	pthread_mutex_lock(&(philo->info->print));
-	if (check_done(philo) == TRUE)
+	if (check_dead(philo) == TRUE)
 	{
 		pthread_mutex_unlock(&(philo->info->print));
 		return (0);
@@ -45,13 +46,11 @@ static void	philo_eat(t_philo *philo)
 	long	cur_time;
 
 	cur_time = philo_print(philo, EAT);
-	pthread_mutex_lock(&(philo->starve));
-	philo->time_last_eat = cur_time;
-	pthread_mutex_unlock(&(philo->starve));
+	update_eat_time(philo, cur_time);
 	while (get_time_from(&(philo->info->start_time)) - cur_time
 		< philo->info->time_to_eat)
 	{
-		if (check_done(philo) == TRUE)
+		if (check_dead(philo) == TRUE)
 		{
 			pthread_mutex_unlock(&(philo->info->fork[philo->left_idx].mutex));
 			pthread_mutex_unlock(&(philo->info->fork[philo->right_idx].mutex));
@@ -62,8 +61,6 @@ static void	philo_eat(t_philo *philo)
 	++(philo->count_eat);
 	put_down_fork(philo->info->fork + philo->left_idx);
 	put_down_fork(philo->info->fork + philo->right_idx);
-	if (philo->count_eat == philo->info->must_eat)
-		set_done(philo);
 	philo->state = SLEEP;
 }
 
@@ -75,7 +72,7 @@ static void	philo_sleep(t_philo *philo)
 	while (get_time_from(&(philo->info->start_time)) - cur_time
 		< philo->info->time_to_sleep)
 	{
-		if (check_done(philo) == TRUE)
+		if (check_dead(philo) == TRUE)
 			return ;
 		usleep(CHECK_CYCLE);
 	}
@@ -86,19 +83,19 @@ static void	philo_think(t_philo *philo)
 {
 	philo_print(philo, THINK);
 	while (check_fork(philo->info->fork + philo->left_idx) == FALSE)
-		if (check_done(philo) == TRUE)
+		if (check_dead(philo) == TRUE)
 			return ;
 	philo_print(philo, FORK);
 	while (check_fork(philo->info->fork + philo->right_idx) == FALSE)
 	{
-		if (check_done(philo) == TRUE)
+		if (check_dead(philo) == TRUE)
 		{
 			pthread_mutex_unlock(&(philo->info->fork[philo->left_idx].mutex));
 			return ;
 		}
 	}
 	philo_print(philo, FORK);
-	if (check_done(philo) == TRUE)
+	if (check_dead(philo) == TRUE)
 	{
 		pthread_mutex_unlock(&(philo->info->fork[philo->left_idx].mutex));
 		pthread_mutex_unlock(&(philo->info->fork[philo->right_idx].mutex));
@@ -113,8 +110,13 @@ void	*philo_update(void *data)
 	philo = (t_philo *)data;
 	while (1)
 	{
-		if (check_done(philo) == TRUE)
+		if (check_dead(philo) == TRUE)
 			return (NULL);
+		if (philo->count_eat == philo->info->must_eat)
+		{
+			increase_done_cnt(philo);
+			return (NULL);
+		}
 		if (philo->state == THINK)
 			philo_think(philo);
 		else if (philo->state == EAT)

@@ -4,6 +4,7 @@
 		"utility.h": "c",
 		"locale": "c",
 		"string": "c",
-		"philosopher.h": "c"
+		"philosopher.h": "c",
+		"access_mutex.h": "c"
 	}
 }
