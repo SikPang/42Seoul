@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 19:53:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 21:07:48 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	set_times(t_info *info, char **av)
 	info->time_to_sleep = ft_atoi(av[4]);
 	info->time_to_think = 0;
 	if (info->max_philo % 2 == 1)
-		info->time_to_think = info->time_to_eat * 2 - info->time_to_sleep;
+		info->time_to_think = 1;
 	if (info->max_philo < 1 || info->max_philo > 1000 || info->time_to_die < 1
 		|| info->time_to_eat < 1 || info->time_to_sleep < 1)
 		error_exit(ARG);

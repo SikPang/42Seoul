@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 18:48:20 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 20:55:15 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@
 long	philo_print(t_philo *philo, t_state state);
 void	*philo_update(void *philo);
 void	observing(t_philo *philo);
-_Bool	philo_usleep(t_philo *philo, long cur_time, int time_for_wait);
+_Bool	philo_usleep(t_philo *philo, long start_time, int time_for_wait);
 
 #endif
