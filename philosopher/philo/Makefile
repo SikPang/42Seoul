@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/30 16:51:35 by kwsong            #+#    #+#              #
-#    Updated: 2023/04/11 19:43:27 by kwsong           ###   ########.fr        #
+#    Updated: 2023/04/11 20:08:37 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,9 @@ SRCS	= $(addsuffix .c, $(SRCS_FILE))
 
 OBJS	= $(SRCS:.c=.o)
 
-CFLAGS	= -Wall -Werror -Wextra -fsanitize=thread
+CFLAGS	= -Wall -Werror -Wextra
 
 all		: $(NAME)
-	make clean
 
 $(NAME)	: $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $^

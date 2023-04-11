@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 19:43:19 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 20:08:32 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,8 @@ static void	make_thread(t_philo *philo)
 	}
 }
 
-// void v()
-// {
-// 	system("leaks philo");
-// }
-
 int	main(int ac, char **av)
 {
-	//atexit(v);
 	t_philo	*philo;
 
 	if (ac != 5 && ac != 6)
