@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 16:15:16 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 16:38:04 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 19:07:21 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ _Bool	check_starve(t_philo *philo)
 	cur_time = get_time_from(&(philo->info->start_time));
 	if (cur_time - last_eat >= philo->info->time_to_die)
 	{
-		philo_print(philo, DIED);
 		set_dead(philo);
+		philo_print(philo, DIED);
 		return (TRUE);
 	}
 	return (FALSE);

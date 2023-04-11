@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 18:59:55 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 19:10:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ long	philo_print(t_philo *philo, t_state state)
 
 	pthread_mutex_lock(&(philo->info->print));
 	time = get_time_from(&(philo->info->start_time));
-	if (check_dead(philo) == TRUE)
+	if (state != DIED && check_dead(philo) == TRUE)
 	{
 		pthread_mutex_unlock(&(philo->info->print));
 		return (0);
