@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:19:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 20:08:32 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/11 21:34:48 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <semaphore.h>
 #include "utility/utility.h"
 #include "philosopher.h"
+#include "mutex/access_mutex.h"
 #include "info.h"
 
 void	join_all(t_philo *philo)
@@ -27,6 +28,8 @@ void	join_all(t_philo *philo)
 		pthread_join(philo[i].thread, NULL);
 		++i;
 	}
+	if (check_done(philo) == TRUE)
+		printf("%ld done !", get_time_from(&(philo->info->start_time)));
 }
 
 static void	make_thread(t_philo *philo)
