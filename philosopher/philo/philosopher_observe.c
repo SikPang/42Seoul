@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:49:11 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 20:55:05 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/12 11:43:15 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	observing(t_philo *philo)
 		while (i < philo->info->max_philo)
 		{
 			if (check_dead(philo) == TRUE
-				|| check_starve(philo) == TRUE)
+				|| check_starve(philo + i) == TRUE)
 				return ;
 			++i;
 		}
