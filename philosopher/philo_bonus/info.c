@@ -6,12 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 22:04:18 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/12 11:51:15 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "info.h"
-#include <stdio.h>
 
 static void	set_starve(t_info *info)
 {

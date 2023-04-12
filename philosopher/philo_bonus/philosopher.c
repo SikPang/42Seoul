@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:24:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/10 15:37:08 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/12 12:19:17 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	philo_update(t_info *info)
 	pthread_t	th;
 
 	pthread_create(&th, NULL, observing, (void *)info);
+	if (info->philo.my_number > info->max_philo / 2)
+		usleep(START_DELAY);
 	while (1)
 	{
 		if (info->philo.state == THINK)
