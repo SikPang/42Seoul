@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 20:23:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/11 20:55:15 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/12 12:19:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define OBSERVE_CYCLE 600
 # define CHECK_CYCLE 600
+# define START_DELAY 1000
 # define SUCCESS 0
 
 long	philo_print(t_philo *philo, t_state state);
