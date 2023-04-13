@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:18 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 21:41:00 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:50:26 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 
 #include <string>
 
-#define PNUM_SIZE 20
+#define PNUM_SIZE 21
 #define PB_SIZE 8
 
 class PhoneBook
 {
 private:
-	class Person
+	class Contact
 	{
 	private:
 		std::string	firstName;
@@ -30,12 +30,13 @@ private:
 		std::string	nickName;
 		std::string	darkestSecret;
 		char		phoneNumber[PNUM_SIZE];
+
 	public:
-		Person();
-		Person(const Person& instance);
-		Person(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber);
-		~Person();
-		Person&		operator=(const Person& instance);
+		Contact();
+		Contact(const Contact& instance);
+		Contact(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber);
+		~Contact();
+		Contact&	operator=(const Contact& instance);
 		std::string	GetFirstName();
 		std::string	GetLastName();
 		std::string	GetNickName();
@@ -43,7 +44,7 @@ private:
 	};
 
 private:
-	Person	list[PB_SIZE];
+	Contact	list[PB_SIZE];
 	int		head;
 	int		tail;
 	int		size;
@@ -54,8 +55,8 @@ public:
 	~PhoneBook();
 	PhoneBook& operator=(const PhoneBook& instance);
 
-	void AddPerson(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber);
-	void RemovePerson();
+	void AddContact(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber);
+	void RemoveContact();
 	void PrintPhoneBook();
 };
 

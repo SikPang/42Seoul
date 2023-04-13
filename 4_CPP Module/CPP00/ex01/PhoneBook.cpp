@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:20 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 21:20:13 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:58:10 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,22 @@ PhoneBook& PhoneBook::operator=(const PhoneBook& instance)
 	return *this;
 }
 
-void PhoneBook::AddPerson(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber)
+void PhoneBook::AddContact(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber)
 {
-	Person person(firstName, lastName, nickName, darkestSecret, phoneNumber);
+	Contact Contact(firstName, lastName, nickName, darkestSecret, phoneNumber);
 	
 	if (size == 0)
 	{
 		head = 0;
 		tail = 0;
-		list[tail] = person;
+		list[tail] = Contact;
 	}
 	else
 	{
 		tail += 1;
 		if (tail == PB_SIZE)
 			tail = 0;
-		list[tail] = person;
+		list[tail] = Contact;
 		if (size == PB_SIZE)
 		{
 			head += 1;
@@ -63,7 +63,7 @@ void PhoneBook::AddPerson(std::string firstName, std::string lastName, std::stri
 	++size;
 }
 
-void PhoneBook::RemovePerson()
+void PhoneBook::RemoveContact()
 {
 	if (size == 0)
 		return;
@@ -104,7 +104,7 @@ void PhoneBook::PrintPhoneBook()
 	std::cout << "\n== Put index to see the phone number\n";
 	std::cin >> index;
 
-	if (index < -1 || index >= size)
+	if (index < 0 || index >= size)
 	{
 		std::cout << "wrong index\n\n";
 		return;
@@ -120,7 +120,7 @@ PhoneBook::~PhoneBook() {}
 
 
 // ----- Inner class -----
-PhoneBook::Person::Person()
+PhoneBook::Contact::Contact()
 {
 	firstName = "";
 	lastName = "";
@@ -130,7 +130,7 @@ PhoneBook::Person::Person()
 		phoneNumber[i] = '\0';
 }
 
-PhoneBook::Person::Person(const Person& instance)
+PhoneBook::Contact::Contact(const Contact& instance)
 {
 	firstName = instance.firstName;
 	lastName = instance.lastName;
@@ -140,7 +140,7 @@ PhoneBook::Person::Person(const Person& instance)
 		phoneNumber[i] = instance.phoneNumber[i];
 }
 
-PhoneBook::Person::Person(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber)
+PhoneBook::Contact::Contact(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber)
 {
 	this->firstName = firstName;
 	this->lastName = lastName;
@@ -150,7 +150,7 @@ PhoneBook::Person::Person(std::string firstName, std::string lastName, std::stri
 		this->phoneNumber[i] = phoneNumber[i];
 }
 
-PhoneBook::Person& PhoneBook::Person::operator=(const Person& instance)
+PhoneBook::Contact& PhoneBook::Contact::operator=(const Contact& instance)
 {
 	firstName = instance.firstName;
 	lastName = instance.lastName;
@@ -161,24 +161,24 @@ PhoneBook::Person& PhoneBook::Person::operator=(const Person& instance)
 	return *this;
 }
 
-PhoneBook::Person::~Person() {}
+PhoneBook::Contact::~Contact() {}
 
-std::string PhoneBook::Person::GetFirstName()
+std::string PhoneBook::Contact::GetFirstName()
 {
 	return firstName;
 }
 
-std::string PhoneBook::Person::GetLastName()
+std::string PhoneBook::Contact::GetLastName()
 {
 	return lastName;
 }
 
-std::string PhoneBook::Person::GetNickName()
+std::string PhoneBook::Contact::GetNickName()
 {
 	return nickName;
 }
 
-char* PhoneBook::Person::GetPhoneNumber()
+char* PhoneBook::Contact::GetPhoneNumber()
 {
 	return &phoneNumber[0];
 }

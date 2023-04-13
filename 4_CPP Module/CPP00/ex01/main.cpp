@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:55:09 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/13 15:07:28 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/13 21:55:15 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,21 @@ void GetInfo(PhoneBook& pb)
 	std::cout << "\n== put nick name (3/5)\n";
 	std::cin >> nickName;
 
-	std::cout << "\n== put darkest secret (4/5)\n";
-	std::cin >> darkestSecret;
-
-	std::cout << "\n== put phoneNumber without '-' (maximum 20 characters) (5/5)\n\n";
+	std::cout << "\n== put phoneNumber without '-' (4/5)\n";
 	std::cin >> phoneNumber;
 
-	for (int i=0; i<phoneNumber.size(); ++i)
+	std::cout << "\n== put darkest secret (5/5)\n";
+	std::cin >> darkestSecret;
+
+	std::cout << "\n";
+
+	for (int i=0; i<phoneNumber.size() && i<20; ++i)
 		phoneNumberArr[i] = phoneNumber[i];
 
 	for (int i=phoneNumber.size(); i<PNUM_SIZE; ++i)
 		phoneNumberArr[i] = '\0';
 
-	pb.AddPerson(firstName, lastName, nickName, darkestSecret, &phoneNumberArr[0]);
+	pb.AddContact(firstName, lastName, nickName, darkestSecret, &phoneNumberArr[0]);
 }
 
 int main()
