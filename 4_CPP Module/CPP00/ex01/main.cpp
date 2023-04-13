@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:55:09 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 21:24:42 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/13 15:07:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ int main()
 	while (true)
 	{
 		std::string input;
-		
-		std::string a = "asd";
-		std::string b = "asdf";
 		
 		std::cout << "== You can use following commands [ADD, SEARCH, EXIT] ==\n";
 		std::cin >> input;
