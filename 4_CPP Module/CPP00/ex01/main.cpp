@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:55:09 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/13 22:25:35 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/14 15:54:19 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int main()
 		
 		std::cout << "== You can use following commands [ADD, SEARCH, EXIT] ==\n";
 		std::cin >> input;
-
+		std::cin.ignore(INT_MAX, '\n');
+		
 		if (input == "ADD")
 			GetInfo(pb);
 		else if (input == "SEARCH")

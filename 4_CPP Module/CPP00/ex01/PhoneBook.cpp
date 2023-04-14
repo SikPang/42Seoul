@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:20 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/13 21:58:10 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/14 15:54:26 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void PhoneBook::PrintPhoneBook()
 	}
 	std::cout << "\n== Put index to see the phone number\n";
 	std::cin >> index;
+	std::cin.ignore(INT_MAX, '\n');
 
 	if (index < 0 || index >= size)
 	{
