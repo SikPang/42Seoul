@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:20 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/17 19:20:29 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/17 19:47:32 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,14 @@ void PhoneBook::RemoveContact()
 	--size;
 }
 
+static void PrintLimits(const std::string& str)
+{
+	if (str.size() > 10)
+		std::cout << std::right << std::setw(9) << str.substr(0, 9) << '.';
+	else
+		std::cout << std::right << std::setw(10) << str;
+}
+
 void PhoneBook::PrintPhoneBook()
 {
 	if (size == 0)
@@ -99,10 +107,13 @@ void PhoneBook::PrintPhoneBook()
 		<< std::setw(11) << "LastName|" << std::setw(11) << "NickName\n" << NC;
 	for (int i=0; i<size; ++i)
 	{
-		std::cout << std::right << std::setw(10) << i << "|"
-			<< std::setw(10) << list[(head + i) % PB_SIZE].GetFirstName() << "|"
-			<< std::setw(10) << list[(head + i) % PB_SIZE].GetLastName() << "|"
-			<< std::setw(10) << list[(head + i) % PB_SIZE].GetNickName() << '\n';
+		std::cout << std::right << std::setw(10) << i << "|";
+		PrintLimits(list[(head + i) % PB_SIZE].GetFirstName());
+		std::cout << '|';
+		PrintLimits(list[(head + i) % PB_SIZE].GetLastName());
+		std::cout << '|';
+		PrintLimits(list[(head + i) % PB_SIZE].GetNickName());
+		std::cout << '\n';
 	}
 	
 	while (true)
@@ -122,11 +133,11 @@ void PhoneBook::PrintPhoneBook()
 			break;
 	}
 
-	std::cout << list[index].GetNickName() << RED << "'s Phone Number is " << NC;
+	std::cout << RED << list[(head + index) % PB_SIZE].GetNickName() << "'s Phone Number is ";
 	phoneNumber = list[(head + index) % PB_SIZE].GetPhoneNumber();
 	for (int i=0; i<PNUM_SIZE; ++i)
 		std::cout << phoneNumber[i];
-	std::cout << "\n\n";
+	std::cout << "\n\n" << NC;
 }
 
 PhoneBook::~PhoneBook() {}
@@ -176,17 +187,17 @@ PhoneBook::Contact& PhoneBook::Contact::operator=(const Contact& instance)
 
 PhoneBook::Contact::~Contact() {}
 
-std::string PhoneBook::Contact::GetFirstName()
+const std::string& PhoneBook::Contact::GetFirstName()
 {
 	return firstName;
 }
 
-std::string PhoneBook::Contact::GetLastName()
+const std::string& PhoneBook::Contact::GetLastName()
 {
 	return lastName;
 }
 
-std::string PhoneBook::Contact::GetNickName()
+const std::string& PhoneBook::Contact::GetNickName()
 {
 	return nickName;
 }
