@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:18 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/17 19:36:27 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/17 20:10:23 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ private:
 		const std::string&	GetFirstName();
 		const std::string&	GetLastName();
 		const std::string&	GetNickName();
-		char*			GetPhoneNumber();
+		const char*			GetPhoneNumber();
 	};
 
 private:

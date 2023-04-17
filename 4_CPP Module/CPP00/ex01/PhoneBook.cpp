@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:20 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/17 19:47:32 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/17 20:10:57 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void PhoneBook::PrintPhoneBook()
 	}
 	
 	int		index;
-	char*	phoneNumber;
 
 	std::cout << '\n';
 	
@@ -134,9 +133,8 @@ void PhoneBook::PrintPhoneBook()
 	}
 
 	std::cout << RED << list[(head + index) % PB_SIZE].GetNickName() << "'s Phone Number is ";
-	phoneNumber = list[(head + index) % PB_SIZE].GetPhoneNumber();
 	for (int i=0; i<PNUM_SIZE; ++i)
-		std::cout << phoneNumber[i];
+		std::cout << list[(head + index) % PB_SIZE].GetPhoneNumber()[i];
 	std::cout << "\n\n" << NC;
 }
 
@@ -202,7 +200,7 @@ const std::string& PhoneBook::Contact::GetNickName()
 	return nickName;
 }
 
-char* PhoneBook::Contact::GetPhoneNumber()
+const char* PhoneBook::Contact::GetPhoneNumber()
 {
 	return &phoneNumber[0];
 }
