@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 14:55:09 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/14 15:54:19 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/17 19:20:12 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,23 @@ void GetInfo(PhoneBook& pb)
 	std::string phoneNumber;
 	char		phoneNumberArr[PNUM_SIZE];
 
-	std::cout << "\n== put first name (1/5)\n";
+	std::cout << CYN << "\n== put first name (1/5)\n" << NC;
 	std::cin >> firstName;
 	std::cin.ignore(INT_MAX, '\n');
 
-	std::cout << "\n== put last name (2/5)\n";
+	std::cout << CYN << "\n== put last name (2/5)\n" << NC;
 	std::cin >> lastName;
 	std::cin.ignore(INT_MAX, '\n');
 
-	std::cout << "\n== put nick name (3/5)\n";
+	std::cout << CYN << "\n== put nick name (3/5)\n" << NC;
 	std::cin >> nickName;
 	std::cin.ignore(INT_MAX, '\n');
 
-	std::cout << "\n== put phoneNumber without '-' (4/5)\n";
+	std::cout << CYN << "\n== put phoneNumber without '-' (4/5)\n" << NC;
 	std::cin >> phoneNumber;
 	std::cin.ignore(INT_MAX, '\n');
 
-	std::cout << "\n== put darkest secret (5/5)\n";
+	std::cout << CYN << "\n== put darkest secret (5/5)\n" << NC;
 	std::cin >> darkestSecret;
 	std::cin.ignore(INT_MAX, '\n');
 
@@ -62,7 +62,7 @@ int main()
 	{
 		std::string input;
 		
-		std::cout << "== You can use following commands [ADD, SEARCH, EXIT] ==\n";
+		std::cout << GRN << "== You can use following commands [ADD, SEARCH, EXIT] ==\n" << NC;
 		std::cin >> input;
 		std::cin.ignore(INT_MAX, '\n');
 		
@@ -73,6 +73,6 @@ int main()
 		else if (input == "EXIT")
 			return 0;
 		else
-			std::cout << "wrong command\n\n";
+			std::cout << RED << "wrong command\n\n" << NC;
 	}
 }

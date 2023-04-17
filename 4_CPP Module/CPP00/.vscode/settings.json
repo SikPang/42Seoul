@@ -53,6 +53,7 @@
 		"__functional_03": "cpp",
 		"list": "cpp",
 		"__split_buffer": "cpp",
-		"vector": "cpp"
+		"vector": "cpp",
+		"iomanip": "cpp"
 	}
 }

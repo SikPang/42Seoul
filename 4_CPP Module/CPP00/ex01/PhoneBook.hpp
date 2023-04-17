@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:18 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/13 21:50:26 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/17 19:20:10 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 
 #define PNUM_SIZE 21
 #define PB_SIZE 8
+#define NC "\e[0m"
+#define RED "\e[0;31m"
+#define GRN "\e[0;32m"
+#define CYN "\e[0;36m"
 
 class PhoneBook
 {

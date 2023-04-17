@@ -6,11 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:20 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/14 15:54:26 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/17 19:20:29 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <iomanip>
 #include "PhoneBook.hpp"
 
 // ----- Outer class -----
@@ -85,32 +86,43 @@ void PhoneBook::PrintPhoneBook()
 {
 	if (size == 0)
 	{
-		std::cout << "There is no one in PhoneBook\n\n";
+		std::cout << CYN << "There is no one in PhoneBook\n\n" << NC;
 		return;
 	}
 	
 	int		index;
 	char*	phoneNumber;
+
+	std::cout << '\n';
 	
-	std::cout << "index\tFirstName\tLastName\tNickName\n";
+	std::cout << CYN << std::right << std::setw(11) << "index|" << std::setw(11) << "FirstName|"
+		<< std::setw(11) << "LastName|" << std::setw(11) << "NickName\n" << NC;
 	for (int i=0; i<size; ++i)
 	{
-		std::cout << i << "\t" 
-			<< list[(head + i) % PB_SIZE].GetFirstName() << "\t"
-			<< list[(head + i) % PB_SIZE].GetLastName() << "\t"
-			<< list[(head + i) % PB_SIZE].GetNickName() << "\t";
-		std::cout << '\n';
+		std::cout << std::right << std::setw(10) << i << "|"
+			<< std::setw(10) << list[(head + i) % PB_SIZE].GetFirstName() << "|"
+			<< std::setw(10) << list[(head + i) % PB_SIZE].GetLastName() << "|"
+			<< std::setw(10) << list[(head + i) % PB_SIZE].GetNickName() << '\n';
 	}
-	std::cout << "\n== Put index to see the phone number\n";
-	std::cin >> index;
-	std::cin.ignore(INT_MAX, '\n');
-
-	if (index < 0 || index >= size)
+	
+	while (true)
 	{
-		std::cout << "wrong index\n\n";
-		return;
+		std::cout << CYN << "\n== Put index to see the phone number ==\n" << NC;
+		std::cin >> index;
+		if (std::cin.fail())
+		{
+			std::cin.clear();
+			index = -1;
+		}
+		std::cin.ignore(INT_MAX, '\n');
+
+		if (index < 0 || index >= size)
+			std::cout << RED << "wrong index\n\n" << NC;
+		else
+			break;
 	}
-	std::cout << list[index].GetNickName() << "'s Phone Number is ";
+
+	std::cout << list[index].GetNickName() << RED << "'s Phone Number is " << NC;
 	phoneNumber = list[(head + index) % PB_SIZE].GetPhoneNumber();
 	for (int i=0; i<PNUM_SIZE; ++i)
 		std::cout << phoneNumber[i];
