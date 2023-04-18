@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:00:22 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/15 18:10:27 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/18 15:40:32 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ private:
 public:
 	Weapon();
 	Weapon(std::string type);
-	Weapon(Weapon& instance);
+	Weapon(const Weapon& instance);
 	~Weapon();
 	Weapon&	operator=(Weapon& instance);
 

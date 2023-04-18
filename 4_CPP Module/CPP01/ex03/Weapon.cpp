@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:05:50 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/15 18:38:40 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/18 15:40:40 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ Weapon::Weapon(std::string type)
 	this->type = type;
 }
 
-Weapon::Weapon(Weapon& instance)
+Weapon::Weapon(const Weapon& instance)
 {
 	type = instance.type;
 }
