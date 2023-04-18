@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 18:48:04 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 14:10:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/18 15:22:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int ac, char **av)
 	int	i = 1;
 	int	j;
 	
-	while (av[i] != nullptr)
+	while (av[i] != NULL)
 	{
 		j = 0;
 		while (av[i][j] != '\0')
