@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:15:38 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/15 20:45:41 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/18 19:56:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,13 @@ std::string 클래스의 모든 멤버 함수가 허용됩니다 (str::string::r
 */
 
 #include <iostream>
-#include <fstream>
 #include <string>
+#include "StringReplacer.hpp"
+
+void MyReplace(std::string line, std::string targetString, std::string destString)
+{
+	
+}
 
 int main(int ac, char** av)
 {
@@ -33,12 +38,8 @@ int main(int ac, char** av)
 		std::cout << "must need 3 arguments. [fileName] [targetString] [destString] (without [])\n";
 		return 0;
 	}
-	
-	std::string		fileName = av[1];
-	std::string		targetString = av[2];
-	std::string		destString = av[3];
-	std::ifstream	targetFile(fileName);
-	std::ofstream	destFile(fileName + ".replace");
+
+	StringReplacer sr(av[1], av[2], av[3]);
 
 	if (targetFile.fail())
 	{
@@ -49,11 +50,12 @@ int main(int ac, char** av)
 	while (!targetFile.eof())
 	{
 		std::string	line;
-		targetFile >> line;
 
-		if (line == targetString)
-			destFile << destString;
-		else
-			destFile << line;
+		getline(targetFile, line);
+
+		for (int i = 0; i < line.size(); ++i)
+		{
+			
+		}
 	}
 }

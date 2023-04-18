@@ -1,53 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harl.hpp                                           :+:      :+:    :+:   */
+/*   StringReplacer.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/18 16:38:31 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 19:46:45 by kwsong           ###   ########.fr       */
+/*   Created: 2023/04/18 19:43:40 by kwsong            #+#    #+#             */
+/*   Updated: 2023/04/18 19:57:04 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __HARL_HPP__
-#define __HARL_HPP__
+#ifndef __STRINGREPLACER_HPP__
+#define __STRINGREPLACER_HPP__
 
+#include <fstream>
 #include <string>
 
-#define NUM_LEVEL 4
-
-enum HarlLevel
-{
-	DEBUG,
-	INFO,
-	WARNING,
-	ERROR
-};
-
-class Harl
+class StringReplacer
 {
 private:
-	void debug(void);
-	void info(void);
-	void warning(void);
-	void error(void);
-
-private:
-	struct Pair
-	{
-	public:
-		std::string key;
-		HarlLevel value;
-		
-	public:
-		Pair(std::string key, HarlLevel value);
-		Pair(const Pair& pair);
-	};
+	std::string		fileName;
+	std::string		targetString;
+	std::string		destString;
+	std::ifstream	targetFile;
+	std::ofstream	destFile;
 
 public:
-	void complain(std::string level);
+	StringReplacer(char* fileName, char* targetString, char* destString);
+
+public:
 };
 
 #endif
