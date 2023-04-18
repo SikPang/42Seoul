@@ -5,45 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/15 17:47:14 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 16:29:47 by kwsong           ###   ########.fr       */
+/*   Created: 2023/04/18 16:34:46 by kwsong            #+#    #+#             */
+/*   Updated: 2023/04/18 17:12:16 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include <iostream>
+#include "Harl.hpp"
 
-int main()
+int main(int ac, char** av)
 {
+	if (ac != 2)
 	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
+		std::cout << "must need 1 argument\n";
+		return 0;
 	}
 
-	HumanA a1;
-	a1.attack();
+	Harl harl;
 
-	Weapon stick("stick");
-	HumanA a2("a2", stick);
-	a2.attack();
-	
-	HumanB b("b");
-	b.attack();
-
-	b.setWeapon(stick);
-	b.attack();
-	
-	return 0;
+	harl.complain(av[1]);
 }
