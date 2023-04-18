@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:20 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 14:47:56 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/18 22:38:21 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void PhoneBook::PrintPhoneBook()
 {
 	if (size == 0)
 	{
-		std::cout << CYN << "There is no one in PhoneBook\n\n" << NC;
+		std::cout << RED << "There is no one in PhoneBook\n\n" << NC;
 		return;
 	}
 	
@@ -93,7 +93,7 @@ void PhoneBook::PrintPhoneBook()
 	int	index;
 	while (true)
 	{
-		std::cout << CYN << "\n== Put index to see the phone number ==\n" << NC;
+		std::cout << CYN << "\n== Put index to see more information ==\n" << NC;
 		std::cin >> index;
 		if (std::cin.eof())
 			exit(1);
@@ -183,5 +183,5 @@ const std::string& PhoneBook::Contact::GetNickName()
 
 const char* PhoneBook::Contact::GetPhoneNumber()
 {
-	return &phoneNumber[0];
+	return phoneNumber;
 }
