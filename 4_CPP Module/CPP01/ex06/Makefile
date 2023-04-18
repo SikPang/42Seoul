@@ -6,14 +6,14 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 18:36:16 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/14 21:22:54 by kwsong           ###   ########.fr        #
+#    Updated: 2023/04/18 19:17:36 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= phonebook
+NAME	= harlFilter
 
 SRCS	= main.cpp \
-		PhoneBook.cpp
+		Harl.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 CC		= c++

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:38:28 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 19:20:35 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/18 19:20:27 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,63 @@
 
 void Harl::debug(void)
 {
-	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!\n";
+	std::cout << "[ DEBUG ]\n";
+	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!\n\n";
 }
 
 void Harl::info(void)
 {
-	std::cout << "I cannot believe adding extra bacon costs more money. You didn't put enough bacon in my burger! If you did, I wouldn't be asking for more!\n";
+	std::cout << "[ INFO ]\n";
+	std::cout << "I cannot believe adding extra bacon costs more money. You didn't put enough bacon in my burger! If you did, I wouldn't be asking for more!\n\n";
 }
 
 void Harl::warning(void)
 {
-	std::cout << "I think I deserve to have some extra bacon for free. I've been coming for years whereas you started working here since last month.\n";
+	std::cout << "[ WARNING ]\n";
+	std::cout << "I think I deserve to have some extra bacon for free. I've been coming for years whereas you started working here since last month.\n\n";
 }
 
 void Harl::error(void)
 {
-	std::cout << "This is unacceptable! I want to speak to the manager now.\n";
+	std::cout << "[ ERROR ]\n";
+	std::cout << "This is unacceptable! I want to speak to the manager now.\n\n";
 }
 
 void Harl::complain(std::string level)
 {
-	Pair pairs[NUM_LEVEL] = {Pair("DEBUG", &Harl::debug), Pair("INFO", &Harl::info),
-		Pair("WARNING", &Harl::warning), Pair("ERROR", &Harl::error)};
+	Pair pairs[NUM_LEVEL] = {Pair("DEBUG", DEBUG), Pair("INFO", INFO),
+		Pair("WARNING", WARNING), Pair("ERROR", ERROR)};
+	
+	HarlLevel curLevel;
 	
 	for (int i = 0; i < NUM_LEVEL; ++i)
 	{
 		if (level == pairs[i].key)
 		{
-			(this->*(pairs[i].value))();
-			return;
+			curLevel = pairs[i].value;
+			break;
 		}
 	}
-	
-	std::cout << "argument failed\n";
+
+	switch (curLevel)
+	{
+	case DEBUG:
+		debug();
+	case INFO:
+		info();
+	case WARNING:
+		warning();
+	case ERROR:
+		error();
+		break;
+	default:
+		std::cout << "[ Probably complaining about insignificant problems ]\n";
+		break;
+	}
 }
 
 // --- Pair
-Harl::Pair::Pair(std::string key, void (Harl::*value)(void))
+Harl::Pair::Pair(std::string key, HarlLevel value)
 {
 	this->key = key;
 	this->value = value;
