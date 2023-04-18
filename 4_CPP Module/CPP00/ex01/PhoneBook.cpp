@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:20 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/17 20:10:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/18 14:41:22 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,37 +49,15 @@ void PhoneBook::AddContact(std::string firstName, std::string lastName, std::str
 	}
 	else
 	{
-		tail += 1;
-		if (tail == PB_SIZE)
-			tail = 0;
+		tail = (tail + 1) % PB_SIZE;
 		list[tail] = Contact;
 		if (size == PB_SIZE)
 		{
-			head += 1;
-			if (head == PB_SIZE)
-				head = 0;
+			head = (head + 1) % PB_SIZE;
 			--size;
 		}
 	}
 	++size;
-}
-
-void PhoneBook::RemoveContact()
-{
-	if (size == 0)
-		return;
-	else if (size == 1)
-	{
-		head = -1;
-		tail = -1;
-	}
-	else
-	{
-		tail -= 1;
-		if (tail < 0)
-			tail = PB_SIZE - 1;
-	}
-	--size;
 }
 
 static void PrintLimits(const std::string& str)
@@ -98,11 +76,8 @@ void PhoneBook::PrintPhoneBook()
 		return;
 	}
 	
-	int		index;
-
-	std::cout << '\n';
-	
-	std::cout << CYN << std::right << std::setw(11) << "index|" << std::setw(11) << "FirstName|"
+	std::cout << '\n' << CYN << std::right
+		<< std::setw(11) << "index|" << std::setw(11) << "FirstName|"
 		<< std::setw(11) << "LastName|" << std::setw(11) << "NickName\n" << NC;
 	for (int i=0; i<size; ++i)
 	{
@@ -115,10 +90,13 @@ void PhoneBook::PrintPhoneBook()
 		std::cout << '\n';
 	}
 	
+	int	index;
 	while (true)
 	{
 		std::cout << CYN << "\n== Put index to see the phone number ==\n" << NC;
 		std::cin >> index;
+		if (std::cin.eof())
+			exit(1);
 		if (std::cin.fail())
 		{
 			std::cin.clear();
@@ -132,7 +110,10 @@ void PhoneBook::PrintPhoneBook()
 			break;
 	}
 
-	std::cout << RED << list[(head + index) % PB_SIZE].GetNickName() << "'s Phone Number is ";
+	std::cout << RED << "FirstName : " << NC << list[(head + index) % PB_SIZE].GetFirstName() << '\n';
+	std::cout << RED << "LastName : " << NC << list[(head + index) % PB_SIZE].GetLastName() << '\n';
+	std::cout << RED << "NickName : " << NC << list[(head + index) % PB_SIZE].GetNickName() << '\n';
+	std::cout << RED << "PhonNumber : " << NC;
 	for (int i=0; i<PNUM_SIZE; ++i)
 		std::cout << list[(head + index) % PB_SIZE].GetPhoneNumber()[i];
 	std::cout << "\n\n" << NC;
