@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:18 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/17 20:10:23 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/18 14:47:49 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ private:
 	public:
 		Contact();
 		Contact(const Contact& instance);
-		Contact(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber);
+		Contact(std::string& firstName, std::string& lastName, std::string& nickName, std::string& darkestSecret, char* phoneNumber);
 		~Contact();
 		Contact&		operator=(const Contact& instance);
 		const std::string&	GetFirstName();
@@ -59,7 +59,7 @@ public:
 	~PhoneBook();
 	PhoneBook& operator=(const PhoneBook& instance);
 
-	void AddContact(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber);
+	void AddContact(std::string& firstName, std::string& lastName, std::string& nickName, std::string& darkestSecret, char* phoneNumber);
 	void RemoveContact();
 	void PrintPhoneBook();
 };

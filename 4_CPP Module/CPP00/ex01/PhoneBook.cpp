@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 17:13:20 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 14:41:22 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/18 14:47:56 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ PhoneBook& PhoneBook::operator=(const PhoneBook& instance)
 	return *this;
 }
 
-void PhoneBook::AddContact(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber)
+void PhoneBook::AddContact(std::string& firstName, std::string& lastName, std::string& nickName, std::string& darkestSecret, char* phoneNumber)
 {
 	Contact Contact(firstName, lastName, nickName, darkestSecret, phoneNumber);
 	
@@ -143,7 +143,7 @@ PhoneBook::Contact::Contact(const Contact& instance)
 		phoneNumber[i] = instance.phoneNumber[i];
 }
 
-PhoneBook::Contact::Contact(std::string firstName, std::string lastName, std::string nickName, std::string darkestSecret, char *phoneNumber)
+PhoneBook::Contact::Contact(std::string& firstName, std::string& lastName, std::string& nickName, std::string& darkestSecret, char* phoneNumber)
 {
 	this->firstName = firstName;
 	this->lastName = lastName;
