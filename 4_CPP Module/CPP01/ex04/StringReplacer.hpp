@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 19:43:40 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 19:57:04 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/18 22:13:57 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,21 @@
 class StringReplacer
 {
 private:
-	std::string		fileName;
-	std::string		targetString;
-	std::string		destString;
-	std::ifstream	targetFile;
-	std::ofstream	destFile;
+	std::string	fileName;
+	std::string	targetString;
+	std::string	destString;
+	std::string	targetFile;
+	std::string	destFile;
 
 public:
 	StringReplacer(char* fileName, char* targetString, char* destString);
 
+private:
+	void WriteToDestFile(std::ofstream& destFile, std::string& temp);
+	void SplitLineAndReplace(std::string& line, std::ofstream& destFile);
+
 public:
+	bool Replace();
 };
 
 #endif

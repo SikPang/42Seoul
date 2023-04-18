@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 19:43:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 19:56:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/18 22:28:19 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,59 @@ StringReplacer::StringReplacer(char* fileName, char* targetString, char* destStr
 	this->fileName = fileName;
 	this->targetString = targetString;
 	this->destString = destString;
-	targetFile = std::ifstream(this->fileName);
-	destFile = std::ofstream(this->fileName + ".replace");
+	this->targetFile = this->fileName;
+	this->destFile = this->fileName + ".replace";
+}
+#include <iostream>
+void StringReplacer::WriteToDestFile(std::ofstream& destFile, std::string& temp)
+{
+	if (temp == targetString)
+	{
+		destFile << destString;
+		temp = "";
+	}
+	else
+	{
+		destFile << temp[0];
+		temp.erase(0, 1);
+	}
+}
+
+void StringReplacer::SplitLineAndReplace(std::string& line, std::ofstream& destFile)
+{
+	std::string temp = "";
+	
+	for (int i = 0; i < line.size(); ++i)
+	{
+		temp += line[i];
+
+		if (temp.size() == targetString.size())
+			WriteToDestFile(destFile, temp);
+	}
+	if (temp == targetString)
+		destFile << destString;
+	else
+		destFile << temp;
+}
+
+bool StringReplacer::Replace()
+{
+	std::ifstream targetFile(this->targetFile);
+	std::ofstream destFile(this->targetFile + ".replace");
+	
+	if (targetFile.fail())
+		return false;
+
+	while (!targetFile.eof())
+	{
+		std::string	line;
+
+		getline(targetFile, line);
+		SplitLineAndReplace(line, destFile);
+
+		if (targetFile.eof())
+			break;
+		destFile << "\n";
+	}
+	return true;
 }
