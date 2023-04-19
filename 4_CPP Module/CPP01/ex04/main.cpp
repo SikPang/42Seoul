@@ -6,13 +6,15 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:15:38 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 22:30:51 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/19 13:27:17 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
 #include "StringReplacer.hpp"
+
+#include <stdio.h>
 
 int main(int ac, char** av)
 {

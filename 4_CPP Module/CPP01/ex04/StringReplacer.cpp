@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 19:43:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 22:28:19 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/19 13:34:26 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void StringReplacer::WriteToDestFile(std::ofstream& destFile, std::string& temp)
 		temp.erase(0, 1);
 	}
 }
-
+#include <stdio.h>
 void StringReplacer::SplitLineAndReplace(std::string& line, std::ofstream& destFile)
 {
 	std::string temp = "";
@@ -65,11 +65,12 @@ bool StringReplacer::Replace()
 		std::string	line;
 
 		getline(targetFile, line);
-		SplitLineAndReplace(line, destFile);
 
 		if (targetFile.eof())
 			break;
-		destFile << "\n";
+		line += "\n";
+
+		SplitLineAndReplace(line, destFile);
 	}
 	return true;
 }
