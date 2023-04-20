@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 13:56:35 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/19 16:58:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 19:26:43 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Fixed::Fixed()
 
 Fixed::Fixed(const int value)
 {
-	fixedPointNumber = value;
+	fixedPointNumber = value << 8;
 }
 
 Fixed::Fixed(const float value)
@@ -28,15 +28,17 @@ Fixed::Fixed(const float value)
 	float temp = value;
 	int* a = (int*)&temp;
 	fixedPointNumber = *a;
+
+	
 }
 
-Fixed::Fixed(Fixed& instance)
+Fixed::Fixed(const Fixed& instance)
 {
 	std::cout << "Copy constructor called\n";
 	this->fixedPointNumber = instance.fixedPointNumber;
 }
 
-Fixed& Fixed::operator=(Fixed& instance)
+Fixed& Fixed::operator=(const Fixed& instance)
 {
 	std::cout << "Copy assignment operator called\n";
 	this->fixedPointNumber = instance.getRawBits();

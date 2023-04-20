@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 13:56:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/19 15:21:26 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 19:23:11 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ class Fixed
 {
 private:
 	int	fixedPointNumber;
-	static const int fractionalBits = 8;
+	static const int fractionalBits;
 
 public:
 	Fixed();
 	Fixed(const int value);
 	Fixed(const float value);
-	Fixed(Fixed& instance);
+	Fixed(const Fixed& instance);
 	~Fixed();
-	Fixed&	operator=(Fixed& instance);
+	Fixed&	operator=(const Fixed& instance);
 	Fixed&	operator<<(const float value);
 
 public:

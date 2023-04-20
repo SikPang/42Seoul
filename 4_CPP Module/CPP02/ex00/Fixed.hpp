@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 13:56:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/19 14:07:11 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 19:25:37 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ private:
 
 public:
 	Fixed();
-	Fixed(Fixed& instance);
+	Fixed(const Fixed& instance);
 	~Fixed();
-	Fixed&	operator=(Fixed& instance);
+	Fixed&	operator=(const Fixed& instance);
 
 public:
 	int		getRawBits(void) const;
