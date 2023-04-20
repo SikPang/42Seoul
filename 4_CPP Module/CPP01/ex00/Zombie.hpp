@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 22:39:37 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 14:58:14 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 13:44:24 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #define __ZOMBIE_HPP__
 
 #include <string>
+
+#define NC "\e[0m"
+#define RED "\e[0;31m"
+#define GRN "\e[0;32m"
+#define CYN "\e[0;36m"
 
 class Zombie
 {
@@ -28,8 +33,8 @@ public:
 	~Zombie();
 	Zombie&	operator=(Zombie& instance);
 
+public:
 	void	announce();
-	void	die();
 };
 
 Zombie*	newZombie(std::string name);

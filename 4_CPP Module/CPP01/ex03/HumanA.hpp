@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:12:41 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/15 18:35:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 14:19:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ private:
 	Weapon*		weapon;
 
 public:
-	HumanA();
 	HumanA(std::string name, Weapon& weapon);
 	HumanA(HumanA& instance);
 	~HumanA();

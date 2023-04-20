@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:12:50 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 14:58:05 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 13:56:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,35 @@
 
 Zombie::Zombie()
 {
+	std::cout << name << GRN << " created\n" << NC;
 	name = "";
-	announce();
 }
 
 Zombie::Zombie(std::string name)
 {
+	std::cout << name << GRN << " created\n" << NC;
 	this->name = name;
-	announce();
 }
 
 Zombie::Zombie(Zombie& instance)
 {
+	std::cout << name << GRN << " created\n" << NC;
 	name = instance.name;
-	announce();
 }
 
 Zombie& Zombie::operator=(Zombie& instance)
 {
+	std::cout << name << GRN << " created\n" << NC;
 	name = instance.name;
 	return *this;
 }
 
 Zombie::~Zombie()
 {
-	die();
+	std::cout << name << RED << " died\n" << NC;
 }
 
 void Zombie::announce()
 {
-	std::cout << name << ": BraiiiiiiinnnzzzZ...\n";
-}
-
-void Zombie::die()
-{
-	std::cout << name << " died\n";
+	std::cout << name << CYN << ": BraiiiiiiinnnzzzZ...\n" << NC;
 }

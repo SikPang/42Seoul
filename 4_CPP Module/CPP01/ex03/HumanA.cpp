@@ -6,18 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:12:42 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/15 18:38:44 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 14:21:57 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "HumanA.hpp"
-
-HumanA::HumanA()
-{
-	name = "";
-	weapon = NULL;
-}
 
 HumanA::HumanA(std::string name, Weapon& weapon)
 {
@@ -42,8 +36,6 @@ HumanA::~HumanA() {}
 
 void HumanA::attack()
 {
-	if (weapon == NULL)
-		std::cout << "Error : HumanA has no weapon\n";
-	else
-		std::cout << name << " attacks with their " << weapon->getType() << "\n";
+	std::cout << name << RED << " attacks " << NC << "with their " 
+		<< RED << weapon->getType() << NC << "\n";
 }

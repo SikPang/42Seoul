@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 16:09:24 by song              #+#    #+#             */
-/*   Updated: 2023/02/15 16:43:05 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 13:41:38 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,4 +15,6 @@
 void randomChump(std::string name)
 {
 	Zombie newZombie(name);
+	
+	newZombie.announce();
 }

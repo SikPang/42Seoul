@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 17:47:14 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 16:29:47 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 14:20:21 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,10 @@ int main()
 		club.setType("some other type of club");
 		jim.attack();
 	}
-
-	HumanA a1;
-	a1.attack();
-
+	
 	Weapon stick("stick");
-	HumanA a2("a2", stick);
-	a2.attack();
+	HumanA a1("a1", stick);
+	a1.attack();
 	
 	HumanB b("b");
 	b.attack();

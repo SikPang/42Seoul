@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:38:31 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 19:46:45 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 14:16:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,17 @@
 
 #define NUM_LEVEL 4
 
-enum HarlLevel
+namespace HarlLevel
 {
-	DEBUG,
-	INFO,
-	WARNING,
-	ERROR
-};
+	enum NUM
+	{
+		DEBUG,
+		INFO,
+		WARNING,
+		ERROR,
+		WRONG
+	};
+}
 
 class Harl
 {
@@ -39,10 +43,10 @@ private:
 	{
 	public:
 		std::string key;
-		HarlLevel value;
+		HarlLevel::NUM value;
 		
 	public:
-		Pair(std::string key, HarlLevel value);
+		Pair(std::string key, HarlLevel::NUM value);
 		Pair(const Pair& pair);
 	};
 

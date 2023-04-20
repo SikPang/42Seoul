@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 18:12:42 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/15 18:39:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 14:23:16 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ HumanB::~HumanB() {}
 
 void HumanB::attack()
 {
-	std::cout << name << " attacks with their ";
+	std::cout << name << GRN << " attacks " << NC << "with their ";
 	
 	if (weapon == NULL)
-		std::cout << "fist\n";
+		std::cout << GRN << "fist\n" << NC;
 	else
-		std::cout << weapon->getType() << "\n";
+		std::cout << GRN << weapon->getType() << NC << "\n";
 }
 
 void HumanB::setWeapon(Weapon& weapon)

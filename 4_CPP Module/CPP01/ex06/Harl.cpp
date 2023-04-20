@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:38:28 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/18 19:20:27 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 14:17:18 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void Harl::error(void)
 
 void Harl::complain(std::string level)
 {
-	Pair pairs[NUM_LEVEL] = {Pair("DEBUG", DEBUG), Pair("INFO", INFO),
-		Pair("WARNING", WARNING), Pair("ERROR", ERROR)};
+	Pair pairs[NUM_LEVEL] = {Pair("DEBUG", HarlLevel::DEBUG), Pair("INFO", HarlLevel::INFO),
+		Pair("WARNING", HarlLevel::WARNING), Pair("ERROR", HarlLevel::ERROR)};
 	
-	HarlLevel curLevel;
+	HarlLevel::NUM curLevel = HarlLevel::WRONG;
 	
 	for (int i = 0; i < NUM_LEVEL; ++i)
 	{
@@ -55,13 +55,13 @@ void Harl::complain(std::string level)
 
 	switch (curLevel)
 	{
-	case DEBUG:
+	case HarlLevel::DEBUG:
 		debug();
-	case INFO:
+	case HarlLevel::INFO:
 		info();
-	case WARNING:
+	case HarlLevel::WARNING:
 		warning();
-	case ERROR:
+	case HarlLevel::ERROR:
 		error();
 		break;
 	default:
@@ -71,7 +71,7 @@ void Harl::complain(std::string level)
 }
 
 // --- Pair
-Harl::Pair::Pair(std::string key, HarlLevel value)
+Harl::Pair::Pair(std::string key, HarlLevel::NUM value)
 {
 	this->key = key;
 	this->value = value;

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 22:38:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/14 22:39:23 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/20 13:53:35 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int main()
 {
-	Zombie*	heapZombie = new Zombie("heap");
-	Zombie	stackZombie("stack");
+	Zombie*	heapZom = new Zombie("Heap");
+	Zombie	stackZom("Stack");
 
-	Zombie* newZom = newZombie("newZombie");
-	randomChump("randomChump");
+	Zombie* newZom = newZombie("NewZombie()");
+	randomChump("RandomChump()");
 
 	delete newZom;
-	delete heapZombie;
+	delete heapZom;
 }
