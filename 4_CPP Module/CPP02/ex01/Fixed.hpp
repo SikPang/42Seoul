@@ -20,16 +20,15 @@ class Fixed
 {
 private:
 	int	fixedPointNumber;
-	static const int fractionalBits;
+	static const int fractionalBits = 8;
 
 public:
 	Fixed();
 	Fixed(const int value);
 	Fixed(const float value);
-	Fixed(const Fixed& instance);
+	Fixed(const Fixed& other);
 	~Fixed();
-	Fixed&	operator=(const Fixed& instance);
-	Fixed&	operator<<(const float value);
+	Fixed&	operator=(const Fixed& other);
 
 public:
 	int		getRawBits(void) const;
@@ -37,5 +36,7 @@ public:
 	float	toFloat( void ) const;
 	int		toInt( void ) const;
 };
+
+std::ostream& operator<<(std::ostream& os, const Fixed& value);
 
 #endif

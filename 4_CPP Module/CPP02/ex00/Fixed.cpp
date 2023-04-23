@@ -13,21 +13,21 @@
 #include "Fixed.hpp"
 
 Fixed::Fixed()
+	: fixedPointNumber(0)
 {
 	std::cout << "Default constructor called\n";
-	fixedPointNumber = 0;
 }
 
-Fixed::Fixed(const Fixed& instance)
+Fixed::Fixed(const Fixed& other)
+	: fixedPointNumber(other.fixedPointNumber)
 {
 	std::cout << "Copy constructor called\n";
-	this->fixedPointNumber = instance.fixedPointNumber;
 }
 
-Fixed& Fixed::operator=(const Fixed& instance)
+Fixed& Fixed::operator=(const Fixed& other)
 {
 	std::cout << "Copy assignment operator called\n";
-	this->fixedPointNumber = instance.getRawBits();
+	this->fixedPointNumber = other.getRawBits();
 	return *this;
 }
 

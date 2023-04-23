@@ -24,9 +24,9 @@ private:
 
 public:
 	Fixed();
-	Fixed(const Fixed& instance);
+	Fixed(const Fixed& other);
 	~Fixed();
-	Fixed&	operator=(const Fixed& instance);
+	Fixed&	operator=(const Fixed& other);
 
 public:
 	int		getRawBits(void) const;
