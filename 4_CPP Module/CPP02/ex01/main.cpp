@@ -6,28 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 13:55:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/20 19:14:01 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/24 18:25:46 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Fixed.hpp"
-
-// #include <cmath>
-
-// int main()
-// {
-// 	float fNum = 3.141592;
-
-// 	int box = fNum;
-// 	std::cout << box << '\n';
-
-// 	for (int i = 1; i < 8; ++i)
-// 	{
-// 		box = roundf(fNum * (1 << i));
-// 		std::cout << box << ' ' << (float)box / (1 << i) << '\n';
-// 	}
-// }
 
 int main( void )
 {
