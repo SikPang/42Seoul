@@ -22,10 +22,10 @@ ScavTrap::ScavTrap() : ClapTrap()
 	isGateKeeperMode = false;
 	species = "ScavTrap";
 
-	std::cout << "ScavTrap [Unknown] Created.\n";
+	std::cout << species << CYN << " [Unknown] " << NC << "Created.\n";
 }
 
-ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
+ScavTrap::ScavTrap(const std::string& name) : ClapTrap(name)
 {
 	hitPoint = 100;
 	energyPoint = 50;
@@ -34,18 +34,18 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 	isGateKeeperMode = false;
 	species = "ScavTrap";
 
-	std::cout << "ScavTrap " << name << " Created.\n";
+	std::cout << species << ' ' << CYN << name << NC << " Created.\n";
 }
 
-ScavTrap::ScavTrap(ScavTrap& instance) : ClapTrap(instance)
+ScavTrap::ScavTrap(const ScavTrap& instance) : ClapTrap(instance)
 {
 	isAlive = instance.isAlive;
 	isGateKeeperMode = instance.isGateKeeperMode;
 	
-	std::cout << "ScavTrap " << name << " Created.\n";
+	std::cout << species << ' ' << CYN << name << NC << " Created.\n";
 }
 
-ScavTrap& ScavTrap::operator=(ScavTrap& instance)
+ScavTrap& ScavTrap::operator=(const ScavTrap& instance)
 {
 	name = instance.name;
 	hitPoint = instance.hitPoint;
@@ -60,7 +60,7 @@ ScavTrap& ScavTrap::operator=(ScavTrap& instance)
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap " << name << " Destroyed.\n";
+	std::cout << species << ' ' << CYN << name << NC << " Destroyed.\n";
 }
 
 void ScavTrap::takeDamage(unsigned int amount)
@@ -82,12 +82,18 @@ void ScavTrap::beRepaired(unsigned int amount)
 void ScavTrap::guardGate()
 {
 	if (isGateKeeperMode)
-		std::cout << "Gate keeper mode of " << name << " is ON\n";
+	{
+		isGateKeeperMode = false;
+		std::cout << "Gate keeper mode of " << species << ' ' << CYN << name << NC << " is OFF\n";
+	}
 	else
-		std::cout << "Gate keeper mode of " << name << " is OFF\n";
+	{
+		isGateKeeperMode = true;
+		std::cout << "Gate keeper mode of " << species << ' ' <<CYN << name << NC << " is ON\n";
+	}
 }
 
-bool ScavTrap::IsAlive()
+bool ScavTrap::IsAlive() const
 {
 	return isAlive;
 }

@@ -15,18 +15,23 @@
 
 int main()
 {
-	ClapTrap	ctA("A");
-	ClapTrap	ctB("B");
+	ClapTrap	ctA("Alpha");
+	ClapTrap	ctB("Beta");
 
 	for (int i = 0; i < 10; ++i)
 	{
-		ctA.attack("B");
+		std::cout << '\n';
+		ctA.attack("Beta");
 		ctB.takeDamage(ctA.getAttackDamage());
 	}
 
-	ctA.attack("B");
+	std::cout << '\n';
+	ctA.attack("Beta");
 	ctA.beRepaired(1);
 	
+	std::cout << '\n';
 	ctB.beRepaired(1);
 	ctB.beRepaired(1);
+
+	std::cout << '\n';
 }

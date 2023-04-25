@@ -15,7 +15,7 @@
 
 void CheckBIsAlive(ScavTrap& stB)
 {
-	std::cout << "is ScavTrap B Alive? : " << stB.IsAlive() << "\n\n";
+	std::cout << "is ScavTrap" << CYN << " B " << NC << "Alive? : " << stB.IsAlive() << "\n\n";
 }
 
 void PrevFunc()
@@ -25,36 +25,48 @@ void PrevFunc()
 
 	for (int i = 0; i < 10; ++i)
 	{
+		std::cout << '\n';
 		ctA.attack("B");
 		ctB.takeDamage(ctA.getAttackDamage());
 	}
 
+	std::cout << '\n';
 	ctA.attack("B");
 	ctA.beRepaired(1);
 	
+	std::cout << '\n';
 	ctB.beRepaired(1);
 	ctB.beRepaired(1);
+
+	std::cout << '\n';
 }
 
 int main()
 {
 	PrevFunc();
-	std::cout << "-----------------------------------\n";
+	std::cout << "\n-----------------------------------\n\n";
 
 	ScavTrap	stA("A");
 	ScavTrap	stB("B");
 
 	for (int i = 0; i < 6; ++i)
 	{
+		std::cout << '\n';
 		stA.attack("B");
 		stB.takeDamage(stA.getAttackDamage());
 		CheckBIsAlive(stB);
 	}
 
+	std::cout << '\n';
 	stB.beRepaired(20);
 	CheckBIsAlive(stB);
 
+	std::cout << '\n';
 	stB.beRepaired(20);
 	CheckBIsAlive(stB);
+
 	stB.guardGate();
+	stB.guardGate();
+	
+	std::cout << '\n';
 }

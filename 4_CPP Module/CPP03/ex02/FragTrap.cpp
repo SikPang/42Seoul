@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <iostream>
+#include <cstdlib>
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap() : ClapTrap()
@@ -23,7 +24,7 @@ FragTrap::FragTrap() : ClapTrap()
 	std::cout << "FragTrap [Unknown] Created.\n";
 }
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name)
+FragTrap::FragTrap(const std::string& name) : ClapTrap(name)
 {
 	hitPoint = 100;
 	energyPoint = 50;
@@ -33,12 +34,12 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 	std::cout << "FragTrap " << name << " Created.\n";
 }
 
-FragTrap::FragTrap(FragTrap& instance) : ClapTrap(instance)
+FragTrap::FragTrap(const FragTrap& instance) : ClapTrap(instance)
 {
 	std::cout << "FragTrap " << name << " Created.\n";
 }
 
-FragTrap& FragTrap::operator=(FragTrap& instance)
+FragTrap& FragTrap::operator=(const FragTrap& instance)
 {
 	name = instance.name;
 	hitPoint = instance.hitPoint;
@@ -51,14 +52,14 @@ FragTrap& FragTrap::operator=(FragTrap& instance)
 
 FragTrap::~FragTrap()
 {
-	std::cout << "FragTrap " << name << " Destroyed.\n";
+	std::cout << "FragTrap " << CYN << ' ' << name << NC << " Destroyed.\n";
 }
 
-void FragTrap::highFivesGuys()
+void FragTrap::highFivesGuys(void) const
 {
 	if (hitPoint == 0)
 	{
-		std::cout << species << " " << name << " is dead but seems to wriggle.\n";	
+		std::cout << species << " " << CYN << name << NC << " is dead but seems to wriggle.\n";	
 		return;
 	}
 	
@@ -66,20 +67,23 @@ void FragTrap::highFivesGuys()
 
 	while (true)
 	{
-		std::cout << "\t" << species << " " << name << ": Can you give me a high five? (yes/no)\n";
+		std::cout << "\t" << species << CYN << ' '  << name << NC << ": Can you give me a high five? (yes/no)\n";
 		std::cin >> input;
+		std::cin.ignore(100, '\n');
+		if (std::cin.eof())
+			exit(1);
 
 		if (input == "yes")
 		{
-			std::cout << "\t" << species << " " << name << ": * Clap! * (looks happy)\n";
+			std::cout << "\t" << "* Clap! * (" << CYN << name << NC << " looks happy)\n";
 			return;
 		}
 		else if (input == "no")
 		{
-			std::cout << "\t" << species << " " << name << ": (looks sad)\n";
+			std::cout << "\t" << ": (" << CYN << name << NC << " looks sad)\n";
 			return;
 		}
 		else
-			std::cout << "\t" << species << " " << name << ": I don't understand.\n";
+			std::cout << "\t" << species << CYN << ' '  << name << NC << ": I don't understand.\n";
 	}
 }

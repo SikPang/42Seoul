@@ -20,12 +20,12 @@ class FragTrap : public ClapTrap
 {
 public:
 	FragTrap();
-	FragTrap(std::string name);
-	FragTrap(FragTrap& instance);
+	FragTrap(const std::string& name);
+	FragTrap(const FragTrap& instance);
 	~FragTrap();
-	FragTrap&	operator=(FragTrap& instance);
+	FragTrap&	operator=(const FragTrap& instance);
 
-	void		highFivesGuys();
+	void		highFivesGuys(void) const;
 };
 
 #endif

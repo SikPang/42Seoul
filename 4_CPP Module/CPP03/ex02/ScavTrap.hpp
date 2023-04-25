@@ -25,15 +25,15 @@ private:
 
 public:
 	ScavTrap();
-	ScavTrap(std::string name);
-	ScavTrap(ScavTrap& instance);
+	ScavTrap(const std::string& name);
+	ScavTrap(const ScavTrap& instance);
 	~ScavTrap();
-	ScavTrap&	operator=(ScavTrap& instance);
+	ScavTrap&	operator=(const ScavTrap& instance);
 
 	void		takeDamage(unsigned int amount);
 	void		beRepaired(unsigned int amount);
 	void		guardGate();
-	bool		IsAlive();
+	bool		IsAlive() const;
 };
 
 #endif
