@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:47:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 19:29:53 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/26 21:25:46 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ protected:
 
 public:
 	Brain();
-	Brain(Brain& instance);
+	Brain(const Brain& instance);
 	virtual ~Brain();
-	Brain&			operator=(Brain& instance);
+	Brain&	operator=(const Brain& instance);
 };
 
 #endif

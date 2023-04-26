@@ -6,13 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:54:40 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 18:37:01 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/26 21:11:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __ANIMAL_HPP__
-#define __ANIMAL_HPP__
 
 #include <string>
 
@@ -23,12 +21,11 @@ protected:
 
 public:
 	Animal();
-	Animal(Animal& instance);
+	Animal(const Animal& instance);
 	virtual ~Animal();
-	Animal&			operator=(Animal& instance);
+	Animal&	operator=(const Animal& instance);
 
+public:
 	virtual void	makeSound() const;
 	std::string		getType() const;
 };
-
-#endif

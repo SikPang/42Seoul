@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:54:41 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 19:32:47 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/26 21:08:47 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,26 @@
 Animal::Animal()
 {
 	type = "some animal";
-	brain = new Brain();
 
 	std::cout << "Animal Created.\n";
 }
 
-Animal::Animal(Animal& instance)
+Animal::Animal(const Animal& instance)
 {
-	instance.type = type;
-	brain = instance.brain;
+	type = instance.type;
 
 	std::cout << "Animal Created.\n";
 }
 
-Animal& Animal::operator=(Animal& instance)
+Animal& Animal::operator=(const Animal& instance)
 {
-	instance.type = type;
-	brain = instance.brain;
+	type = instance.type;
 	
 	return *this;
 }
 
 Animal::~Animal() 
 {
-	delete brain;
 	std::cout << "Animal Destroyed.\n";
 }
 

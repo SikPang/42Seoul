@@ -6,25 +6,26 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:07:15 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 18:35:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/26 21:24:04 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __DOG_HPP__
-#define __DOG_HPP__
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Dog : public Animal
 {
+private:
+	Brain*	brain;
+
 public:
 	Dog();
-	Dog(Dog& instance);
+	Dog(const Dog& instance);
 	~Dog();
-	Dog&	operator=(Dog& instance);
+	Dog&	operator=(const Dog& instance);
 
-	void	makeSound() const;
+public:
+	void	makeSound() const;	// override
 };
-
-#endif
