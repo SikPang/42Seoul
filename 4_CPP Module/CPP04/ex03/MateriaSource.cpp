@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 19:49:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:25:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/30 08:47:33 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,33 @@
 
 MateriaSource::MateriaSource()
 {
-
 }
 
 MateriaSource::~MateriaSource()
 {
-
 }
 
 MateriaSource::MateriaSource(const MateriaSource& other)
 {
-
+	this->inventory = other.inventory;
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& other)
 {
-
+	this->inventory = other.inventory;
 }
 
 void MateriaSource::learnMateria(AMateria* m)
 {
-	
+	inventory.AddItem(m);
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type)
 {
-	if (type == "ice")
-		return new Ice();
-	else if (type == "cure")
-		return new Cure();
-	else
-		return NULL;
+	for (int i = 0; i < inventory.GetSize(); ++i)
+	{
+		if (type == inventory.GetSlot(i)->getType())
+			return (inventory.GetSlot(i)->clone());
+	}
+	return NULL;
 }

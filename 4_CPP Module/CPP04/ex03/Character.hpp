@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 20:09:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:50:31 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/30 08:36:38 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ public:
 	Character(std::string name);
 	Character(const Character& other);
 	~Character();
+	Character& operator=(const Character& other);
 
 public:
 	std::string const & getName() const;
