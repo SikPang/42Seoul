@@ -33,3 +33,8 @@ Cure& Cure::operator=(const Cure& other)
 {
 	
 }
+
+AMateria* Cure::clone() const
+{
+
+}

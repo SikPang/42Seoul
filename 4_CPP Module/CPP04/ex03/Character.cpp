@@ -1,40 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.cpp                                            :+:      :+:    :+:   */
+/*   Character.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/29 20:00:07 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:08:28 by kwsong           ###   ########.fr       */
+/*   Created: 2023/04/29 20:09:04 by kwsong            #+#    #+#             */
+/*   Updated: 2023/04/29 20:13:55 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Ice.hpp"
+#include "Character.hpp"
 
-Ice::Ice()
-	: AMateria()
+Character::Character()
+	: name("")
+{
+}
+
+Character::Character(std::string name)
+	: name(name)
+{
+}
+
+Character::Character(const Character& other)
+	: name(other.name)
+{
+}
+
+Character::~Character()
+{
+}
+
+std::string const & Character::getName() const
+{
+	return name;
+}
+
+void Character::equip(AMateria* m)
+{
+
+}
+
+void Character::unequip(int idx)
+{
+
+}
+
+void Character::use(int idx, ICharacter& target)
 {
 	
-}
-
-Ice::Ice(const Ice& other)
-	: AMateria(other)
-{
-
-}
-
-Ice::~Ice()
-{
-
-}
-
-Ice& Ice::operator=(const Ice& other)
-{
-	
-}
-
-AMateria* Ice::clone() const
-{
-
 }

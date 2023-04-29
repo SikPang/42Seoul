@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:46:31 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 19:58:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 20:13:06 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "ICharacter.hpp"
 #include "AMateria.cpp"
 #include "MateriaSource.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
+#include "Character.hpp"
 
 int main()
 {

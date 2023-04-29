@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 20:00:06 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:03:12 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 20:08:16 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,7 @@ public:
 	Ice(const Ice& other);
 	~Ice();
 	Ice& operator=(const Ice& other);
+
+public:
+	AMateria* clone() const;
 };
