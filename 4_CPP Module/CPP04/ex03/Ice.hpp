@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 20:00:06 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:08:16 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 20:39:23 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 class Ice : public AMateria
 {
-
 public:
 	Ice();
 	Ice(const Ice& other);
@@ -23,5 +22,6 @@ public:
 	Ice& operator=(const Ice& other);
 
 public:
-	AMateria* clone() const;
+	AMateria* clone() const;	// override
+	void use(ICharacter& target);	// override
 };

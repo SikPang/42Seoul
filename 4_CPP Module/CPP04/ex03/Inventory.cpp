@@ -1,46 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.cpp                                       :+:      :+:    :+:   */
+/*   Inventory.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/29 17:51:46 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:30:53 by kwsong           ###   ########.fr       */
+/*   Created: 2023/04/29 20:46:45 by kwsong            #+#    #+#             */
+/*   Updated: 2023/04/29 20:54:37 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AMateria.hpp"
+#include "Inventory.hpp"
 
-AMateria::AMateria()
-	: type("")
+Inventory::Inventory()
+	: capacity(SIZE_OF_INVENTORY)
+	, size(0)
 {
 }
 
-AMateria::AMateria(std::string const & type)
-	: type(type)
+Inventory::Inventory(const Inventory& other)
+	: capacity(other.capacity)
+	, size(other.size)
 {
 }
 
-AMateria::AMateria(const AMateria& other)
-	: type(other.type)
+Inventory::~Inventory()
 {
 }
 
-AMateria::~AMateria()
+Inventory& Inventory::operator=(const Inventory& other)
 {
-}
-
-AMateria& AMateria::operator=(const AMateria& other)
-{
-	type = other.type;
-}
-
-std::string const & AMateria::getType() const
-{
-	return type;
-}
-
-void AMateria::use(ICharacter& target)
-{
+	capacity = other.capacity;
+	size = other.size;
 }

@@ -6,12 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 19:49:05 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 19:59:49 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 20:24:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include "IMateriaSource.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
 
 class MateriaSource : public IMateriaSource
 {

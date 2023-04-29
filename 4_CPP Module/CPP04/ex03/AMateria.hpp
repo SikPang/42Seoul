@@ -6,12 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:49:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:03:41 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 20:34:47 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <string>
+#include <iostream>
 
 class ICharacter;
 

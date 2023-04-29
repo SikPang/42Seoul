@@ -6,18 +6,20 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 20:09:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:12:56 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 20:50:31 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <string>
 #include "ICharacter.hpp"
+#include "Inventory.hpp"
 
 class Character : public ICharacter
 {
 private:
 	std::string name;
+	Inventory inventory;
 
 public:
 	Character();

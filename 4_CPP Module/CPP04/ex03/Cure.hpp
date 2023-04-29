@@ -23,5 +23,6 @@ public:
 	Cure& operator=(const Cure& other);
 
 public:
-	AMateria* clone() const;
+	AMateria* clone() const;	// override
+	void use(ICharacter& target);	// override
 };

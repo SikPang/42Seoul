@@ -1,46 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AMateria.cpp                                       :+:      :+:    :+:   */
+/*   Inventory.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/29 17:51:46 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:30:53 by kwsong           ###   ########.fr       */
+/*   Created: 2023/04/29 20:46:47 by kwsong            #+#    #+#             */
+/*   Updated: 2023/04/29 20:56:26 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include "AMateria.hpp"
 
-AMateria::AMateria()
-	: type("")
-{
-}
+#define SIZE_OF_INVENTORY 4
 
-AMateria::AMateria(std::string const & type)
-	: type(type)
+class Inventory
 {
-}
+private:
+	AMateria* slots;
+	unsigned int capacity;
+	unsigned int size;
 
-AMateria::AMateria(const AMateria& other)
-	: type(other.type)
-{
-}
+public:
+	Inventory();
+	Inventory(const Inventory& other);
+	~Inventory();
+	Inventory& operator=(const Inventory& other);
 
-AMateria::~AMateria()
-{
-}
-
-AMateria& AMateria::operator=(const AMateria& other)
-{
-	type = other.type;
-}
-
-std::string const & AMateria::getType() const
-{
-	return type;
-}
-
-void AMateria::use(ICharacter& target)
-{
-}
+public:
+	unsigned int GetCapacity();
+	unsigned int GetSize();
+	void AddToSlot();
+	AMateria* GetSlot();
+};
