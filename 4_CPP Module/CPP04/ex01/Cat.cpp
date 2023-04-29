@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:06:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/26 21:24:48 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 17:34:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,19 @@ Cat::Cat()
 	std::cout << "Cat Created.\n";
 }
 
-Cat::Cat(const Cat& instance)
+Cat::Cat(const Cat& other)
 {
-	type = instance.type;
-	brain = instance.brain;
+	type = other.type;
+	brain = new Brain;
+	brain->duplicate(other.brain);
 
 	std::cout << "Cat Created.\n";
 }
 
-Cat& Cat::operator=(const Cat& instance)
+Cat& Cat::operator=(const Cat& other)
 {
-	type = instance.type;
-	brain = instance.brain;
+	type = other.type;
+	brain->duplicate(other.brain);
 	
 	return *this;
 }
@@ -47,4 +48,19 @@ Cat::~Cat()
 void Cat::makeSound() const
 {
 	std::cout << "* Meow~ *\n";
+}
+
+unsigned int Cat::GetSizeOfIdeas() const
+{
+	return brain->GetSize();
+}
+
+void Cat::AddIdea(const std::string& idea, unsigned int index)
+{
+	brain->AddIdea(idea, index);
+}
+
+std::string Cat::GetIdea(unsigned int index) const
+{
+	return brain->GetIdea(index);
 }

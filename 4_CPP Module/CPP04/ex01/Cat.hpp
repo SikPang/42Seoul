@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:05:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/26 21:23:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 17:34:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,11 @@ public:
 	Cat();
 	Cat(const Cat& instance);
 	~Cat();
-	Cat&	operator=(const Cat& instance);
+	Cat& operator=(const Cat& instance);
 
 public:
-	void	makeSound() const;	// override
+	void makeSound() const;	// override
+	unsigned int GetSizeOfIdeas() const;
+	void AddIdea(const std::string& idea, unsigned int index);
+	std::string GetIdea(unsigned int index) const;
 };

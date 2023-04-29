@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:07:15 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/26 21:24:04 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 17:34:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ private:
 
 public:
 	Dog();
-	Dog(const Dog& instance);
+	Dog(const Dog& other);
 	~Dog();
-	Dog&	operator=(const Dog& instance);
+	Dog& operator=(const Dog& other);
 
 public:
-	void	makeSound() const;	// override
+	void makeSound() const;	// override
+	unsigned int GetSizeOfIdeas() const;
+	void AddIdea(const std::string& idea, unsigned int index);
+	std::string GetIdea(unsigned int index) const;
 };
