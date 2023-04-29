@@ -6,25 +6,29 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:05:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 18:35:56 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 17:34:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __CAT_HPP__
-#define __CAT_HPP__
 
 #include "Animal.hpp"
+#include "Brain.hpp"
 
 class Cat : public Animal
 {
+private:
+	Brain*	brain;
+
 public:
 	Cat();
-	Cat(Cat& instance);
+	Cat(const Cat& instance);
 	~Cat();
-	Cat&	operator=(Cat& instance);
+	Cat& operator=(const Cat& instance);
 
-	void	makeSound() const;
+public:
+	void makeSound() const;	// override
+	unsigned int GetSizeOfIdeas() const;
+	void AddIdea(const std::string& idea, unsigned int index);
+	std::string GetIdea(unsigned int index) const;
 };
-
-#endif

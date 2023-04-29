@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 21:01:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 17:39:32 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 17:45:18 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void leaks()
 {
-	system("leaks animal");
+	system("leaks brain");
 }
 
 int main()

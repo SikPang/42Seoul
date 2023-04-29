@@ -6,31 +6,26 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:54:40 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 19:46:03 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 17:44:11 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __ANIMAL_HPP__
-#define __ANIMAL_HPP__
 
 #include <string>
-#include "Brain.hpp"
 
 class Animal
 {
 protected:
 	std::string	type;
-	Brain*		brain;
 
 public:
 	Animal();
-	Animal(Animal& instance);
+	Animal(const Animal& instance);
 	virtual ~Animal();
-	Animal&			operator=(Animal& instance);
+	Animal&	operator=(const Animal& instance);
 
-	virtual void	makeSound() const=0;
+public:
+	virtual void	makeSound() const = 0;
 	std::string		getType() const;
 };
-
-#endif

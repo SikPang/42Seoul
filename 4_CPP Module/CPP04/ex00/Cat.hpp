@@ -6,12 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:05:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/26 21:11:13 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 16:34:47 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-
 #include "Animal.hpp"
 
 class Cat : public Animal

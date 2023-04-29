@@ -6,12 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:54:40 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/26 21:11:25 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 16:34:49 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-
 #include <string>
 
 class Animal

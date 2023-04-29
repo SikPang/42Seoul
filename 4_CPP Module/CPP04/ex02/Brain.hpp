@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:47:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 19:29:53 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 17:19:22 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,21 @@
 
 class Brain
 {
-protected:
-	std::string	ideas[IDEA_CAPACITY];
+private:
+	std::string ideas[IDEA_CAPACITY];
+	unsigned int size;
 
 public:
 	Brain();
-	Brain(Brain& instance);
-	virtual ~Brain();
-	Brain&			operator=(Brain& instance);
+	Brain(const Brain& other);
+	~Brain();
+	Brain&	operator=(const Brain& other);
+
+public:
+	unsigned int GetSize() const;
+	void AddIdea(const std::string& idea, unsigned int index);
+	std::string GetIdea(unsigned int index) const;
+	void duplicate(const Brain* other);
 };
 
 #endif
