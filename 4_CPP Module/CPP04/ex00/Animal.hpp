@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:54:40 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 16:34:49 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 19:38:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ protected:
 
 public:
 	Animal();
-	Animal(const Animal& instance);
+	Animal(const Animal& other);
 	virtual ~Animal();
-	Animal&	operator=(const Animal& instance);
+	Animal&	operator=(const Animal& other);
 
 public:
 	virtual void	makeSound() const;

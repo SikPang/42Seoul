@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   Cure.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 18:07:15 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 19:38:50 by kwsong           ###   ########.fr       */
+/*   Created: 2023/04/29 20:00:07 by kwsong            #+#    #+#             */
+/*   Updated: 2023/04/29 20:04:24 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#include "Animal.hpp"
+#include "Cure.hpp"
 
-class Dog : public Animal
+Cure::Cure()
+	: AMateria()
 {
-public:
-	Dog();
-	Dog(const Dog& other);
-	~Dog();
-	Dog&	operator=(const Dog& other);
+	
+}
 
-public:
-	void	makeSound() const;	// override
-};
+Cure::Cure(const Cure& other)
+	: AMateria(other)
+{
+
+}
+
+Cure::~Cure()
+{
+
+}
+
+Cure& Cure::operator=(const Cure& other)
+{
+	
+}

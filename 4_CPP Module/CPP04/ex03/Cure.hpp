@@ -1,14 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ICharacter.cpp                                     :+:      :+:    :+:   */
+/*   Cure.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/29 17:52:20 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 17:52:28 by kwsong           ###   ########.fr       */
+/*   Created: 2023/04/29 20:00:06 by kwsong            #+#    #+#             */
+/*   Updated: 2023/04/29 20:03:12 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ICharacter.hpp"
+#pragma once
+#include "AMateria.hpp"
 
+class Cure : public AMateria
+{
+
+public:
+	Cure();
+	Cure(const Cure& other);
+	~Cure();
+	Cure& operator=(const Cure& other);
+};

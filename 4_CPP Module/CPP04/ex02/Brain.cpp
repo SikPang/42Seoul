@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:47:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 17:19:27 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 19:38:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ Brain::Brain()
 	std::cout << "Brain Created.\n";
 }
 
-Brain::Brain(const Brain& instance)
-	: size(instance.size)
+Brain::Brain(const Brain& other)
+	: size(other.size)
 {
 	for (unsigned int i = 0; i < size; ++i)
-		ideas[i] = instance.ideas[i];
+		ideas[i] = other.ideas[i];
 
 	std::cout << "Brain Created.\n";
 }
 
-Brain& Brain::operator=(const Brain& instance)
+Brain& Brain::operator=(const Brain& other)
 {
 	for (unsigned int i = 0; i < size; ++i)
-		ideas[i] = instance.ideas[i];
-	size = instance.size;
+		ideas[i] = other.ideas[i];
+	size = other.size;
 	
 	return *this;
 }

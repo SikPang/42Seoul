@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:54:41 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/26 21:08:47 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/29 19:38:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ Animal::Animal()
 	std::cout << "Animal Created.\n";
 }
 
-Animal::Animal(const Animal& instance)
+Animal::Animal(const Animal& other)
 {
-	type = instance.type;
+	type = other.type;
 
 	std::cout << "Animal Created.\n";
 }
 
-Animal& Animal::operator=(const Animal& instance)
+Animal& Animal::operator=(const Animal& other)
 {
-	type = instance.type;
+	type = other.type;
 	
 	return *this;
 }

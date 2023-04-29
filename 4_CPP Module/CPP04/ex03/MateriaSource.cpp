@@ -1,26 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   MateriaSource.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 18:07:15 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 19:38:50 by kwsong           ###   ########.fr       */
+/*   Created: 2023/04/29 19:49:03 by kwsong            #+#    #+#             */
+/*   Updated: 2023/04/29 19:59:49 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#include "Animal.hpp"
+#include "MateriaSource.hpp"
 
-class Dog : public Animal
+MateriaSource::MateriaSource()
 {
-public:
-	Dog();
-	Dog(const Dog& other);
-	~Dog();
-	Dog&	operator=(const Dog& other);
 
-public:
-	void	makeSound() const;	// override
-};
+}
+
+MateriaSource::~MateriaSource()
+{
+
+}
+
+MateriaSource::MateriaSource(const MateriaSource& other)
+{
+
+}
+
+MateriaSource& MateriaSource::operator=(const MateriaSource& other)
+{
+
+}
+
+void MateriaSource::learnMateria(AMateria* m)
+{
+	
+}
+
+AMateria* MateriaSource::createMateria(std::string const & type)
+{
+	
+}

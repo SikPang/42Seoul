@@ -1,14 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   IMateriaSource.cpp                                 :+:      :+:    :+:   */
+/*   MateriaSource.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/29 17:53:39 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 17:53:51 by kwsong           ###   ########.fr       */
+/*   Created: 2023/04/29 19:49:05 by kwsong            #+#    #+#             */
+/*   Updated: 2023/04/29 19:59:49 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #include "IMateriaSource.hpp"
 
+class MateriaSource : public IMateriaSource
+{
+public:
+	MateriaSource();
+	~MateriaSource();
+	MateriaSource(const MateriaSource& other);
+	MateriaSource& operator=(const MateriaSource& other);
+
+public:
+	void learnMateria(AMateria* m);  // override
+	AMateria* createMateria(std::string const & type);  // override
+};
