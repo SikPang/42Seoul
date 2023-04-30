@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:47:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 19:38:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/30 09:46:02 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ Brain::Brain(const Brain& other)
 
 Brain& Brain::operator=(const Brain& other)
 {
+	if (&other == this)
+		return *this;
+
 	for (unsigned int i = 0; i < size; ++i)
 		ideas[i] = other.ideas[i];
 	size = other.size;

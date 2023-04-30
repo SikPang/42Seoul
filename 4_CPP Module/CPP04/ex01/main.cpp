@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 21:01:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 17:45:18 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/30 09:50:09 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int main()
 	Cat cat3;
 	cat3 = cat1;
 	std::cout << "cat3's idea[0] : " << cat3.GetIdea(0) << "\n\n";
+	
+	Animal test;
 	
 	return 0;
 }
