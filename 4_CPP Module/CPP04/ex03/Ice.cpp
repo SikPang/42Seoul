@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 20:00:07 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:39:14 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/30 08:50:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ Ice::~Ice()
 Ice& Ice::operator=(const Ice& other)
 {
 	type = other.type;
+	return *this;
 }
 
 AMateria* Ice::clone() const

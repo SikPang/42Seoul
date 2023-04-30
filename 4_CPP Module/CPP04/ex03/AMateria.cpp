@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:51:46 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:30:53 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/30 09:01:58 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ AMateria::~AMateria()
 AMateria& AMateria::operator=(const AMateria& other)
 {
 	type = other.type;
+	return *this;
 }
 
 std::string const & AMateria::getType() const
@@ -43,4 +44,5 @@ std::string const & AMateria::getType() const
 
 void AMateria::use(ICharacter& target)
 {
+	(void)target;
 }

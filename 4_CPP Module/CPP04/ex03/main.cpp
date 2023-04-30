@@ -6,20 +6,23 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:46:31 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:13:06 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/30 09:04:31 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "IMateriaSource.hpp"
-#include "ICharacter.hpp"
-#include "AMateria.cpp"
 #include "MateriaSource.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
 #include "Character.hpp"
 
+void leaks()
+{
+	system("leaks interface");
+}
+
 int main()
 {
+	//atexit(leaks);
 	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());

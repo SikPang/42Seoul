@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 20:46:45 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/30 08:13:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/30 08:52:13 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ Inventory::Inventory(const Inventory& other)
 	: capacity(other.capacity)
 	, size(other.size)
 {
-	for (int i = 0; i < other.size; ++i)
+	for (unsigned int i = 0; i < other.size; ++i)
 	{
 		if (dynamic_cast<Ice*>(other.slots[i]))
 			this->slots[i] = new Ice();
@@ -33,7 +33,7 @@ Inventory::Inventory(const Inventory& other)
 
 Inventory::~Inventory()
 {
-	for (int i = 0; i < size; ++i)
+	for (unsigned int i = 0; i < size; ++i)
 		delete this->slots[i];
 }
 
@@ -42,10 +42,10 @@ Inventory& Inventory::operator=(const Inventory& other)
 	if (&other == this)
 		return *this;
 	
-	for (int i = 0; i < other.size; ++i)
+	for (unsigned int i = 0; i < other.size; ++i)
 		delete this->slots[i];
 
-	for (int i = 0; i < other.size; ++i)
+	for (unsigned int i = 0; i < other.size; ++i)
 	{
 		if (dynamic_cast<Ice*>(other.slots[i]))
 			this->slots[i] = new Ice();

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:49:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 20:34:47 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/04/30 08:53:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ public:
 	AMateria& operator=(const AMateria& other);
 
 public:
-	std::string const & getType() const; //Returns the materia type
+	std::string const & getType() const;
 	virtual AMateria* clone() const = 0;
 	virtual void use(ICharacter& target);
 };

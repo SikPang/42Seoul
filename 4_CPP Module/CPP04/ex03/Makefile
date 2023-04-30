@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 18:36:16 by kwsong            #+#    #+#              #
-#    Updated: 2023/04/29 20:15:22 by kwsong           ###   ########.fr        #
+#    Updated: 2023/04/30 09:04:49 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS	= main.cpp \
 		Character.cpp \
 		Cure.cpp \
 		Ice.cpp \
+		Inventory.cpp \
 		MateriaSource.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
@@ -24,7 +25,7 @@ OBJS	= $(SRCS:.cpp=.o)
 	$(CC) $(CFLAGS) -c $<
 
 CC		= c++
-CFLAGS	= #-Wall -Werror -Wextra -std=c++98
+CFLAGS	= -Wall -Werror -Wextra -std=c++98 #-fsanitize=address
 
 all		: $(NAME)
 
