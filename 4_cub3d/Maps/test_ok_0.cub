@@ -1,0 +1,23 @@
+
+      
+ 
+F 220,100,0
+SO ./Resources/south_texture
+ 
+NO ./Resources/north_texture
+WE ./Resources/west_texture
+ 
+
+ 
+C 225,30,0
+EA ./Resources/east_texture
+
+
+
+
+
+
+
+
+
+
