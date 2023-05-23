@@ -63,6 +63,12 @@
 		"__functional_03": "cpp",
 		"memory_resource": "cpp",
 		"random": "cpp",
-		"numeric": "cpp"
+		"numeric": "cpp",
+		"deque": "cpp",
+		"__memory": "cpp",
+		"filesystem": "cpp",
+		"fstream": "cpp",
+		"iomanip": "cpp",
+		"stack": "cpp"
 	}
 }
