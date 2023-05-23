@@ -6,102 +6,88 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 15:31:08 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/17 16:25:40 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/23 20:20:43 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Form.hpp"
 
 Form::Form()
-:	name("someForm"),
-	isSigned(false),
-	gradeForSign(75),
-	gradeForExe(75)
+	: name("someForm")
+	, gradeForSign(75)
+	, gradeForExe(75)
+	, isSigned(false)
 {
-	std::cout << "Form Created.\n";
+	std::cout << "Form " << name << " Created.\n";
 }
 
-Form::Form(std::string name, bool isSigned, int gradeForSign, int gradeForExe)
-:	name(name),
-	isSigned(isSigned),
-	gradeForSign(gradeForSign),
-	gradeForExe(gradeForExe)
+Form::Form(const std::string& name, int gradeForSign, int gradeForExe)
+	: name(name)
+	, gradeForSign(gradeForSign)
+	, gradeForExe(gradeForExe)
+	, isSigned(false)
 {
-	if (gradeForSign > 150 || gradeForExe > 150)
+	if (gradeForSign > GRADE_LIMIT_LOW || gradeForExe > GRADE_LIMIT_LOW)
 	{
 		throw GradeTooLowException();
 		return;
 	}
-	else if (gradeForSign < 1 || gradeForExe < 1)
+	else if (gradeForSign < GRADE_LIMIT_HIGH || gradeForExe < GRADE_LIMIT_HIGH)
 	{
 		throw GradeTooHighException();
 		return;
 	}
-	std::cout << "Form Created.\n";
+	std::cout << "Form " << name << " Created.\n";
 }
 
-Form::Form(Form& instance)
-:	name(instance.name),
-	isSigned(instance.isSigned),
-	gradeForSign(instance.gradeForSign),
-	gradeForExe(instance.gradeForExe)
+Form::Form(const Form& instance)
+	: name(instance.name)
+	, gradeForSign(instance.gradeForSign)
+	, gradeForExe(instance.gradeForExe)
+	, isSigned(instance.isSigned)
 {
-	std::cout << "Form Created.\n";
+	std::cout << "Form " << name << " Created.\n";
 }
 
-Form& Form::operator=(Form& instance)
+Form& Form::operator=(const Form& instance)
 {
 	isSigned = instance.isSigned;
-	
 	return *this;
-}
-
-void Form::operator<<(Form& instance)
-{
-	std::cout << "Form: " << instance.getName() << ", isSigned: " << instance.getIsSiged()
-		<< ", Form gradeForSign: " << instance.getGradeForSign()
-		<< ", Form gradeForExe: " << instance.getGradeForExe() << "\n";
 }
 
 Form::~Form() 
 {
-	std::cout << "Form Destroyed.\n";
+	std::cout << "Form " << name << " Destroyed.\n";
 }
 
-std::string Form::getName()
+const std::string& Form::getName() const
 {
 	return name;
 }
 
-bool Form::getIsSiged()
+bool Form::getIsSiged() const
 {
 	return isSigned;
 }
 
-int Form::getGradeForSign()
+int Form::getGradeForSign() const
 {
 	return gradeForSign;
 }
 
-int Form::getGradeForExe()
+int Form::getGradeForExe() const
 {
 	return gradeForExe;
 }
 
-void Form::beSigned(Bureaucrat& bure)
+void Form::beSigned(const Bureaucrat& bure)
 {
-	if (bure.getGrade() >= gradeForSign)
-	{
+	if (isSigned)
+		throw Form::AlreadySigned();
+	else if (bure.getGrade() <= gradeForSign)
 		isSigned = true;
-		std::cout << bure.getName() << " signed " << name << "\n";
-	}
 	else
-	{
-		std::cout << bure.getName() << " couldn’t sign " << name
-			<< " because grade is too low to sign \n";
 		throw Form::GradeTooLowException();
-	}
 }
 
 // ----- inner class -----
@@ -114,4 +100,19 @@ void Form::GradeTooHighException::report()
 void Form::GradeTooLowException::report()
 {
 	std::cerr << "grade is too low\n";
+}
+
+void Form::AlreadySigned::report()
+{
+	std::cerr << "already signed\n";
+}
+
+// ----- extern -----
+
+std::ostream& operator<<(std::ostream& os, const Form& instance)
+{
+	std::cout << "Form: " << instance.getName() << ", isSigned: " << instance.getIsSiged()
+		<< ", Form gradeForSign: " << instance.getGradeForSign()
+		<< ", Form gradeForExe: " << instance.getGradeForExe() << "\n";
+	return (os);
 }

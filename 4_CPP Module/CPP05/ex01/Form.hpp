@@ -6,39 +6,39 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 15:31:06 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/17 16:23:33 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/23 20:20:39 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __FORM_HPP__
-#define __FORM_HPP__
 
 #include <string>
+#include <iostream>
 #include "Bureaucrat.hpp"
 
 class Form
 {
 private:
-	const std::string	name;
-	bool				isSigned;
-	const int			gradeForSign;
-	const int			gradeForExe;
+	const std::string name;
+	const int gradeForSign;
+	const int gradeForExe;
+	bool isSigned;
 
 public:
 	Form();
-	Form(std::string name, bool isSigned, int gradeForSign, int gradeForExe);
-	Form(Form& instance);
+	Form(const std::string& name, int gradeForSign, int gradeForExe);
+	Form(const Form& instance);
 	~Form();
-	Form&			operator=(Form& instance);
-	void			operator<<(Form& instance);
+	Form& operator=(const Form& instance);
 
-	std::string		getName();
-	bool			getIsSiged();
-	int				getGradeForSign();
-	int				getGradeForExe();
-	void			beSigned(Bureaucrat& bure);
+public:
+	const std::string& getName() const;
+	bool getIsSiged() const;
+	int getGradeForSign() const;
+	int getGradeForExe() const;
+	void beSigned(const Bureaucrat& bure);
 
+public:
 	class GradeTooHighException
 	{
 	public:
@@ -50,6 +50,12 @@ public:
 	public:
 		void	report();
 	};
+
+	class AlreadySigned
+	{
+	public:
+		void	report();
+	};
 };
 
-#endif
+std::ostream& operator<<(std::ostream& os, const Form& value);

@@ -6,38 +6,42 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:18:26 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/17 15:53:06 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/23 20:23:30 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __BUREAUCRAT_HPP__
-#define __BUREAUCRAT_HPP__
 
 #include <string>
+#include <iostream>
 
-#define GRADE_LIMIT_MAX 150
-#define GRADE_LIMIT_MIN 1
+#define GRADE_LIMIT_LOW 150
+#define GRADE_LIMIT_HIGH 1
+
+class AForm;
 
 class Bureaucrat
 {
 private:
-	const std::string	name;
-	int					grade;
+	const std::string name;
+	int grade;
 
 public:
 	Bureaucrat();
-	Bureaucrat(std::string name, int grade);
-	Bureaucrat(Bureaucrat& instance);
+	Bureaucrat(const std::string& name, int grade);
+	Bureaucrat(const Bureaucrat& instance);
 	~Bureaucrat();
-	Bureaucrat&		operator=(Bureaucrat& instance);
-	void			operator<<(Bureaucrat& instance);
+	Bureaucrat& operator=(const Bureaucrat& instance);
 
-	std::string		getName();
-	int				getGrade();
-	void			upGrade();
-	void			downGrade();
+public:
+	const std::string& getName() const;
+	int getGrade() const;
+	void upGrade();
+	void downGrade();
+	void signForm(AForm& form);
+	void executeForm(AForm const & form);
 
+public:
 	class GradeTooHighException
 	{
 	public:
@@ -51,4 +55,4 @@ public:
 	};
 };
 
-#endif
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& value);

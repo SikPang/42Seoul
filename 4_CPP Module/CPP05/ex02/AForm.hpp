@@ -1,44 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AForm.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 15:31:06 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/17 16:23:35 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/23 20:20:18 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __AFORM_HPP__
-#define __AFORM_HPP__
 
 #include <string>
+#include <iostream>
 #include "Bureaucrat.hpp"
 
 class AForm
 {
 private:
-	const std::string	name;
-	bool				isSigned;
-	const int			gradeForSign;
-	const int			gradeForExe;
+	const std::string name;
+	const int gradeForSign;
+	const int gradeForExe;
+	bool isSigned;
 
 public:
 	AForm();
-	AForm(std::string name, bool isSigned, int gradeForSign, int gradeForExe);
-	AForm(AForm& instance);
-	~AForm();
-	AForm&			operator=(AForm& instance);
-	void			operator<<(AForm& instance);
+	AForm(const std::string& name, int gradeForSign, int gradeForExe);
+	AForm(const AForm& instance);
+	virtual ~AForm();
+	AForm& operator=(const AForm& instance);
 
-	std::string		getName();
-	bool			getIsSiged();
-	int				getGradeForSign();
-	int				getGradeForExe();
-	void			beSigned(Bureaucrat& bure);
+public:
+	const std::string& getName() const;
+	bool getIsSiged() const;
+	int getGradeForSign() const;
+	int getGradeForExe() const;
+	void beSigned(const Bureaucrat& bure);
+	virtual void execute(Bureaucrat const & executor) const;
 
+public:
 	class GradeTooHighException
 	{
 	public:
@@ -50,6 +51,18 @@ public:
 	public:
 		void	report();
 	};
+
+	class AlreadySigned
+	{
+	public:
+		void	report();
+	};
+
+	class NotSigned
+	{
+	public:
+		void	report();
+	};
 };
 
-#endif
+std::ostream& operator<<(std::ostream& os, const AForm& value);

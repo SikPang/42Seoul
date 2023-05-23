@@ -6,30 +6,30 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:18:28 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/17 15:44:21 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/23 19:21:22 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat()
-:	name("someone"),
-	grade(75)
+	: name("someone")
+	, grade(75)
 {
 	std::cout << "Bureaucrat Created.\n";
 }
 
-Bureaucrat::Bureaucrat(const std::string name, int grade)
-:	name(name),
-	grade(grade)
+Bureaucrat::Bureaucrat(const std::string& name, int grade)
+	: name(name)
+	, grade(grade)
 {
-	if (grade > 150)
+	if (grade > GRADE_LIMIT_LOW)
 	{
 		throw GradeTooLowException();
 		return;
 	}
-	else if (grade < 1)
+	else if (grade < GRADE_LIMIT_HIGH)
 	{
 		throw GradeTooHighException();
 		return;
@@ -37,22 +37,17 @@ Bureaucrat::Bureaucrat(const std::string name, int grade)
 	std::cout << "Bureaucrat Created.\n";
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat& instance)
-:	name(instance.name),
-	grade(instance.grade)
+Bureaucrat::Bureaucrat(const Bureaucrat& instance)
+	: name(instance.name)
+	, grade(instance.grade)
 {
 	std::cout << "Bureaucrat Created.\n";
 }
 
-Bureaucrat& Bureaucrat::operator=(Bureaucrat& instance)
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& instance)
 {
 	grade = instance.grade;
 	return *this;
-}
-
-void Bureaucrat::operator<<(Bureaucrat& instance)
-{
-	std::cout << name << ", bureaucrat grade " << grade << "\n";
 }
 
 Bureaucrat::~Bureaucrat() 
@@ -60,35 +55,51 @@ Bureaucrat::~Bureaucrat()
 	std::cout << "Bureaucrat Destroyed.\n";
 }
 
-std::string Bureaucrat::getName()
+const std::string& Bureaucrat::getName() const
 {
 	return name;
 }
 
-int Bureaucrat::getGrade()
+int Bureaucrat::getGrade() const
 {
 	return grade;
 }
 
 void Bureaucrat::upGrade()
 {
-	if (grade == 1)
-	{
+	if (grade == GRADE_LIMIT_HIGH)
 		throw GradeTooHighException();
-		return;
-	}
-	--grade;
+	else
+		--grade;
 }
 
 void Bureaucrat::downGrade()
 {
-	if (grade == 150)
-	{
+	if (grade == GRADE_LIMIT_LOW)
 		throw GradeTooLowException();
+	else
+		++grade;
+}
+
+void Bureaucrat::signForm(Form& form)
+{
+	try
+	{
+		form.beSigned(*this);
+	}
+	catch(Form::AlreadySigned& e)
+	{
+		std::cout << name << " couldn't sign " << form.getName()
+			<< " because the form is already signed.\n";
 		return;
 	}
-	++grade;
-
+	catch(Form::GradeTooLowException& e)
+	{
+		std::cout << name << " couldn't sign " << form.getName()
+			<< " because grade is too low to sign\n";
+		return;
+	}
+	std::cout << name << " signed " << form.getName() << "\n";
 }
 
 // ----- inner class -----
@@ -101,4 +112,12 @@ void Bureaucrat::GradeTooHighException::report()
 void Bureaucrat::GradeTooLowException::report()
 {
 	std::cerr << "grade is too low\n";
+}
+
+// ----- extern -----
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& instance)
+{
+	std::cout << instance.getName() << ", bureaucrat grade " << instance.getGrade() << ".\n";
+	return (os);
 }
