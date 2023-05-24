@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 19:59:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/23 21:39:45 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/24 14:47:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ int main()
 	b2.executeForm(*sf);
 
 	std::cout << "\n----------\n\n";
+
+	delete pf;
+	delete rf;
+	delete sf;
 
 	return 0;
 }

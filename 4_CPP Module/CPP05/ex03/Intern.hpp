@@ -19,5 +19,7 @@ public:
 	Intern(const Intern& other);
 	~Intern();
 	Intern& operator=(const Intern& other);
+
+public:
 	AForm* makeForm(const std::string& formName, const std::string& target);
 };

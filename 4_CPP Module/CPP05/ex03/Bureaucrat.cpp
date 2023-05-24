@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 21:18:28 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/23 20:26:38 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/24 14:25:10 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,10 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade)
 	, grade(grade)
 {
 	if (grade > GRADE_LIMIT_LOW)
-	{
 		throw GradeTooLowException();
-		return;
-	}
 	else if (grade < GRADE_LIMIT_HIGH)
-	{
 		throw GradeTooHighException();
-		return;
-	}
+	
 	std::cout << "Bureaucrat Created.\n";
 }
 

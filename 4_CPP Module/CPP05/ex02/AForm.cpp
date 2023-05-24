@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 15:31:08 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/23 20:20:27 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/24 14:33:01 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,10 @@ AForm::AForm(const std::string& name, int gradeForSign, int gradeForExe)
 	, isSigned(false)
 {
 	if (gradeForSign > GRADE_LIMIT_LOW || gradeForExe > GRADE_LIMIT_LOW)
-	{
 		throw GradeTooLowException();
-		return;
-	}
 	else if (gradeForSign < GRADE_LIMIT_HIGH || gradeForExe < GRADE_LIMIT_HIGH)
-	{
 		throw GradeTooHighException();
-		return;
-	}
+	
 	std::cout << "AForm " << name << " Created.\n";
 }
 

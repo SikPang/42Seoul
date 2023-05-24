@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 19:29:44 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/23 21:01:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/24 14:42:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 	AForm::execute(executor);
 	
 	std::ofstream destFile(target + "_shrubbery");
+
+	if (destFile.fail())
+		return;
 
 	destFile << "              \n";
 	destFile << "      @@@     \n";
