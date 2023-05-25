@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:16:34 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/25 19:53:45 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/25 20:48:24 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void ScalarConverter::print(const std::string& str, bool isOverflowed)
 	std::istringstream issc(str);
 	int c;
 	issc >> c;
-	if (issc.fail() || c < 0 || c > 255)
+	if (issc.fail() || c < -128 || c > 127)
 		std::cout << "char: overflowed\n";
 	else if (!isprint(c))
 		std::cout << "char: Non displayable" << "\n";
@@ -76,6 +76,13 @@ void ScalarConverter::print(const std::string& str, bool isOverflowed)
 	issf >> f;
 	if ((idNum.id == ID::FLOAT && isOverflowed) || issf.fail())
 		std::cout << "float: overflowed\n";
+	else if (std::isinf(f))
+	{
+		if (idNum.sign == SIGN::MINUS)
+			std::cout << "float: -inff\n";
+		else
+			std::cout << "float: +inff\n";
+	}
 	else
 	{
 		std::cout << "float: ";
@@ -84,7 +91,7 @@ void ScalarConverter::print(const std::string& str, bool isOverflowed)
 		else
 			do_static_cast<float>();
 		
-		if (f - floorf(f) == 0.f)
+		if (f - static_cast<int>(f) == 0.f)
 			std::cout << ".0f\n";
 		else
 			std::cout << "f\n";
@@ -93,17 +100,23 @@ void ScalarConverter::print(const std::string& str, bool isOverflowed)
 	std::istringstream issd(str);
 	double d;
 	issd >> d;
-	if ((idNum.id == ID::DOUBLE && isOverflowed) || issd.fail())
+	if ((idNum.id == ID::DOUBLE && isOverflowed))
 		std::cout << "double: overflowed\n";
+	else if (std::isinf(d))
+	{
+		if (idNum.sign == SIGN::MINUS)
+			std::cout << "double: -inf\n";
+		else
+			std::cout << "double: +inf\n";
+	}
 	else
 	{
 		std::cout << "double: ";
 		if (isOverflowed)
-			std::cout << f;
+			std::cout << d;
 		else
 			do_static_cast<double>();
-		
-		if (d - floor(d) == 0.0)
+		if (d - static_cast<int>(d) == 0.0)
 			std::cout << ".0\n";
 		else
 			std::cout << "\n";
@@ -153,15 +166,15 @@ void ScalarConverter::identify(const std::string& str)
 {
 	int floatIdx = -1;
 	int pointIdx = -1;
-	int sign = SIGN::NONE;
 	int i = 0;
+	idNum.sign = SIGN::NONE;
 
 	while (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')
 		{
-			if (sign == SIGN::NONE)
-				sign = SIGN::MINUS;
+			if (idNum.sign == SIGN::NONE)
+				idNum.sign = SIGN::MINUS;
 			else
 			{
 				idNum.id = ID::NONE;
@@ -170,8 +183,8 @@ void ScalarConverter::identify(const std::string& str)
 		}
 		else if (str[i] == '+')
 		{
-			if (sign == SIGN::NONE)
-				sign = SIGN::PLUS;
+			if (idNum.sign == SIGN::NONE)
+				idNum.sign = SIGN::PLUS;
 			else
 			{
 				idNum.id = ID::NONE;
@@ -185,7 +198,7 @@ void ScalarConverter::identify(const std::string& str)
 		idNum.id = ID::NONE;
 		return;
 	}
-	
+
 	for (; i < (int)str.length(); ++i)
 	{
 		if (str[i] == 'f')

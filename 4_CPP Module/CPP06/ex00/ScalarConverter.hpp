@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:16:32 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/25 19:53:52 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/25 20:48:32 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ private:
 	struct Num
 	{
 		int id;
+		int sign;
 		union
 		{
 			char c;
