@@ -6,13 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:03:06 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 21:08:15 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/26 15:55:28 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __ARRAY_HPP__
-#define __ARRAY_HPP__
 
 template <typename T>
 class Array
@@ -97,5 +95,3 @@ unsigned int Array<T>::Size()
 {
 	return size;
 }
-
-#endif

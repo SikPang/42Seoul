@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 18:36:16 by kwsong            #+#    #+#              #
-#    Updated: 2023/02/14 21:22:54 by kwsong           ###   ########.fr        #
+#    Updated: 2023/05/26 15:41:55 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ SRCS	= main.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 CC		= c++
-CFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=leak
+CFLAGS	= -Wall -Werror -Wextra -std=c++98 -fsanitize=address
+
+%.o		: %.cpp
+	$(CC) $(CFLAGS) -c $<
 
 all		: $(NAME)
 

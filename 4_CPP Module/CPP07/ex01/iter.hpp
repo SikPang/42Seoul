@@ -6,25 +6,23 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:03:06 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 20:33:41 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/26 15:52:29 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __ITER_HPP__
-#define __ITER_HPP__
+
+#include <iostream>
 
 template <typename T>
-void temp(T data)
+void print(T data)
 {
-	(void)data;
+	std::cout << data << " ";
 }
 
 template <typename T>
 void iter(T* arr, unsigned int len, void (*func)(T))
 {
-	for (int i=0; i<len; ++i)
+	for (unsigned int i=0; i<len; ++i)
 		func(arr[i]);
 }
-
-#endif
