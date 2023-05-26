@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:16:34 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/25 20:48:24 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/26 14:22:12 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,15 @@ void ScalarConverter::printNaN()
 	std::cout << "double: nan\n";
 }
 
-void ScalarConverter::print(const std::string& str, bool isOverflowed)
+void ScalarConverter::print(std::string& str, bool isOverflowed)
 {
-	std::istringstream issc(str);
+	std::string intStr(str);
+	if (intStr[0] == '.')
+		intStr.insert(intStr.begin(), '0');
+	else if ((intStr[0] == '+' || intStr[0] == '-') && intStr[1] == '.')
+		intStr.insert(intStr.begin() + 1, '0');
+
+	std::istringstream issc(intStr);
 	int c;
 	issc >> c;
 	if (issc.fail() || c < -128 || c > 127)
@@ -57,13 +63,10 @@ void ScalarConverter::print(const std::string& str, bool isOverflowed)
 		std::cout << "'\n";
 	}
 	
-	std::istringstream issi(str);
-	int i;
-	issi >> i;
-	if ((idNum.id == ID::INT && isOverflowed) || issi.fail())
+	if ((idNum.id == ID::INT && isOverflowed) || issc.fail())
 		std::cout << "int: overflowed\n";
 	else if (isOverflowed)
-		std::cout << "int: " << i << "\n";
+		std::cout << "int: " << c << "\n";
 	else
 	{
 		std::cout << "int: ";
@@ -203,13 +206,13 @@ void ScalarConverter::identify(const std::string& str)
 	{
 		if (str[i] == 'f')
 		{
-			if (floatIdx == -1)
-				floatIdx = i;
-			else
+			if (i != (int)str.length() - 1 || floatIdx != -1)
 			{
 				idNum.id = ID::NONE;
 				return;
 			}
+			else
+				floatIdx = i;
 		}
 		else if (str[i] == '.')
 		{
@@ -230,7 +233,7 @@ void ScalarConverter::identify(const std::string& str)
 		
 	if (floatIdx != -1)
 	{
-		if (pointIdx == -1 || floatIdx < pointIdx)
+		if (pointIdx == -1 || floatIdx < pointIdx || (floatIdx == 1 && pointIdx == 0))
 			idNum.id = ID::NONE;
 		else
 			idNum.id = ID::FLOAT;
@@ -243,24 +246,26 @@ void ScalarConverter::identify(const std::string& str)
 
 void ScalarConverter::convert(const std::string& str)
 {
-	identify(str);
+	std::string new_str = const_cast<std::string&>(str);
+	identify(new_str);
 
 	bool isOverflowed = false;
 	switch (idNum.id)
 	{
 	case ID::INT:
-		isOverflowed = toInt(str);
+		isOverflowed = toInt(new_str);
 		break;
 	case ID::FLOAT:
-		isOverflowed = toFloat(str);
+		new_str = new_str.substr(0, str.length() - 1);
+		isOverflowed = toFloat(new_str);
 		break;
 	case ID::DOUBLE:
-		isOverflowed = toDouble(str);
+		isOverflowed = toDouble(new_str);
 		break;
 	}
 
 	if (idNum.id == ID::NONE)
 		printNaN();
 	else
-		print(str, isOverflowed);
+		print(new_str, isOverflowed);
 }

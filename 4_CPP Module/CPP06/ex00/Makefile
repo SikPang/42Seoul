@@ -6,11 +6,11 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 18:36:16 by kwsong            #+#    #+#              #
-#    Updated: 2023/05/25 16:50:13 by kwsong           ###   ########.fr        #
+#    Updated: 2023/05/26 14:11:05 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= cast
+NAME	= convert
 
 SRCS	= main.cpp \
 		ScalarConverter.cpp

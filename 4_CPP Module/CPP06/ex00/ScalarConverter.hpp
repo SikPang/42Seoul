@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:16:32 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/25 20:48:32 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/05/26 14:14:11 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ private:
 	static bool toDouble(const std::string& str);
 	static void identify(const std::string& str);
 	static void printNaN();
-	static void print(const std::string& str, bool isOverflowed);
+	static void print(std::string& str, bool isOverflowed);
 
 private:
 	template <typename T>
