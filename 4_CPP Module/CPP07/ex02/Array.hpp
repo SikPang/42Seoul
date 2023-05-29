@@ -12,60 +12,79 @@
 
 #pragma once
 
+#include <exception>
+
 template <typename T>
 class Array
 {
 private:
 	T*				arr;
-	unsigned int	size;
+	unsigned int	capacity;
 
 public:
 	Array();
 	Array(unsigned int n);
-	Array(Array& instance);
+	Array(const Array& instance);
 	virtual ~Array();
-	Array&			operator=(Array& instance);
-	T&				operator[](unsigned int index);
+	Array& operator=(const Array& instance);
+	T& operator[](unsigned int index);
+	unsigned int size() const;
 
-	unsigned int	Size();
+public:
+	class LengthException : public std::exception 
+	{
+	// public:
+	// 	const char* what() const// override
+	// 	{
+	// 		return "out of index\n";
+	// 	}
+	};
 };
+
+// template <typename T>
+// const char* Array<T>::LengthException::what() const
+// {
+// 	return "out of index\n";
+// }
 
 // 1로?? NULL로??
 template <typename T>
 Array<T>::Array()
+	: arr(new T[1]())
+	, capacity(1)
 {
-	arr = new T();
-	size = 1;
-
 	std::cout << "Array [1] Created.\n";
 }
 
 template <typename T>
 Array<T>::Array(unsigned int n)
+	: arr(new T[n]())
+	, capacity(n)
 {
-	arr = new T[n]();
-	size = n;
-
 	std::cout << "Array [" << n << "] Created.\n";
 }
 
 template <typename T>
-Array<T>::Array(Array<T>& instance)
+Array<T>::Array(const Array<T>& instance)
+	: arr(new T[instance.capacity])
+	, capacity(instance.capacity)
 {
-	arr = new T[instance.size]();
-	size = instance.size;
-	for (int i=0; i<size; ++i)
+	for (unsigned int i = 0; i < capacity; ++i)
 		arr[i] = instance.arr[i];
 
-	std::cout << "Array [" << instance.size << "] Created.\n";
+	std::cout << "Array [" << instance.capacity << "] Created.\n";
 }
 
 template <typename T>
-Array<T>& Array<T>::operator=(Array<T>& instance)
+Array<T>& Array<T>::operator=(const Array<T>& instance)
 {
-	arr = new T[instance.size]();
-	size = instance.size;
-	for (int i=0; i<size; ++i)
+	if (&instance == this)
+		return *this;
+
+	delete[] arr;
+	arr = new T[instance.capacity]();
+	capacity = instance.capacity;
+	for (unsigned int i = 0; i < capacity; ++i)
 		arr[i] = instance.arr[i];
 	
 	return *this;
@@ -74,11 +93,8 @@ Array<T>& Array<T>::operator=(Array<T>& instance)
 template <typename T>
 T& Array<T>::operator[](unsigned int index)
 {
-	if (index >= size)
-	{
-		// exception
-		return arr[0];
-	}
+	if (index >= capacity)
+		throw LengthException();
 
 	return arr[index];
 }
@@ -91,7 +107,7 @@ Array<T>::~Array()
 }
 
 template <typename T>
-unsigned int Array<T>::Size()
+unsigned int Array<T>::size() const
 {
-	return size;
+	return capacity;
 }
