@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= easyfind
+NAME	= mutant_stack
 
 SRCS	= main.cpp
 OBJS	= $(SRCS:.cpp=.o)
