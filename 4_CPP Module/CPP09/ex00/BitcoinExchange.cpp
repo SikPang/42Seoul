@@ -12,16 +12,16 @@
 
 #include "BitcoinExchange.hpp"
 
-std::map<std::string, double> BitcoinExchange::exchangeRates;
-BitcoinExchange::Num BitcoinExchange::idNum = {};
-
 BitcoinExchange::BitcoinExchange()
+	: exchangeRates()
+	, idNum()
 {
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
+	: exchangeRates(other.exchangeRates)
+	, idNum(other.idNum)
 {
-	(void)other;
 }
 
 BitcoinExchange::~BitcoinExchange()
@@ -30,8 +30,15 @@ BitcoinExchange::~BitcoinExchange()
 
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 {
-	(void)other;
+	exchangeRates = other.exchangeRates;
+	idNum = other.idNum;
 	return *this;
+}
+
+BitcoinExchange& BitcoinExchange::getInstance()
+{
+	static BitcoinExchange instance;
+	return instance;
 }
 
 void BitcoinExchange::setRates(std::ifstream& file)

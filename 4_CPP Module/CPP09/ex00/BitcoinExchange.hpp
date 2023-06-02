@@ -43,7 +43,6 @@ namespace Sign
 class BitcoinExchange
 {
 private:
-	private:
 	struct Num
 	{
 		Type::TYPE id;
@@ -57,8 +56,8 @@ private:
 	};
 
 private:
-	static std::map<std::string, double> exchangeRates;
-	static Num idNum;
+	std::map<std::string, double> exchangeRates;
+	Num idNum;
 
 private:
 	BitcoinExchange();
@@ -67,16 +66,17 @@ private:
 	BitcoinExchange& operator=(const BitcoinExchange& other);
 
 private:
-	static void identify(const std::string& valueStr);
-	static bool checkValidValue(const std::string& valueStr);
-	static bool checkValidDate(const std::string& date);
-	static bool errorReturn(const std::string& msg);
-	template <typename T> static bool getNum(T& num, const std::string& str);
-	static void print(const std::string& key, std::map<std::string, double>::iterator& curIter);
+	void identify(const std::string& valueStr);
+	bool checkValidValue(const std::string& valueStr);
+	bool checkValidDate(const std::string& date);
+	bool errorReturn(const std::string& msg);
+	template <typename T> bool getNum(T& num, const std::string& str);
+	void print(const std::string& key, std::map<std::string, double>::iterator& curIter);
 
 public:
-	static void setRates(std::ifstream& file);
-	static void parseInput(std::ifstream& file);
+	static BitcoinExchange& getInstance();
+	void setRates(std::ifstream& file);
+	void parseInput(std::ifstream& file);
 };
 
 template <typename T>

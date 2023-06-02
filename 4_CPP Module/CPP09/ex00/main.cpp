@@ -28,7 +28,7 @@
  위쪽 날짜가 아닌 아래쪽 날짜를 사용하도록 주의하십시오.
 */
 
-// map
+// CRLF Check
 
 #include <iostream>
 #include <fstream>
@@ -53,8 +53,9 @@ int main(int ac, char** av)
 		return 1;
 	}
 
-	BitcoinExchange::setRates(database);
-	BitcoinExchange::parseInput(input);
+	BitcoinExchange& be = BitcoinExchange::getInstance();
+	be.setRates(database);
+	be.parseInput(input);
 
 	return 0;
 }
