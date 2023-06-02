@@ -21,4 +21,18 @@
 괄호나 십진수는 관리할 필요가 없습니다.
 */
 
-// stack
+#include <iostream>
+#include "RPN.hpp"
+
+int main(int ac, char** av)
+{
+	if (ac != 2)
+	{
+		std::cout << "Error\n";
+		return 1;
+	}
+
+	RPN& rpn = RPN::getInstance();
+
+	rpn.calculate(av[1]);
+}
