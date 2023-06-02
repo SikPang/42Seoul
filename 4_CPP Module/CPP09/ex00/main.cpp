@@ -36,22 +36,25 @@
 #include <cstdlib>
 #include "BitcoinExchange.hpp"
 
-int error_exit(const std::string& msg)
-{
-	std::cout << "Error: " << msg << "\n";
-	exit(1);
-}
-
 int main(int ac, char** av)
 {
+	if (ac != 2)
+	{
+		std::cout << "Error: could not open file.\n";
+		return 1;
+	}
+
 	std::ifstream database("data.csv");
 	std::ifstream input(av[1]);
 	
-	if (ac != 2 || database.fail() || input.fail())
-		error_exit("could not open file.");
+	if (database.fail() || input.fail())
+	{
+		std::cout << "Error: could not open file.\n";
+		return 1;
+	}
 
 	BitcoinExchange::setRates(database);
-	//BitcoinExchange::parseInput(input);
+	BitcoinExchange::parseInput(input);
 
 	return 0;
 }

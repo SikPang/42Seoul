@@ -13,6 +13,7 @@
 #include "BitcoinExchange.hpp"
 
 std::map<std::string, double> BitcoinExchange::exchangeRates;
+BitcoinExchange::Num BitcoinExchange::idNum = {};
 
 BitcoinExchange::BitcoinExchange()
 {
@@ -52,29 +53,124 @@ void BitcoinExchange::setRates(std::ifstream& file)
 	}
 }
 
-bool checkValidValue(const std::string& valueStr)
+bool BitcoinExchange::errorReturn(const std::string& msg)
 {
-	// 문자 있는지 파싱
-	// int인지 double인지 확인 후 ㄱㄱ
-
-	std::istringstream iss(valueStr);
-	int value;
-	
-	iss >> value;
-	if (iss.fail())
-	{
-		std::cout << "Error: too large a number.\n";
-		return false;
-	}
-	else if (value < 0)
-	{
-		std::cout << "Error: not a positive number.\n";
-		return false;
-	}
+	std::cout << "Error: " << msg << "\n";
+	return false;
 }
 
-bool checkValidData(const std::string& date)
+void BitcoinExchange::identify(const std::string& valueStr)
 {
+	int floatIdx = -1;
+	int pointIdx = -1;
+	int i = 0;
+
+	while (valueStr[i] == '-' || valueStr[i] == '+')
+	{
+		if (valueStr[i] == '-')
+		{
+			if (idNum.sign == Sign::NONE)
+				idNum.sign = Sign::MINUS;
+			else
+			{ 
+				idNum.id = Type::NONE; 
+				return; 
+			}
+		}
+		else if (valueStr[i] == '+')
+		{
+			if (idNum.sign == Sign::NONE)
+				idNum.sign = Sign::PLUS;
+			else
+			{
+				idNum.id = Type::NONE; 
+				return;
+			}
+		}
+		++i;
+	}
+	if (i == (int)valueStr.length())
+	{
+		idNum.id = Type::NONE;
+		return;
+	}
+
+	for (; i < (int)valueStr.length() && valueStr[i] != 13 && valueStr[i] != 10; ++i)
+	{
+		if (valueStr[i] == 'f')
+		{
+			if (i != (int)valueStr.length() - 1 || floatIdx != -1)
+			{ 
+				idNum.id = Type::NONE;
+				return;
+			}
+			else
+				floatIdx = i;
+		}
+		else if (valueStr[i] == '.')
+		{
+			if (pointIdx == -1)
+				pointIdx = i;
+			else
+			{ 
+				idNum.id = Type::NONE;
+				return;
+			}
+		}
+		else if (valueStr[i] < '0' || valueStr[i] > '9')
+		{ 
+			idNum.id = Type::NONE;
+			return;
+		}
+	}
+		
+	if (floatIdx != -1)
+	{
+		if (pointIdx == -1 || floatIdx < pointIdx || (floatIdx == 1 && pointIdx == 0))
+		{
+			idNum.id = Type::NONE; 
+			return; 
+		}
+		else
+			idNum.id = Type::FLOAT;
+	}
+	else if (pointIdx != -1)
+		idNum.id = Type::DOUBLE;
+	else
+		idNum.id = Type::INT;
+}
+
+bool BitcoinExchange::checkValidValue(const std::string& valueStr)
+{		
+	if (valueStr == "value")
+		return true;
+	
+	identify(valueStr);
+	bool isValid = false;
+
+	switch(idNum.id)
+	{
+	case Type::INT:
+		isValid = getNum(idNum.i, valueStr);
+		break;
+	case Type::FLOAT:
+		isValid = getNum(idNum.f, valueStr);
+		break;
+	case Type::DOUBLE:
+		isValid = getNum(idNum.d, valueStr);
+		break;
+	default:
+		std::cout << "Error: bad input => " << valueStr << "\n";
+		break;
+	}
+	return isValid;
+}
+
+bool BitcoinExchange::checkValidDate(const std::string& date)
+{
+	if (date == "date")
+		return true;
+
 	int cnt = 0;
 	std::string::size_type idx = 0;
 	std::string copy(date);
@@ -91,16 +187,22 @@ bool checkValidData(const std::string& date)
 			numStr = copy.substr(0, idx);
 		else
 			numStr = copy;
-		
+
+		for (int i = 0; i < (int)numStr.length(); ++i)
+		{
+			if (numStr[i] < '0' || numStr[i] > '9')
+			{
+				std::cout << "Error: bad input => " << date << "\n";
+				return false;
+			}
+		}
+
 		std::istringstream iss(numStr);
 		int num;
 
 		iss >> num;
 		if (iss.fail())
-		{
-			std::cout << "Error: too large a number.\n";
-			return false;
-		}
+			return errorReturn("too large a number.");
 
 		if ((cnt == 0 && (num < 0 || num > 9999))
 			|| (cnt == 1 && (num < 1 || num > 12))
@@ -119,8 +221,42 @@ bool checkValidData(const std::string& date)
 	return true;
 }
 
+void BitcoinExchange::print(const std::string& key, std::map<std::string, double>::iterator& curIter)
+{
+	std::map<std::string, double>::iterator prevIter;
+
+	while (true)
+	{
+		prevIter = curIter;
+		for (; curIter != exchangeRates.end() && (*curIter).first <= key; ++curIter)
+			prevIter = curIter;
+		
+		if ((*prevIter).first <= key)
+			break;
+		curIter = exchangeRates.begin();
+	}
+	
+	//std::cout << "(" << (*prevIter).first << ", " << (*prevIter).second << ") ";
+	std::cout << key << " => ";
+	switch (idNum.id)
+	{
+	case Type::INT:
+		std::cout << idNum.i << " = " << (*prevIter).second * idNum.i << "\n";
+		break;
+	case Type::FLOAT:
+		std::cout << idNum.f << " = " << (*prevIter).second * idNum.f << "\n";
+		break;
+	default:
+		std::cout << idNum.d << " = " << (*prevIter).second * idNum.d << "\n";
+		break;
+	}
+
+	curIter = prevIter;
+}
+
 void BitcoinExchange::parseInput(std::ifstream& file)
 {
+	std::map<std::string, double>::iterator curIter = exchangeRates.begin();
 	std::string line;
 
 	while (!file.eof())
@@ -136,17 +272,20 @@ void BitcoinExchange::parseInput(std::ifstream& file)
 			|| (idx < line.length() && line[idx + 1] != ' '))
 		{
 			std::cout << "Error: bad input => " << line << "\n";
-			continue;;
+			continue;
 		}
 
 		std::string key = line.substr(0, idx - 1);
-		if (!checkValidData(key))
+		if (!checkValidDate(key))
 			continue;
 
-		std::string value = line.substr(idx + 1, line.length() - (idx + 1));
-		if (!checkValidValue(value))
+		std::string value = line.substr(idx + 2, line.length() - (idx + 2));
+		std::string::const_iterator iter = find(value.begin(), value.end(), 13);
+		if (iter != value.end())
+			value.erase(value.length() - 1);
+		if (!checkValidValue(value) || idNum.id == Type::NONE)
 			continue;
 
-		
+		print(key, curIter);
 	}
 }
