@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 20:03:06 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/26 15:55:28 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/05 13:07:21 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,11 @@ public:
 public:
 	class LengthException : public std::exception 
 	{
-	// public:
-	// 	const char* what() const// override
-	// 	{
-	// 		return "out of index\n";
-	// 	}
+	public:
+		const char* what() const throw(); // override
 	};
 };
 
-// template <typename T>
-// const char* Array<T>::LengthException::what() const
-// {
-// 	return "out of index\n";
-// }
-
-// 1로?? NULL로??
 template <typename T>
 Array<T>::Array()
 	: arr(new T[1]())
@@ -110,4 +100,13 @@ template <typename T>
 unsigned int Array<T>::size() const
 {
 	return capacity;
+}
+
+
+// ----- Exception -----
+
+template <typename T>
+const char* Array<T>::LengthException::what() const throw()
+{
+	return "out of index\n";
 }

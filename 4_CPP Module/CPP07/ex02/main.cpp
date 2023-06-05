@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 19:59:25 by kwsong            #+#    #+#             */
-/*   Updated: 2023/02/16 21:10:28 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/05 13:18:42 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,54 +17,14 @@
 #include "Array.hpp"
 
 #define MAX_VAL 750
+#define ARR_SIZE 10
 
-void myTest()
+template <typename T>
+void myTest(T& container, const std::string& name)
 {
-	Array<int>			iArr1;
-	Array<int>			iArr2(10);
-	Array<float>		fArr(10);
-	Array<char>			cArr(10);
-	Array<std::string>*	sArr = new Array<std::string>(10);
-
-	std::cout << "iArr1\n";
-	for (unsigned int i=0; i<iArr1.size(); ++i)
-		std::cout << i << ":" << iArr1[i] << ", ";
-	std::cout << "\n\n";
-
-	std::cout << "iArr2\n";
-	for (unsigned int i=0; i<iArr2.size(); ++i)
-		std::cout << i << ":" << iArr2[i] << ", ";
-	std::cout << "\n\n";
-
-	std::cout << "fArr\n";
-	for (unsigned int i=0; i<fArr.size(); ++i)
-		std::cout << i << ":" << fArr[i] << ' ';
-	std::cout << "\n\n";
-
-	std::cout << "cArr\n";
-	for (unsigned int i=0; i<cArr.size(); ++i)
-		std::cout << i << ":" << cArr[i] << ' ';
-	std::cout << "\n\n";
-
-	std::cout << "sArr\n";
-	for (unsigned int i=0; i<sArr->size(); ++i)
-		std::cout << i << ":" << (*sArr)[i] << ' ';
-	std::cout << "\n\n";
-
-	for (unsigned int i=0; i<sArr->size(); ++i)
-		(*sArr)[i] = "test";
-
-	std::cout << "sArr\n";
-	for (unsigned int i=0; i<sArr->size(); ++i)
-		std::cout << i << ":" << (*sArr)[i] << ' ';
-	std::cout << "\n\n";
-
-	Array<std::string> copy(*sArr);
-	delete sArr;
-
-	std::cout << "\ncopy\n";
-	for (unsigned int i=0; i<copy.size(); ++i)
-		std::cout << i << ":" << copy[i] << ' ';
+	std::cout << "* " << name << "\n";
+	for (unsigned int i=0; i<container.size(); ++i)
+		std::cout << i << ":" << container[i] << ", ";
 	std::cout << "\n\n";
 }
 
@@ -84,7 +44,7 @@ int main(int, char**)
         Array<int> tmp = numbers;
         Array<int> test(tmp);
 
-		 for (int i = 0; i < MAX_VAL; i++)
+		for (int i = 0; i < MAX_VAL; i++)
 		{
 			if (tmp[i] != numbers[i] || test[i] != numbers[i])
 			{
@@ -108,7 +68,7 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << e.what();
     }
     try
     {
@@ -116,7 +76,7 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << e.what();
     }
 
     for (int i = 0; i < MAX_VAL; i++)
@@ -125,7 +85,32 @@ int main(int, char**)
     }
     delete [] mirror;//
 
-	std::cout <<"\n\n";
-	myTest();
+	std::cout <<"\n";
+	
+	// my test
+
+	Array<int>			iArr1;
+	myTest(iArr1, "iArr1");
+
+	Array<int>			iArr2(ARR_SIZE);
+	myTest(iArr2, "iArr2");
+
+	Array<float>		fArr(ARR_SIZE);
+	for (int i = 0; i < ARR_SIZE; ++i)
+		fArr[i] = 4.2f;
+	myTest(fArr, "fArr");
+
+	Array<char>			cArr(ARR_SIZE);
+	myTest(cArr, "cArr");
+
+	Array<std::string>*	sArr = new Array<std::string>(ARR_SIZE);
+	for (int i = 0; i < ARR_SIZE; ++i)
+		(*sArr)[i] = "hi";
+	myTest(*sArr, "sArr");
+	
+	Array<std::string> copy(*sArr);
+	myTest(copy, "copy");	
+
+	delete sArr;
     return 0;
 }
