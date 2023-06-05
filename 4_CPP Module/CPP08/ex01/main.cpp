@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 14:56:54 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/29 22:24:16 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/05 21:50:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void test(int size)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << e.what();
 	}
 
 	span.sortAndPrint();
@@ -36,7 +36,7 @@ void test(int size)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << e.what();
 	}
 
 	try
@@ -45,7 +45,7 @@ void test(int size)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << e.what();
 	}
 
 	std::cout << "\n";
@@ -87,7 +87,7 @@ int main()
 		}
 		catch(const std::exception& e)
 		{
-			std::cerr << e.what() << '\n';
+			std::cerr << e.what();
 		}
 	}
 	std::cout << "\n";
@@ -104,7 +104,7 @@ int main()
 	test(2);
 	test(10);
 	test(20);
-	//test(10000);
+	test(10000);
 
 	return 0;
 }

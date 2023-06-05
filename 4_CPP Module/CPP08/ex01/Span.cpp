@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 17:43:08 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/29 22:21:59 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/05 21:45:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,4 +131,27 @@ void Span::sortAndPrint()
 	for (int i = 0; i < size; ++i)
 		std::cout << data[i] << " ";
 	std::cout << "\n";
+}
+
+
+// ----- Exception -----
+
+const char* Span::LengthException::what() const throw()
+{
+	return "out of index\n";
+}
+
+const char* Span::WrongIterator::what() const throw()
+{
+	return "wrong iterator\n";
+}
+
+const char* Span::TooManyElements::what() const throw()
+{
+	return "too many elements\n";
+}
+
+const char* Span::TooFewElements::what() const throw()
+{
+	return "too few elements\n";
 }

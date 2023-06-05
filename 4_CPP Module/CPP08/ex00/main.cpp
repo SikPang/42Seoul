@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 14:56:54 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/29 17:39:24 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/05 21:38:52 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 #include <vector>
 #include <deque>
 #include <string>
-#include <stack>
-#include <queue>
+#include <set>
 #include "easyfind.hpp"
 
 template <typename T>
-void test(T& arr, int target)
+void find_test(T& arr, int target)
 {
 	typename T::iterator iter = easyfind(arr, target);
 	
@@ -35,22 +34,29 @@ int main()
 	std::list<int> list;
 	list.push_back(1);
 	list.push_back(2);
-	test(list, 2);
-	test(list, 3);
+	find_test(list, 2);
+	find_test(list, 3);
 
 	std::vector<float> vec;
 	vec.push_back(2.1f);
 	vec.push_back(3.f);
-	test(vec, 2);
-	test(vec, 3);
+	find_test(vec, 2);
+	find_test(vec, 3);
 
 	std::deque<char> deq;
 	deq.push_back('a');
 	deq.push_back(' ');
-	test(deq, 'a');
-	test(deq, 10);
+	find_test(deq, 'a');
+	find_test(deq, 10);
 
 	std::string str = "hello";
-	test(str, 'h');
-	test(str, 'z');
+	find_test(str, 'h');
+	find_test(str, 'z');
+
+	std::set<int> set;
+	set.insert(1);
+	set.insert(2);
+	find_test(set, 1);
+	find_test(set, 2);
+	find_test(set, 3);
 }

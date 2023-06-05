@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 17:43:06 by kwsong            #+#    #+#             */
-/*   Updated: 2023/05/29 21:58:40 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/05 16:15:51 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,24 @@ public:
 	void sortAndPrint();
 
 public:
-	class LengthException : public std::exception{};
-	class WrongIterator : public std::exception{};
-	class TooManyElements : public std::exception{};
-	class TooFewElements : public std::exception{};
+	class LengthException : public std::exception
+	{
+	public:
+		const char* what() const throw(); // override
+	};
+	class WrongIterator : public std::exception
+	{
+	public:
+		const char* what() const throw(); // override
+	};
+	class TooManyElements : public std::exception
+	{
+	public:
+		const char* what() const throw(); // override
+	};
+	class TooFewElements : public std::exception
+	{
+	public:
+		const char* what() const throw(); // override
+	};
 };
