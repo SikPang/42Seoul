@@ -12,11 +12,12 @@
 
 NAME	= RPN
 
-SRCS	= main.cpp
+SRCS	= main.cpp \
+		RPN.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 CC		= c++
-CFLAGS	= -Wall -Werror -Wextra -std=c++98
+CFLAGS	= -Wall -Werror -Wextra -std=c++98 #-fsanitize=address
 
 %.o		: %.cpp
 	$(CC) $(CFLAGS) -c $<

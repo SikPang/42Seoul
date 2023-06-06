@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RPN.hpp                                            :+:      :+:    :+:   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 22:26:42 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/02 22:46:42 by kwsong           ###   ########.fr       */
+/*   Created: 2023/06/06 18:18:51 by kwsong            #+#    #+#             */
+/*   Updated: 2023/06/06 20:50:42 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <stack>
+#include <vector>
+#include <deque>
+#include <set>
 #include <iostream>
 #include <sstream>
 #include <exception>
 
-class RPN
+class PmergeMe
 {
 private:
-	std::stack<long> stack;
+	std::vector<long> vec;
+	std::deque<long> deq;
+	std::set<long> set;
 
 private:
-	RPN();
-	RPN(const RPN& other);
-	~RPN();
-	RPN& operator=(const RPN& other);
+	PmergeMe();
+	PmergeMe(const PmergeMe& other);
+	~PmergeMe();
+	PmergeMe& operator=(const PmergeMe& other);
 
 public:
-	static RPN& getInstance();
-	void calculate(char* str);
+	static PmergeMe& getInstance();
+	void setArgs(int ac, char** str);
+	void sort();
 
 public:
 	class Error : public std::exception

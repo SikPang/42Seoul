@@ -40,25 +40,59 @@ RPN& RPN::getInstance()
 
 void RPN::calculate(char* str)
 {
-	std::stack<int> newStack;
-	stack.swap(newStack);
+	std::stack<long> newStack;
+	swap(stack, newStack);
 
 	std::stringstream ss(str);
 	char num;
 
-	while (true)
+	while (ss >> num)
 	{
-		ss >> num;
+		if ((num < '0' || num > '9') 
+			&& (num != '+' && num != '-' && num != '*' && num != '/'))
+			throw RPN::Error();
 
-		if (ss.eof())
-			break;
-			// 사칙연산도
-		else if (ss.fail() || num < '0' || num > '9')
+		if (num >= '0' && num <= '9')
+			stack.push(num - '0'); 
+		else if (num == '+' || num == '-' || num == '*' || num == '/')
 		{
-			std::cout << "Error\n";
-			return;
-		}
+			if (stack.size() < 2)
+				throw RPN::Error();
+			long second = stack.top();
+			stack.pop();
 
-		stack.push(num);
+			long first = stack.top();
+			stack.pop();
+
+			switch(num)
+			{
+			case '+':
+				stack.push(first + second);
+				break;
+			case '-':
+				stack.push(first - second);
+				break;
+			case '*':
+				stack.push(first * second);
+				break;
+			case '/':
+				if (second == 0)
+					throw RPN::Error();
+				stack.push(first / second);
+				break;
+			}
+		}
 	}
+
+	if (stack.size() != 1)
+		throw RPN::Error();
+	std::cout << stack.top() << "\n";
+}
+
+
+// ----- Exception -----
+
+const char* RPN::Error::what() const throw()
+{
+	return "Error\n";
 }
