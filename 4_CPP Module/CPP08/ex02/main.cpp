@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 14:56:54 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/05 21:52:58 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/07 12:19:51 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "MutantStack.hpp"
 
 template <typename T>
-void test(T& m, const std::string& name)
+void myTest(T& m, const std::string& name)
 {
 	std::cout << "-------------------- TEST for " << name << " --------------------\n\n";
 	T cm(m);
@@ -113,8 +113,8 @@ int main()
 	std::deque<int> deq(m.begin(), m.end());
 	std::vector<int> vec(m.begin(), m.end());
 
-	test(m, "MutantStack");
-	test(list, "std::list");
-	test(deq, "std::deque");
-	test(vec, "std::vector");
+	myTest(m, "MutantStack");
+	myTest(list, "std::list");
+	myTest(deq, "std::deque");
+	myTest(vec, "std::vector");
 }

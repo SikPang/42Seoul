@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 17:43:08 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/05 21:45:52 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/07 12:15:47 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ Span::Span(const Span& other)
 
 Span::~Span()
 {
-
 }
 
 Span& Span::operator=(const Span& other)
@@ -44,7 +43,7 @@ Span& Span::operator=(const Span& other)
 	return *this;
 }
 
-int Span::operator[](unsigned int index) const
+int& Span::operator[](unsigned int index)
 {
 	if (index >= data.size())
 		throw LengthException();
@@ -83,13 +82,12 @@ void Span::fillNumbers()
 
 void Span::insert(const std::vector<int>::iterator& begin, const std::vector<int>::iterator& end)
 {
-	if (begin > end)
+	if (begin >= end)
 		throw WrongIterator();
 	
 	if (data.capacity() == data.size()
 		|| (unsigned long)(end - begin) > (unsigned long)(data.capacity() - data.size()))
 		throw TooManyElements();
-
 	data.insert(data.end(), begin, end);
 }
 
@@ -123,10 +121,13 @@ int Span::longestSpan()
 	return std::abs(data[0] - data[data.size() - 1]);
 }
 
-void Span::sortAndPrint()
+void Span::sort()
 {
 	std::sort(data.begin(), data.end());
+}
 
+void Span::print()
+{
 	int size = data.size();
 	for (int i = 0; i < size; ++i)
 		std::cout << data[i] << " ";

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 17:43:06 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/05 16:15:51 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/07 12:13:31 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ public:
 	Span(const Span& other);
 	~Span();
 	Span& operator=(const Span& other);
-	int operator[](unsigned int index) const;
+	int& operator[](unsigned int index);
 
 public:
 	void addNumber(int num);
@@ -38,7 +38,8 @@ public:
 	int longestSpan();
 	void fillNumbers();
 	void insert(const std::vector<int>::iterator& begin, const std::vector<int>::iterator& end);
-	void sortAndPrint();
+	void sort();
+	void print();
 
 public:
 	class LengthException : public std::exception

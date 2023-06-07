@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 14:56:54 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/05 21:50:52 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/07 12:18:10 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <cstdlib>
 #include "Span.hpp"
 
-void test(int size)
+void myTest(int size)
 {
-	std::cout << "--- test start (size :" << size << ")\n";
+	std::cout << "----- test start (size :" << size << ") -----\n";
 	Span span(size);
 
 	try
@@ -28,7 +28,8 @@ void test(int size)
 		std::cerr << e.what();
 	}
 
-	span.sortAndPrint();
+	span.sort();
+	span.print();
 
 	try
 	{
@@ -63,11 +64,12 @@ int main()
 	std::cout << sp.longestSpan() << std::endl << std::endl;
 
 	sp.fillNumbers();
-	sp.sortAndPrint();
+	sp.sort();
+	sp.print();
 	std::cout << "longest span : " << sp.longestSpan() << "\n";
 	std::cout << "shortest span : " << sp.shortestSpan() << "\n\n";
 
-	std::cout << "--- test start (insert)\n";
+	std::cout << "----- test start (insert) -----\n";
 	std::vector<int> temp;
 	temp.push_back(4);
 	temp.push_back(-2);
@@ -75,13 +77,15 @@ int main()
 	temp.push_back(-10);
 	temp.push_back(32);
 
-	Span insertTest(temp.size());
+	Span insertTest(temp.size() + 2);
+	insertTest.addNumber(42);
+	insertTest.addNumber(42);
 	for (int i = 0; i < 2; ++i)
 	{
 		try
 		{
 			insertTest.insert(temp.begin(), temp.end());
-			insertTest.sortAndPrint();
+			insertTest.print();
 			std::cout << "longest span : " << insertTest.longestSpan() << "\n";
 			std::cout << "shortest span : " << insertTest.shortestSpan() << "\n";
 		}
@@ -92,19 +96,23 @@ int main()
 	}
 	std::cout << "\n";
 
-	std::cout << "--- test start (copy operator)\n";
+	std::cout << "----- test start (copy operator) -----\n";
 	sp = insertTest;
-	sp.sortAndPrint();
+	sp.print();
 	std::cout << "longest span : " << sp.longestSpan() << "\n";
 	std::cout << "shortest span : " << sp.shortestSpan() << "\n\n";	
 	
-	test(-1);
-	test(0);
-	test(1);
-	test(2);
-	test(10);
-	test(20);
-	test(10000);
+	myTest(-1);
+	myTest(0);
+	myTest(1);
+	myTest(2);
+	myTest(10);
+	myTest(20);
+	//myTest(10000);
+
+	std::cout << sp[1] << "\n";
+	sp[1] = 0;
+	std::cout << sp[1] << "\n";
 
 	return 0;
 }
