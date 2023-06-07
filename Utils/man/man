@@ -1,0 +1,1 @@
+cat doc | tr '\n' '#' | sed 's/##/+/g' | tr '+' '\n' | tr -d '#' |  sed 's/    //g' | sed 's/  / /g' | sed 's/  / /g'

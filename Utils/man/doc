@@ -1,0 +1,5 @@
+The system resources associated with the named semaphore referenced by
+     sem are deallocated and the descriptor is invalidated.
+
+     If successful, sem_close() will return 0.  Otherwise, -1 is returned and
+     errno is set.
