@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:18:53 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/08 17:07:29 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/08 19:59:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,40 @@ static unsigned long ticksToMicroseconds(clock_t ticks)
 
 // ----- Member functions -----
 
-template <typename T>
-void getJacobSequence(int len, T& jacob)
+void PmergeMe::checkSuccess()
 {
-	
+	if (set.size() != vec.size() || set.size() != deq.size())
+		throw PmergeMe::Fail();
+
+	std::set<long>::iterator iter = set.begin();
+	for (int i = 0; iter != set.end(); ++iter, ++i)
+	{
+		if (*iter != vec[i] || *iter != deq[i])
+			throw PmergeMe::Fail();
+	}
 }
 
 template <typename T>
-void separate(const T& src, T& result, T& less)
+void PmergeMe::getJacobSequence(int len, T& container)
 {
-	for (int i = 0; i < (int)container.size(); i += 2)
+	int jacobIndex = 3;
+
+	while (true)
+	{
+		int jacobNum = jacobsthal(jacobIndex);
+
+		if (jacobNum >= len - 1)
+			break;
+
+		container.push_back(jacobNum);
+		++jacobIndex;
+	}
+}
+
+template <typename T>
+void PmergeMe::separate(const T& src, T& result, T& less)
+{
+	for (int i = 0; i < (int)src.size(); i += 2)
 	{
 		less.push_back(src[i]);
 		result.push_back(src[i + 1]);
@@ -111,14 +135,14 @@ void separate(const T& src, T& result, T& less)
 template <typename T>
 void PmergeMe::sortByPair(T& container)
 {
-	print(container);
+	//print(container);
 	for (int i = 0; i < (int)container.size(); i += 2)
 	{
 		if (container[i] > container[i + 1])
 			swap(container[i], container[i + 1]);
 	}
 
-	print(container);
+	//print(container);
 	for (int i = 0; i < (int)container.size(); i += 2)
 	{
 		for (int j = i; j > 0; j -= 2)
@@ -130,7 +154,7 @@ void PmergeMe::sortByPair(T& container)
 			}
 		}
 	}
-	print(container);
+	//print(container);
 }
 
 template <typename T>
@@ -194,11 +218,55 @@ void PmergeMe::sortVector()
 	less.erase(less.begin());
 
 	std::vector<int> jacob;
+	std::vector<int> index;
 	getJacobSequence(less.size(), jacob);
+
+	long target;
+	bool flag = false;
+	for (int i = 0; i <= (int)less.size(); ++i)
+	{
+		if (jacob.size() != 0 && !flag)
+		{
+			index.push_back(jacob.front());
+			target = less[jacob.front() - 1];
+			jacob.erase(jacob.begin());
+			flag = true;
+		}
+		else
+		{
+			for (int j = 0; j < (int)index.size(); ++j)
+			{
+				if (i == index[j])
+					++i;
+			}
+			target = less[i - 1];
+			index.push_back(i);
+			flag = false;
+		}
+
+		std::vector<long>::iterator pos = std::upper_bound(result.begin(), result.end(), target);
+
+		if (pos == result.end())
+			result.push_back(target);
+		else
+			result.insert(pos, target);
+	}
+
+	if (straggler.isExist)
+	{
+		std::vector<long>::iterator pos = std::upper_bound(result.begin(), result.end(), straggler.num);
+
+		if (pos == result.end())
+			result.push_back(straggler.num);
+		else
+			result.insert(pos, straggler.num);
+	}
 
 	clock_t end = clock();
 	unsigned long elapsedMicroseconds = ticksToMicroseconds(end - begin);
-    std::cout <<  "Time to process a range of "<< vec.size() << " elements with std::vector : "  << elapsedMicroseconds << "\n";
+    std::cout <<  "Time to process a range of "<< result.size() << " elements with std::vector : "  << elapsedMicroseconds << " ms\n";
+
+	vec.swap(result);
 }
 
 void PmergeMe::sortDeque()
@@ -216,11 +284,56 @@ void PmergeMe::sortDeque()
 	result.push_front(less.front());
 	less.pop_front();
 
-	
+	std::deque<int> jacob;
+	std::deque<int> index;
+	getJacobSequence(less.size(), jacob);
 
+	long target;
+	bool flag = false;
+	for (int i = 0; i <= (int)less.size(); ++i)
+	{
+		if (jacob.size() != 0 && !flag)
+		{
+			index.push_back(jacob.front());
+			target = less[jacob.front() - 1];
+			jacob.pop_front();
+			flag = true;
+		}
+		else
+		{
+			for (int j = 0; j < (int)index.size(); ++j)
+			{
+				if (i == index[j])
+					++i;
+			}
+			target = less[i - 1];
+			index.push_back(i);
+			flag = false;
+		}
+
+		std::deque<long>::iterator pos = std::upper_bound(result.begin(), result.end(), target);
+
+		if (pos == result.end())
+			result.push_back(target);
+		else
+			result.insert(pos, target);
+	}
+
+	if (straggler.isExist)
+	{
+		std::deque<long>::iterator pos = std::upper_bound(result.begin(), result.end(), straggler.num);
+
+		if (pos == result.end())
+			result.push_back(straggler.num);
+		else
+			result.insert(pos, straggler.num);
+	}
+	
 	clock_t end = clock();
 	unsigned long elapsedMicroseconds = ticksToMicroseconds(end - begin);
-    std::cout <<  "Time to process a range of "<< vec.size() << " elements with std::deargQue  : "  << elapsedMicroseconds << "\n";
+    std::cout <<  "Time to process a range of "<< vec.size() << " elements with std::deque  : "  << elapsedMicroseconds << " ms\n";
+
+	deq.swap(result);
 }
 
 void PmergeMe::printArgs()
@@ -272,6 +385,14 @@ void PmergeMe::sort(char** strs)
 	printArgs();
 	sortVector();
 	sortDeque();
+	try
+	{
+		checkSuccess();
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what();
+	}
 }
 
 
@@ -280,4 +401,9 @@ void PmergeMe::sort(char** strs)
 const char* PmergeMe::Error::what() const throw()
 {
 	return "Error\n";
+}
+
+const char* PmergeMe::Fail::what() const throw()
+{
+	return "Failed to sort\n";
 }
