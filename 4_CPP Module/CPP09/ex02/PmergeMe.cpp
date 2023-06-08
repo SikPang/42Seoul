@@ -6,17 +6,24 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:18:53 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/08 15:49:48 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/08 16:34:49 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
+PmergeMe::Straggler::Straggler()
+	: isExist(false)
+	, num (0)
+{
+}
+
 PmergeMe::PmergeMe()
 	: vec()
 	, deq()
 	, set()
-	, printQue()
+	, argQue()
+	, straggler()
 {
 }
 
@@ -28,7 +35,8 @@ PmergeMe::PmergeMe(const PmergeMe& other)
 	: vec(other.vec)
 	, deq(other.deq)
 	, set(other.set)
-	, printQue(other.printQue)
+	, argQue(other.argQue)
+	, straggler(other.straggler)
 {
 }
 
@@ -37,7 +45,8 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other)
 	vec = other.vec;
 	deq = other.deq;
 	set = other.set;
-	printQue = other.printQue;
+	argQue = other.argQue;
+	straggler = other.straggler;
 	return *this;	
 }
 
@@ -45,6 +54,23 @@ PmergeMe& PmergeMe::getInstance()
 {
 	static PmergeMe instance;
 	return instance;
+}
+
+// ----- Static functions -----
+
+template <typename T>
+static void print(T& container)
+{
+	for (int i = 0; i < (int)container.size(); ++i)
+		std::cout << container[i] << " ";
+	std::cout << "\n";
+}
+
+static void swap(long& val1, long& val2)
+{
+	long temp = val1;
+	val1 = val2;
+	val2 = temp;
 }
 
 // sysconf(_SC_CLK_TCK);
@@ -55,20 +81,86 @@ static unsigned long ticksToMicroseconds(clock_t ticks)
     return static_cast<unsigned long>(ticks * microsecondsPerTick);
 }
 
+
+// ----- Member functions -----
+
+template <typename T>
+void PmergeMe::sortByPair(T& container)
+{
+	print(container);
+	for (int i = 0; i < (int)container.size(); i += 2)
+	{
+		if (container[i] > container[i + 1])
+			swap(container[i], container[i + 1]);
+	}
+
+	print(container);
+	for (int i = 0; i < (int)container.size(); i += 2)
+	{
+		for (int j = i; j > 0; j -= 2)
+		{
+			if (container[j - 1] > container[j + 1])
+			{
+				swap(container[j - 1], container[j + 1]);
+				swap(container[j - 2], container[j]);
+			}
+		}
+	}
+	print(container);
+}
+
+template <typename T>
+void PmergeMe::getStraggler(T& container)
+{
+	if (container.size() % 2 == 1)
+	{
+		straggler.isExist = true;
+		straggler.num = container.back();
+		container.pop_back();
+	}
+}
+
 template <typename T>
 void PmergeMe::pushArgs(T& container)
 {
-	std::set<long>::iterator iter = set.begin();
-	for (; iter != set.end(); ++iter)
-		container.push_back(*iter);
+	for (int i = 0; i < (int)argQue.size(); ++i)
+		container.push_back(argQue[i]);
 }
+
+/*
+1. 홀수면 straggler 정하기
+2. 2개씩 짝짓기
+3. 짝끼리 정렬
+4. 각 쌍의 큰 수 비교 정렬
+
+5. 각 쌍에서 큰 수는 S, 작은 수는 pend로 옮기기
+6. pend의 첫 요소를 S에 넣기 (첫 쌍의 작은 수는 항상 첫 쌍의 큰 수보다 작기 때문)
+7. pend의 길이에 따라서 Jacobsthal Number 수열 구하기 ( Jn = Jn-1 + 2 * Jn-2) 
+8. index[]에 1 넣어둠
+9. pend를 반복
+	만약 Jacob[]이 남아있으면서 && 플래그가 아니면
+		index[]에 Jacob 수열의 첫번째를 push_back
+		pend[Jacob 수열의 첫번째 - 1] 값을 가져옴
+		Jacob[]의 첫번째를 pop
+		플래그 세움
+	아니면
+		index[]을 순회하며 반복자와 같은 요소가 있다면 반복자 +=1
+		pend[반복자 - 1] 값을 가져옴
+		index[]에 반복자를 push_back
+		플래그 초기화
+	S에서 가져온 값이 어디에 들어가야 하는지 이진탐색 후 insert
+	반복자 += 1
+	JacobIndex +=1
+10. 만약 straggler가 있다면 S에 이진탐색 후 insert
+*/
 
 void PmergeMe::sortVector()
 {
 	clock_t begin = clock();
 
 	pushArgs(vec);
-	
+	getStraggler(vec);
+	sortByPair(vec);
 
 	clock_t end = clock();
 	unsigned long elapsedMicroseconds = ticksToMicroseconds(end - begin);
@@ -80,22 +172,19 @@ void PmergeMe::sortDeque()
 	clock_t begin = clock();
 
 	pushArgs(deq);
-		
+	getStraggler(deq);
+	sortByPair(deq);
 
 	clock_t end = clock();
 	unsigned long elapsedMicroseconds = ticksToMicroseconds(end - begin);
-    std::cout <<  "Time to process a range of "<< vec.size() << " elements with std::deque  : "  << elapsedMicroseconds << "\n";
+    std::cout <<  "Time to process a range of "<< vec.size() << " elements with std::deargQue  : "  << elapsedMicroseconds << "\n";
 }
 
 void PmergeMe::printArgs()
 {
 	std::cout << "Before: ";
-	while (!printQue.empty())
-	{
-		long cur = printQue.front();
-		std::cout << cur << " ";
-		printQue.pop();
-	}
+	for (int i = 0; i < (int)argQue.size(); ++i)
+		std::cout << argQue[i] << " ";
 	std::cout << "\n";
 
 	std::cout << "After:  ";
@@ -123,7 +212,7 @@ void PmergeMe::parseArgs(char** strs)
 				throw PmergeMe::Error();
 			
 			set.insert(num);
-			printQue.push(num);
+			argQue.push_back(num);
 			
 			if (ss.eof())
 				isValid = true;
@@ -136,31 +225,6 @@ void PmergeMe::parseArgs(char** strs)
 
 void PmergeMe::sort(char** strs)
 {
-	/*
-	1. 홀수면 straggler 정하기
-	2. 2개씩 짝짓기
-	3. 짝끼리 정렬
-	4. 각 쌍의 큰 수 비교 정렬
-	5. 각 쌍에서 큰 수는 S, 작은 수는 pend로 옮기기
-	6. pend의 첫 요소를 S에 넣기 (첫 쌍의 작은 수는 항상 첫 쌍의 큰 수보다 작기 때문)
-	7. pend의 길이에 따라서 Jacobsthal Number 수열 구하기 ( Jn = Jn-1 + 2 * Jn-2) 
-	8. index[]에 1 넣어둠
-	9. pend를 반복
-		만약 Jacob[]이 남아있으면서 && 플래그가 아니면
-			index[]에 Jacob 수열의 첫번째를 push_back
-			pend[Jacob 수열의 첫번째 - 1] 값을 가져옴
-			Jacob[]의 첫번째를 pop
-			플래그 세움
-		아니면
-			index[]을 순회하며 반복자와 같은 요소가 있다면 반복자 +=1
-			pend[반복자 - 1] 값을 가져옴
-			index[]에 반복자를 push_back
-			플래그 초기화
-		S에서 가져온 값이 어디에 들어가야 하는지 이진탐색 후 insert
-		반복자 += 1
-		JacobIndex +=1
-	10. 만약 straggler가 있다면 S에 이진탐색 후 insert
-	*/
 	parseArgs(strs);
 	printArgs();
 	sortVector();
