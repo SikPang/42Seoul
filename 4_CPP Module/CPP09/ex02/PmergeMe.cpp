@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:18:53 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/08 19:59:59 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/08 20:23:17 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,14 +135,14 @@ void PmergeMe::separate(const T& src, T& result, T& less)
 template <typename T>
 void PmergeMe::sortByPair(T& container)
 {
-	//print(container);
+	print(container);
 	for (int i = 0; i < (int)container.size(); i += 2)
 	{
 		if (container[i] > container[i + 1])
 			swap(container[i], container[i + 1]);
 	}
 
-	//print(container);
+	print(container);
 	for (int i = 0; i < (int)container.size(); i += 2)
 	{
 		for (int j = i; j > 0; j -= 2)
@@ -154,7 +154,7 @@ void PmergeMe::sortByPair(T& container)
 			}
 		}
 	}
-	//print(container);
+	print(container);
 }
 
 template <typename T>
@@ -214,13 +214,14 @@ void PmergeMe::sortVector()
 	std::vector<long> less;
 
 	separate(vec, result, less);
+
 	result.insert(result.begin(), less[0]);
 	less.erase(less.begin());
 
 	std::vector<int> jacob;
 	std::vector<int> index;
+	index.push_back(1);
 	getJacobSequence(less.size(), jacob);
-
 	long target;
 	bool flag = false;
 	for (int i = 0; i <= (int)less.size(); ++i)
@@ -234,11 +235,8 @@ void PmergeMe::sortVector()
 		}
 		else
 		{
-			for (int j = 0; j < (int)index.size(); ++j)
-			{
-				if (i == index[j])
-					++i;
-			}
+			if (std::find(index.begin(), index.end(), i) != index.end())
+				++i;
 			target = less[i - 1];
 			index.push_back(i);
 			flag = false;
@@ -267,6 +265,7 @@ void PmergeMe::sortVector()
     std::cout <<  "Time to process a range of "<< result.size() << " elements with std::vector : "  << elapsedMicroseconds << " ms\n";
 
 	vec.swap(result);
+	print(vec);
 }
 
 void PmergeMe::sortDeque()
@@ -301,11 +300,8 @@ void PmergeMe::sortDeque()
 		}
 		else
 		{
-			for (int j = 0; j < (int)index.size(); ++j)
-			{
-				if (i == index[j])
-					++i;
-			}
+			if (std::find(index.begin(), index.end(), i) != index.end())
+				++i;
 			target = less[i - 1];
 			index.push_back(i);
 			flag = false;
@@ -384,15 +380,15 @@ void PmergeMe::sort(char** strs)
 	parseArgs(strs);
 	printArgs();
 	sortVector();
-	sortDeque();
-	try
-	{
-		checkSuccess();
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << e.what();
-	}
+	// sortDeque();
+	// try
+	// {
+	// 	checkSuccess();
+	// }
+	// catch (const std::exception& e)
+	// {
+	// 	std::cout << e.what();
+	// }
 }
 
 
