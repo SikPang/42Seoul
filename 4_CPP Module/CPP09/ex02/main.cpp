@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:09:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/06 21:08:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/08 14:48:54 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,6 @@
 
 #include "PmergeMe.hpp"
 #include <ctime>
-#include <climits>
-
-// sysconf(_SC_CLK_TCK);
-unsigned long long ticksToMicroseconds(clock_t ticks) {
-	std::cout << ticks << "\n";
-    static double microsecondsPerTick = 1.0 / CLOCKS_PER_SEC * 1000000.0;
-    return static_cast<unsigned long long>(ticks * microsecondsPerTick);
-}
 
 int main(int ac, char** av)
 {
@@ -60,10 +52,9 @@ int main(int ac, char** av)
 	
 	PmergeMe& p = PmergeMe::getInstance();
 
-	clock_t begin = clock();
 	try
 	{
-		p.setArgs(ac, av);
+		p.parseArgs(av);
 	}
 	catch(const std::exception& e)
 	{
@@ -71,10 +62,6 @@ int main(int ac, char** av)
 		return 1;
 	}
 	p.sort();
-	clock_t end = clock();
-
-	unsigned long long elapsedMicroseconds = ticksToMicroseconds(end - begin);
-    std::cout <<  elapsedMicroseconds <<  std::endl;
 	
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:18:51 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/06 20:50:42 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/08 15:10:27 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 #include <vector>
 #include <deque>
 #include <set>
+#include <queue>
 #include <iostream>
 #include <sstream>
 #include <exception>
+#include <ctime>
 
 class PmergeMe
 {
@@ -25,6 +27,7 @@ private:
 	std::vector<long> vec;
 	std::deque<long> deq;
 	std::set<long> set;
+	std::queue<long> printQue;
 
 private:
 	PmergeMe();
@@ -32,9 +35,15 @@ private:
 	~PmergeMe();
 	PmergeMe& operator=(const PmergeMe& other);
 
+private:
+	void sortVector();
+	void sortDeque();
+	void printArgs();
+
 public:
 	static PmergeMe& getInstance();
-	void setArgs(int ac, char** str);
+	template <typename T> void pushArgs(T& container);
+	void parseArgs(char** str);
 	void sort();
 
 public:
