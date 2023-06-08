@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:18:53 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/08 16:34:49 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/08 17:07:29 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,14 @@ static void print(T& container)
 	std::cout << "\n";
 }
 
+static int jacobsthal(int n)
+{
+	if (n == 0 || n == 1)
+		return n;
+
+	return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
+}
+
 static void swap(long& val1, long& val2)
 {
 	long temp = val1;
@@ -83,6 +91,22 @@ static unsigned long ticksToMicroseconds(clock_t ticks)
 
 
 // ----- Member functions -----
+
+template <typename T>
+void getJacobSequence(int len, T& jacob)
+{
+	
+}
+
+template <typename T>
+void separate(const T& src, T& result, T& less)
+{
+	for (int i = 0; i < (int)container.size(); i += 2)
+	{
+		less.push_back(src[i]);
+		result.push_back(src[i + 1]);
+	}
+}
 
 template <typename T>
 void PmergeMe::sortByPair(T& container)
@@ -132,8 +156,8 @@ void PmergeMe::pushArgs(T& container)
 2. 2개씩 짝짓기
 3. 짝끼리 정렬
 4. 각 쌍의 큰 수 비교 정렬
-
 5. 각 쌍에서 큰 수는 S, 작은 수는 pend로 옮기기
+
 6. pend의 첫 요소를 S에 넣기 (첫 쌍의 작은 수는 항상 첫 쌍의 큰 수보다 작기 때문)
 7. pend의 길이에 따라서 Jacobsthal Number 수열 구하기 ( Jn = Jn-1 + 2 * Jn-2) 
 8. index[]에 1 넣어둠
@@ -162,6 +186,16 @@ void PmergeMe::sortVector()
 	getStraggler(vec);
 	sortByPair(vec);
 
+	std::vector<long> result;
+	std::vector<long> less;
+
+	separate(vec, result, less);
+	result.insert(result.begin(), less[0]);
+	less.erase(less.begin());
+
+	std::vector<int> jacob;
+	getJacobSequence(less.size(), jacob);
+
 	clock_t end = clock();
 	unsigned long elapsedMicroseconds = ticksToMicroseconds(end - begin);
     std::cout <<  "Time to process a range of "<< vec.size() << " elements with std::vector : "  << elapsedMicroseconds << "\n";
@@ -174,6 +208,15 @@ void PmergeMe::sortDeque()
 	pushArgs(deq);
 	getStraggler(deq);
 	sortByPair(deq);
+
+	std::deque<long> result;
+	std::deque<long> less;
+	
+	separate(deq, result, less);
+	result.push_front(less.front());
+	less.pop_front();
+
+	
 
 	clock_t end = clock();
 	unsigned long elapsedMicroseconds = ticksToMicroseconds(end - begin);
