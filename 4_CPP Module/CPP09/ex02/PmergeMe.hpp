@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:18:51 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/08 19:47:42 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/08 21:28:11 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ private:
 	template <typename T> void getStraggler(T& container);
 	template <typename T> void sortByPair(T& container);
 	template <typename T> void separate(const T& src, T& result, T& less);
-	template <typename T> void getJacobSequence(int len, T& container);
 	void parseArgs(char** strs);
 	void printArgs();
 	void sortVector();
