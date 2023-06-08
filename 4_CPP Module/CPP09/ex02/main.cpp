@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:09:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/08 14:48:54 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/08 15:49:24 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,13 @@ int main(int ac, char** av)
 
 	try
 	{
-		p.parseArgs(av);
+		p.sort(av);
 	}
 	catch(const std::exception& e)
 	{
 		std::cout << e.what();
 		return 1;
 	}
-	p.sort();
 	
 	return 0;
 }
