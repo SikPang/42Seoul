@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:03:26 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/09 14:03:53 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/09 16:25:32 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,12 @@ void BitcoinExchange::print(const std::string& key, std::map<std::string, double
 		curIter = exchangeRates.begin();
 	}
 	
-	//std::cout << "(" << (*prevIter).first << ", " << (*prevIter).second << ") ";
+	if (prevIter == exchangeRates.begin() || prevIter == exchangeRates.end())
+	{
+		std::cout << "Error: bad input => " << key << "\n";
+		return;
+	}
+	
 	std::cout << key << " => ";
 	switch (idNum.id)
 	{

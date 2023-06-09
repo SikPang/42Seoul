@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:03:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/09 14:03:18 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/09 16:30:04 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,14 @@ bool BitcoinExchange::getNum(T& num, const std::string& str)
 	std::istringstream iss(str);
 	iss >> num;
 
-	if (iss.fail())
+	if (iss.fail() || num >= 1000 || num >= 999.999)
 	{
 		std::cout << "Error: too large a number.\n";
+		return false;
+	}
+	else if (num == 0)
+	{
+		std::cout << "Error: too small a number.\n";
 		return false;
 	}
 	else if (num < 0)
