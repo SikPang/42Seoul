@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:18:53 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/08 22:01:23 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/09 13:15:02 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,60 @@ static void swap(long& val1, long& val2)
 	val2 = temp;
 }
 
-// sysconf(_SC_CLK_TCK);
-static unsigned long ticksToMicroseconds(clock_t ticks)
-{
-	//std::cout << ticks << "\n";
-    static double microsecondsPerTick = 1.0 / CLOCKS_PER_SEC * 1000000.0;
-    return static_cast<unsigned long>(ticks * microsecondsPerTick);
-}
-
 
 // ----- Member functions -----
+
+template <typename T>
+void PmergeMe::insertStraggler(T& result)
+{
+	typename T::iterator pos = std::upper_bound(result.begin(), result.end(), straggler.num);
+
+	if (pos == result.end())
+		result.push_back(straggler.num);
+	else
+		result.insert(pos, straggler.num);
+}
+
+template <typename T>
+void PmergeMe::merge(T& result, T& less)
+{
+	if (less.size() <= 1)
+		return;
+		
+	std::queue<int> jacob;
+	getJacobSequence(less.size(), jacob);
+	
+	std::set<int> usedIndex;
+	usedIndex.insert(0);
+	
+	int cur = 1;
+	while (true)
+	{
+		if (usedIndex.find(cur - 1) != usedIndex.end())
+		{
+			if (jacob.empty())
+				break;
+			else
+			{
+				cur = jacob.front();
+				jacob.pop();
+			}
+		}
+		else
+			cur -= 1;
+
+		if (cur >= (int)less.size())
+			cur = (int)less.size() - 1;
+			
+		usedIndex.insert(cur);
+		typename T::iterator pos = std::upper_bound(result.begin(), result.end(), less[cur]);
+
+		if (pos == result.end())
+			result.push_back(less[cur]);
+		else
+			result.insert(pos, less[cur]);
+	}
+}
 
 void PmergeMe::checkSuccess()
 {
@@ -185,58 +229,19 @@ void PmergeMe::sortVector()
 	std::vector<long> less;
 
 	separate(vec, result, less);
-	result.insert(result.begin(), less[0]);
-	print(result);
-	print(less);
-
-	std::queue<int> jacob;
-	getJacobSequence(less.size(), jacob);
+	if (!less.empty())
+		result.insert(result.begin(), less[0]);
 	
-	std::set<int> usedIndex;
-	usedIndex.insert(0);
-	
-	int cur = 1;
-	while (true)
-	{
-		if (usedIndex.find(cur - 1) != usedIndex.end())
-		{
-			if (jacob.empty())
-				break;
-			else
-			{
-				cur = jacob.front();
-				jacob.pop();
-			}
-		}
-		else
-			cur -= 1;
-
-		while (cur >= (int)less.size())
-			--cur;
-			
-		usedIndex.insert(cur);
-		std::vector<long>::iterator pos = std::upper_bound(result.begin(), result.end(), less[cur]);
-
-		if (pos == result.end())
-			result.push_back(less[cur]);
-		else
-			result.insert(pos, less[cur]);
-	}
+	merge(result, less);
 
 	if (straggler.isExist)
-	{
-		std::vector<long>::iterator pos = std::upper_bound(result.begin(), result.end(), straggler.num);
+		insertStraggler(result);
 
-		if (pos == result.end())
-			result.push_back(straggler.num);
-		else
-			result.insert(pos, straggler.num);
-	}
-	print(result);
 	clock_t end = clock();
-	unsigned long elapsedMicroseconds = ticksToMicroseconds(end - begin);
-    std::cout <<  "Time to process a range of "<< result.size() << " elements with std::vector : "  << elapsedMicroseconds << " μs\n";
+    std::cout <<  "Time to process a range of "<< result.size() << " elements with std::vector : "  << end - begin << " μs\n";
 
+	// std::cout << "result vector : ";
+	// print(result);
 	vec.swap(result);
 }
 
@@ -252,36 +257,19 @@ void PmergeMe::sortDeque()
 	std::deque<long> less;
 	
 	separate(deq, result, less);
-	result.push_front(less.front());
-	less.pop_front();
+	if (!less.empty())
+		result.push_front(less.front());
 
-	std::queue<int> jacob;
-	getJacobSequence(less.size(), jacob);
-
-	for (int i = 0; i < (int)less.size(); ++i)
-	{
-		std::deque<long>::iterator pos = std::upper_bound(result.begin(), result.end(), less[i]);
-
-		if (pos == result.end())
-			result.push_back(less[i]);
-		else
-			result.insert(pos, less[i]);
-	}
+	merge(result, less);
 
 	if (straggler.isExist)
-	{
-		std::deque<long>::iterator pos = std::upper_bound(result.begin(), result.end(), straggler.num);
-
-		if (pos == result.end())
-			result.push_back(straggler.num);
-		else
-			result.insert(pos, straggler.num);
-	}
+		insertStraggler(result);
 	
 	clock_t end = clock();
-	unsigned long elapsedMicroseconds = ticksToMicroseconds(end - begin);
-    std::cout <<  "Time to process a range of "<< vec.size() << " elements with std::deque  : "  << elapsedMicroseconds << " μs\n";
+    std::cout <<  "Time to process a range of "<< vec.size() << " elements with std::deque  : "  << end - begin << " μs\n";
 
+	// std::cout << "result deque  : ";
+	// print(result);
 	deq.swap(result);
 }
 
