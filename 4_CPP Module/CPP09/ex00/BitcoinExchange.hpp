@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:03:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/01 00:48:46 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/09 14:03:18 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ private:
 	void identify(const std::string& valueStr);
 	bool checkValidValue(const std::string& valueStr);
 	bool checkValidDate(const std::string& date);
-	bool errorReturn(const std::string& msg);
 	template <typename T> bool getNum(T& num, const std::string& str);
 	void print(const std::string& key, std::map<std::string, double>::iterator& curIter);
 
@@ -86,8 +85,14 @@ bool BitcoinExchange::getNum(T& num, const std::string& str)
 	iss >> num;
 
 	if (iss.fail())
-		return errorReturn("too large a number.");
+	{
+		std::cout << "Error: too large a number.\n";
+		return false;
+	}
 	else if (num < 0)
-		return errorReturn("not a positive number.");
+	{
+		std::cout << "Error: not a positive number.\n";
+		return false;
+	}
 	return true;
 }

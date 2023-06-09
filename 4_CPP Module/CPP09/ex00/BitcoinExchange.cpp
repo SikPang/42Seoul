@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:03:26 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/09 13:36:03 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/09 14:03:53 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void BitcoinExchange::setRates(std::ifstream& file)
 	}
 }
 
-bool BitcoinExchange::errorReturn(const std::string& msg)
+static bool returnBadInput(const std::string& str)
 {
-	std::cout << "Error: " << msg << "\n";
+	std::cout << "Error: bad input => " << str << "\n";
 	return false;
 }
 
@@ -167,8 +167,7 @@ bool BitcoinExchange::checkValidValue(const std::string& valueStr)
 		isValid = getNum(idNum.d, valueStr);
 		break;
 	default:
-		std::cout << "Error: bad input => " << valueStr << "\n";
-		break;
+		return returnBadInput(valueStr);
 	}
 	return isValid;
 }
@@ -195,21 +194,23 @@ bool BitcoinExchange::checkValidDate(const std::string& date)
 		else
 			numStr = copy;
 
+		if (numStr.size() == 0)
+			return returnBadInput(date);
+		
 		for (int i = 0; i < (int)numStr.length(); ++i)
 		{
 			if (numStr[i] < '0' || numStr[i] > '9')
-			{
-				std::cout << "Error: bad input => " << date << "\n";
-				return false;
-			}
+				return returnBadInput(date);
 		}
-
 		std::istringstream iss(numStr);
 		int num;
 
 		iss >> num;
 		if (iss.fail())
-			return errorReturn("too large a number.");
+		{
+			std::cout << "Error: too large a number.\n";
+			return false;
+		}
 
 		if ((cnt == 0 && (num < 0 || num > 9999))
 			|| (cnt == 1 && (num < 1 || num > 12))
@@ -221,10 +222,7 @@ bool BitcoinExchange::checkValidDate(const std::string& date)
 	}
 	
 	if (cnt != 3)
-	{
-		std::cout << "Error: bad input => " << date << "\n";
-		return false;
-	}
+		return returnBadInput(date);
 	return true;
 }
 
