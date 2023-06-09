@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:18:51 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/09 12:49:10 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/09 13:15:29 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ private:
 private:
 	std::vector<long> vec;
 	std::deque<long> deq;
-	std::set<long> set;
+	std::set<long> dupChecker;
 	std::deque<long> argQue;
 	Straggler straggler;
 

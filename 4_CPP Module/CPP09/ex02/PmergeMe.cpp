@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:18:53 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/09 13:15:02 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/09 13:16:05 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ PmergeMe::Straggler::Straggler()
 PmergeMe::PmergeMe()
 	: vec()
 	, deq()
-	, set()
+	, dupChecker()
 	, argQue()
 	, straggler()
 {
@@ -34,7 +34,7 @@ PmergeMe::~PmergeMe()
 PmergeMe::PmergeMe(const PmergeMe& other)
 	: vec(other.vec)
 	, deq(other.deq)
-	, set(other.set)
+	, dupChecker(other.dupChecker)
 	, argQue(other.argQue)
 	, straggler(other.straggler)
 {
@@ -44,7 +44,7 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other)
 {
 	vec = other.vec;
 	deq = other.deq;
-	set = other.set;
+	dupChecker = other.dupChecker;
 	argQue = other.argQue;
 	straggler = other.straggler;
 	return *this;	
@@ -156,11 +156,11 @@ void PmergeMe::merge(T& result, T& less)
 
 void PmergeMe::checkSuccess()
 {
-	if (set.size() != vec.size() || set.size() != deq.size())
+	if (dupChecker.size() != vec.size() || dupChecker.size() != deq.size())
 		throw PmergeMe::Fail();
 
-	std::set<long>::iterator iter = set.begin();
-	for (int i = 0; iter != set.end(); ++iter, ++i)
+	std::set<long>::iterator iter = dupChecker.begin();
+	for (int i = 0; iter != dupChecker.end(); ++iter, ++i)
 	{
 		if (*iter != vec[i] || *iter != deq[i])
 			throw PmergeMe::Fail();
@@ -281,8 +281,8 @@ void PmergeMe::printArgs()
 	std::cout << "\n";
 
 	std::cout << "After:  ";
-	std::set<long>::iterator iter = set.begin();
-	for (; iter != set.end(); ++iter)
+	std::set<long>::iterator iter = dupChecker.begin();
+	for (; iter != dupChecker.end(); ++iter)
 		std::cout << *iter << " ";
 	std::cout << "\n";
 }
@@ -301,10 +301,10 @@ void PmergeMe::parseArgs(char** strs)
 		
 		while (ss >> num)
 		{
-			if (num < 0 || set.find(num) != set.end())
+			if (num < 0 || dupChecker.find(num) != dupChecker.end())
 				throw PmergeMe::Error();
 			
-			set.insert(num);
+			dupChecker.insert(num);
 			argQue.push_back(num);
 			
 			if (ss.eof())

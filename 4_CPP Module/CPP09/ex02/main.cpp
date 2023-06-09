@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:09:52 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/08 15:49:24 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/09 13:18:03 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,14 @@
 #include "PmergeMe.hpp"
 #include <ctime>
 
+// void v()
+// {
+// 	system("leaks PmergeMe");
+// }
+
 int main(int ac, char** av)
 {
+	//atexit(v);
 	if (ac < 2)
 	{
 		std::cout << "Error\n";
