@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 22:03:26 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/01 01:38:09 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/09 13:36:03 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,8 @@ void BitcoinExchange::parseInput(std::ifstream& file)
 	while (!file.eof())
 	{
 		getline(file, line);
-		
+		idNum.id = Type::NONE;
+		idNum.sign = Sign::NONE;
 		std::string::size_type idx = line.find('|');
 		std::string::size_type ridx = line.rfind('|');
 
