@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:18:53 by kwsong            #+#    #+#             */
-/*   Updated: 2023/06/09 16:33:31 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/10 16:44:30 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void PmergeMe::sortVector()
 {
 	clock_t begin = clock();
 
+	vec.reserve(dupChecker.size());
 	pushArgs(vec);
 	getStraggler(vec);
 	sortByPair(vec);
@@ -113,6 +114,9 @@ void PmergeMe::sortVector()
 	std::vector<long> result;
 	std::vector<long> less;
 
+	result.reserve(vec.size());
+	less.reserve(vec.size() / 2);
+	
 	separate(vec, result, less);
 	if (!less.empty())
 		result.insert(result.begin(), less[0]);
@@ -199,6 +203,9 @@ void PmergeMe::parseArgs(char** strs)
 			throw PmergeMe::Error();
 		++i;
 	}
+	
+	if (dupChecker.size() > 10000)
+		throw PmergeMe::Error();
 }
 
 void PmergeMe::sort(char** strs)
