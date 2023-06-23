@@ -1,7 +1,7 @@
 FROM		debian:bullseye
 
 RUN		apt-get -y update \
-		#&& apt-get -y install dumb-init \
+		&& apt-get -y install dumb-init \
 		&& apt-get -y install mariadb-server \
 		&& mkdir /run/mysqld \
 		&& chmod 777 /run/mysqld \
@@ -12,13 +12,16 @@ RUN		rm -rf /var/lib/mysql/aria_log_control
 #ENV		MYSQL_DATA=mydb \
 #		MYSQL_ROOT_PASSWORD=root
 
-#COPY		settings.sh .
-COPY		my.cnf /etc/mysql/my.cnf
+COPY	settings.sh .
+COPY	my.cnf /etc/mysql/my.cnf
+
+RUN		chmod 777 ./settings.sh
 
 EXPOSE		3306
 
 VOLUME		["/home/kwsong/data/mariadb"]
 
-#ENTRYPOINT	["/usr/bin/dumb-init", "--"]
+ENTRYPOINT	["/usr/bin/dumb-init", "--"]
 
-CMD		["mysqld", "--user=root"]
+CMD		["./settings.sh"]
+
