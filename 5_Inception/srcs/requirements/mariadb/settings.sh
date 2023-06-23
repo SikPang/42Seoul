@@ -2,13 +2,16 @@
 
 mariadb-install-db
 
-mysqld --user=root
+service mariadb start
 
-# mysql -u root -p
-# CREATE DATABASE mydb;
-# CREATE USER 'kwsong'@'mariadb' IDENTIFIED BY '1234';
-# GRANT ALL ON wordpress.* TO 'kwsong'@'mariadb' ;
-# FLUSH PRIVILEGES;
-# EXIT;
+mysql -u root -p -e "CREATE DATABASE mydb;"
+mysql -u root -p -e "CREATE USER 'kwsong'@'mariadb' IDENTIFIED BY '1234';"
+mysql -u root -p -e "GRANT ALL ON wordpress.* TO 'kwsong'@'mariadb' ;"
+mysql -u root -p -e "FLUSH PRIVILEGES;"
+mysql -u root -p -e "EXIT;"
+
+service mariadb stop
+
+mysqld --user=root
 
 
