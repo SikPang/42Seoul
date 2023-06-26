@@ -1,12 +1,14 @@
 up : 
 		cd ./srcs && docker-compose up
 
-clean : 
+down : 
 		cd ./srcs && docker-compose down
 
-fclean :
-		make clean
+clean :
+		make down
 		docker image prune -a
 
-destroy:
-		docker container prune
+fclean:
+		make down
+		docker system prune -a
+
