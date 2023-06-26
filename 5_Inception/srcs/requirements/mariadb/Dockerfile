@@ -1,20 +1,18 @@
-FROM		debian:bullseye
+FROM	debian:bullseye
 
-RUN		apt-get -y update \
-		&& apt-get -y install dumb-init \
-		&& apt-get -y install mariadb-server \
-		&& mkdir /run/mysqld \
+RUN 	apt-get -y update \
+		&& apt-get -y install dumb-init
+
+RUN		apt-get -y install mariadb-server
+
+RUN		mkdir /run/mysqld \
 		&& chmod 777 /run/mysqld \
-		&& chmod 777 /var/lib/mysql
+		&& chmod 777 /var/lib/mysql \
+		&& rm -rf /var/lib/mysql/aria_log_control
 
-RUN		rm -rf /var/lib/mysql/aria_log_control
-
-#ENV		MYSQL_DATA=mydb \
-#		MYSQL_ROOT_PASSWORD=root
-
-COPY	settings.sh .
-COPY	my.cnf /etc/mysql/my.cnf
-COPY	50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY	tools/settings.sh .
+COPY	conf/my.cnf /etc/mysql/my.cnf
+COPY	conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 RUN		chmod 777 ./settings.sh
 
