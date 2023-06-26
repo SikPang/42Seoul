@@ -14,6 +14,7 @@ RUN		rm -rf /var/lib/mysql/aria_log_control
 
 COPY	settings.sh .
 COPY	my.cnf /etc/mysql/my.cnf
+COPY	50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 RUN		chmod 777 ./settings.sh
 
