@@ -14,9 +14,9 @@ RUN	mkdir /run/php \
 
 RUN curl -o /tmp/wordpress.tar.gz -SL https://wordpress.org/latest.tar.gz
 
-COPY	conf/wp-config.php /etc/php/7.4/fpm/pool.f/wp-config.php
+COPY	conf/wp-config.php /var/www/html/wordpress/wp-config-sample.php
 COPY	conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
-COPY	conf/my.cnf /etc/mysql/my.cnf
+#COPY	conf/my.cnf /etc/mysql/my.cnf
 COPY	tools/settings.sh .
 
 RUN		chmod 777 settings.sh

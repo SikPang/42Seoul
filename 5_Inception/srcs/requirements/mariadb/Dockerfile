@@ -11,7 +11,8 @@ RUN		mkdir /run/mysqld \
 		&& rm -rf /var/lib/mysql/aria_log_control
 
 COPY	tools/settings.sh .
-COPY	conf/my.cnf /etc/mysql/my.cnf
+COPY	tools/my.sql .
+#COPY	conf/my.cnf /etc/mysql/my.cnf
 COPY	conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 RUN		chmod 777 ./settings.sh
