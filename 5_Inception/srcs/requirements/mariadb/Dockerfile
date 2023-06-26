@@ -3,7 +3,7 @@ FROM	debian:bullseye
 RUN 	apt-get -y update \
 		&& apt-get -y install dumb-init
 
-RUN		apt-get -y install mariadb-server
+RUN		apt-get -y install mariadb-server mariadb-client
 
 RUN		mkdir /run/mysqld \
 		&& chmod 777 /run/mysqld \
@@ -15,7 +15,8 @@ COPY	tools/my.sql .
 #COPY	conf/my.cnf /etc/mysql/my.cnf
 COPY	conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
-RUN		chmod 777 ./settings.sh
+RUN		chmod 777 ./settings.sh \
+		&& chmod 777 ./my.sql
 
 EXPOSE		3306
 

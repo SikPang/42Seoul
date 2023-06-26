@@ -2,6 +2,9 @@
 
 mariadb-install-db
 
-mysqld --user=mysql
+mysqld --user=root
 
-mysql -u mysql -p < ./my.sql
+mysql -u root -p < ./my.sql
+
+
+# select Host,Db,User from mysql.db;

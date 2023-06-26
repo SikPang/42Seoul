@@ -44,7 +44,7 @@ services:
     volumes:
       - ${HOME}/data/wordpress:/var/www/html/wordpress
     ports:
-      - 8080:80
+      - 443:443
     networks:
       - my
     restart: always
