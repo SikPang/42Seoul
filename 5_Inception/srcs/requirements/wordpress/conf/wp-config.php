@@ -20,16 +20,16 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'mydb' );
+define( 'DB_NAME', getenv('WORDPRESS_DB_NAME') );
 
 /** Database username */
-define( 'DB_USER', 'kwsong' );
+define( 'DB_USER', getenv('WORDPRESS_DB_USER') );
 
 /** Database password */
-define( 'DB_PASSWORD', '1234' );
+define( 'DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD') );
 
 /** Database hostname */
-define( 'DB_HOST', 'mariadb' );
+define( 'DB_HOST', getenv('WORDPRESS_DB_HOST') );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -62,14 +62,14 @@ define( 'DB_COLLATE', '' );
 // define( 'SECURE_AUTH_SALT', 'WORDPRESS_SECURE_AUTH_SALT') );
 // define( 'LOGGED_IN_SALT', 'WORDPRESS_LOGGED_IN_SALT') );
 // define( 'NONCE_SALT', 'WORDPRESS_NONCE_SALT') );
-define( 'AUTH_KEY',         'put your unique phrase here' );
-define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
-define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
-define( 'NONCE_KEY',        'put your unique phrase here' );
-define( 'AUTH_SALT',        'put your unique phrase here' );
-define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
-define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
-define( 'NONCE_SALT',       'put your unique phrase here' );
+define( 'AUTH_KEY',         getenv('WORDPRESS_AUTH_KEY') );
+define( 'SECURE_AUTH_KEY',  getenv('WORDPRESS_SECURE_AUTH_KEY') );
+define( 'LOGGED_IN_KEY',    getenv('WORDPRESS_LOGGED_IN_KEY') );
+define( 'NONCE_KEY',        getenv('WORDPRESS_NONCE_KEY') );
+define( 'AUTH_SALT',        getenv('WORDPRESS_AUTH_SALT') );
+define( 'SECURE_AUTH_SALT', getenv('WORDPRESS_SECURE_AUTH_SALT') );
+define( 'LOGGED_IN_SALT',   getenv('WORDPRESS_LOGGED_IN_SALT') );
+define( 'NONCE_SALT',       getenv('WORDPRESS_NONCE_SALT') );
 
 /**#@-*/
 
