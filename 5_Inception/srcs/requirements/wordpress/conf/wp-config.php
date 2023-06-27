@@ -18,29 +18,46 @@
  * @package WordPress
  */
 
+$WORDPRESS_DB_NAME = getenv('WORDPRESS_DB_NAME');
+$WORDPRESS_DB_USER = getenv('WORDPRESS_DB_USER');
+$WORDPRESS_DB_PASSWORD = getenv('WORDPRESS_DB_PASSWORD');
+$WORDPRESS_DB_HOST = getenv('WORDPRESS_DB_HOST');
+
+$WORDPRESS_AUTH_KEY = getenv('WORDPRESS_AUTH_KEY');
+$WORDPRESS_SECURE_AUTH_KEY = getenv('WORDPRESS_SECURE_AUTH_KEY');
+$WORDPRESS_LOGGED_IN_KEY = getenv('WORDPRESS_LOGGED_IN_KEY');
+$WORDPRESS_NONCE_KEY = getenv('WORDPRESS_NONCE_KEY');
+$WORDPRESS_AUTH_SALT = getenv('WORDPRESS_AUTH_SALT');
+$WORDPRESS_SECURE_AUTH_SALT = getenv('WORDPRESS_SECURE_AUTH_SALT');
+$WORDPRESS_LOGGED_IN_SALT = getenv('WORDPRESS_LOGGED_IN_SALT');
+$WORDPRESS_NONCE_SALT = getenv('WORDPRESS_NONCE_SALT');
+
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', getenv('WORDPRESS_DB_NAME') );
+//define( 'DB_NAME', getenv('WORDPRESS_DB_NAME') );
+//define( 'DB_NAME', $WORDPRESS_DB_NAME );
+define( 'DB_NAME', 'mydb' );
 
 /** Database username */
-define( 'DB_USER', getenv('WORDPRESS_DB_USER') );
+//define( 'DB_USER', getenv('WORDPRESS_DB_USER') );
+//define( 'DB_USER', $WORDPRESS_DB_USER );
+define( 'DB_USER', 'kwsong' );
 
 /** Database password */
-define( 'DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD') );
+//define( 'DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD') );
+//define( 'DB_PASSWORD', $WORDPRESS_DB_NAME );
+define( 'DB_PASSWORD', '1234' );
 
 /** Database hostname */
-define( 'DB_HOST', getenv('WORDPRESS_DB_HOST') );
+//define( 'DB_HOST', getenv('WORDPRESS_DB_HOST') );
+//define( 'DB_HOST', $WORDPRESS_DB_NAME );
+define( 'DB_HOST', 'mariadb' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
 
 /** The database collate type. Don't change this if in doubt. */
 define( 'DB_COLLATE', '' );
-
-// define( 'DB_NAME', 'WORDPRESS_DB_NAME') );
-// define( 'DB_USER', 'WORDPRESS_DB_USER') );
-// define( 'DB_PASSWORD', 'WORDPRESS_DB_PASSWORD') );
-// define( 'DB_HOST', 'WORDPRESS_DB_HOST') );
 
 /**#@+
  * Authentication unique keys and salts.
@@ -53,23 +70,15 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-// $table_prefix = 'wp_';
-// define( 'AUTH_KEY', 'WORDPRESS_AUTH_KEY') );
-// define( 'SECURE_AUTH_KEY', 'WORDPRESS_SECURE_AUTH_KEY') );
-// define( 'LOGGED_IN_KEY', 'WORDPRESS_LOGGED_IN_KEY') );
-// define( 'NONCE_KEY', 'WORDPRESS_NONCE_KEY') );
-// define( 'AUTH_SALT', 'WORDPRESS_AUTH_SALT') );
-// define( 'SECURE_AUTH_SALT', 'WORDPRESS_SECURE_AUTH_SALT') );
-// define( 'LOGGED_IN_SALT', 'WORDPRESS_LOGGED_IN_SALT') );
-// define( 'NONCE_SALT', 'WORDPRESS_NONCE_SALT') );
-define( 'AUTH_KEY',         getenv('WORDPRESS_AUTH_KEY') );
-define( 'SECURE_AUTH_KEY',  getenv('WORDPRESS_SECURE_AUTH_KEY') );
-define( 'LOGGED_IN_KEY',    getenv('WORDPRESS_LOGGED_IN_KEY') );
-define( 'NONCE_KEY',        getenv('WORDPRESS_NONCE_KEY') );
-define( 'AUTH_SALT',        getenv('WORDPRESS_AUTH_SALT') );
-define( 'SECURE_AUTH_SALT', getenv('WORDPRESS_SECURE_AUTH_SALT') );
-define( 'LOGGED_IN_SALT',   getenv('WORDPRESS_LOGGED_IN_SALT') );
-define( 'NONCE_SALT',       getenv('WORDPRESS_NONCE_SALT') );
+
+define( 'AUTH_KEY',         $WORDPRESS_AUTH_KEY );
+define( 'SECURE_AUTH_KEY',  $WORDPRESS_SECURE_AUTH_KEY );
+define( 'LOGGED_IN_KEY',    $WORDPRESS_LOGGED_IN_KEY );
+define( 'NONCE_KEY',        $WORDPRESS_NONCE_KEY );
+define( 'AUTH_SALT',        $WORDPRESS_AUTH_SALT );
+define( 'SECURE_AUTH_SALT', $WORDPRESS_SECURE_AUTH_SALT );
+define( 'LOGGED_IN_SALT',   $WORDPRESS_LOGGED_IN_SALT );
+define( 'NONCE_SALT',       $WORDPRESS_NONCE_SALT );
 
 /**#@-*/
 
