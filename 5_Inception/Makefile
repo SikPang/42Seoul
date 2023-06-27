@@ -1,8 +1,14 @@
-up		: 
+NAME	= .inception
+
+all		: $(NAME)
+
+$(NAME) :
+	@touch $(NAME)
 	cd ./srcs && docker-compose up
 
 down	: 
 	cd ./srcs && docker-compose down
+	@rm $(NAME)
 
 rmi		:
 	docker image prune -a
@@ -17,7 +23,7 @@ fclean	:
 
 re		:
 	make fclean
-	make up
+	make all
 
 em	:
 	docker exec -it mariadb bash
@@ -28,4 +34,4 @@ en	:
 ew	:
 	docker exec -it wordpress bash
 
-.PHONY	: up down rmi clean fclean re em en ew
+.PHONY	: all down rmi clean fclean re em en ew
