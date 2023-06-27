@@ -6,11 +6,8 @@ services:
     build: ./requirements/mariadb
     volumes:
       - ${HOME}/data/mariadb:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
-      MYSQL_USER: ${WORDPRESS_DB_USER}
-      MYSQL_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+    env_file:
+      - ./.env
     expose:
       - 3306
     networks:
@@ -24,11 +21,8 @@ services:
     build: ./requirements/wordpress
     volumes:
       - ${HOME}/data/wordpress:/var/www/html/wordpress
-    environment:
-      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
-      WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
-      WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
-      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+    env_file:
+      - ./.env
     expose:
       - 9000
     networks:
@@ -43,6 +37,8 @@ services:
     build: ./requirements/nginx
     volumes:
       - ${HOME}/data/wordpress:/var/www/html/wordpress
+    env_file:
+      - ./.env
     ports:
       - 443:443
     networks:

@@ -1,14 +1,31 @@
-up : 
-		cd ./srcs && docker-compose up
+up		: 
+	cd ./srcs && docker-compose up
 
-down : 
-		cd ./srcs && docker-compose down
+down	: 
+	cd ./srcs && docker-compose down
 
-clean :
-		make down
-		docker image prune -a
+rmi		:
+	docker image prune -a
 
-fclean:
-		make down
-		docker system prune -a
+clean	:
+	make down
+	docker system prune -a
 
+fclean	:
+	make clean
+	cd /home/kwsong/data && sudo rm -rf *
+
+re		:
+	make fclean
+	make up
+
+em	:
+	docker exec -it mariadb bash
+
+en	:
+	docker exec -it nginx bash
+
+ew	:
+	docker exec -it wordpress bash
+
+.PHONY	: up down rmi clean fclean re em en ew
