@@ -1,15 +1,35 @@
 #!/bin/bash 
 
-if [ ! -e /var/www/html/wordpress/index.php ]; then
-    wp core download --allow-root --path=/var/www/html/wordpress/
-    mv /var/www/html/wordpress/wp-config-sample.php  /var/www/html/wordpress/wp-config.php 
-    #mv /var/www/html/wp-config.php /var/www/html/wordpress/wp-config.php 
+if [ ! -e $WORDPRESS_PATH/index.php ]; then
+    echo "Start installing wordpress..."
+
+    wp core download --allow-root --path=$WORDPRESS_PATH
     
+    mv /var/www/html/wp-config.php $WORDPRESS_PATH/wp-config.php 
+
+    sed -i "s/WORDPRESS_DB_NAME/$WORDPRESS_DB_NAME/" $WORDPRESS_PATH/wp-config.php
+    sed -i "s/WORDPRESS_DB_USER/$WORDPRESS_DB_USER/" $WORDPRESS_PATH/wp-config.php
+    sed -i "s/WORDPRESS_DB_PASSWORD/$WORDPRESS_DB_PASSWORD/" $WORDPRESS_PATH/wp-config.php
+    sed -i "s/WORDPRESS_DB_HOST/$WORDPRESS_DB_HOST/" $WORDPRESS_PATH/wp-config.php
+    
+    sed -i "s/WORDPRESS_AUTH_KEY/$WORDPRESS_AUTH_KEY/" $WORDPRESS_PATH/wp-config.php
+    sed -i "s/WORDPRESS_SECURE_AUTH_KEY/$WORDPRESS_SECURE_AUTH_KEY/" $WORDPRESS_PATH/wp-config.php
+    sed -i "s/WORDPRESS_LOGGED_IN_KEY/$WORDPRESS_LOGGED_IN_KEY/" $WORDPRESS_PATH/wp-config.php
+    sed -i "s/WORDPRESS_NONCE_KEY/$WORDPRESS_NONCE_KEY/" $WORDPRESS_PATH/wp-config.php
+    sed -i "s/WORDPRESS_AUTH_SALT/$WORDPRESS_AUTH_SALT/" $WORDPRESS_PATH/wp-config.php
+    sed -i "s/WORDPRESS_SECURE_AUTH_SALT/$WORDPRESS_SECURE_AUTH_SALT/" $WORDPRESS_PATH/wp-config.php
+    sed -i "s/WORDPRESS_LOGGED_IN_SALT/$WORDPRESS_LOGGED_IN_SALT/" $WORDPRESS_PATH/wp-config.php
+    sed -i "s/WORDPRESS_NONCE_SALT/$WORDPRESS_NONCE_SALT/" $WORDPRESS_PATH/wp-config.php 
+
     chown www-data: /var/www/html/ -R
     
-    wp config create --dbname=$WORDPRESS_DB_NAME --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASSWORD --dbhost=$WORDPRESS_DB_HOST --locale=en_US --allow-root --path=/var/www/html/wordpress/
-    wp core install --url=localhost --title=my_blog --admin_email=kwsong@42.fr --admin_password=1234 --admin_name=song --allow-root --path=/var/www/html/wordpress/
-    wp user create human human@42.fr --user_pass=1234 --role=subscriber --allow-root --path=/var/www/html/wordpress/
+    #wp config create --config-file=$WORDPRESS_PATH/wp-config.php --dbname=$WORDPRESS_DB_NAME --dbuser=$WORDPRESS_DB_USER --dbpass=$WORDPRESS_DB_PASSWORD --dbhost=$WORDPRESS_DB_HOST --locale=en_US --allow-root --path=$WORDPRESS_PATH/
+    wp core install --url=localhost --title=$WORDPRESS_TITLE --admin_email=$WORDPRESS_ADMIN_EMAIL --admin_password=$WORDPRESS_DB_PASSWORD --admin_name=$WORDPRESS_DB_USER --allow-root --path=$WORDPRESS_PATH
+    wp user create human human@42.fr --user_pass=1234 --role=subscriber --allow-root --path=$WORDPRESS_PATH
+
+    echo "Wordpress installation complete"
+else
+    echo "Wordpress already installed"
 fi
 
 /usr/sbin/php-fpm7.4 -F
