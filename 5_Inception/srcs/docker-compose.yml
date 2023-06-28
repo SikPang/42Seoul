@@ -4,6 +4,7 @@ services:
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
+    image: mariadb:my
     volumes:
       - ${HOME}/data/mariadb:/var/lib/mysql
     env_file:
@@ -19,6 +20,7 @@ services:
       - mariadb
     container_name: wordpress
     build: ./requirements/wordpress
+    image: wordpress:my
     volumes:
       - ${HOME}/data/wordpress:/var/www/html/wordpress
     env_file:
@@ -35,6 +37,7 @@ services:
       - wordpress
     container_name: nginx
     build: ./requirements/nginx
+    image: nginx:my
     volumes:
       - ${HOME}/data/wordpress:/var/www/html/wordpress
     env_file:
