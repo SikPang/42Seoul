@@ -11,7 +11,7 @@ $(NAME) :
 	else \
 		echo "--- Domain name already setted ---"; \
 	fi
-	cd ./srcs && docker-compose up
+	cd ./srcs && docker-compose up --build
 down	: 
 	cd ./srcs && docker-compose down
 	@rm -rf $(NAME)
