@@ -6,7 +6,7 @@ services:
     build: ./requirements/mariadb
     image: mariadb:my
     volumes:
-      - ${HOME}/data/mariadb:/var/lib/mysql
+      - /home/kwsong/data/mariadb:/var/lib/mysql
     env_file:
       - ./.env
     expose:
@@ -22,7 +22,7 @@ services:
     build: ./requirements/wordpress
     image: wordpress:my
     volumes:
-      - ${HOME}/data/wordpress:/var/www/html/wordpress
+      - /home/kwsong/data/wordpress:/var/www/html/wordpress
     env_file:
       - ./.env
     expose:
@@ -39,7 +39,7 @@ services:
     build: ./requirements/nginx
     image: nginx:my
     volumes:
-      - ${HOME}/data/wordpress:/var/www/html/wordpress
+      - /home/kwsong/data/wordpress:/var/www/html/wordpress
     env_file:
       - ./.env
     ports:
