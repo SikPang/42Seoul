@@ -1,14 +1,20 @@
-NAME	= .inception
+NAME		= .inception
+DOMAIN_NAME	= kwsong.42.fr
 
 all		: $(NAME)
 
 $(NAME) :
 	@touch $(NAME)
+	@if ! grep -e '^127.0.0.1\s\+$(DOMAIN_NAME)' /etc/hosts; then \
+		echo "--- Add domain name ---"; \
+		sudo sh -c 'echo "127.0.0.1    $(DOMAIN_NAME)" >>  /etc/hosts'; \
+	else \
+		echo "--- Domain name already setted ---"; \
+	fi
 	cd ./srcs && docker-compose up
-
 down	: 
 	cd ./srcs && docker-compose down
-	@rm $(NAME)
+	@rm -rf $(NAME)
 
 rmi		:
 	docker image prune -a
@@ -19,7 +25,7 @@ clean	:
 
 fclean	:
 	make clean
-	cd /home/kwsong/data && sudo rm -rf *
+	sudo rm -rf /home/kwsong/data/*
 
 re		:
 	make fclean

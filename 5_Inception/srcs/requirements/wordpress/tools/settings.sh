@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 if [ ! -e $WORDPRESS_PATH/index.php ]; then
-    echo "Start installing wordpress..."
+    echo "--- Start installing wordpress... ---"
 
     wp core download --allow-root --path=$WORDPRESS_PATH
     
@@ -27,9 +27,9 @@ if [ ! -e $WORDPRESS_PATH/index.php ]; then
     wp core install --url=localhost --title=$WORDPRESS_TITLE --admin_email=$WORDPRESS_ADMIN_EMAIL --admin_password=$WORDPRESS_DB_PASSWORD --admin_name=$WORDPRESS_DB_USER --allow-root --path=$WORDPRESS_PATH
     wp user create human human@42.fr --user_pass=1234 --role=subscriber --allow-root --path=$WORDPRESS_PATH
 
-    echo "Wordpress installation complete"
+    echo "--- Wordpress installation complete ---"
 else
-    echo "Wordpress already installed"
+    echo "--- Wordpress already installed ---"
 fi
 
 /usr/sbin/php-fpm7.4 -F

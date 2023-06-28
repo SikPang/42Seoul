@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 if [ ! -d /var/lib/mysql/${WORDPRESS_DB_NAME} ]; then
-    echo "Start settings MaridDB..."
+    echo "--- Start settings MaridDB... ---"
 
     mariadb-install-db
 
@@ -14,9 +14,9 @@ if [ ! -d /var/lib/mysql/${WORDPRESS_DB_NAME} ]; then
 
     service mariadb stop
 
-    echo "MaridDB settings complete"
+    echo "--- MaridDB settings complete ---"
 else
-    echo "MaridDB already setted"
+    echo "--- MaridDB already setted ---"
 fi
 
 mysqld --user=root
