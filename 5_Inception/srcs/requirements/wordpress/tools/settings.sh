@@ -23,7 +23,7 @@ if [ ! -e $WORDPRESS_PATH/index.php ]; then
 
     chown www-data: /var/www/html/ -R
     
-    wp core install --url=$DOMAIN_NAME --title=$WORDPRESS_TITLE --admin_email=$WORDPRESS_ADMIN_EMAIL --admin_password=$WORDPRESS_DB_PASSWORD --admin_name=$WORDPRESS_DB_USER --allow-root --path=$WORDPRESS_PATH
+    wp core install --url=$DOMAIN_NAME --title=$WORDPRESS_TITLE --admin_email=$WORDPRESS_ADMIN_EMAIL --admin_password=$WORDPRESS_DB_PASSWORD --admin_name=$WORDPRESS_DB_USER --allow-root --path=$WORDPRESS_PATH --skip-email
     wp user create human human@42.fr --user_pass=1234 --role=subscriber --allow-root --path=$WORDPRESS_PATH
 
     echo "--- Wordpress installation complete ---"

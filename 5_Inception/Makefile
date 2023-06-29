@@ -24,7 +24,8 @@ clean	:
 fclean	:
 	make clean
 	docker volume rm srcs_db srcs_wp
-	sudo rm -rf /home/kwsong/data/*
+	sudo rm -rf /home/kwsong/data/wp/*
+	sudo rm -rf /home/kwsong/data/db/*
 
 re		:
 	make fclean

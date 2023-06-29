@@ -53,14 +53,14 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: '/home/kwsong/data/db'
       o: bind
+      device: '/home/kwsong/data/db'
   wp:
     driver: local
     driver_opts:
       type: none
-      device: '/home/kwsong/data/wp'
       o: bind
+      device: '/home/kwsong/data/wp'
 
 networks:
   my: 
