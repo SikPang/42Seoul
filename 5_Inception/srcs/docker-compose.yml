@@ -4,9 +4,9 @@ services:
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
-    image: mariadb
+    image: mariadb:inception
     volumes:
-      - /home/kwsong/data/mariadb:/var/lib/mysql
+      - db:/var/lib/mysql
     env_file:
       - ./.env
     expose:
@@ -20,9 +20,9 @@ services:
       - mariadb
     container_name: wordpress
     build: ./requirements/wordpress
-    image: wordpress
+    image: wordpress:inception
     volumes:
-      - /home/kwsong/data/wordpress:/var/www/html/wordpress
+      - wp:/var/www/html/wordpress
     env_file:
       - ./.env
     expose:
@@ -37,9 +37,9 @@ services:
       - wordpress
     container_name: nginx
     build: ./requirements/nginx
-    image: nginx
+    image: nginx:inception
     volumes:
-      - /home/kwsong/data/wordpress:/var/www/html/wordpress
+      - wp:/var/www/html/wordpress
     env_file:
       - ./.env
     ports:
@@ -48,7 +48,20 @@ services:
       - my
     restart: always
 
+volumes:
+  db:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/home/kwsong/data/db'
+      o: bind
+  wp:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/home/kwsong/data/wp'
+      o: bind
+
 networks:
   my: 
     driver: bridge
-

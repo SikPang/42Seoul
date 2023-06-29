@@ -17,15 +17,13 @@ down	:
 	cd ./srcs && docker-compose down
 	@rm -rf $(NAME)
 
-rmi		:
-	docker image prune -a
-
 clean	:
 	make down
 	docker system prune -a
 
 fclean	:
 	make clean
+	docker volume rm srcs_db srcs_wp
 	sudo rm -rf /home/kwsong/data/*
 
 re		:
@@ -41,4 +39,4 @@ en	:
 ew	:
 	docker exec -it wordpress bash
 
-.PHONY	: all down rmi clean fclean re em en ew
+.PHONY	: all down clean fclean re em en ew
