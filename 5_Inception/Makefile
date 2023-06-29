@@ -11,6 +11,8 @@ $(NAME) :
 	else \
 		echo "--- Domain name already setted ---"; \
 	fi
+	mkdir -p /home/kwsong/data/wp;
+	mkdir -p /home/kwsong/data/db;
 	cd ./srcs && docker-compose up --build
 
 down	: 
@@ -23,7 +25,7 @@ clean	:
 
 fclean	:
 	make clean
-	docker volume rm srcs_db srcs_wp
+	docker volume rm -f srcs_db srcs_wp
 	sudo rm -rf /home/kwsong/data/wp/*
 	sudo rm -rf /home/kwsong/data/db/*
 
