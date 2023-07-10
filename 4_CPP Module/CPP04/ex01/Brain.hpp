@@ -6,12 +6,13 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:47:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/07/10 12:31:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/07/10 12:39:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #include <string>
+#include <exception>
 
 #define IDEA_CAPACITY 100
 
@@ -30,7 +31,5 @@ public:
 public:
 	unsigned int GetSize() const;
 	void AddIdea(const std::string& idea, unsigned int index);
-	std::string GetIdea(unsigned int index) const;
+	const std::string& GetIdea(unsigned int index) const;
 };
-
-#endif

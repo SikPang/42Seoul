@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:06:36 by kwsong            #+#    #+#             */
-/*   Updated: 2023/07/10 12:30:57 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/07/10 12:37:54 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ Dog& Dog::operator=(const Dog& other)
 		return *this;
 
 	type = other.type;
-	brain = other.brain;
+	*brain = *(other.brain);
 	return *this;
 }
 
@@ -45,4 +45,14 @@ Dog::~Dog()
 void Dog::makeSound() const
 {
 	std::cout << "* Woof! *\n";
+}
+
+void Dog::AddIdea(const std::string& idea, unsigned int index)
+{
+	brain->AddIdea(idea, index);
+}
+
+const std::string& Dog::GetIdea(unsigned int index) const
+{
+	return brain->GetIdea(index);
 }

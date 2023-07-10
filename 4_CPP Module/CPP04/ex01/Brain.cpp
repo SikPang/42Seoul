@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:47:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/07/10 12:32:19 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/07/10 12:39:25 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,10 @@ void Brain::AddIdea(const std::string& idea, unsigned int index)
 	ideas[index] = idea;
 }
 
-std::string Brain::GetIdea(unsigned int index) const
+const std::string& Brain::GetIdea(unsigned int index) const
 {
 	if (index >= size)
-		return "! out of index !";
+		throw std::exception();
 
 	return ideas[index];
-}
-
-void Brain::duplicate(const Brain* other)
-{
-	for (unsigned int i = 0; i < size; ++i)
-		ideas[i] = other->GetIdea(i);
 }

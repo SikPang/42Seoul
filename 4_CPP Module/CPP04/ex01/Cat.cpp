@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:06:33 by kwsong            #+#    #+#             */
-/*   Updated: 2023/07/10 12:30:49 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/07/10 12:46:47 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ Cat& Cat::operator=(const Cat& other)
 		return *this;
 
 	type = other.type;
-	brain = other.brain;
+	*brain = *(other.brain);
 	return *this;
 }
 
@@ -45,4 +45,14 @@ Cat::~Cat()
 void Cat::makeSound() const
 {
 	std::cout << "* Meow~ *\n";
+}
+
+void Cat::AddIdea(const std::string& idea, unsigned int index)
+{
+	brain->AddIdea(idea, index);
+}
+
+const std::string& Cat::GetIdea(unsigned int index) const
+{
+	return brain->GetIdea(index);
 }

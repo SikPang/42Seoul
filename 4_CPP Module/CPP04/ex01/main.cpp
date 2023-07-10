@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 21:01:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/30 09:50:09 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/07/10 12:44:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,33 @@ int main()
 
 	Dog* dog = dynamic_cast<Dog*>(animals[0]);
 
-	std::cout << "before idea : " << dog->GetIdea(0) << '\n';
+	try
+	{
+		std::cout << "before idea : " << dog->GetIdea(0) << '\n';
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
 	dog->AddIdea("I want to go home..", 0);
-	std::cout << "after idea : " << dog->GetIdea(0) << '\n';
-	std::cout << "access to max index + 1 : " << dog->GetIdea(dog->GetSizeOfIdeas() + 1) << "\n\n";
+	try
+	{
+		std::cout << "after idea : " << dog->GetIdea(0) << '\n';
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+
+	try
+	{
+		std::cout << "access to max index + 1 : " << dog->GetIdea(IDEA_CAPACITY + 1) << "\n\n";
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
 	for (int i=0; i<ANIMAL_NUM; ++i)
 	{
@@ -71,13 +94,28 @@ int main()
 	cat1.AddIdea("dup", 0);
 	
 	Cat cat2 = cat1;
-	std::cout << "cat2's idea[0] : " << cat2.GetIdea(0) << "\n\n";
-
-	Cat cat3;
-	cat3 = cat1;
-	std::cout << "cat3's idea[0] : " << cat3.GetIdea(0) << "\n\n";
+	// try
+	// {
+	// 	std::cout << "cat2's idea[0] : " << cat2.GetIdea(0) << "\n\n";
+	// }
+	// catch(const std::exception& e)
+	// {
+	// 	std::cerr << e.what() << '\n';
+	// }
 	
-	Animal test;
+	
+	// Cat cat3;
+	// cat3 = cat1;
+	// try
+	// {
+	// 	std::cout << "cat3's idea[0] : " << cat3.GetIdea(0) << "\n\n";
+	// }
+	// catch(const std::exception& e)
+	// {
+	// 	std::cerr << e.what() << '\n';
+	// }
+	
+	// Animal test;
 	
 	return 0;
 }
