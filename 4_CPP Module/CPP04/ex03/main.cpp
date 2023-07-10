@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kwsong <kwsong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:46:31 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/30 09:47:51 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/06/12 21:09:57 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void MyTest()
 
 int main()
 {
-	//atexit(leaks);
+	atexit(leaks);
 	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());

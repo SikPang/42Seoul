@@ -6,14 +6,14 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 21:01:10 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 16:35:55 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/07/10 12:25:17 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "WrongCat.hpp"
 
 int main()
 {
@@ -31,6 +31,15 @@ int main()
 	delete j;
 	delete i;
 	delete meta;
+
+	const WrongAnimal* wrong = new WrongAnimal();
+	const WrongAnimal* cat = new WrongCat();
+
+	wrong->makeSound();
+	cat->makeSound();
+
+	delete wrong;
+	delete cat;
 	
 	return 0;
 }

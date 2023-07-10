@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 18:07:15 by kwsong            #+#    #+#             */
-/*   Updated: 2023/07/10 12:18:19 by kwsong           ###   ########.fr       */
+/*   Created: 2023/02/16 18:05:24 by kwsong            #+#    #+#             */
+/*   Updated: 2023/07/10 12:24:36 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
-class Dog : public Animal
+class WrongCat : public WrongAnimal
 {
 public:
-	Dog();
-	Dog(const Dog& other);
-	~Dog();
-	Dog& operator=(const Dog& other);
+	WrongCat();
+	WrongCat(const WrongCat& other);
+	~WrongCat();
+	WrongCat& operator=(const WrongCat& other);
 
 public:
 	void makeSound() const;	// override

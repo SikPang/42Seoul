@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:05:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 19:38:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/07/10 12:18:07 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ public:
 	Cat();
 	Cat(const Cat& other);
 	~Cat();
-	Cat&	operator=(const Cat& other);
+	Cat& operator=(const Cat& other);
 
 public:
-	void	makeSound() const;	// override
+	void makeSound() const;	// override
 };

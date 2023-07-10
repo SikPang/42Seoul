@@ -6,14 +6,11 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:47:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 17:19:22 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/07/10 12:31:50 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef __BRAIN_HPP__
-#define __BRAIN_HPP__
-
 #include <string>
 
 #define IDEA_CAPACITY 100
@@ -34,7 +31,6 @@ public:
 	unsigned int GetSize() const;
 	void AddIdea(const std::string& idea, unsigned int index);
 	std::string GetIdea(unsigned int index) const;
-	void duplicate(const Brain* other);
 };
 
 #endif

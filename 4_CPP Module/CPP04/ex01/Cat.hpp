@@ -6,19 +6,18 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:05:24 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 19:38:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/07/10 12:28:16 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-
 #include "Animal.hpp"
 #include "Brain.hpp"
 
 class Cat : public Animal
 {
 private:
-	Brain*	brain;
+	Brain* brain;
 
 public:
 	Cat();
@@ -28,7 +27,4 @@ public:
 
 public:
 	void makeSound() const;	// override
-	unsigned int GetSizeOfIdeas() const;
-	void AddIdea(const std::string& idea, unsigned int index);
-	std::string GetIdea(unsigned int index) const;
 };
