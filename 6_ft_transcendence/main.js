@@ -50,8 +50,6 @@ function myKeyEvent(event)
 	fixDef.friction = 0.0;
 	fixDef.restitution = 1.0;
 
-	//alert(objs["leftRacket"]);
-	//alert(objs["leftRacket"].position.x)
 	world.DestroyBody(objs["leftRacket"]);
 	world.DestroyBody(objs["rightRacket"]);
 	delete objs.leftRacket;
@@ -94,6 +92,7 @@ function init() {
 	// create rackets
 	drawObject(objs, "leftRacket", fixDef, true, true, 0.3, y, 0.05, 0.5, 0, 0, 0);
 	drawObject(objs, "rightRacket", fixDef, true, true, 0.7 + 11.8, y, 0.05, 0.5, 0, 0, 0);
+	alert(world.GetBodyCount());
    
    //setup debug draw
    var debugDraw = new b2DebugDraw();		
