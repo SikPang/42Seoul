@@ -8,17 +8,12 @@ var   b2Vec2 = Box2D.Common.Math.b2Vec2
 ,	b2MassData = Box2D.Collision.Shapes.b2MassData
 ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
 ,	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
-,	b2DebugDraw = Box2D.Dynamics.b2DebugDraw
-;
+,	b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
 
-console.log(tempString);
+var objs = {};
+var y = 3.5;
 
-function drawObject(isStatic, isSquare, x, y, width, height, linearVelocityX, linearVelocityY, angularVelocity) {
-	var fixDef = new b2FixtureDef;
-	fixDef.density = 0.0;
-	fixDef.friction = 0.0;
-	fixDef.restitution = 1.0;
-
+function drawObject(objs, tag, fixDef, isStatic, isSquare, x, y, width, height, linearVelocityX, linearVelocityY, angularVelocity) {
 	var bodyDef = new b2BodyDef;
 
 	if (isStatic)
@@ -27,8 +22,7 @@ function drawObject(isStatic, isSquare, x, y, width, height, linearVelocityX, li
 		bodyDef.type = b2Body.b2_dynamicBody;
 	bodyDef.position.x = x;
 	bodyDef.position.y = y;
-	if (linearVelocityX && linearVelocityY)
-		bodyDef.linearVelocity = new b2Vec2(linearVelocityX, linearVelocityY);
+	bodyDef.linearVelocity = new b2Vec2(linearVelocityX, linearVelocityY);
 	if (angularVelocity)
 		bodyDef.angularVelocity = angularVelocity;
 	if (isSquare)
@@ -38,27 +32,68 @@ function drawObject(isStatic, isSquare, x, y, width, height, linearVelocityX, li
 	}
 	else
 		fixDef.shape = new b2CircleShape(width);
+	objs[tag] = bodyDef;
 	world.CreateBody(bodyDef).CreateFixture(fixDef);
 }
-      
-function init() {
-   world = new b2World(
-         new b2Vec2(0, 0)    //gravity
-      ,  true                //allow sleep
-   );
 
-	// create walls
-	for (var i = 0; i < 2; ++i)
-		drawObject(true, true, i * 12.8, 4, 0.1, 5, 0, 0, 0);
-	for (var i = 0; i < 2; ++i)
-		drawObject(true, true, 6, i * 7.2, 7, 0.1, 0, 0, 0);
+function myKeyEvent(event)
+{
+	if (event.keyCode == 38) // Arrow Up
+		y -= 0.2;
+	else if (event.keyCode == 40) // Arrow Down
+		y += 0.2;
+	else
+		return;
+	
+	var fixDef = new b2FixtureDef;
+	fixDef.density = 1.0;
+	fixDef.friction = 0.0;
+	fixDef.restitution = 1.0;
+
+	//alert(objs["leftRacket"]);
+	//alert(objs["leftRacket"].position.x)
+	world.DestroyBody(objs["leftRacket"]);
+	world.DestroyBody(objs["rightRacket"]);
+	delete objs.leftRacket;
+	delete objs.rightRacket;
+	//alert(objs["leftRacket"]);
 
 	// create rackets
-	for (var i = 0; i < 2; ++i)
-		drawObject(true, true, 0.5 + i * 11.8, 4, 0.1, 0.5, 0, 0, 0);
+	drawObject(objs, "leftRacket", fixDef, true, true, 0.3, y, 0.05, 0.5, 0, 0, 0);
+	drawObject(objs, "rightRacket", fixDef, true, true, 0.7 + 11.8, y, 0.05, 0.5, 0, 0, 0);
+	//alert(objs["leftRacket"]);
+	world.DrawDebugData();
+	world.ClearForces();
+}
 
+function init() {
+	document.addEventListener("keydown", myKeyEvent);
+
+	world = new b2World(
+			new b2Vec2(0, 0)    //gravity
+			, true              //allow sleep
+	);
+
+	var fixDef = new b2FixtureDef;
+	fixDef.density = 1.0;
+	fixDef.friction = 0.0;
+	fixDef.restitution = 1.0;
+
+	// create walls
+	drawObject(objs, "leftWall", fixDef, true, true, 0, 4, 0.1, 5, 0, 0, 0);
+	drawObject(objs, "rightWall", fixDef, true, true, 12.8, 4, 0.1, 5, 0, 0, 0);
+	drawObject(objs, "upWall", fixDef, true, true, 6, 0, 7, 0.1, 0, 0, 0);
+	drawObject(objs, "downWall", fixDef, true, true, 6, 7.2, 7, 0.1, 0, 0, 0);
+		
 	// create a ball
-	drawObject(false, false, 6, 4, 0.1, 0, 5, 5, 10.0);
+	var randValHorizon = Math.ceil(Math.random() * 100) % 2 ? 1 : -1;
+	var randValVertical = Math.ceil(Math.random() * 100) % 2 ? 1 : -1;
+	var randValSpin = Math.ceil(Math.random() * 100) % 2 ? 1 : -1;
+	drawObject(objs, "ball", fixDef, false, false, 6, 4, 0.15, 0, 5 * randValHorizon, 5 * randValVertical, 20 * randValSpin);
+	
+	// create rackets
+	drawObject(objs, "leftRacket", fixDef, true, true, 0.3, y, 0.05, 0.5, 0, 0, 0);
+	drawObject(objs, "rightRacket", fixDef, true, true, 0.7 + 11.8, y, 0.05, 0.5, 0, 0, 0);
    
    //setup debug draw
    var debugDraw = new b2DebugDraw();		
@@ -68,8 +103,6 @@ function init() {
    debugDraw.SetLineThickness(1.1);		
    debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);		
    world.SetDebugDraw(debugDraw);
-
-   //var myInt: number = 1;
    
    window.setInterval(update, 1000 / 60);
 };
