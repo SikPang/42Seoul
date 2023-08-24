@@ -32,36 +32,25 @@ function drawObject(objs, tag, fixDef, isStatic, isSquare, x, y, width, height, 
 	}
 	else
 		fixDef.shape = new b2CircleShape(width);
-	objs[tag] = bodyDef;
-	world.CreateBody(bodyDef).CreateFixture(fixDef);
+	let body = world.CreateBody(bodyDef);
+	body.CreateFixture(fixDef);
+	objs[tag] = body;
 }
 
 function myKeyEvent(event)
 {
 	if (event.keyCode == 38) // Arrow Up
-		y -= 0.2;
+	{
+		objs["leftRacket"].SetLinearVelocity(new b2Vec2(0, -20));
+		objs["rightRacket"].SetLinearVelocity(new b2Vec2(0, -20));
+	}
 	else if (event.keyCode == 40) // Arrow Down
-		y += 0.2;
+	{
+		objs["leftRacket"].SetLinearVelocity(new b2Vec2(0, +20));
+		objs["rightRacket"].SetLinearVelocity(new b2Vec2(0, +20));
+	}
 	else
 		return;
-	
-	var fixDef = new b2FixtureDef;
-	fixDef.density = 1.0;
-	fixDef.friction = 0.0;
-	fixDef.restitution = 1.0;
-
-	world.DestroyBody(objs["leftRacket"]);
-	world.DestroyBody(objs["rightRacket"]);
-	delete objs.leftRacket;
-	delete objs.rightRacket;
-	//alert(objs["leftRacket"]);
-
-	// create rackets
-	drawObject(objs, "leftRacket", fixDef, true, true, 0.3, y, 0.05, 0.5, 0, 0, 0);
-	drawObject(objs, "rightRacket", fixDef, true, true, 0.7 + 11.8, y, 0.05, 0.5, 0, 0, 0);
-	//alert(objs["leftRacket"]);
-	world.DrawDebugData();
-	world.ClearForces();
 }
 
 function init() {
@@ -89,10 +78,12 @@ function init() {
 	var randValSpin = Math.ceil(Math.random() * 100) % 2 ? 1 : -1;
 	drawObject(objs, "ball", fixDef, false, false, 6, 4, 0.15, 0, 5 * randValHorizon, 5 * randValVertical, 20 * randValSpin);
 	
+	fixDef.density = 100;
+	fixDef.friction = 0.01;
+	fixDef.restitution = 0;
 	// create rackets
-	drawObject(objs, "leftRacket", fixDef, true, true, 0.3, y, 0.05, 0.5, 0, 0, 0);
-	drawObject(objs, "rightRacket", fixDef, true, true, 0.7 + 11.8, y, 0.05, 0.5, 0, 0, 0);
-	alert(world.GetBodyCount());
+	drawObject(objs, "leftRacket", fixDef, false, true, 0.3, y, 0.05, 0.5, 0, 0, 0);
+	drawObject(objs, "rightRacket", fixDef, false, true, 0.7 + 11.8, y, 0.05, 0.5, 0, 0, 0);
    
    //setup debug draw
    var debugDraw = new b2DebugDraw();		
@@ -113,6 +104,8 @@ function update() {
 	   ,  10       //velocity iterations
 	   ,  10       //position iterations
 	);
+	// playerOne.SetAngle(0);
+	// playerTwo.SetAngle(0);
 	world.DrawDebugData();
 	world.ClearForces();
 };
