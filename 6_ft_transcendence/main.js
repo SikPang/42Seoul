@@ -10,18 +10,17 @@ var   b2Vec2 = Box2D.Common.Math.b2Vec2
 ,	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
 ,	b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
 
-var objs = {};
+var gameObjects = {};
 var y = 3.5;
 
-function drawObject(objs, tag, fixDef, isStatic, isSquare, x, y, width, height, linearVelocityX, linearVelocityY, angularVelocity) {
+function drawObject(gameObjects, tag, fixDef, isStatic, isSquare, x, y, width, height, linearVelocityX, linearVelocityY, angularVelocity) {
 	var bodyDef = new b2BodyDef;
 
 	if (isStatic)
 		bodyDef.type = b2Body.b2_staticBody;
 	else
 		bodyDef.type = b2Body.b2_dynamicBody;
-	bodyDef.position.x = x;
-	bodyDef.position.y = y;
+	bodyDef.position.Set(x, y);
 	bodyDef.linearVelocity = new b2Vec2(linearVelocityX, linearVelocityY);
 	if (angularVelocity)
 		bodyDef.angularVelocity = angularVelocity;
@@ -29,32 +28,52 @@ function drawObject(objs, tag, fixDef, isStatic, isSquare, x, y, width, height, 
 	{
 		fixDef.shape = new b2PolygonShape;
 		fixDef.shape.SetAsBox(width, height);
+		bodyDef.linearDamping = 1.0;
 	}
 	else
+	{
 		fixDef.shape = new b2CircleShape(width);
+	}
 	let body = world.CreateBody(bodyDef);
 	body.CreateFixture(fixDef);
-	objs[tag] = body;
+	gameObjects[tag] = body;
 }
 
-function myKeyEvent(event)
+function keyDownEvent(event)
 {
 	if (event.keyCode == 38) // Arrow Up
 	{
-		objs["leftRacket"].SetLinearVelocity(new b2Vec2(0, -20));
-		objs["rightRacket"].SetLinearVelocity(new b2Vec2(0, -20));
+		gameObjects["leftRacket"].SetLinearVelocity(new b2Vec2(0, -10));
+		gameObjects["rightRacket"].SetLinearVelocity(new b2Vec2(0, -10));
 	}
 	else if (event.keyCode == 40) // Arrow Down
 	{
-		objs["leftRacket"].SetLinearVelocity(new b2Vec2(0, +20));
-		objs["rightRacket"].SetLinearVelocity(new b2Vec2(0, +20));
+		gameObjects["leftRacket"].SetLinearVelocity(new b2Vec2(0, +10));
+		gameObjects["rightRacket"].SetLinearVelocity(new b2Vec2(0, +10));
+	}
+	else
+		return;
+}
+
+
+function keyUpEvent(event) {
+	if (event.keyCode == 38) // Arrow Up
+	{
+		gameObjects["leftRacket"].SetLinearVelocity(new b2Vec2(0, 0));
+		gameObjects["rightRacket"].SetLinearVelocity(new b2Vec2(0, 0));
+	}
+	else if (event.keyCode == 40) // Arrow Down
+	{
+		gameObjects["leftRacket"].SetLinearVelocity(new b2Vec2(0, 0));
+		gameObjects["rightRacket"].SetLinearVelocity(new b2Vec2(0, 0));
 	}
 	else
 		return;
 }
 
 function init() {
-	document.addEventListener("keydown", myKeyEvent);
+	document.addEventListener("keydown", keyDownEvent);
+	document.addEventListener('keyup', keyUpEvent);
 
 	world = new b2World(
 			new b2Vec2(0, 0)    //gravity
@@ -67,23 +86,27 @@ function init() {
 	fixDef.restitution = 1.0;
 
 	// create walls
-	drawObject(objs, "leftWall", fixDef, true, true, 0, 4, 0.1, 5, 0, 0, 0);
-	drawObject(objs, "rightWall", fixDef, true, true, 12.8, 4, 0.1, 5, 0, 0, 0);
-	drawObject(objs, "upWall", fixDef, true, true, 6, 0, 7, 0.1, 0, 0, 0);
-	drawObject(objs, "downWall", fixDef, true, true, 6, 7.2, 7, 0.1, 0, 0, 0);
+	drawObject(gameObjects, "leftWall", fixDef, true, true, 0, 4, 0.1, 5, 0, 0, 0);
+	drawObject(gameObjects, "rightWall", fixDef, true, true, 12.8, 4, 0.1, 5, 0, 0, 0);
+	drawObject(gameObjects, "upWall", fixDef, true, true, 6, 0, 7, 0.1, 0, 0, 0);
+	drawObject(gameObjects, "downWall", fixDef, true, true, 6, 7.2, 7, 0.1, 0, 0, 0);
 		
 	// create a ball
 	var randValHorizon = Math.ceil(Math.random() * 100) % 2 ? 1 : -1;
 	var randValVertical = Math.ceil(Math.random() * 100) % 2 ? 1 : -1;
 	var randValSpin = Math.ceil(Math.random() * 100) % 2 ? 1 : -1;
-	drawObject(objs, "ball", fixDef, false, false, 6, 4, 0.15, 0, 5 * randValHorizon, 5 * randValVertical, 20 * randValSpin);
+	drawObject(gameObjects, "ball", fixDef, false, false, 6, 4, 0.1, 0, 5 * randValHorizon, 5 * randValVertical, 20 * randValSpin);
 	
 	fixDef.density = 100;
 	fixDef.friction = 0.01;
 	fixDef.restitution = 0;
 	// create rackets
-	drawObject(objs, "leftRacket", fixDef, false, true, 0.3, y, 0.05, 0.5, 0, 0, 0);
-	drawObject(objs, "rightRacket", fixDef, false, true, 0.7 + 11.8, y, 0.05, 0.5, 0, 0, 0);
+	drawObject(gameObjects, "leftRacket", fixDef, false, true, 0.3, y, 0.1, 0.5, 0, 0, 0);
+	drawObject(gameObjects, "rightRacket", fixDef, false, true, 0.7 + 11.8, y, 0.1, 0.5, 0, 0, 0);
+
+	gameObjects["ball"].isBullet = true;
+	gameObjects["leftRacket"].isBullet = true;
+	gameObjects["rightRacket"].isBullet = true;
    
    //setup debug draw
    var debugDraw = new b2DebugDraw();		
@@ -104,8 +127,10 @@ function update() {
 	   ,  10       //velocity iterations
 	   ,  10       //position iterations
 	);
-	// playerOne.SetAngle(0);
-	// playerTwo.SetAngle(0);
+	gameObjects["leftRacket"].SetAngle(0);
+	gameObjects["rightRacket"].SetAngle(0);
+	gameObjects["leftRacket"].SetAwake(true);
+	gameObjects["rightRacket"].SetAwake(true);
 	world.DrawDebugData();
 	world.ClearForces();
 };

@@ -34,10 +34,8 @@ window.onload = () => {
     let edgeDown = CreateBox("EdgeDown", canvas.width / 2, canvas.height + 20, 500, 20, 1.0, 0, 1.0, true, false);
     let edgeLeft = CreateBox("EdgeLeft", -20, canvas.height / 2, 20, 500, 1.0, 0, 1.0, true, false);
 
-    //let areaPlayerOne = CreateBox("AreaPlayerOne", 50, canvas.height / 2, 10, 400, 1.0, 0, 0.3, true, true);
-    //let areaPlayerTwo = CreateBox("AreaPlayerTwo", canvas.width - 50, canvas.height / 2, 10, 400, 1.0, 0, 0.9, true, true);
-
     let line = CreateBox("Line", canvas.width / 2, canvas.height / 2, 2, 900, 0, 0, 0, true, true);
+
     // score sensor
 	let playerOneSensor = CreateBox('PlayerOneSensor', 5, canvas.height / 2, 10, 900, 0, 0, 0, true, true);
     let playerTwoSensor = CreateBox('PlayerTwoSensor', canvas.width - 5, canvas.height / 2, 10, 900, 0, 0, 0, true, true);
@@ -45,7 +43,7 @@ window.onload = () => {
 	// wall 1.0, 0, 1.0 static
 	// player 100, 0.01, 0 dynamic
 	// ball 1.0, 0, 1.0 dynamic
-    let playerOne = CreateBox("PlayerOne", 50, canvas.height / 2, 10, 40, 100, 0.01, 0, false, false);
+    let playerOne = CreateBox("PlayerOne", 50, canvas.height / 2, 10, 40, 1, 0.01, 0, false, false);
     let playerTwo = CreateBox("PlayerTwo", canvas.width - 50, canvas.height / 2, 10, 40, 100, 0.01, 0, false, false);
     playerOne.isBullet = true;
     playerTwo.isBullet = true;
