@@ -12,26 +12,26 @@ function App() {
   // react to unity
   function ButtonEvent()
   {
-	sendMessage("Cube", "startGame");
+	sendMessage("GameManager", "StartGame");
   }
 
   // unity to react
-  const [isOver, setIsOver] = useState();
+  const [gameOver, setGameOver] = useState();
   const handleGameOver = useCallback(() => {
-    setIsOver(true);
+    setGameOver(true);
   }, []);
 
   useEffect(() => {
-    addEventListener("IsOver", handleGameOver);
+    addEventListener("GameOver", handleGameOver);
     return () => {
-      removeEventListener("IsOver", handleGameOver);
+      removeEventListener("GameOver", handleGameOver);
     };
   }, [addEventListener, removeEventListener, handleGameOver]);
 
   return (
 	<Fragment>
 	<div className="App">
-		{isOver === true && (
+		{gameOver === true && (
 			<p>{`Game Over!`}</p>
 		)}
 		<button onClick={ButtonEvent}> 시작 버튼 </button>
