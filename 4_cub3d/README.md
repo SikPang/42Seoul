@@ -2,13 +2,14 @@
 
 [Need screenShot]
 
-# Assignment Overview
+# Introduction
 This project is inspired by the world-famous Wolfenstein 3D game, which was the first FPS ever. 
 
 It will enable you to explore ray-casting. 
 
 Your goal will be to make a dynamic view inside a maze, in which you’ll have to find your way.
 
+<br/>
 
 # Usage
 ```
@@ -24,6 +25,8 @@ make bonus && ./cub3D_bonus Maps/map.cub
 - W, A, S, D : move
 - Mouse : rotate
 - Esc : exit
+
+<br/>
 
 # Screen shots
 [Need screenShot]
