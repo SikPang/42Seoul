@@ -4,9 +4,16 @@
 
 [Need screenShot]
 
-# Assignment Overview
+# Introduction
+- The existence of <a href="https://en.wikipedia.org/wiki/Unix_shell" target="_blank">shells</a> is linked to the very existence of IT.
+- At the time, all developers agreed that communicating with a computer using aligned 1/0 switches was seriously irritating.
+- It was only logical that they came up with the idea of creating a software to communicate with a computer
+  using interactive lines of commands in a language somewhat close to the human language.
+- Thanks to Minishell, you’ll be able to travel through time and come back to problems people faced when Windows didn’t exist.
 
-- <a href="https://en.wikipedia.org/wiki/Unix_shell" target="_blank">Unix shell </a>
+<br/>
+
+# Implementation
 - Display a prompt when waiting for a new command.
 - Have a working history.
 - Search and launch the right executable (based on the PATH variable or using a relative or an absolute path).
@@ -45,7 +52,7 @@
   - env with no options or arguments
   - exit with no options
 
-
+<br/>
 
 # Usage
 ```
@@ -73,6 +80,7 @@ cd ..
 ls
 ```
 
+<br/>
 
 # Screen shots
 [Need screenShot]
