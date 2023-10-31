@@ -2,7 +2,7 @@
 
 ![cat](https://github.com/SikPang/42Seoul/assets/87380790/c0f4c908-a649-4456-96b7-eb43704bb797)
 
-# Assignment Overview
+# Overview
 
 - <a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem" target="_blank">Dining philosophers problem </a>
 - One or more philosophers sit at a round table.
@@ -27,6 +27,23 @@
 - Philosophers don’t know if another philosopher is about to die.
 - No need to say that philosophers should avoid dying!
 
+<br/>
+
+# Implementation
+### Mandatory
+- Each philosopher should be a thread.
+- There is one fork between each pair of philosophers. Therefore, if there are several philosophers,
+  
+  each philosopher has a fork on their left side and a fork on their right side.
+  
+  If there is only one philosopher, there should be only one fork on the table.
+- To prevent philosophers from duplicating forks, you should protect the forks state with a mutex for each of them.
+### Bonus
+- All the forks are put in the middle of the table.
+- They have no states in memory but the number of available forks is represented by a semaphore.
+- Each philosopher should be a process. But the main process should not be a philosopher.
+
+<br/>
 
 # Usage
 ```
@@ -42,6 +59,8 @@ cd philo && make && ./philo 4 410 200 200
 ```
 cd philo_bonus && make && ./philo_bonus 4 410 200 200
 ```
+
+<br/>
 
 # Screen shots
 ![philo](https://github.com/SikPang/42Seoul/assets/87380790/89cb5aa4-6cd8-4e30-b861-11811fdbb687)
