@@ -2,9 +2,16 @@
 
 [Need screenShot]
 
-# Assignment Overview
+# Introduction
 
-- <a href="https://en.wikipedia.org/wiki/Internet_Relay_Chat" target="_blank"> IRC protocol </a>
+- <a href="https://en.wikipedia.org/wiki/Internet_Relay_Chat" target="_blank">Internet Relay Chat</a> or IRC is a text-based communication protocol on the Internet.
+- It offers real-time messaging that can be either public or private. Users can exchange direct messages and join group channels.
+- IRC clients connect to IRC servers in order to join channels. IRC servers are connected together to form a network.
+
+<br/>
+
+# Implementation
+
 - The server must be capable of handling multiple clients at the same time and never hang.
 - Forking is not allowed. All I/O operations must be non-blocking.
 - Only 1 poll() (or equivalent) can be used for handling all these operations (read,
@@ -31,6 +38,7 @@ every other client that joined the channel.
       - o: Give/take channel operator privilege
       - l: Set/remove the user limit to channel
 
+<br/>
 
 # Usage
 ```
@@ -53,6 +61,7 @@ join myRoom
 ```
 [Need Usage]
 
+<br/>
 
 # Screen shots
 [Need screenShot]
