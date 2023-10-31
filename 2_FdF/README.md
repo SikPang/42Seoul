@@ -17,7 +17,6 @@ It’s your turn today to modelize some 3D magnificent landscapes, imaginary or 
 
 # Implementation
 ![1](https://github.com/SikPang/42Seoul/assets/87380790/7c462f8f-58be-4309-8374-541e44934d04)
-
 ![2](https://github.com/SikPang/42Seoul/assets/87380790/ccbb2963-b916-4b3b-b1a0-9cdd64b202f8)
 
 
