@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 12:11:47 by kwsong            #+#    #+#             */
-/*   Updated: 2023/03/01 18:26:40 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/11/03 14:38:22 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define HERE_DOC_H
 
 # include <stdlib.h>
-# include <readline/readline.h>
+# include "../readline/readline.h"
 # include <unistd.h>
 # include "list.h"
 # include "fcntl.h"

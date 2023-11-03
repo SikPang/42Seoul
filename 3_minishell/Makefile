@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/21 11:13:05 by kwsong            #+#    #+#              #
-#    Updated: 2023/03/10 14:20:28 by kwsong           ###   ########.fr        #
+#    Updated: 2023/11/03 14:40:50 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,8 +49,8 @@ SRCS	= $(addprefix $(SRCS_DIR), $(addsuffix .c, $(SRCS_FILE)))
 OBJS	= $(SRCS:.c=.o)
 
 CFLAGS	= -Wall -Werror -Wextra
-LFLAGS	= ${HOME}/.brew/opt/readline/lib
-IFLAGS	= ${HOME}/.brew/opt/readline/include
+# LFLAGS	= ${HOME}/.brew/opt/readline/lib
+# IFLAGS	= ${HOME}/.brew/opt/readline/include
 
 all		: $(NAME)
 
@@ -59,7 +59,8 @@ $(NAME)	: $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $^ \
 		-I$(INC_DIR)/ -I./libft/ \
 		-Llibft/ -lft \
-		-I$(IFLAGS)/ -L$(LFLAGS) -lreadline
+		-lreadline
+# -I$(IFLAGS)/ -L$(LFLAGS) 
 
 %.o	: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_DIR)/ -I./libft/ -I$(IFLAGS)/
