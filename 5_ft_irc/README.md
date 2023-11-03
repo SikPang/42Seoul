@@ -1,6 +1,6 @@
 > 본 프로그램은 Mac OS 에서만 구동되며, irssi 클라이언트에 맞춰 개발되었습니다
 
-[Need screenShot]
+![ezgif com-video-to-gif (2)](https://github.com/SikPang/42Seoul/assets/87380790/d6fb46e3-d937-416d-b81a-8e5d68822ace)
 
 # Introduction
 
@@ -52,18 +52,22 @@ make && ./ircserv 4242 1234
 
 ### Connect as client with nc
 ```
-nc 127.0.0.1 -p 4242
-user me me 127.0.0.1 me
-pass 1234
+nc 127.0.0.1 4242
+USER me me 127.0.0.1 [your hostName]
+PASS 1234
+NICK user1
 ```
 ```
-join myRoom
+JOIN #newCh
 ```
-[Need Usage]
+```
+PRIVMSG #newCh :my text
+```
 
 <br/>
 
 # Screen shots
-[Need screenShot]
-[Need screenShot]
-[Need screenShot]
+
+![ezgif com-video-to-gif](https://github.com/SikPang/42Seoul/assets/87380790/9513cec1-c6bc-4fb2-89d0-af13ed5b14ac)
+![ezgif com-video-to-gif (1)](https://github.com/SikPang/42Seoul/assets/87380790/8b3f7d43-01f9-4f20-aaef-0b1520f7b8ea)
+
