@@ -1,6 +1,8 @@
 > 본 프로그램은 Mac OS 에서만 구동됩니다
+<img width="800" alt="Screen Shot 2023-11-03 at 3 14 39 PM" src="https://github.com/SikPang/42Seoul/assets/87380790/b95ade83-fec0-47a2-80e9-2ef242b27be3">
+<img width="800" alt="Screen Shot 2023-11-03 at 3 14 52 PM" src="https://github.com/SikPang/42Seoul/assets/87380790/fc07531f-f0ee-4b0d-8a83-dcbfc23ff807">
 
-[Need screenShot]
+
 
 # Introduction
 This project is inspired by the world-famous Wolfenstein 3D game, which was the first FPS ever. 
@@ -37,6 +39,7 @@ make bonus && ./cub3D_bonus Maps/map.cub
 <br/>
 
 # Screen shots
-[Need screenShot]
-[Need screenShot]
-[Need screenShot]
+![ezgif com-video-to-gif](https://github.com/SikPang/42Seoul/assets/87380790/d5775952-49e1-4137-9907-259714ca5d8a)
+![ezgif com-video-to-gif (1)](https://github.com/SikPang/42Seoul/assets/87380790/3edc3988-bb10-465a-aa2f-94e0505fd449)
+![ezgif com-video-to-gif (2)](https://github.com/SikPang/42Seoul/assets/87380790/dd1d2ac7-8beb-49b6-ae7e-45a4c0146b24)
+
