@@ -1,8 +1,5 @@
 > 본 프로그램은 Mac OS 에 최적화되어 있습니다
-
-[Need to setUp readline]
-
-[Need screenShot]
+<img width="500" alt="Screen Shot 2023-11-03 at 2 49 51 PM" src="https://github.com/SikPang/42Seoul/assets/87380790/87538ec9-baab-4db3-8419-a0e0d951f3f0">
 
 # Introduction
 - The existence of <a href="https://en.wikipedia.org/wiki/Unix_shell" target="_blank">shells</a> is linked to the very existence of IT.
@@ -59,30 +56,8 @@
 make && ./minishell
 ```
 
-```
-< /dev/random cat | head -1 | wc | cat > newfile
-cat newfile
-```
-```
-export minishell=hi
-env | grep minishell=hi
-```
-```
-unset minishell
-env | grep minishell=hi
-```
-```
-cd srcs
-ls
-```
-```
-cd ..
-ls
-```
-
 <br/>
 
 # Screen shots
-[Need screenShot]
-[Need screenShot]
-[Need screenShot]
+<img width="500" alt="Screen Shot 2023-11-03 at 2 55 15 PM" src="https://github.com/SikPang/42Seoul/assets/87380790/e9489716-5fb3-4279-9615-f51fd9ffa2a5">
+
