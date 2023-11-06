@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:47:57 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/30 09:46:02 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/11/06 19:43:36 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 #include "Brain.hpp"
 
 Brain::Brain()
-	: size(IDEA_CAPACITY)
 {
-	for (unsigned int i = 0; i < size; ++i)
+	for (unsigned int i = 0; i < IDEA_CAPACITY; ++i)
 		ideas[i] = "";
 
 	std::cout << "Brain Created.\n";
 }
 
 Brain::Brain(const Brain& other)
-	: size(other.size)
 {
-	for (unsigned int i = 0; i < size; ++i)
+	for (unsigned int i = 0; i < IDEA_CAPACITY; ++i)
 		ideas[i] = other.ideas[i];
 
 	std::cout << "Brain Created.\n";
@@ -35,10 +33,9 @@ Brain& Brain::operator=(const Brain& other)
 {
 	if (&other == this)
 		return *this;
-
-	for (unsigned int i = 0; i < size; ++i)
+	
+	for (unsigned int i = 0; i < IDEA_CAPACITY; ++i)
 		ideas[i] = other.ideas[i];
-	size = other.size;
 	
 	return *this;
 }
@@ -50,27 +47,21 @@ Brain::~Brain()
 
 unsigned int Brain::GetSize() const
 {
-	return size;
+	return IDEA_CAPACITY;
 }
 
 void Brain::AddIdea(const std::string& idea, unsigned int index)
 {
-	if (index >= size)
-		return;
+	if (index >= IDEA_CAPACITY)
+		throw std::exception();
 	
 	ideas[index] = idea;
 }
 
-std::string Brain::GetIdea(unsigned int index) const
+const std::string& Brain::GetIdea(unsigned int index) const
 {
-	if (index >= size)
-		return "! out of index !";
+	if (index >= IDEA_CAPACITY)
+		throw std::exception();
 
 	return ideas[index];
-}
-
-void Brain::duplicate(const Brain* other)
-{
-	for (unsigned int i = 0; i < size; ++i)
-		ideas[i] = other->GetIdea(i);
 }

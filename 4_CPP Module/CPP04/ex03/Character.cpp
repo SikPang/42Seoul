@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 20:09:04 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/30 09:32:29 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/11/06 21:54:59 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void Character::equip(AMateria* m)
 void Character::unequip(int idx)
 {
 	if (idx < 0)
-		return;
+		throw std::exception();
 	
 	inventory.RemoveItem(idx);
 }
@@ -63,17 +63,12 @@ void Character::unequip(int idx)
 void Character::use(int idx, ICharacter& target)
 {
 	if (idx < 0)
-		return;
+		throw std::exception();
 	
 	AMateria* selected = inventory.GetSlot(idx);
 	
 	if (selected != NULL)
 		selected->use(target);
-}
-
-unsigned int Character::GetSizeOfInventory()
-{
-	return inventory.GetSize();
 }
 
 unsigned int Character::GetCapacityOfInventory()

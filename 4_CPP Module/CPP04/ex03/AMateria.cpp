@@ -6,11 +6,12 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 17:51:46 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/30 09:01:58 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/11/06 21:03:53 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 AMateria::AMateria()
 	: type("")
@@ -44,5 +45,5 @@ std::string const & AMateria::getType() const
 
 void AMateria::use(ICharacter& target)
 {
-	(void)target;
+	std::cout << "* some Materia bolt to " << target.getName() << " *\n";
 }

@@ -6,24 +6,27 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 17:54:41 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/29 19:38:50 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/11/06 22:28:53 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Animal.hpp"
 
 Animal::Animal()
+	: type("some animal")
 {
-	type = "some animal";
+	std::cout << "Animal Created.\n";
+}
 
+Animal::Animal(const std::string& type)
+	: type(type)
+{
 	std::cout << "Animal Created.\n";
 }
 
 Animal::Animal(const Animal& other)
+	: type(other.type)
 {
-	type = other.type;
-
 	std::cout << "Animal Created.\n";
 }
 
@@ -39,7 +42,7 @@ Animal::~Animal()
 	std::cout << "Animal Destroyed.\n";
 }
 
-std::string Animal::getType() const
+const std::string& Animal::getType() const
 {
 	return type;
 }

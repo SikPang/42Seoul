@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:47:55 by kwsong            #+#    #+#             */
-/*   Updated: 2023/07/10 12:39:07 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/11/06 19:31:48 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ class Brain
 {
 private:
 	std::string ideas[IDEA_CAPACITY];
-	unsigned int size;
 
 public:
 	Brain();

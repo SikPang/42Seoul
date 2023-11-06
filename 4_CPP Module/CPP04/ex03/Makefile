@@ -6,7 +6,7 @@
 #    By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 18:36:16 by kwsong            #+#    #+#              #
-#    Updated: 2023/04/30 09:34:16 by kwsong           ###   ########.fr        #
+#    Updated: 2023/11/06 22:13:35 by kwsong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS	= $(SRCS:.cpp=.o)
 	$(CC) $(CFLAGS) -c $<
 
 CC		= c++
-CFLAGS	= -Wall -Werror -Wextra -std=c++98 #-fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra -std=c++98 #-fsanitize=address -g
 
 all		: $(NAME)
 

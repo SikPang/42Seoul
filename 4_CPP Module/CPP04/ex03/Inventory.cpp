@@ -6,35 +6,26 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 20:46:45 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/30 09:32:37 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/11/06 22:25:30 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Inventory.hpp"
 
 Inventory::Inventory()
-	: capacity(MAX_SIZE_OF_INVENTORY)
-	, size(0)
 {
+	for (unsigned int i = 0; i < MAX_SIZE_OF_INVENTORY; ++i)
+		this->slots[i] = NULL;
 }
 
 Inventory::Inventory(const Inventory& other)
-	: capacity(other.capacity)
-	, size(other.size)
 {
-	for (unsigned int i = 0; i < other.size; ++i)
-	{
-		if (dynamic_cast<Ice*>(other.slots[i]))
-			this->slots[i] = new Ice();
-		else
-			this->slots[i] = new Cure();
-	}
+	CopyAllItems(other);
 }
 
 Inventory::~Inventory()
 {
-	for (unsigned int i = 0; i < size; ++i)
-		delete this->slots[i];
+	DeleteAllItems();
 }
 
 Inventory& Inventory::operator=(const Inventory& other)
@@ -42,53 +33,64 @@ Inventory& Inventory::operator=(const Inventory& other)
 	if (&other == this)
 		return *this;
 	
-	for (unsigned int i = 0; i < other.size; ++i)
-		delete this->slots[i];
-
-	for (unsigned int i = 0; i < other.size; ++i)
-	{
-		if (dynamic_cast<Ice*>(other.slots[i]))
-			this->slots[i] = new Ice();
-		else
-			this->slots[i] = new Cure();
-	}
-	
-	capacity = other.capacity;
-	size = other.size;
+	DeleteAllItems();
+	CopyAllItems(other);
 
 	return *this;
 }
 
-unsigned int Inventory::GetCapacity()
+unsigned int Inventory::GetCapacity() const
 {
-	return capacity;
-}
-
-unsigned int Inventory::GetSize()
-{
-	return size;
+	return MAX_SIZE_OF_INVENTORY;
 }
 
 void Inventory::AddItem(AMateria* m)
 {
-	if (size == capacity)
-		return;
-
-	slots[size++] = m;
+	for (unsigned int i = 0; i < MAX_SIZE_OF_INVENTORY; ++i)
+	{
+		if (slots[i] == NULL)
+		{
+			slots[i] = m;
+			return;
+		}
+	}
 }
 
 void Inventory::RemoveItem(unsigned int index)
 {
-	if (index >= size)
-		return;
+	if (index >= MAX_SIZE_OF_INVENTORY)
+		throw std::exception();
 
-	slots[--size] = NULL;
+	slots[index] = NULL;
 }
 
-AMateria* Inventory::GetSlot(unsigned int index)
+AMateria* Inventory::GetSlot(unsigned int index) const
 {
-	if (index >= size)
-		return NULL;
+	if (index >= MAX_SIZE_OF_INVENTORY)
+		throw std::exception();
 
 	return slots[index];
+}
+
+
+// --- private memeber functions ---
+
+void Inventory::CopyAllItems(const Inventory& other)
+{
+	for (unsigned int i = 0; i < other.GetCapacity(); ++i)
+	{
+		if (other.slots[i])
+			this->slots[i] = other.slots[i]->clone();
+		else
+			this->slots[i] = NULL;
+	}
+}
+
+void Inventory::DeleteAllItems()
+{
+	for (unsigned int i = 0; i < MAX_SIZE_OF_INVENTORY; ++i)
+	{
+		if (this->slots[i])
+			delete this->slots[i];
+	}
 }

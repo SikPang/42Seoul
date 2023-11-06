@@ -6,7 +6,7 @@
 /*   By: kwsong <kwsong@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 20:09:03 by kwsong            #+#    #+#             */
-/*   Updated: 2023/04/30 09:15:11 by kwsong           ###   ########.fr       */
+/*   Updated: 2023/11/06 21:23:37 by kwsong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ public:
 	void equip(AMateria* m);
 	void unequip(int idx);
 	void use(int idx, ICharacter& target);
-	unsigned int GetSizeOfInventory();
 	unsigned int GetCapacityOfInventory();
 };
