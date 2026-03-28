@@ -1,4 +1,4 @@
 # 42Seoul
 
 
-[![kwsong's 42 stats](https://badge42.vercel.app/api/v2/cll7rz6su003509l5wzrncw3t/stats?cursusId=21&coalitionId=88)](https://github.com/JaeSeoKim/badge42)
+<img width="1182" height="274" alt="profile" src="https://github.com/user-attachments/assets/ac9d6d82-8a88-4f00-88e9-561fa7aa31c1" />
