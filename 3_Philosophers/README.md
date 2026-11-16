@@ -1,74 +1,91 @@
-> 본 프로그램은 Mac OS 에 최적화되어 있습니다
+# Philosophers
+
+## 1. 프로젝트 설명
+
+철학자의 식사 문제를 스레드와 프로세스 두 방식으로 구현한 동시성 프로젝트다. 제한된 포크를 공유하는 철학자가 식사·수면·생각을 반복하며, 기아 또는 지정 식사 횟수 완료를 감지한다.
+
+<br/>
+
+## 2. 사용 기술 및 학습 범위
+
+**핵심 CS**: 운영체제의 동시성과 동기화 — 스레드·프로세스, 공유 자원과 임계 구역, mutex·semaphore, 경쟁 상태·교착 상태·기아.
+
+- C, POSIX Threads, mutex, named semaphore
+- `fork`, `waitpid`, 프로세스 종료·회수
+- 공유 상태 보호, 자원 경합, 교착 상태 완화
+- `gettimeofday` 기반 경과 시간과 짧은 주기의 대기·감시
+
+<br/>
+
+## 3. 핵심 기술 및 설계
+
+| 구분 | 기본 `philo` | 보너스 `philo_bonus` |
+| --- | --- | --- |
+| 철학자 | 철학자당 스레드 | 철학자당 자식 프로세스 |
+| 포크 | 포크별 가용 상태와 mutex | 전체 포크 수를 나타내는 semaphore |
+| 감시 | 메인 스레드의 순회 감시 | 각 자식 안의 감시 스레드 |
+| 종료 판단 | 공유 사망·완료 상태 | 자식 종료 상태를 부모가 확인 |
+
+- **기본 동기화**: 포크 가용 여부, 마지막 식사 시각, 사망 여부, 완료 수, 로그 출력을 각각 잠금으로 보호한다.
+- **경합 완화**: 철학자 번호에 따라 포크 획득 순서를 달리하고 일부 시작을 지연한다. 보너스는 포크 수 외에 동시 진입 수를 절반으로 제한하는 `fork_set` semaphore를 둔다.
+- **시간 감시**: 식사 시각과 현재 경과 시간을 비교한다. 한 번의 긴 sleep 대신 짧은 대기를 반복하며 상태를 확인한다.
+- **종료 전파**: 기본은 공유 플래그를 통해 작업을 끝내고 join한다. 보너스는 사망 종료 코드를 부모가 감지해 다른 자식에 종료 신호를 보낸다.
+
+구현 근거: [기본 초기화](philo/info.c), [mutex 접근](philo/mutex/access_mutex.c), [기본 감시](philo/philosopher_observe.c), [보너스 semaphore](philo_bonus/info.c), [프로세스 관리](philo_bonus/main.c).
+
+<br/>
+
+## 4. 완성 스크린샷 / Gif
 
 ![cat](https://github.com/SikPang/42Seoul/assets/87380790/c0f4c908-a649-4456-96b7-eb43704bb797)
 
-# Overview
-
-- <a href="https://en.wikipedia.org/wiki/Dining_philosophers_problem" target="_blank">Dining philosophers problem </a>
-- One or more philosophers sit at a round table.
-
-  There is a large bowl of spaghetti in the middle of the table.
-- The philosophers alternatively eat, think, or sleep.
-
-  While they are eating, they are not thinking nor sleeping;
-
-  while thinking, they are not eating nor sleeping;
-
-  and, of course, while sleeping, they are not eating nor thinking.
-- There are also forks on the table. There are as many forks as philosophers.
-- Because serving and eating spaghetti with only one fork is very inconvenient,
-
-  a philosopher takes their right and their left forks to eat, one in each hand.
-- When a philosopher has finished eating, they put their forks back on the table and start sleeping.
-
-  Once awake, they start thinking again. The simulation stops when a philosopher dies of starvation.
-- Every philosopher needs to eat and should never starve.
-- Philosophers don’t speak with each other.
-- Philosophers don’t know if another philosopher is about to die.
-- No need to say that philosophers should avoid dying!
-
-<br/>
-
-# Implementation
-### Mandatory
-- Each philosopher should be a thread.
-- There is one fork between each pair of philosophers. Therefore, if there are several philosophers,
-  
-  each philosopher has a fork on their left side and a fork on their right side.
-  
-  If there is only one philosopher, there should be only one fork on the table.
-- To prevent philosophers from duplicating forks, you should protect the forks state with a mutex for each of them.
-### Bonus
-- All the forks are put in the middle of the table.
-- They have no states in memory but the number of available forks is represented by a semaphore.
-- Each philosopher should be a process. But the main process should not be a philosopher.
-
-<br/>
-
-# Usage
-```
-./philo [number of philosophers] [time to die] [time to eat] [time to sleep]
-```
-
-### Mandatory (Multi-thread with Mutex)
-```
-cd philo && make && ./philo 4 410 200 200
-```
-
-### Bonus (Multi-process with Semaphore)
-```
-cd philo_bonus && make && ./philo_bonus 4 410 200 200
-```
-
-<br/>
-
-# Screen shots
 ![philo](https://github.com/SikPang/42Seoul/assets/87380790/89cb5aa4-6cd8-4e30-b861-11811fdbb687)
-- timestamp_in_ms X has taken a fork
-- timestamp_in_ms X is eating
-- timestamp_in_ms X is sleeping
-- timestamp_in_ms X is thinking
-- timestamp_in_ms X died
-
 
 ![캡처](https://github.com/SikPang/42Seoul/assets/87380790/faf8159c-8b50-4b73-957d-1dfb3ecd8c6f)
+
+로그는 경과 시간(ms), 철학자 번호, 행동을 출력한다. 상태에는 포크 획득, 식사, 수면, 생각, 사망이 있다.
+
+<br/>
+
+## 5. 프로그램 실행법
+
+C 컴파일러, `make`, POSIX 스레드·semaphore를 지원하는 Unix 계열 환경이 필요하다. 기존 코드는 macOS 중심으로 작성되었다.
+
+```text
+./philo 철학자수 사망제한시간 식사시간 수면시간 [필수식사횟수]
+```
+
+시간 인자의 단위는 밀리초다. 철학자 수는 1에서 1000이며 시간과 선택 식사 횟수는 양수여야 한다.
+
+```sh
+cd 3_Philosophers
+make -C philo
+./philo/philo 4 410 200 200 5
+
+make -C philo_bonus
+./philo_bonus/philo_bonus 4 410 200 200 5
+```
+
+선택 인자를 생략하면 식사 횟수에 의한 종료 조건이 없어 사망이 발생할 때까지 실행한다. POSIX 스레드 링크 옵션이 필요한 환경에서는 `make -C philo CC="cc -pthread"`처럼 지정하고, 보너스에도 같은 방식을 적용한다.
+
+<br/>
+
+## 6. 구현 범위
+
+### 기본 구현
+
+- 철학자별 스레드와 포크별 mutex
+- 식사·수면·생각 상태 전이
+- 마지막 식사 시각·사망·식사 완료 수의 동기화
+- 출력 직렬화와 사망 후 일반 로그 억제
+- 기아 감시, 선택 식사 횟수, join과 메모리·mutex 정리
+
+
+### 보너스 및 동작 범위
+
+- 철학자별 프로세스, 자식별 감시 스레드
+- 포크·식사 진입·로그·식사 시각을 위한 named semaphore
+- 사망 발생 시 나머지 자식 종료, 완료 시 종료 상태 확인
+- semaphore 닫기·이름 해제
+- 실행 결과는 OS 스케줄링과 입력 시간 여유에 영향을 받는다.
+- 보너스의 모든 강제 종료 경로에서 자식 회수까지 완료하는지는 추가 검증이 필요하다.
